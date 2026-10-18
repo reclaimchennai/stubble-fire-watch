@@ -9,6 +9,8 @@ pdfplumber
 pymupdf
 duckdb
 rasterio
+scipy
+boto3          # scripts/s2night.py (CDSE S3)
 geopandas
 pyogrio
 xarray

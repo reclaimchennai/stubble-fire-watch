@@ -176,6 +176,7 @@
         <div class="menu-head"><span class="menu-title">Layers</span><button class="btn icon ghost menu-close" type="button" aria-label="Close"><span data-icon="x"></span></button></div>
         <div class="menu-body">
           <label><input type="checkbox" id="l-burnscar" checked>Burned area (MODIS, 500 m)</label>
+          <label title="One-off: ESA's Sentinel-2A night campaign, 9 and 12 Dec 2025, 22:30 IST"><input type="checkbox" id="l-s2night">Night hot spots, Sentinel-2 (Dec 2025)</label>
           <label><input type="checkbox" id="l-hillshade" checked>Hillshade</label>
           <label><input type="checkbox" id="l-wind" checked>Wind streamlines</label>
           <label><input type="checkbox" id="l-districts" checked>District boundaries</label>
@@ -197,6 +198,15 @@
         <div class="ramp-bar" style="background:linear-gradient(90deg,#ffec96,#ffb74d 30%,#f4682d 55%,#d62d48 73%,#7a166e)"></div>
         <div class="ramp-labels"><span>15 Sep</span><span>15 Oct</span><span>1 Nov</span><span>15 Nov</span><span>5 Dec</span></div>
         <div class="legend-note" id="legend-burn-note"></div>
+      </div>
+      <div class="legend-card" id="legend-s2n" hidden>
+        <div class="legend-title">Sentinel-2A at night, 20 m</div>
+        <div class="s2n-keys">
+          <span><i style="background:#ff7a1a"></i>open land (likely fire)</span>
+          <span><i style="background:#b68cff"></i>built-up (factories, furnaces)</span>
+          <span><i style="background:#e8e8e8"></i>known industrial source</span>
+        </div>
+        <div class="legend-note" id="legend-s2n-note">Hot spots in the SWIR bands on 9 and 12 Dec 2025 (22:32 / 22:42 IST). Heat sources, not counted as crop fires.</div>
       </div>
       <div class="legend-card" id="legend-fire">
         <div class="legend-title" id="legend-fire-title"></div>

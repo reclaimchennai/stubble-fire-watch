@@ -430,6 +430,41 @@ function renderBurn() {
     The burning shrank, and it also moved out of the satellites' sight.`;
 }
 
+// ---------------------------------------------------------------- 4b2. Sentinel-2 at night (ESA campaign, Dec 2025)
+let S2N = null;
+function renderS2n() {
+  const V = S2N;
+  if (!V || !V.R012) return;
+  $("#sect-s2n").hidden = false;
+  const t = th(), CLS = [["open", "open land", "#ff7a1a"], ["built-up", "built-up", "#b68cff"], ["industrial", "known industrial", t.dim]];
+  const rows = {};
+  for (const sc of ["R012", "R055"]) for (const [st, v] of Object.entries(V[sc].both_by_state)) {
+    const k = st.replace(" (Pa)", ", Pakistan");
+    rows[k] = rows[k] || { open: 0, "built-up": 0, industrial: 0, with_firms: 0 };
+    for (const c of Object.keys(rows[k])) rows[k][c] += v[c] || 0;
+  }
+  const names = Object.keys(rows).sort((a, b) => d3sum(rows[a]) - d3sum(rows[b]));
+  chart("c-s2n").setOption(base({
+    grid: { left: 130, right: 24, top: 30, bottom: 26 },
+    tooltip: { ...base().tooltip, formatter: (ps) => `<div class="tt-title">${ps[0].axisValue}</div>` + ps.map((p) => tipRow(p.color, p.seriesName, fmt(p.value))).join("") +
+      tipRow("transparent", "with a FIRMS detection within 1 km", fmt(rows[ps[0].axisValue].with_firms)) },
+    xAxis: vAxis({ minInterval: 1 }),
+    yAxis: cAxis(names, { axisLabel: { color: t.dim } }),
+    series: CLS.map(([k, label, color]) => ({ name: label, type: "bar", stack: "s", barMaxWidth: 16, itemStyle: { color }, data: names.map((n) => rows[n][k]) })),
+  }), true);
+  const a = V.R012.tiers.both, b = V.R055.tiers.both, na = a.recall_1km.viirs_night_after, rg = a.recall_1km.viirs_night_after_by_region;
+  $("#s2n-lede").innerHTML = `For a few weeks in December 2025 ESA kept Sentinel-2A's camera on at night. Two scenes cover Punjab, at
+    22:32 IST on 9 December and 22:42 IST on 12 December, after the paddy season. With no sunlight, a pixel bright in the short-wave
+    infrared is giving off heat. <b>${a.detections + b.detections}</b> hot spots were bright in both infrared bands; the same rule found
+    <b>${V.R012.mirror_selected.both + V.R055.mirror_selected.both}</b> on the negated images, so they are not sensor noise.
+    On 9 December they recovered <b>${na.matched} of ${na.firms}</b> VIIRS night detections made three hours later, but
+    ${rg.hills.matched === na.matched ? "all" : rg.hills.matched} of those were forest and scrub fires in Himachal and Uttarakhand; the ${rg.plains.firms} VIIRS points in the plains were
+    ${rg.plains.matched ? `matched ${rg.plains.matched} times` : "not seen"}. In the plains many hot spots sit on steel mills, furnaces and
+    industrial estates (Mandi Gobindgarh, Ludhiana, Mohali, Lahore). These images show that small heat sources can be seen at 20 m at night;
+    they cannot say how much stubble burns after dark, and they are kept out of every fire count on this site.`;
+}
+const d3sum = (r) => r.open + r["built-up"] + r.industrial;
+
 // ---------------------------------------------------------------- 4c. enforcement and residue management
 function setupEnf() {
   const E = D.enforcement;
@@ -623,6 +658,7 @@ function renderNotes() {
     ["Paddy area", `${r} The latest APY year can lag the fire season by a year; per-hectare figures use the latest year available.`],
     ["Burned area", "NASA MODIS MCD64A1 collection 6.1 (500 m, monthly burn date), read from Microsoft Planetary Computer, 15 Sep - 5 Dec, clipped to each district. It is NASA's validated global product, but at 500 m it misses many of Punjab's 1-2 ha fields and short burns, so its hectares understate the true area. Some months are missing from the archive (Sep 2023, Sep-Oct 2025); those seasons are shown faded and left out of ratios. A field-scale Sentinel-2 classifier was tested and rejected: it could not tell burned from merely harvested paddy."],
     ["Enforcement", "Punjab Pollution Control Board action-taken reports to CAQM, Haryana's enforcement dashboard, CAQM directions and press releases, NGT affidavits, and Lok Sabha / Rajya Sabha answers (some via data.gov.in), parsed from the documents; every value carries its source, and figures quoted from prose are checked against the cached text. Season figures are cumulative to the date shown; where several reports cover a season, the latest is plotted. A 2022 compensation table with an implausible unit is left out. There are no official end-of-season Punjab totals for 2023 or 2024, and no Haryana compensation or FIR totals for 2021-2025."],
+    ["Night hot spots", "ESA's Sentinel-2A night-time campaign (3-22 Dec 2025; scenes of 9 and 12 Dec over Punjab), orthorectified radiance, 20 m. Clusters bright in both B12 and B11 (0.5 W m-2 sr-1 um-1 over a 1 km background); none pass on the negated images. Matched to FIRMS within 1 km; setting from ESA WorldCover 2021. Hot spots on open land may still be lone factories or brick kilns. A one-off test: ESA's second campaign (Jul-Sep 2026) is restricted to expert users and no campaign has covered the October-November burning season."],
     ["Districts", "geoBoundaries district polygons (India: LGD 2021). Districts created after 2021 are counted inside their parent polygon. Pakistan's districts are shown for comparison; no paddy area is available for them here."],
     ["Air quality", "Ground PM2.5: CPCB continuous ambient air-quality stations via the OpenAQ v3 API, daily means kept only with 18+ hours of data, city value = mean of stations reporting (Delhi grew from 6 stations in 2016 to about 40). OpenAQ holds no CPCB data from late 2022 to February 2025. Model PM2.5: CAMS via Open-Meteo, from August 2022, good at day-to-day swings but biased low in absolute level. Weather moves PM2.5 as much as fires do; the scatter is an association, not an attribution."],
     ["Stubble share", "IITM Pune's Decision Support System for Delhi (2023 onward, daily model mean, from the live page and Wayback Machine captures) and SAFAR's daily bulletin (2019-2022, scattered days from archived captures, dates may be off by one). Both are model attributions, from different models; they are not spliced into one series."],
@@ -633,7 +669,7 @@ function renderNotes() {
 
 // ---------------------------------------------------------------- orchestration
 function renderAll() {
-  renderHeader(); renderTotals(); renderTiming(); renderMap(); renderScatter(); renderTable(); renderPerHa(); renderBurn(); renderEnf(); renderAir(); renderNotes();
+  renderHeader(); renderTotals(); renderTiming(); renderMap(); renderScatter(); renderTable(); renderPerHa(); renderBurn(); renderS2n(); renderEnf(); renderAir(); renderNotes();
 }
 function press(sel, v) { document.querySelectorAll(`${sel} button`).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v))); }
 function bind() {
@@ -676,6 +712,7 @@ async function boot() {
   setupAir();
   setupEnf();
   renderAll();
+  fetch("../data/s2night/s2night_validation.json").then((r) => (r.ok ? r.json() : null)).then((v) => { S2N = v; renderS2n(); }).catch((e) => console.error(e));
 }
 boot().catch((e) => { console.error(e); $("#lede").textContent = `Could not load the data: ${e.message}`; });
 })();

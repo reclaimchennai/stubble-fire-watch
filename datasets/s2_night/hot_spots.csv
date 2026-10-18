@@ -1,0 +1,194 @@
+scene,date,tier,class,lon,lat,npix,l12_peak,l11_peak,l12_sum,saturated,t_k,area_m2,frp_mw,b04_peak,b08_peak,landcover,built_share,district,state,country,firms_km,firms_dt_h,firms_sat,static_km,both_nights
+R012,2025-12-09,b12,open,77.08796,29.95988,4,1.007,0.028,2.598,False,,,,0.221,0.162,grassland,0.03,Kurukshetra,Haryana,India,,,,,False
+R012,2025-12-09,b12,open,76.13768,30.2311,8,1.111,0.454,4.622,False,658.0,3.97,0.0423,0.221,0.162,grassland,0.01,Patiala,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,77.34708,30.23673,6,2.485,0.028,4.792,False,,,,0.221,0.162,cropland,0.02,Yamunanagar,Haryana,India,,,,,False
+R012,2025-12-09,b12,open,77.22598,30.25524,8,1.092,0.028,4.688,False,,,,0.221,0.324,cropland,0.0,Yamunanagar,Haryana,India,,,,,False
+R012,2025-12-09,b12,built-up,77.96166,30.32977,8,1.28,0.397,4.585,False,509.0,86.41,0.3277,0.221,0.649,built-up,0.64,Dehradun,Uttarakhand,India,,,,,False
+R012,2025-12-09,b12,built-up,76.38439,30.37734,7,1.13,0.028,2.598,False,,,,0.221,0.162,cropland,0.29,Patiala,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,78.07396,30.38407,5,2.081,0.028,4.971,False,,,,0.221,0.162,bare,0.19,Dehradun,Uttarakhand,India,,,,,False
+R012,2025-12-09,b12,open,78.30572,30.41967,12,2.184,0.397,8.84,False,,,,0.221,0.162,grassland,0.03,Tehri Garhwal,Uttarakhand,India,0.13,3.3,VIIRS:N20,,False
+R012,2025-12-09,b12,built-up,77.60368,30.45504,8,1.167,0.426,4.349,False,519.0,60.96,0.2505,0.221,0.324,cropland,0.27,Sirmaur,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,built-up,77.80397,30.48848,7,1.083,0.284,3.7,False,823.0,0.53,0.0137,0.221,0.162,built-up,0.35,Dehradun,Uttarakhand,India,,,,,False
+R012,2025-12-09,b12,built-up,77.47691,30.52147,10,1.704,0.454,5.187,False,588.0,19.98,0.1356,0.221,0.162,built-up,0.48,Sirmaur,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.03618,30.55228,7,1.007,0.028,4.189,False,,,,0.221,0.162,cropland,0.0,Panchkula,Haryana,India,,,,,False
+R012,2025-12-09,b12,built-up,76.71715,30.55606,3,1.45,0.085,2.495,False,,,,0.221,0.162,built-up,0.96,Patiala,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,78.11783,30.61999,3,2.335,0.028,3.615,False,,,,0.221,0.162,cropland,0.0,Tehri Garhwal,Uttarakhand,India,4.96,,,,False
+R012,2025-12-09,b12,built-up,76.79193,30.62363,11,1.177,0.454,5.489,False,951.0,0.19,0.009,0.221,0.162,tree cover,0.28,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,78.36655,30.6346,7,1.092,0.057,2.843,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.06,-9.1,VIIRS:N20,,False
+R012,2025-12-09,b12,open,76.77983,30.63466,7,2.052,0.199,5.338,False,501.0,166.54,0.5968,0.221,0.324,shrubland,0.03,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,76.29422,30.64096,8,1.384,0.256,4.349,False,733.0,1.78,0.0292,0.221,0.162,built-up,0.1,Fatehgarh Sahib,Punjab,India,5.28,,,,False
+R012,2025-12-09,b12,built-up,76.30811,30.66345,6,1.214,0.227,2.881,False,564.0,22.96,0.1318,0.221,0.324,built-up,0.51,Fatehgarh Sahib,Punjab,India,4.77,,,,False
+R012,2025-12-09,b12,open,76.70078,30.66506,3,1.826,0.057,2.843,False,,,,0.221,0.162,built-up,0.23,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,76.15381,30.66865,5,1.092,0.057,2.438,False,,,,0.221,0.162,cropland,0.0,Ludhiana,Punjab,India,,,,,False
+R012,2025-12-09,b12,built-up,76.83229,30.67821,6,3.446,0.227,6.929,False,,,,0.221,0.324,tree cover,0.96,Panchkula,Haryana,India,,,,,False
+R012,2025-12-09,b12,open,76.68774,30.68353,7,1.205,0.483,4.415,False,965.0,0.18,0.0089,0.221,0.324,built-up,0.07,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,built-up,76.81751,30.69106,9,1.045,0.142,3.21,False,,,,0.221,0.324,tree cover,0.59,Chandigarh,Chandigarh,India,,,,,False
+R012,2025-12-09,b12,open,76.55104,30.73336,4,1.318,0.028,2.344,False,,,,,0.162,cropland,0.0,Sahibzada Ajit Singh Nagar,Punjab,India,5.1,,,,False
+R012,2025-12-09,b12,open,76.70579,30.74193,7,1.855,0.312,5.112,False,512.0,113.62,0.444,0.221,0.162,cropland,0.1,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,77.17351,30.76236,4,1.939,0.028,4.01,False,,,,0.221,0.162,tree cover,0.0,Sirmaur,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.69906,30.83953,7,1.007,0.142,3.173,False,,,,0.221,0.324,tree cover,0.0,Shimla,Himachal Pradesh,India,2.08,,,,False
+R012,2025-12-09,b12,open,77.86075,30.85371,13,1.064,0.312,6.938,False,627.0,6.27,0.0549,0.221,0.324,tree cover,0.0,Dehradun,Uttarakhand,India,3.5,,,,False
+R012,2025-12-09,b12,open,76.55925,30.86065,6,1.582,0.028,4.105,False,,,,0.221,0.162,cropland,0.12,Rupnagar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,75.53914,30.89003,4,1.196,0.028,2.871,False,,,,0.221,0.162,cropland,0.0,Ludhiana,Punjab,India,7.62,,,,False
+R012,2025-12-09,b12,open,75.41616,30.96818,5,1.073,0.0,2.815,False,,,,0.221,0.162,cropland,0.0,Ludhiana,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,78.11749,30.97513,30,1.685,0.483,14.46,False,668.0,5.2,0.0587,0.221,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.41,14.6,VIIRS:N20,,False
+R012,2025-12-09,b12,open,77.77838,31.10778,16,1.939,0.483,12.625,False,,,,0.221,0.649,grassland,0.0,Shimla,Himachal Pradesh,India,0.19,3.3,VIIRS:N20,,False
+R012,2025-12-09,b12,open,76.01104,31.14794,4,1.054,0.028,2.692,False,,,,0.221,0.162,cropland,0.0,Shahid Bhagat Singh Nagar,Punjab,India,2.1,,,,False
+R012,2025-12-09,b12,built-up,76.92914,31.25007,10,1.045,0.085,5.827,False,,,,0.221,0.162,bare,0.54,Solan,Himachal Pradesh,India,0.16,-20.4,VIIRS:N20,0.0,False
+R012,2025-12-09,b12,open,75.79059,31.25959,5,1.911,0.028,4.321,False,,,,0.443,0.162,cropland,0.0,Kapurthala,Punjab,India,4.88,,,,False
+R012,2025-12-09,b12,open,77.97932,31.2981,11,1.054,0.028,5.31,False,,,,0.221,0.162,tree cover,0.0,Shimla,Himachal Pradesh,India,10.93,,,,False
+R012,2025-12-09,b12,open,77.5832,31.30166,3,1.064,0.028,1.77,False,,,,0.221,0.162,tree cover,0.01,Shimla,Himachal Pradesh,India,8.18,,,,False
+R012,2025-12-09,b12,open,77.92226,31.30357,7,1.054,0.227,4.067,False,,,,0.221,0.162,tree cover,0.0,Shimla,Himachal Pradesh,India,5.1,,,,False
+R012,2025-12-09,b12,open,77.13714,31.3167,8,1.017,0.028,3.785,False,,,,0.221,0.162,tree cover,0.0,Mandi,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,76.10912,31.33227,6,1.356,0.028,3.662,False,,,,0.221,0.324,tree cover,0.0,Hoshiarpur,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,77.87105,31.34588,6,1.393,0.057,3.427,False,,,,0.221,0.162,tree cover,0.0,Shimla,Himachal Pradesh,India,7.67,,,,False
+R012,2025-12-09,b12,built-up,75.60286,31.34885,4,1.036,0.028,2.787,False,,,,0.221,0.162,bare,0.79,Jalandhar,Punjab,India,,,,,False
+R012,2025-12-09,b12,built-up,75.60229,31.35075,10,3.229,0.057,13.349,False,,,,0.221,0.324,built-up,0.88,Jalandhar,Punjab,India,,,,,False
+R012,2025-12-09,b12,open,75.29738,31.39346,5,1.902,0.028,5.376,False,,,,0.221,0.162,cropland,0.0,Kapurthala,Punjab,India,,,,,False
+R012,2025-12-09,b12,industrial,76.83576,31.41364,20,1.431,0.199,9.923,False,674.0,4.06,0.0475,0.221,0.162,built-up,0.92,Bilaspur,Himachal Pradesh,India,0.12,-20.4,VIIRS:N20,0.01,False
+R012,2025-12-09,b12,open,76.98247,31.43834,8,1.553,0.341,6.599,False,,,,0.221,0.162,tree cover,0.0,Mandi,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,76.99525,31.51222,6,3.643,0.057,9.367,False,,,,0.221,0.162,tree cover,0.01,Mandi,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.47617,31.52049,5,2.278,0.085,7.164,False,,,,0.221,0.162,grassland,0.0,Kullu,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.41165,31.55526,6,1.036,0.142,2.561,False,671.0,3.05,0.0351,0.221,0.162,tree cover,0.0,Kullu,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,75.17461,31.70659,5,1.092,0.028,2.419,False,,,,0.221,0.162,cropland,0.01,Amritsar,Punjab,India,6.58,,,,False
+R012,2025-12-09,b12,open,76.34324,31.71502,4,1.017,0.028,2.005,False,,,,0.221,0.162,tree cover,0.0,Hamirpur,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.00898,31.95055,4,1.026,0.028,2.57,False,,,,0.221,0.162,tree cover,0.0,Kullu,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.22319,32.12104,5,1.469,0.028,3.813,False,,,,0.221,0.162,grassland,0.0,Kullu,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.20496,32.13339,6,1.28,0.028,5.206,False,,,,0.221,0.324,tree cover,0.0,Kullu,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,b12,open,77.92473,32.16788,5,1.403,0.0,3.888,False,,,,0.221,0.324,bare,0.0,Lahul & Spiti,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,both,built-up,76.40459,29.79492,11,2.758,1.334,11.73,False,,,,0.221,0.324,tree cover,0.66,Kaithal,Haryana,India,,,,,False
+R012,2025-12-09,both,open,76.4828,29.83317,14,1.826,0.511,7.899,False,548.0,48.24,0.2473,0.221,0.162,tree cover,0.0,Kaithal,Haryana,India,,,,,False
+R012,2025-12-09,both,open,76.62449,30.01545,8,1.789,0.852,6.195,False,,,,,0.649,cropland,0.0,Kurukshetra,Haryana,India,9.98,,,,False
+R012,2025-12-09,both,open,76.55954,30.02663,8,1.713,0.539,7.07,False,557.0,37.9,0.2063,,0.486,cropland,0.11,Kurukshetra,Haryana,India,,,,,False
+R012,2025-12-09,both,open,77.79719,30.03591,9,1.949,0.625,5.074,False,,,,0.221,0.162,cropland,0.0,Hardwar,Uttarakhand,India,,,,,False
+R012,2025-12-09,both,open,75.82341,30.08255,21,6.797,3.123,30.258,False,558.0,146.95,0.8059,0.221,0.973,cropland,0.02,Sangrur,Punjab,India,,,,,False
+R012,2025-12-09,both,open,77.4185,30.13083,17,7.635,3.663,30.917,False,,,,0.221,0.973,cropland,0.0,Yamunanagar,Haryana,India,3.35,,,,False
+R012,2025-12-09,both,built-up,77.30841,30.13094,12,2.382,1.306,9.254,False,628.0,13.84,0.1218,0.221,0.649,grassland,0.47,Yamunanagar,Haryana,India,7.59,,,,False
+R012,2025-12-09,both,open,77.09281,30.18874,7,0.857,0.539,3.775,False,557.0,18.95,0.1031,0.221,0.162,tree cover,0.0,Ambala,Haryana,India,,,,,False
+R012,2025-12-09,both,open,76.26561,30.35857,5,1.007,0.511,2.146,False,677.0,2.74,0.0326,0.221,0.162,built-up,0.16,Patiala,Punjab,India,,,,,False
+R012,2025-12-09,both,open,75.92391,30.37445,10,1.657,0.625,5.357,False,,,,0.221,0.162,cropland,0.15,Sangrur,Punjab,India,4.53,,,,False
+R012,2025-12-09,both,open,78.39498,30.41663,93,23.385,13.572,337.898,False,963.0,3.55,0.1731,0.443,1.784,grassland,0.0,Tehri Garhwal,Uttarakhand,India,8.02,,,,False
+R012,2025-12-09,both,open,78.30923,30.41885,37,10.403,4.6,67.105,False,555.0,237.76,1.2796,0.221,0.486,grassland,0.02,Tehri Garhwal,Uttarakhand,India,0.06,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,77.0097,30.48765,39,15.298,7.638,89.775,False,832.0,6.8,0.1848,0.443,2.595,bare,0.0,Panchkula,Haryana,India,1.27,,,,False
+R012,2025-12-09,both,open,78.4214,30.52689,24,2.222,1.334,20.711,False,857.0,0.79,0.024,0.443,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.54,-68.1,VIIRS:N,,False
+R012,2025-12-09,both,open,78.42355,30.52729,32,2.928,0.625,24.496,False,,,,0.221,0.324,grassland,0.05,Uttarkashi,Uttarakhand,India,0.74,-68.1,VIIRS:N,,False
+R012,2025-12-09,both,built-up,76.978,30.54299,8,2.438,1.647,8.266,False,914.0,0.53,0.0211,0.221,0.486,bare,0.45,Panchkula,Haryana,India,5.95,,,,False
+R012,2025-12-09,both,open,78.38478,30.55676,39,5.272,0.994,38.043,False,,,,0.221,0.486,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.38,-7.5,MODIS:Aqua,,False
+R012,2025-12-09,both,open,78.38934,30.55761,28,8.539,3.464,45.311,False,,,,0.221,0.486,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.38,-9.5,VIIRS:N,,False
+R012,2025-12-09,both,open,76.89167,30.57401,8,1.751,0.738,5.291,False,612.0,13.35,0.1061,0.221,0.324,cropland,0.15,Sahibzada Ajit Singh Nagar,Punjab,India,9.2,,,,False
+R012,2025-12-09,both,built-up,76.88751,30.57856,28,26.304,18.852,89.699,False,888.0,7.1,0.2504,0.664,5.513,built-up,0.55,Sahibzada Ajit Singh Nagar,Punjab,India,9.0,,,,False
+R012,2025-12-09,both,built-up,76.85724,30.5868,7,0.885,1.221,3.276,False,885.0,0.25,0.0085,0.221,0.324,built-up,0.58,Sahibzada Ajit Singh Nagar,Punjab,India,10.36,,,,False
+R012,2025-12-09,both,open,78.38219,30.60375,201,15.938,6.417,267.733,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,2.32,,,,False
+R012,2025-12-09,both,open,78.35131,30.62498,89,5.121,2.64,118.837,False,814.0,2.71,0.0675,0.221,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.41,2.9,VIIRS:N,,False
+R012,2025-12-09,both,open,78.35957,30.63233,1283,27.236,10.335,2875.302,False,630.0,152.02,1.3609,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.09,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,76.28106,30.63272,13,3.766,1.845,12.822,False,911.0,0.84,0.0329,0.221,0.324,cropland,0.01,Fatehgarh Sahib,Punjab,India,5.5,,,,False
+R012,2025-12-09,both,built-up,76.27156,30.6388,9,2.485,0.568,7.917,False,785.0,1.77,0.0381,0.221,0.162,built-up,0.46,Fatehgarh Sahib,Punjab,India,4.61,,,,False
+R012,2025-12-09,both,open,78.36416,30.63925,42,6.176,1.874,39.992,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.23,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,built-up,76.30565,30.63939,9,1.196,0.767,4.349,False,608.0,9.74,0.0755,0.221,0.162,built-up,0.31,Fatehgarh Sahib,Punjab,India,6.11,,,,False
+R012,2025-12-09,both,built-up,76.27717,30.64895,11,2.184,0.795,8.407,False,,,,0.221,0.324,built-up,0.6,Fatehgarh Sahib,Punjab,India,3.69,,,,False
+R012,2025-12-09,both,built-up,76.31097,30.65653,10,2.909,1.704,9.97,False,769.0,2.46,0.0489,0.221,0.324,built-up,0.72,Fatehgarh Sahib,Punjab,India,5.35,,,,False
+R012,2025-12-09,both,open,78.2061,30.69513,133,20.777,12.777,377.325,False,796.0,13.27,0.3013,0.221,1.946,grassland,0.0,Uttarkashi,Uttarakhand,India,0.28,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,76.85708,30.6988,8,1.582,1.022,4.208,False,770.0,1.33,0.0264,0.0,0.324,cropland,0.14,Panchkula,Haryana,India,10.16,,,,False
+R012,2025-12-09,both,open,78.20763,30.70165,30,3.097,1.476,23.752,False,,,,0.443,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.8,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,77.82459,30.70514,31,8.115,3.606,42.336,False,520.0,415.64,1.7183,0.221,0.811,grassland,0.0,Dehradun,Uttarakhand,India,6.7,,,,False
+R012,2025-12-09,both,built-up,76.69845,30.72471,8,2.664,1.136,9.763,False,504.0,200.71,0.7357,0.443,0.811,tree cover,0.59,Sahibzada Ajit Singh Nagar,Punjab,India,,,,,False
+R012,2025-12-09,both,open,75.85437,30.7365,9,1.808,0.852,7.475,False,738.0,2.2,0.0369,0.221,0.324,cropland,0.01,Ludhiana,Punjab,India,,,,,False
+R012,2025-12-09,both,open,76.72178,30.74706,11,3.427,1.334,15.816,False,628.0,19.69,0.1741,0.221,0.324,tree cover,0.02,Chandigarh,Chandigarh,India,,,,,False
+R012,2025-12-09,both,open,78.27278,30.78757,21,2.128,0.823,13.792,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,,,,,False
+R012,2025-12-09,both,open,77.97973,30.80019,91,9.791,5.792,110.439,False,,,,0.221,0.324,tree cover,0.0,Dehradun,Uttarakhand,India,4.34,,,,False
+R012,2025-12-09,both,open,77.9755,30.80069,50,12.003,6.757,83.203,False,537.0,409.46,1.9296,0.221,0.486,tree cover,0.0,Dehradun,Uttarakhand,India,4.66,,,,False
+R012,2025-12-09,both,open,77.98379,30.80104,27,8.934,5.735,44.37,False,570.0,150.62,0.8997,0.221,0.324,tree cover,0.0,Dehradun,Uttarakhand,India,3.97,,,,False
+R012,2025-12-09,both,open,77.82654,30.80294,273,25.174,14.139,658.831,False,833.0,11.08,0.3026,0.221,1.135,tree cover,0.0,Dehradun,Uttarakhand,India,6.51,,,,False
+R012,2025-12-09,both,open,77.6776,30.80372,428,6.562,3.975,366.272,False,766.0,5.78,0.1127,0.221,0.162,grassland,0.0,Shimla,Himachal Pradesh,India,0.16,2.9,VIIRS:N,,False
+R012,2025-12-09,both,open,78.14229,30.80439,31,2.853,1.051,28.252,False,,,,0.221,0.649,grassland,0.0,Uttarkashi,Uttarakhand,India,4.99,,,,False
+R012,2025-12-09,both,open,77.66411,30.83672,70,2.777,1.902,48.954,False,756.0,2.73,0.0506,0.443,0.486,grassland,0.0,Shimla,Himachal Pradesh,India,1.76,,,,False
+R012,2025-12-09,both,built-up,76.95518,30.83823,13,8.671,6.473,21.53,False,663.0,28.95,0.3167,0.221,1.784,built-up,0.97,Solan,Himachal Pradesh,India,8.52,,,,False
+R012,2025-12-09,both,open,77.69715,30.84199,26,0.941,0.596,11.533,False,601.0,8.78,0.0647,0.221,0.324,grassland,0.0,Shimla,Himachal Pradesh,India,2.1,,,,False
+R012,2025-12-09,both,built-up,75.9222,30.84539,15,2.777,1.562,15.213,False,923.0,0.57,0.0233,0.221,0.162,built-up,0.42,Ludhiana,Punjab,India,,,,2.43,False
+R012,2025-12-09,both,open,78.17224,30.84655,24,1.968,0.937,14.31,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,5.25,,,,False
+R012,2025-12-09,both,open,78.17592,30.84774,17,1.214,0.511,8.03,False,514.0,70.77,0.2809,0.0,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,5.55,,,,False
+R012,2025-12-09,both,open,78.17232,30.84857,32,25.748,11.698,116.747,False,,,,0.221,0.486,tree cover,0.0,Uttarkashi,Uttarakhand,India,5.19,,,,False
+R012,2025-12-09,both,built-up,75.90752,30.85541,19,6.91,5.991,30.813,False,1361.0,0.14,0.0276,0.443,1.459,built-up,0.57,Ludhiana,Punjab,India,,,,3.76,False
+R012,2025-12-09,both,open,78.11923,30.86016,57,4.067,2.129,50.63,False,,,,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.17,2.9,VIIRS:N,,False
+R012,2025-12-09,both,open,76.05563,30.89395,23,9.678,7.836,50.046,False,805.0,5.58,0.1332,0.221,1.135,cropland,0.02,Ludhiana,Punjab,India,6.49,,,,False
+R012,2025-12-09,both,built-up,76.82419,30.89848,8,1.177,0.539,4.66,False,744.0,1.34,0.0232,0.221,0.324,tree cover,0.79,Panchkula,Haryana,India,1.63,,,,False
+R012,2025-12-09,both,open,78.03746,30.90546,41,7.88,3.095,50.96,False,,,,0.221,0.649,grassland,0.0,Uttarkashi,Uttarakhand,India,0.37,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.03789,30.90769,33,7.183,3.123,44.031,False,,,,0.221,0.811,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.21,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.03888,30.91141,101,7.4,4.401,115.306,False,,,,0.0,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.42,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,76.80221,30.91227,5,0.904,0.88,2.937,False,1523.0,0.01,0.0034,0.221,0.486,built-up,0.04,Panchkula,Haryana,India,3.98,,,,False
+R012,2025-12-09,both,open,78.04169,30.91472,68,8.369,3.038,101.354,False,,,,0.221,0.811,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.38,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.03944,30.916,53,3.323,1.306,37.977,False,525.0,151.63,0.6509,0.221,0.162,grassland,0.0,Uttarkashi,Uttarakhand,India,0.16,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,77.95389,30.916,23,3.963,2.442,25.852,False,505.0,291.75,1.0771,0.443,0.324,grassland,0.0,Dehradun,Uttarakhand,India,0.24,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.08132,30.95477,88,1.6,0.795,44.925,False,566.0,29.29,0.1701,0.221,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,3.51,,,,False
+R012,2025-12-09,both,open,78.11591,30.97272,66,1.958,0.994,40.519,False,569.0,33.78,0.2002,0.221,0.162,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.48,-32.8,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.00647,31.06391,61,3.257,2.058,57.239,False,,,,0.221,0.324,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.12,-9.1,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.00202,31.06408,57,8.539,5.352,71.285,False,567.0,153.76,0.8981,0.221,1.135,tree cover,0.0,Uttarkashi,Uttarakhand,India,0.34,-9.1,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.0109,31.06738,44,2.57,1.732,19.761,False,680.0,6.64,0.0807,0.221,0.324,grassland,0.0,Uttarkashi,Uttarakhand,India,0.6,-9.1,VIIRS:N20,,False
+R012,2025-12-09,both,open,78.03567,31.06816,50,7.842,4.287,69.929,False,729.0,10.66,0.1706,0.221,0.811,grassland,0.0,Uttarkashi,Uttarakhand,India,0.57,-7.5,MODIS:Aqua,,False
+R012,2025-12-09,both,open,75.50011,31.07359,16,3.502,1.334,17.021,False,554.0,82.29,0.4388,0.221,0.162,cropland,0.0,Jalandhar,Punjab,India,5.64,,,,False
+R012,2025-12-09,both,open,77.12742,31.08439,125,29.796,84.836,420.602,True,,,,2.435,12.162,bare,0.16,Shimla,Himachal Pradesh,India,0.2,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,built-up,75.59258,31.09116,15,4.688,2.981,19.638,False,,,,0.221,0.973,built-up,0.81,Jalandhar,Punjab,India,0.61,-55.1,MODIS:Aqua,,False
+R012,2025-12-09,both,open,77.78137,31.10532,195,23.009,15.9,677.49,False,847.0,8.87,0.2592,0.221,1.135,grassland,0.0,Shimla,Himachal Pradesh,India,0.08,3.3,VIIRS:N20,,False
+R012,2025-12-09,both,open,76.35012,31.32608,8,1.064,0.568,4.378,False,1094.0,0.07,0.0058,,0.162,cropland,0.0,Rupnagar,Punjab,India,7.04,,,,False
+R012,2025-12-09,both,built-up,75.53541,31.33832,10,1.61,1.42,6.129,False,766.0,1.42,0.0276,0.664,2.27,built-up,0.9,Jalandhar,Punjab,India,,,,,False
+R012,2025-12-09,both,open,77.20708,31.34136,12,2.335,1.192,10.422,False,631.0,12.83,0.1154,0.221,0.162,cropland,0.0,Mandi,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,both,built-up,76.74777,31.36,8,1.374,0.681,4.83,False,1057.0,0.11,0.008,0.221,0.162,tree cover,0.3,Bilaspur,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,both,open,77.52772,31.79175,40,4.312,3.265,39.06,False,724.0,6.21,0.097,0.221,0.811,grassland,0.0,Kullu,Himachal Pradesh,India,0.28,14.6,VIIRS:N20,,False
+R012,2025-12-09,both,open,77.52741,31.79587,55,3.756,1.334,29.486,False,560.0,78.04,0.4342,0.221,0.162,tree cover,0.0,Kullu,Himachal Pradesh,India,0.03,14.2,VIIRS:N,,False
+R012,2025-12-09,both,open,75.59894,31.80292,31,4.142,1.874,37.234,False,1016.0,0.44,0.0266,0.221,0.162,cropland,0.0,Hoshiarpur,Punjab,India,0.59,-9.1,VIIRS:N20,,False
+R012,2025-12-09,both,open,77.48621,31.81094,64,10.855,8.234,120.333,False,712.0,18.34,0.2667,0.221,1.135,grassland,0.0,Kullu,Himachal Pradesh,India,0.72,-9.4,VIIRS:N,,False
+R012,2025-12-09,both,open,77.08306,31.81621,11,0.932,0.568,4.604,False,1165.0,0.04,0.0045,0.221,0.162,tree cover,0.0,Mandi,Himachal Pradesh,India,,,,,False
+R012,2025-12-09,both,open,77.27199,31.96962,9,2.146,0.625,6.1,False,529.0,88.76,0.3929,0.221,0.162,tree cover,0.0,Kullu,Himachal Pradesh,India,1.16,,,,False
+R012,2025-12-09,both,open,77.21842,32.02352,13,2.74,1.107,11.278,False,796.0,1.73,0.0395,0.221,0.162,grassland,0.0,Kullu,Himachal Pradesh,India,2.99,,,,False
+R055,2025-12-12,b12,open,74.17975,29.40632,5,6.832,0.028,13.532,False,,,,0.221,0.162,cropland,0.0,Hanumangarh,Rajasthan,India,,,,,False
+R055,2025-12-12,b12,open,74.36753,29.44317,6,1.79,0.114,4.203,False,551.0,44.58,0.2329,0.221,0.162,cropland,0.0,Hanumangarh,Rajasthan,India,,,,,False
+R055,2025-12-12,b12,open,75.21542,29.62074,2,1.385,0.028,1.941,False,,,,0.443,0.162,cropland,0.0,Mansa,Punjab,India,0.6,-81.3,VIIRS:N20,,False
+R055,2025-12-12,b12,open,75.22809,29.62328,3,1.734,0.028,3.081,False,,,,0.221,0.162,cropland,0.01,Mansa,Punjab,India,1.82,,,,False
+R055,2025-12-12,b12,open,74.42498,29.80477,7,1.272,0.028,4.731,False,,,,0.221,0.162,cropland,0.0,Hanumangarh,Rajasthan,India,,,,,False
+R055,2025-12-12,b12,open,75.79678,29.8652,6,1.527,0.028,3.637,False,,,,0.221,0.162,cropland,0.0,Sangrur,Punjab,India,,,,,False
+R055,2025-12-12,b12,open,73.23751,29.89249,7,1.348,0.398,3.392,False,813.0,0.72,0.0178,0.221,0.162,bare,0.0,Bahawalnagar,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.47092,29.91522,7,1.027,0.483,3.411,False,710.0,1.77,0.0255,0.221,0.162,shrubland,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,b12,open,74.24248,29.96492,6,1.008,0.256,2.243,False,677.0,2.74,0.0326,0.221,0.162,cropland,0.04,Fazilka,Punjab,India,,,,,False
+R055,2025-12-12,b12,built-up,73.15093,30.03494,7,1.093,0.199,2.761,False,730.0,1.46,0.0235,0.221,0.162,built-up,0.49,Bahawalnagar,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,built-up,72.88053,30.27342,8,1.216,0.369,4.09,False,867.0,0.39,0.0125,0.221,0.162,built-up,0.81,Vihari,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,74.0654,30.29381,6,1.8,0.057,6.201,False,,,,0.221,0.162,cropland,0.0,Fazilka,Punjab,India,,,,,False
+R055,2025-12-12,b12,open,74.99755,30.3613,4,1.809,0.0,3.421,False,,,,0.221,0.324,cropland,0.0,Bathinda,Punjab,India,,,,,False
+R055,2025-12-12,b12,built-up,73.84053,30.58528,7,1.15,0.426,3.421,False,806.0,0.66,0.0157,0.221,0.324,built-up,0.71,Okara,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,75.41322,30.6788,5,1.206,0.028,2.742,False,,,,0.0,0.162,cropland,0.0,Ludhiana,Punjab,India,,,,,False
+R055,2025-12-12,b12,open,73.24455,30.78288,8,1.404,0.454,4.646,False,888.0,0.38,0.0133,0.221,0.162,cropland,0.12,Sahiwal,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.75151,30.79255,5,1.008,0.028,2.657,False,,,,0.221,0.162,cropland,0.0,Okara,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.99754,30.88102,7,1.404,0.426,4.429,False,867.0,0.45,0.0145,0.221,0.324,tree cover,0.0,Kasur,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.56396,30.89454,9,1.046,0.028,3.449,False,,,,0.221,0.162,cropland,0.0,Okara,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.744,31.00279,7,2.95,0.028,6.38,False,,,,0.221,0.162,cropland,0.0,Kasur,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,74.43164,31.02859,6,1.14,0.028,2.846,False,,,,0.221,0.162,cropland,0.0,Kasur,Punjab,Pakistan,5.29,,,,False
+R055,2025-12-12,b12,open,74.42472,31.14,3,1.084,0.0,1.8,False,,,,0.221,0.324,cropland,0.02,Kasur,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.75297,31.22863,3,1.093,0.028,1.913,False,,,,0.221,0.162,bare,0.0,Sheikhpura,Punjab,Pakistan,,,,,False
+R055,2025-12-12,b12,open,73.44779,31.40641,5,34.207,0.028,71.147,True,,,,0.221,0.162,cropland,0.05,Faisalabad,Punjab,Pakistan,6.88,,,,False
+R055,2025-12-12,b12,open,75.39354,31.42084,5,1.329,0.057,3.675,False,505.0,99.01,0.3638,0.221,0.162,tree cover,0.01,Kapurthala,Punjab,India,6.4,,,,False
+R055,2025-12-12,both,open,73.97912,29.3492,16,5.682,4.8,25.17,False,1392.0,0.1,0.0222,0.221,0.649,shrubland,0.19,Hanumangarh,Rajasthan,India,,,,,False
+R055,2025-12-12,both,open,73.42711,29.44672,14,6.615,4.09,25.415,False,585.0,82.0,0.5451,0.221,0.324,bare,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,both,open,73.43368,29.4871,10,2.978,1.25,8.443,False,984.0,0.39,0.0207,0.221,0.162,grassland,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,both,open,74.97202,29.51278,6,0.773,0.511,1.932,False,570.0,12.79,0.0768,0.221,0.162,cropland,0.19,Sirsa,Haryana,India,,,,,False
+R055,2025-12-12,both,open,74.9411,29.52067,9,2.007,0.596,5.475,False,565.0,36.94,0.2138,0.221,0.162,cropland,0.0,Sirsa,Haryana,India,,,,,False
+R055,2025-12-12,both,open,75.09549,29.53315,7,0.952,0.625,3.364,False,726.0,1.33,0.021,0.221,0.162,built-up,0.08,Sirsa,Haryana,India,,,,,False
+R055,2025-12-12,both,open,73.02488,29.69452,5,1.074,0.568,2.931,False,766.0,0.95,0.0184,0.443,0.324,cropland,0.0,Bahawalnagar,Punjab,Pakistan,,,,,False
+R055,2025-12-12,both,open,73.38891,29.87592,11,3.223,1.136,11.864,False,917.0,0.69,0.0275,0.221,0.162,bare,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,both,industrial,74.95014,29.9091,1029,29.825,89.464,1526.484,True,,,,173.825,459.213,bare,0.73,Sirsa,Haryana,India,0.02,27.6,VIIRS:N20,0.01,False
+R055,2025-12-12,both,open,73.99697,29.91951,7,1.423,0.909,4.005,False,1193.0,0.06,0.0066,0.221,0.162,cropland,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,both,open,73.42078,29.92768,13,4.702,2.869,17.028,False,1166.0,0.22,0.0227,0.221,1.784,bare,0.0,Ganganagar,Rajasthan,India,,,,,False
+R055,2025-12-12,both,open,75.17392,30.26572,8,1.593,0.596,6.832,False,768.0,1.36,0.0268,0.221,0.162,bare,0.0,Bathinda,Punjab,India,,,,,False
+R055,2025-12-12,both,built-up,73.78207,30.61218,6,0.876,0.568,2.412,False,888.0,0.24,0.0083,0.221,0.162,built-up,0.36,Okara,Punjab,Pakistan,,,,,False
+R055,2025-12-12,both,open,74.82661,30.62963,7,1.423,0.909,4.41,False,924.0,0.29,0.0119,0.221,0.487,cropland,0.03,Faridkot,Punjab,India,,,,,False
+R055,2025-12-12,both,open,73.40143,31.232,12,2.337,1.392,9.405,False,1152.0,0.11,0.0115,0.443,0.324,cropland,0.0,Faisalabad,Punjab,Pakistan,2.18,,,,False
+R055,2025-12-12,both,open,72.76577,31.23478,8,1.253,0.682,4.589,False,1103.0,0.08,0.0067,0.221,0.162,cropland,0.0,Toba Tek Singh,Punjab,Pakistan,1.98,,,,False
+R055,2025-12-12,both,built-up,73.24291,31.37462,6,0.81,0.795,2.431,False,1530.0,0.01,0.003,0.221,0.324,built-up,0.58,Faisalabad,Punjab,Pakistan,,,,,False
+R055,2025-12-12,both,open,74.30346,31.38492,12,1.649,1.164,6.785,False,1208.0,0.06,0.0075,0.221,0.324,grassland,0.23,Lahore,Punjab,Pakistan,7.47,,,,False
+R055,2025-12-12,both,open,74.27321,31.40456,31,2.083,0.795,22.352,False,918.0,0.44,0.0178,0.221,0.162,grassland,0.16,Lahore,Punjab,Pakistan,4.09,,,,False
+R055,2025-12-12,both,industrial,74.41493,31.59388,15,2.375,1.534,11.383,False,886.0,0.65,0.0228,0.221,0.162,built-up,0.93,Lahore,Punjab,Pakistan,3.06,,,0.09,False
+R055,2025-12-12,both,industrial,74.40244,31.60138,10,1.187,0.54,4.438,False,710.0,2.06,0.0297,0.221,0.162,built-up,0.97,Lahore,Punjab,Pakistan,2.17,,,0.06,False
+R055,2025-12-12,both,industrial,74.41949,31.60885,26,2.214,1.335,20.072,False,1000.0,0.26,0.0148,0.443,0.324,built-up,0.76,Lahore,Punjab,Pakistan,1.77,,,0.01,False
+R055,2025-12-12,both,industrial,74.40565,31.60991,21,2.997,1.704,17.999,False,924.0,0.61,0.0251,0.221,0.324,built-up,0.85,Lahore,Punjab,Pakistan,1.19,,,0.04,False
+R055,2025-12-12,both,industrial,74.3751,31.61602,41,2.525,1.874,23.106,False,1290.0,0.07,0.0106,0.221,0.162,built-up,0.27,Lahore,Punjab,Pakistan,0.14,-92.9,VIIRS:N,0.01,False
+R055,2025-12-12,both,industrial,74.40513,31.62013,31,4.306,2.443,29.382,False,913.0,0.95,0.0373,0.221,0.324,tree cover,0.0,Lahore,Punjab,Pakistan,0.17,-20.2,VIIRS:N,0.8,False
+R055,2025-12-12,both,industrial,74.42632,31.62061,18,1.168,0.568,9.16,False,877.0,0.35,0.0117,0.221,0.324,built-up,0.09,Lahore,Punjab,Pakistan,1.16,,,0.01,False
+R055,2025-12-12,both,industrial,74.42692,31.62973,16,0.971,0.54,6.794,False,1110.0,0.06,0.0052,0.221,0.162,tree cover,0.02,Lahore,Punjab,Pakistan,0.25,-92.6,VIIRS:N20,0.02,False

@@ -11,6 +11,7 @@ Exported by `scripts/export_release.py` on 2026-10-18.
 | [fires/](datasets/fires/README.md) | NASA FIRMS active-fire detections aggregated by day / state / district / season / sensor, IST hour of burning | `daily_by_state.csv.gz` (1.4 MB), `daily_by_state.parquet` (0.8 MB), `district_daily_paddy.csv.gz` (1.4 MB), `district_season.csv` (3.0 MB), `hourly_ist_paddy.csv` (40 kB), `season_totals.csv` (0.2 MB) |
 | [creams/](datasets/creams/README.md) | ICAR-IARI CREAMS official daily residue-burning counts (state, district), year comparisons, bulletin list | `bulletin_state_tables_long.csv.gz` (2.3 MB), `bulletins.csv` (0.2 MB), `district_daily.csv` (34.7 MB), `monthly_reports.csv` (0.2 MB), `state_daily.csv` (1.0 MB), `validation.json` (74 kB), `year_compare.csv` (0.6 MB) |
 | [burned_area/](datasets/burned_area/README.md) | NASA MODIS MCD64A1 burned area per season, state, district and burn date (Punjab, Haryana) | `daily_by_state.csv` (0.3 MB), `district_season.csv` (44 kB), `firms_check.csv` (1 kB), `state_season.csv` (10 kB) |
+| [s2_night/](datasets/s2_night/README.md) | Sentinel-2A night hot spots (SWIR, 20 m), 9 and 12 Dec 2025, with FIRMS match rates and land-cover setting | `hot_spots.csv` (29 kB), `hot_spots.geojson` (98 kB), `validation.csv` (3 kB) |
 | [air/](datasets/air/README.md) | CPCB ground PM2.5/PM10 (via OpenAQ), CAMS PM/AOD + ERA5 meteorology at receptor cities, modelled stubble share of Delhi PM2.5 | `cams_era5_cities.csv` (0 kB), `cams_era5_daily.csv` (1.3 MB), `cpcb_pm25_daily.csv` (1.3 MB), `cpcb_pm25_monthly.csv` (93 kB), `cpcb_stations.csv` (17 kB), `stubble_share_delhi.csv` (0.2 MB) |
 | [paddy/](datasets/paddy/README.md) | Kharif rice area and production by state (1966+) and district (1997+), UPAg/DES | `rice_area_district.csv` (0.5 MB), `rice_area_state.csv` (38 kB) |
 | [enforcement/](datasets/enforcement/README.md) | Enforcement and crop-residue-management indicators with source documents and policy timeline | `ENFORCEMENT_SOURCES.md` (54 kB), `events.csv` (14 kB), `metrics.csv` (4 kB), `sources.csv` (40 kB), `values.csv` (0.4 MB) |
@@ -47,6 +48,7 @@ Download from the GitHub Release; checksums in `SHA256SUMS`, list in `MANIFEST.c
 | `burned_area_2025.tif` | 0.1 MB | 790 x 1170 px | MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0) |
 | `creams_events.csv.gz` | 8.9 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (CSV) |
 | `creams_events.parquet` | 18.1 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326) |
+| `dashboard-data.zip` | 96.3 MB |  |  |
 | `fire_detections_2003.parquet` | 1.1 MB | 31959 rows | FIRMS detections 2003, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_2004.parquet` | 1.2 MB | 35948 rows | FIRMS detections 2004, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_2005.parquet` | 1.3 MB | 40562 rows | FIRMS detections 2005, all days (GeoParquet, EPSG:4326) |
@@ -72,6 +74,10 @@ Download from the GitHub Release; checksums in `SHA256SUMS`, list in `MANIFEST.c
 | `fire_detections_2025.parquet` | 44.1 MB | 1185951 rows | FIRMS detections 2025, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_2026.parquet` | 31.8 MB | 847058 rows | FIRMS detections 2026, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_all.csv.gz` | 236.8 MB | 10553783 rows | All FIRMS detections 2003-present in the box 68.5-89E 21-35.5N, all days, one CSV (same columns as the per-year parquet minus geometry) |
+| `s2night_R012_b11_max_100m.tif` | 13.7 MB | 3726 x 2848 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
+| `s2night_R012_b12_max_100m.tif` | 12.2 MB | 3726 x 2848 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
+| `s2night_R055_b11_max_100m.tif` | 13.6 MB | 3715 x 2853 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
+| `s2night_R055_b12_max_100m.tif` | 12.1 MB | 3715 x 2853 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
 | `smoke_geosfp_2026.nc` | 36.6 MB | time=321 x lat=81 x lon=97 | GEOS-FP smoke AOD, total AOD, OC/BC/BrC AOD, 10 m wind; 3-hourly, 0.3125 x 0.25 deg (NetCDF4/CF) |
 
 ### `fire_detections_<year>.parquet` and `fire_detections_all.csv.gz`

@@ -127,6 +127,10 @@ Details and caveats per source: [`LICENSES.md`](LICENSES.md).
   A field-scale Sentinel-2 classifier was built first and **rejected**: harvested paddy looks like ash whether or
   not it burned, and the classifier rated a near-burn-free year above a peak year. The test and its imagery are
   in the method document.
+- **Night hot spots.** ESA's Sentinel-2A night campaign imaged Punjab on 9 and 12 December 2025. Hot spots bright
+  in two short-wave infrared bands at 20 m pass a noise test with zero false alarms and recovered 32 of 34 VIIRS night
+  detections, but those were hill fires; in the plains many sit on factories and furnaces, so they are mapped as
+  heat sources by setting and never counted as crop fires.
 - **Smoke.** GEOS-FP's 3-hourly aerosol fields over the region, packed into image atlases the browser animates with
   bicubic smoothing and time interpolation; runs are gap-filled from neighbouring runs.
 - **Air, paddy, enforcement.** CPCB stations aggregated per city with coverage rules; rice area matched to the

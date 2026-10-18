@@ -15,6 +15,7 @@ Python 3.11+ and shell; GDAL command-line tools for the raster steps. Install wi
 | `build_fires.py` | the three above | `data/fires/` (binary points per season, `summary.json`, `district_daily.json`) | live, refresh |
 | `fetch_smoke.py` | NASA GMAO GEOS-FP OPeNDAP (no key) | `data/smoke/` (PNG atlases, `smoke_meta.json`) | refresh |
 | `burnscar.py [--season ...]` | NASA MCD64A1 on Planetary Computer (no key) | `data/burnscar/` (XYZ tiles, `burnscar.json`) | refresh (current two seasons) |
+| `s2night.py fetch\|detect\|validate` | ESA Sentinel-2A night campaign on CDSE S3 (`CDSE_S3_ACCESS_KEY` / `CDSE_S3_SECRET_KEY`), FIRMS, ESA WorldCover on Planetary Computer | `data/raw/s2night/`, `data/s2night/` (hot spots, validation) | once (two scenes, Dec 2025) |
 | `build_db_extras.py [--rice-only\|--aq-only]` | Agri at Source crop statistics; Open-Meteo CAMS + ERA5 | `data/db/extras/rice_area.json`, `aq_met.json` | refresh |
 | `build_aq_ground.py [aq\|stubble\|all]` | OpenAQ v3 (`OPENAQ_API_KEY`); IITM DSS, SAFAR (live and Wayback) | `aq_ground.json`, `stubble_share.json` | daily |
 | `build_enforcement.py [--offline]` | PPCB, Haryana, CAQM, NGT, Parliament, data.gov.in (`DATAGOV_API_KEY`) | `enforcement.json`, `ENFORCEMENT_SOURCES.md` | daily |

@@ -6,6 +6,7 @@ explains, source by source, what was taken, how it was processed, how it was che
 - [1. Fire detections (NASA FIRMS)](#1-fire-detections-nasa-firms)
 - [2. Official counts (ICAR-IARI CREAMS bulletins)](#2-official-counts-icar-iari-creams-bulletins)
 - [3. Burned area (NASA MODIS MCD64A1), and a Sentinel-2 method that failed](#3-burned-area)
+  - [3c. Sentinel-2A at night: hot spots, not a crop-fire count](#3c-sentinel-2a-at-night-december-2025-hot-spots-not-a-crop-fire-count)
 - [4. Smoke (NASA GMAO GEOS-FP)](#4-smoke-nasa-gmao-geos-fp)
 - [5. Air quality and the stubble share](#5-air-quality-and-the-stubble-share)
 - [6. Paddy area](#6-paddy-area)
@@ -126,6 +127,67 @@ It failed validation, so it was not published:
 *Freshly cut, damp paddy stubble is as dark in the near infrared and as low in NBR as ash, and stays that way for
 weeks. A spectral threshold cannot separate burned from merely harvested fields in this landscape; doing so needs a
 classifier trained on fields known to have burned (for example from high-resolution imagery or field surveys).*
+
+### 3c. Sentinel-2A at night (December 2025): hot spots, not a crop-fire count
+
+**What it is.** From 3 to 22 December 2025 ESA left Sentinel-2A's camera on during its night (ascending) pass as a
+test, and released the images in June 2026 (Copernicus Data Space collection `sentinel-2-night-time-acquisitions`;
+processing note [doi:10.5281/zenodo.20286476](https://doi.org/10.5281/zenodo.20286476)). Two scenes cover Punjab:
+9 Dec at 22:32 IST (east Punjab, Haryana, the Himachal and Uttarakhand hills) and 12 Dec at 22:42 IST (west Punjab
+and Pakistani Punjab). With no sunlight, a pixel that is bright in the short-wave infrared is giving off heat. At
+20 m that is a far smaller footprint than MODIS (1 km) or VIIRS (375 m).
+
+**How it was taken and processed** (`scripts/s2night.py`).
+- The orthorectified products (one float32 radiance GeoTIFF per band, about 2.7 GB per scene) are read from the CDSE
+  S3 store; only B04, B08 (10 m), B11 and B12 (20 m) are kept.
+- The data are coarse at night. Radiance comes in steps of 0.0094 (B12) and 0.028 (B11) W m⁻² sr⁻¹ µm⁻¹ per count,
+  most pixels read exactly zero, and the noise arrives as clumped spikes of up to about 0.94 in B12.
+- Each pixel's excess over the median of its 1 km block is computed. Pixels with a B12 excess of at least 0.15 are
+  joined into clusters, which is about twice the night SWIR noise limit reported by DLR.
+- A cluster is kept when its B12 peak and the B11 value next to it are both at least 0.5. B11 and B12 are separate
+  detector rows read about 0.6 s apart, so a noise spike in one band does not appear in the other.
+- A second tier keeps clusters with B12 alone at 1.0 or more. It is exported but not mapped.
+
+**Checked by.**
+- *Mirror test.* The same rules were run on the negated images, where every cluster is noise by construction. About
+  3,700 negated candidates per scene gave **0** selected clusters in either tier, on either night.
+  - The negative side bottoms out at −0.94 in B12, the zero-count floor, so the test cannot rule out positive-only
+    artefacts above that level.
+  - Image chips show that some B12-only clusters are dotted streaks. That is why only the two-band tier is mapped.
+- *NASA FIRMS, 9 Dec.* The two-band hot spots recovered **32 of 34** VIIRS night detections made about three hours
+  later (within 1 km), and the one Terra night detection.
+  - All 32 matches were forest and scrub fires in Himachal and Uttarakhand.
+  - The **2** VIIRS night detections in the Punjab-Haryana plains were **not** seen.
+  - 36% of hot spots had a FIRMS detection within 1 km in the four days either side, against 3% for the same points
+    moved 5-30 km at random.
+- *NASA FIRMS, 12 Dec.* The 4 VIIRS night detections in the scene were all one static industrial site, which was matched.
+- *Setting.*
+  - A hot spot is labelled industrial when FIRMS lists a static source (VIIRS type 2, 2012-2025) within 1 km.
+  - It is labelled built-up when ESA WorldCover 2021 maps at least a quarter of the 310 m box around it as built.
+  - Everything else is labelled open.
+  - Esri imagery of all 61 plains hot spots agreed: about half sit on factories, steel mills (Mandi Gobindgarh),
+    industrial estates (Ludhiana, Mohali, Lahore) or a flare; the rest are in fields.
+
+![Sentinel-2A night chips: a hill fire, a flare, steel mills, a field hot spot and a B12-only streak](images/methods/s2night_examples.png)
+
+*Hot spots from the two night scenes, in B12 and B11. Real heat sources appear in both bands; the streak on the
+right appears in B12 alone and is a sensor artefact.*
+
+**Result.** 111 two-band hot spots: 83 on open land, 19 built-up, 9 known industrial. Sentinel-2 at night reliably
+sees heat sources as small as a few hundred square metres. It does not reliably separate crop fires from furnaces
+and kilns. In the plains on these two nights there was no independent detection to confirm any hot spot as a crop
+fire. The map shows them as "night hot spots" (layer off by default), coloured by setting, and they are never added
+to fire counts.
+
+**Limits.**
+- Two December nights, after the paddy season, say nothing about October-November.
+- Open-land hot spots can still be lone factories or brick kilns, which WorldCover does not map as built-up.
+- Geolocation uses no ground control, so expect offsets of tens of metres.
+- The fitted temperature and radiative power (B11/B12 ratio) are indicative only.
+- Night lights could not be mapped: detector striping in the visible and near-infrared bands (0.01-0.03) is larger
+  than the city signal, even after destriping.
+- ESA's second night campaign (23 Jul-1 Sep 2026) is restricted to expert users, and no campaign announced by
+  October 2026 covers the October-November burning season.
 
 ---
 

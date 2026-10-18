@@ -223,6 +223,9 @@ function addOverlayLayers() {
   map.addLayer({ id: "burnscar", type: "raster", source: "burnscar", layout: { visibility: "none" },
     paint: { "raster-opacity": ["interpolate", ["linear"], ["zoom"], 5, 0.75, 9, 0.95], "raster-resampling": "nearest", "raster-fade-duration": 0 } });
 
+  // Sentinel-2A night hot spots (ESA campaign, 9 and 12 Dec 2025; scripts/s2night.py): a one-off layer, off the timeline
+  map.addSource("s2night", { type: "geojson", data: { type: "FeatureCollection", features: [] }, attribution: "Night hot spots: ESA Copernicus Sentinel-2 night campaign (Dec 2025)" });
+
   // dim everything outside the subcontinent
   map.addLayer({ id: "mask", type: "fill", source: "countries", filter: ["!", ["get", "sub"]], paint: { "fill-color": T.mask, "fill-opacity": T.maskOp } });
   map.addLayer({ id: "district-fill", type: "fill", source: "districts", layout: { visibility: "none" },
@@ -269,8 +272,17 @@ function addOverlayLayers() {
     "circle-color": ageColor, "circle-radius": radius(0.9), "circle-opacity": fade,
     "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 6, 0, 9, 0.6], "circle-stroke-color": "rgba(0,0,0,0.5)" } });
 
+  const s2c = ["match", ["get", "class"], "industrial", "#e8e8e8", "built-up", "#b68cff", "#ff7a1a"];
+  const s2r = (k) => ["interpolate", ["linear"], ["zoom"], 5, ["*", k, ["interpolate", ["linear"], ["get", "l12_sum"], 0, 2, 20, 3.2, 100, 5]],
+    11, ["*", k * 2.6, ["interpolate", ["linear"], ["get", "l12_sum"], 0, 2, 20, 3.2, 100, 5]]];
+  map.addLayer({ id: "s2night-glow", type: "circle", source: "s2night", layout: { visibility: "none" },
+    paint: { "circle-color": s2c, "circle-radius": s2r(2.2), "circle-blur": 1, "circle-opacity": 0.45 } });
+  map.addLayer({ id: "s2night", type: "circle", source: "s2night", layout: { visibility: "none" },
+    paint: { "circle-color": s2c, "circle-radius": s2r(0.8), "circle-stroke-width": 1.4, "circle-stroke-color": "#ffffff" } });
+
   map.addSource("labels", { type: "raster", tiles: [REF_TILES[theme()]], tileSize: 256, maxzoom: 16 });
   map.addLayer({ id: "labels", type: "raster", source: "labels", paint: { "raster-opacity": 0.9 } });
+  if ($("#l-s2night").checked) setS2night(true);   // ticked before the map was ready
 
   bindMapEvents();
 }
@@ -341,6 +353,7 @@ function bindLayerToggles() {
   const vis = (ids, on) => ids.forEach((id) => map.getLayer(id) && map.setLayoutProperty(id, "visibility", on ? "visible" : "none"));
   $("#l-hillshade").onchange = (e) => vis(["hillshade"], e.target.checked);
   $("#l-burnscar").onchange = () => updateBurnscar();
+  $("#l-s2night").onchange = (e) => setS2night(e.target.checked);
   $("#l-wind").onchange = (e) => { S.showWind = e.target.checked; vis(["wind"], e.target.checked); };
   $("#l-districts").onchange = (e) => vis(["district-line"], e.target.checked);
   $("#l-labels").onchange = (e) => vis(["labels"], e.target.checked);
@@ -583,8 +596,9 @@ let hoverId = null, popup = null;
 function bindMapEvents() {
   const tip = $("#tooltip");
   map.on("mousemove", (e) => {
-    const f = map.queryRenderedFeatures(e.point, { layers: ["fires-core", "district-hover"].filter((l) => map.getLayer(l)) });
+    const f = map.queryRenderedFeatures(e.point, { layers: ["s2night", "fires-core", "district-hover"].filter((l) => map.getLayer(l)) });
     const fire = f.find((x) => x.layer.id === "fires-core");
+    const s2 = f.find((x) => x.layer.id === "s2night");
     const dist = map.queryRenderedFeatures(e.point, { layers: ["district-hover"] })[0];
     const id = dist ? dist.id : null;
     if (id !== hoverId) {
@@ -593,7 +607,8 @@ function bindMapEvents() {
       hoverId = id;
     }
     map.getCanvas().style.cursor = fire ? "pointer" : "";
-    if (fire) { tip.innerHTML = fireTip(fire.properties); }
+    if (s2) { tip.innerHTML = s2nightTip(s2.properties); }
+    else if (fire) { tip.innerHTML = fireTip(fire.properties); }
     else if (dist) { tip.innerHTML = districtTip(id); }
     else { tip.hidden = true; return; }
     tip.hidden = false;
@@ -623,6 +638,19 @@ function fireTip(p, full) {
     ${d ? `<div class="tt-row"><span>District</span><span>${d.name}, ${d.state}</span></div>` : ""}
     ${full ? `<div class="tt-row"><span>Age at view time</span><span>${(+p.age).toFixed(1)} h</span></div>` : ""}`;
 }
+const S2N_CLASS = { open: "open land: likely an open fire", "built-up": "built-up: factory, furnace or waste fire", industrial: "known industrial source (FIRMS static)" };
+function s2nightTip(p) {
+  const m = (+p.firms_km) <= 1 && p.firms_sat !== "null" && p.firms_sat;
+  return `<div class="tt-title">Sentinel-2 night hot spot</div>
+    <div class="tt-row"><span>Seen</span><span>${p.date === "2025-12-09" ? "9 Dec 2025, 22:32" : "12 Dec 2025, 22:42"} IST</span></div>
+    <div class="tt-row"><span>Setting</span><span>${S2N_CLASS[p.class] || p.class}</span></div>
+    <div class="tt-row"><span>Land cover</span><span>${p.landcover}, ${Math.round(100 * p.built_share)}% built</span></div>
+    <div class="tt-row"><span>Size</span><span>${p.npix} px of 20 m</span></div>
+    <div class="tt-row"><span>Peak radiance B12 / B11</span><span>${(+p.l12_peak).toFixed(1)} / ${(+p.l11_peak).toFixed(1)}</span></div>
+    ${p.t_k && p.t_k !== "null" ? `<div class="tt-row"><span>Fitted temperature</span><span>~${p.t_k} K</span></div>` : ""}
+    <div class="tt-row"><span>FIRMS within 1 km (±4 days)</span><span>${m ? `${p.firms_sat.replace("VIIRS:", "VIIRS ").replace("MODIS:", "MODIS ")}, ${(+p.firms_dt_h) > 0 ? "+" : ""}${p.firms_dt_h} h` : "none"}</span></div>
+    ${p.district && p.district !== "null" ? `<div class="tt-row"><span>District</span><span>${p.district}, ${p.state}${p.country === "Pakistan" ? " (Pak.)" : ""}</span></div>` : ""}`;
+}
 function districtTip(id) {
   const d = S.summary.districts[id]; if (!d) return "";
   const n = S.distCount ? S.distCount[id] : 0, f = S.distFrp ? S.distFrp[id] : 0;
@@ -649,6 +677,23 @@ function updateBadge() {
     : S.fireMode !== "none" ? ` | ${plural((S.periodPts || []).length)} ${fmtDM(S.d1)}-${fmtDM(S.d2)}` : "";
   $("#map-badge").innerHTML = `<b>${fmtDay(S.t)}, ${fmtClock(S.t)}</b>${fires}${mode}`;
 }
+// Sentinel-2 night hot spots: loaded on first use; the view moves to the two scenes if they are off screen
+function setS2night(on) {
+  if (!map || !map.getSource("s2night")) return;
+  ["s2night-glow", "s2night"].forEach((id) => map.setLayoutProperty(id, "visibility", on ? "visible" : "none"));
+  $("#legend-s2n").hidden = !on;
+  if (!on) return;
+  if (!S.s2night) getJSON("data/s2night/s2night.geojson").then((g) => {
+    S.s2night = g; map.getSource("s2night").setData(g);
+    const n = (c) => g.features.filter((f) => f.properties.class === c).length;
+    $("#legend-s2n-note").textContent = `${g.features.length} hot spots seen in both SWIR bands on 9 and 12 Dec 2025 (22:32 / 22:42 IST): ` +
+      `${n("open")} on open land, ${n("built-up")} built-up, ${n("industrial")} known industrial. Heat sources, not counted as crop fires; most matched fires were in the hills.`;
+  }).catch(() => { $("#legend-s2n-note").textContent = "Night hot spots are not available."; });
+  const b = map.getBounds(), box = [72.6, 29.2, 78.5, 32.3];
+  if (b.getWest() > box[2] || b.getEast() < box[0] || b.getSouth() > box[3] || b.getNorth() < box[1] || map.getZoom() < 5.5)
+    map.easeTo({ center: [75.6, 30.8], zoom: 6.3, duration: 1200 });   // fitBounds throws on the globe in small viewports
+}
+
 // burn scars exist per paddy season; show the selected season's tiles when they are built
 function updateBurnscar() {
   if (!map || !map.getSource("burnscar")) return;
@@ -1166,6 +1211,15 @@ function aboutHTML() {
   Frames are time-interpolated and bicubic-smoothed on the GPU. GEOS-FP assimilates MODIS/VIIRS AOD and uses QFED fire emissions; it is the NASA counterpart of the Copernicus CAMS organic matter AOD field.</p>
   <h3>Official counts: ICAR-IARI CREAMS</h3>
   <p>Daily paddy (and wheat) residue burning bulletins from the Consortium for Research on Agroecosystem Monitoring and Modeling from Space, IARI New Delhi, parsed from the bulletin PDFs at <a href="https://creams.iari.res.in/?page_id=1123" target="_blank" rel="noopener">creams.iari.res.in</a>. CREAMS uses its own VIIRS-based protocol, so its numbers differ from the raw FIRMS counts here. The geolocated events listed in the bulletin annexures (2018 onward) can be shown on the map with the "CREAMS events" chip; it is off by default because those events are themselves satellite detections and would double count.</p>
+  <h3>Night hot spots: Sentinel-2A at night (one-off, December 2025)</h3>
+  <p>In December 2025 ESA switched Sentinel-2A on during its night pass for a test campaign; two scenes cover Punjab
+  (9 Dec, 22:32 IST, east Punjab, Haryana and the hills; 12 Dec, 22:42 IST, west Punjab and Pakistani Punjab). With no sunlight,
+  anything bright in the short-wave infrared is giving off heat. The layer shows 20 m clusters bright in both B12 (2.2 µm) and
+  B11 (1.6 µm); the same rule finds nothing on the negated image, so they are not noise. On 9 Dec they recovered 32 of the
+  34 VIIRS night detections made three hours later, but all 32 were forest and scrub fires in Himachal and Uttarakhand;
+  the two VIIRS points in the Punjab and Haryana plains were not seen. In the plains many hot spots sit on factories and
+  furnaces (Mandi Gobindgarh, Ludhiana, Mohali, Lahore), so they are labelled by setting (ESA WorldCover) and are never
+  added to fire counts. December is after the paddy season, and night lights could not be mapped from these images.</p>
   <h3>Boundaries and basemaps</h3>
   <p>Country outlines: Natural Earth 1:10m, India point of view. States and districts: geoBoundaries (India districts from LGD 2021, Pakistan from geoBoundaries). Basemaps: Esri World Dark and Light Gray Canvas and World Imagery. Terrain: AWS Terrain Tiles (SRTM and GMTED elevation), drawn as hillshade, as an elevation tint in the relief basemap, and as 3D terrain (exaggerated 4.5 times) in the 3D view.</p>
   <h3>Open data and code</h3>

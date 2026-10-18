@@ -112,6 +112,8 @@ body { display: flex; flex-direction: column; }
 .fire-scale .fd { border-radius: 50%; background: radial-gradient(circle, #fff6c2 0%, #ffb02e 45%, #ff4d1a 100%); box-shadow: 0 0 6px rgba(255,120,40,0.7); }
 .ramp-bar { height: 10px; border-radius: 2px; }
 .ramp-labels { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--dim); margin-top: 3px; }
+.s2n-keys { display: flex; flex-direction: column; gap: 3px; font-size: 10.5px; color: var(--dim); }
+.s2n-keys i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 1.5px solid #fff; }
 
 /* ---------------------------------------------------------------- timeline */
 .timeline { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 3; height: 56px; display: flex; align-items: center; gap: 12px;

@@ -8,6 +8,7 @@ Reads only files the pipeline already produced (nothing is re-fetched):
   data/creams/*                                     ICAR-IARI CREAMS bulletin tables + events
   data/burnscar/burnscar.json, data/raw/burnscar/<season>/mosaic.tif   MODIS MCD64A1 burned area
   data/smoke/smoke_meta.json, data/raw/smoke/*.npy  GEOS-FP smoke AOD + winds chunk cache
+  data/s2night/*, data/raw/s2night/                 Sentinel-2A night hot spots, Dec 2025 (scripts/s2night.py)
   data/db/extras/*                                  rice area, AQ/met, CPCB ground PM, stubble share, enforcement
   data/geo/*.geojson                                boundaries
 
@@ -480,6 +481,117 @@ ss.pivot(index="season", columns="state", values="burned_ha")""",
                  """library(readr)
 ss <- read_csv("state_season.csv")""")
     return ss
+
+
+# ---------------------------------------------------------------------------------------------
+# A3b. Sentinel-2A night hot spots (ESA campaign, Dec 2025)
+# ---------------------------------------------------------------------------------------------
+def export_s2night():
+    allp = DATA / "raw" / "s2night" / "s2night_all.geojson"
+    vp = DATA / "s2night" / "s2night_validation.json"
+    if not allp.exists() or not vp.exists():
+        log("SKIP s2_night: run scripts/s2night.py first")
+        return
+    out = DS / "s2_night"
+    out.mkdir(parents=True, exist_ok=True)
+    g, V = jload(allp), jload(vp)
+    cols = ["scene", "date", "tier", "class", "lon", "lat", "npix", "l12_peak", "l11_peak", "l12_sum", "saturated", "t_k", "area_m2", "frp_mw",
+            "b04_peak", "b08_peak", "landcover", "built_share", "district", "state", "country", "firms_km", "firms_dt_h", "firms_sat", "static_km", "both_nights"]
+    rows = []
+    for f in g["features"]:
+        p = dict(f["properties"]); p["lon"], p["lat"] = f["geometry"]["coordinates"]
+        p["both_nights"] = bool(p.get("both_nights"))
+        rows.append({c: p.get(c) for c in cols})
+    hs = pd.DataFrame(rows, columns=cols).sort_values(["scene", "tier", "lat"]).reset_index(drop=True)
+    write_csv(hs, out / "hot_spots.csv")
+    (out / "hot_spots.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": [
+        {"type": "Feature", "geometry": {"type": "Point", "coordinates": [r["lon"], r["lat"]]},
+         "properties": {k: (None if pd.isna(v) else v) for k, v in r.items() if k not in ("lon", "lat")}} for r in hs.to_dict("records")]},
+        separators=(",", ":"), default=lambda o: o.item() if hasattr(o, "item") else str(o)))
+    mr = []
+    for sc in ("R012", "R055"):
+        for t, x in V[sc]["tiers"].items():
+            for grp, r in x["recall_1km"].items():
+                if grp == "viirs_night_after_by_region":
+                    for reg, q in r.items():
+                        mr.append((sc, V[sc]["date_utc"], t, f"viirs_night_after_{reg}", q["firms"], q["matched"], None, None))
+                    continue
+                mr.append((sc, V[sc]["date_utc"], t, grp, r["firms"], r["matched"], r["firms_excl_static"], r["matched_excl_static"]))
+            mr.append((sc, V[sc]["date_utc"], t, "s2_with_firms_pm4d", x["detections"], x["with_firms_1km_pm4d"], None, None))
+            mr.append((sc, V[sc]["date_utc"], t, "chance_displaced_5_30km", x["detections"], round(x["chance_share"] * x["detections"], 1), None, None))
+        for t, n in V[sc]["mirror_selected"].items():
+            mr.append((sc, V[sc]["date_utc"], t, "mirror_test_negated_image", V[sc]["mirror_candidates"], n, None, None))
+    mr = pd.DataFrame(mr, columns=["scene", "scene_utc", "tier", "comparison", "n", "matched", "n_excl_static", "matched_excl_static"])
+    write_csv(mr, out / "validation.csv")
+    check(int(mr[mr.comparison == "mirror_test_negated_image"].matched.sum()) == 0, "s2_night: no clusters selected on the negated images")
+    D = {"scene": ("", "R012 = 9 Dec 2025 17:02 UTC (22:32 IST), R055 = 12 Dec 2025 17:12 UTC (22:42 IST); Sentinel-2A relative orbit"),
+         "date": ("date", "acquisition date (UTC; same calendar day in IST)"),
+         "tier": ("", "both = bright in B12 and B11 (each >= 0.5 W m-2 sr-1 um-1 over background; the map layer); b12 = B12 >= 1.0 only, unconfirmed (includes streak artefacts)"),
+         "class": ("", "industrial (FIRMS static source within 1 km, or same spot on both nights); built-up (WorldCover built-up share >= 0.25); open (everything else)"),
+         "lon": ("deg", "radiance-weighted cluster centre, WGS84"), "lat": ("deg", "radiance-weighted cluster centre, WGS84"),
+         "npix": ("pixels", "20 m pixels in the cluster (B12 excess >= 0.15)"),
+         "l12_peak": ("W m-2 sr-1 um-1", "peak B12 (2.19 um) radiance above the 1 km background median"),
+         "l11_peak": ("W m-2 sr-1 um-1", "peak B11 (1.61 um) excess within one pixel of the cluster"),
+         "l12_sum": ("W m-2 sr-1 um-1 x px", "sum of B12 excess over the cluster"),
+         "saturated": ("", "true if the peak B12 pixel is at or above 29 (B12 saturates near 30 at night)"),
+         "t_k": ("K", "single-temperature fit from the B11/B12 ratio at the peak (indicative; mixed pixels bias it)"),
+         "area_m2": ("m2", "emitting area implied by t_k (indicative)"), "frp_mw": ("MW", "radiative power implied by t_k and area_m2 (indicative, not comparable to FIRMS FRP)"),
+         "b04_peak": ("W m-2 sr-1 um-1", "peak B04 (red) radiance in a 110 m box at 10 m, for clusters with a peak >= 0.5 (null otherwise)"),
+         "b08_peak": ("W m-2 sr-1 um-1", "peak B08 (NIR) radiance in a 110 m box at 10 m (null as above)"),
+         "landcover": ("", "ESA WorldCover 2021 v200 class at the point"), "built_share": ("fraction", "WorldCover built-up share within 310 x 310 m"),
+         "district": ("", "district (datasets/boundaries)"), "state": ("", "state / province"), "country": ("", "India or Pakistan"),
+         "firms_km": ("km", "distance to the nearest FIRMS detection (any sensor, scene date +/- 4 days); null if none in the scene"),
+         "firms_dt_h": ("h", "time of that FIRMS detection relative to Sentinel-2, if within 1 km"), "firms_sat": ("", "its instrument:satellite, if within 1 km"),
+         "static_km": ("km", "distance to the nearest FIRMS VIIRS static (type 2) detection, 2012-2025"),
+         "both_nights": ("", "true if a hot spot was also seen within 300 m on the other night (overlap strip only)"),
+         "scene_utc": ("UTC", "Sentinel-2 acquisition start"),
+         "comparison": ("", "viirs_night_after (VIIRS night pass 0-6 h after), viirs_night_before (0-24 h before), same_day_daytime (0-12 h before), modis_night_same_pass (+/-3 h), viirs_night_after_hills / _plains (Himachal + Uttarakhand vs the rest), s2_with_firms_pm4d (hot spots with any FIRMS within 1 km, +/-4 days), chance_displaced_5_30km (same, after moving each hot spot 5-30 km at random, mean of 20 draws), mirror_test_negated_image (clusters passing the tier's rule on the negated image; n = negated candidates)"),
+         "n": ("count", "FIRMS detections (recall rows), hot spots (s2_with_firms, chance rows) or negated candidates (mirror rows)"),
+         "matched": ("count", "of n, those with a counterpart within 1 km"), "n_excl_static": ("count", "n without FIRMS type-2 static sources"),
+         "matched_excl_static": ("count", "matched without static sources")}
+    secs = [table_doc("hot_spots.csv", hs, D, "Also as `hot_spots.geojson`."), table_doc("validation.csv", mr, D)]
+    rasters = sorted(AS.glob("s2night_*_100m.tif"))
+    a, b = V["R012"]["tiers"]["both"], V["R055"]["tiers"]["both"]
+    na = a["recall_1km"]["viirs_night_after"]; rg = a["recall_1km"]["viirs_night_after_by_region"]
+    write_readme(out, "Night hot spots from ESA's Sentinel-2A night campaign, Punjab, 9 and 12 Dec 2025",
+                 "Short-wave infrared hot spots at 20 m in the two Sentinel-2A night scenes that cover Punjab, with a FIRMS cross-check and a land-cover setting. "
+                 f"{a['detections'] + b['detections']} hot spots pass the two-band rule; none pass on the negated images. On 9 Dec they recovered {na['matched']} of {na['firms']} VIIRS night "
+                 f"detections made three hours later ({rg['hills']['matched']} of {rg['hills']['firms']} in the Himachal/Uttarakhand hills, {rg['plains']['matched']} of {rg['plains']['firms']} in the plains). "
+                 "They are heat sources (fires, furnaces, flares), not a crop-fire census." +
+                 (f" 100 m B12/B11 maximum rasters per scene are release assets `s2night_<scene>_b12_max_100m.tif` / `_b11_max_100m.tif`." if rasters else ""),
+                 secs, "Scenes R012 (74.94-78.53 E, 29.59-32.32 N) and R055 (72.56-76.12 E, 29.15-31.89 N), about 71,000 km2 of valid pixels each.",
+                 "Contains modified Copernicus Sentinel data 2025, ESA Sentinel-2 night-time campaign (CDSE collection sentinel-2-night-time-acquisitions; "
+                 "processing note doi:10.5281/zenodo.20286476); Copernicus data are free and open. ESA WorldCover 2021 v200 (CC BY 4.0). NASA FIRMS (open).",
+                 ["Two December nights after the paddy season: this says nothing about burning in October-November.",
+                  "Most FIRMS-matched hot spots on 9 Dec were forest/scrub fires in the hills. In the Punjab-Haryana plains there was no same-night FIRMS detection that Sentinel-2 confirmed, and many hot spots sit on steel mills, furnaces and industrial estates.",
+                  "`open` hot spots can still be lone factories or brick kilns in farmland; WorldCover does not map most kilns as built-up.",
+                  "Tier `b12` is not confirmed by a second band and includes dotted-streak artefacts; it is not on the map.",
+                  "Geolocation uses no ground control (ESA note): expect offsets of tens of metres.",
+                  "Night lights (VNIR) were not usable: detector striping exceeds the city signal in these products."],
+                 "`scripts/s2night.py fetch|detect|validate` writes `data/raw/s2night/` and `data/s2night/`; this script flattens them. The method, thresholds and checks are in docs/METHODS.md.",
+                 """import pandas as pd
+hs = pd.read_csv("hot_spots.csv")
+hs[hs.tier == "both"].groupby(["scene", "class"]).size()""",
+                 """library(readr)
+hs <- read_csv("hot_spots.csv")""")
+    return hs
+
+
+def export_s2night_tifs():
+    n = 0
+    for sc in ("R012", "R055"):
+        for k in ("b12_max", "b11_max"):
+            src = DATA / "raw" / "s2night" / sc / f"{k}_100m.tif"
+            if not src.exists():
+                continue
+            dst = AS / f"s2night_{sc}_{k}_100m.tif"
+            tags = {"SOURCE": "Contains modified Copernicus Sentinel data 2025 (ESA Sentinel-2 night campaign)", "SCENE": sc,
+                    "UNITS": "W m-2 sr-1 um-1", "CONTENT": f"maximum {k[:3].upper()} radiance per 100 m cell (5 x 5 pixels of 20 m)"}
+            mo = [a for kv in tags.items() for a in ("-mo", "=".join(kv))]
+            subprocess.run(["gdal_translate", "-q", "-of", "COG", "-co", "COMPRESS=DEFLATE", "-co", "PREDICTOR=3", *mo, str(src), str(dst)], check=True)
+            n += 1
+    if not n:
+        log("SKIP s2night_*_100m.tif: no data/raw/s2night/<scene>/*_100m.tif (run scripts/s2night.py detect)")
 
 
 # ---------------------------------------------------------------------------------------------
@@ -1263,7 +1375,8 @@ def manifest(counts):
             import rasterio
             with rasterio.open(p) as r:
                 size = f"{r.width} x {r.height} px"
-            d = "MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0)"
+            d = ("Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326)" if p.name.startswith("s2night_")
+                 else "MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0)")
         rows.append({"file": p.name, "bytes": p.stat().st_size, "rows_or_size": size, "description": d})
         if p.stat().st_size >= 1.9e9:
             log(f"FAIL {p.name} exceeds 1.9 GB")
@@ -1316,11 +1429,14 @@ def write_docs(counts, rows_manifest):
     topics = {"fires": "NASA FIRMS active-fire detections aggregated by day / state / district / season / sensor, IST hour of burning",
               "creams": "ICAR-IARI CREAMS official daily residue-burning counts (state, district), year comparisons, bulletin list",
               "burned_area": "NASA MODIS MCD64A1 burned area per season, state, district and burn date (Punjab, Haryana)",
+              "s2_night": "Sentinel-2A night hot spots (SWIR, 20 m), 9 and 12 Dec 2025, with FIRMS match rates and land-cover setting",
               "air": "CPCB ground PM2.5/PM10 (via OpenAQ), CAMS PM/AOD + ERA5 meteorology at receptor cities, modelled stubble share of Delhi PM2.5",
               "paddy": "Kharif rice area and production by state (1966+) and district (1997+), UPAg/DES",
               "enforcement": "Enforcement and crop-residue-management indicators with source documents and policy timeline",
               "boundaries": "District / state / country polygons used for all attributions (GeoJSON + GeoPackage)"}
     for t, d in topics.items():
+        if not (DS / t).exists():
+            continue
         files = ", ".join(f"`{p.name}` ({size(p)})" for p in sorted((DS / t).iterdir()) if p.name != "README.md")
         lines.append(f"| [{t}/](datasets/{t}/README.md) | {d} | {files} |")
     lines += ["", "## Release assets", "", "Download from the GitHub Release; checksums in `SHA256SUMS`, list in `MANIFEST.csv`.", "",
@@ -1372,6 +1488,7 @@ provider's own licence statement on {TODAY}; **stated** = taken from the provide
 |---|---|---|---|
 | fires/, fire_detections_* | NASA FIRMS (LANCE / MODAPS), MODIS C6.1 and VIIRS 375 m active fires | NASA Earth science data are open with no restrictions on use (NASA Earth Science Data and Information Policy). Cite: "NASA FIRMS, https://firms.modaps.eosdis.nasa.gov/" and the product DOIs (MODIS MCD14ML doi:10.5067/FIRMS/MODIS/MCD14ML; VIIRS VNP14IMGTDL_NRT doi:10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002). | stated |
 | burned_area/, burned_area_*.tif | NASA MODIS MCD64A1 C6.1 (LP DAAC), via Microsoft Planetary Computer | NASA open data, no restrictions; cite doi:10.5067/MODIS/MCD64A1.061 (Giglio et al.). | stated |
+| s2_night/, s2night_*.tif | ESA Copernicus Sentinel-2 night-time campaign (Dec 2025), CDSE; ESA WorldCover 2021 v200 for the setting | Copernicus Sentinel data: free, full and open (Copernicus data policy, Regulation (EU) 2021/696); credit "Contains modified Copernicus Sentinel data 2025". WorldCover: CC BY 4.0, cite "ESA WorldCover 2021 v200, doi:10.5281/zenodo.7254221". | stated |
 | smoke_geosfp_*.nc | NASA GMAO GEOS-FP | NASA open data, no restrictions; cite NASA GMAO GEOS-FP. | stated |
 | creams/, creams_events.* | ICAR-IARI CREAMS daily crop-residue burning bulletins (https://creams.iari.res.in/) | Public bulletins of a government research institute; no explicit licence found. Redistributed as factual extracts with source URLs; cite ICAR-IARI CREAMS and the bulletin. | uncertain |
 | boundaries/districts (India part) | geoBoundaries gbOpen IND ADM2 (Pathways Data / lgdirectory.gov.in) | **Open Database License (ODbL) 1.0** - the districts layer is a derivative database and is released under ODbL 1.0; tables that use it for attribution are Produced Works (attribution required). | verified (geoBoundaries API) |
@@ -1494,11 +1611,13 @@ def main():
             counts = export_detections(S)
         export_creams_events()
         export_burned_tifs()
+        export_s2night_tifs()
         export_smoke()
     elif (BUILD / "detection_counts.json").exists():
         counts = {int(k): v for k, v in jload(BUILD / "detection_counts.json").items()}
     if do_ds:
         export_burned()  # after the rasters so its README knows whether they exist
+        export_s2night()
     rows = manifest(counts) if any(AS.iterdir()) else []
     write_docs(counts, rows)
     total = sum(p.stat().st_size for p in DS.rglob("*") if p.is_file())
