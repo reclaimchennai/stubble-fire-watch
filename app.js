@@ -1168,6 +1168,9 @@ function aboutHTML() {
   <p>Daily paddy (and wheat) residue burning bulletins from the Consortium for Research on Agroecosystem Monitoring and Modeling from Space, IARI New Delhi, parsed from the bulletin PDFs at <a href="https://creams.iari.res.in/?page_id=1123" target="_blank" rel="noopener">creams.iari.res.in</a>. CREAMS uses its own VIIRS-based protocol, so its numbers differ from the raw FIRMS counts here. The geolocated events listed in the bulletin annexures (2018 onward) can be shown on the map with the "CREAMS events" chip; it is off by default because those events are themselves satellite detections and would double count.</p>
   <h3>Boundaries and basemaps</h3>
   <p>Country outlines: Natural Earth 1:10m, India point of view. States and districts: geoBoundaries (India districts from LGD 2021, Pakistan from geoBoundaries). Basemaps: Esri World Dark and Light Gray Canvas and World Imagery. Terrain: AWS Terrain Tiles (SRTM and GMTED elevation), drawn as hillshade, as an elevation tint in the relief basemap, and as 3D terrain (exaggerated 4.5 times) in the 3D view.</p>
+  <h3>Open data and code</h3>
+  <p>Every dataset behind this map, in CSV, Parquet, GeoParquet, GeoTIFF, NetCDF and GeoPackage, with the pipeline
+  and a full method write-up: <a href="https://github.com/reclaimchennai/stubble-fire-watch" target="_blank" rel="noopener">github.com/reclaimchennai/stubble-fire-watch</a>.</p>
   <h3>Refreshing the data</h3>
   <p><code>./scripts/update.sh</code> pulls new FIRMS detections, the latest GEOS-FP run and new CREAMS bulletins, then rebuilds <code>data/</code>.</p>`;
 }
