@@ -1,0 +1,10 @@
+[Unit]
+Description=Stubble Fire Watch: refresh FIRMS, GEOS-FP smoke, CREAMS bulletins and air quality, publish web/
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/fire
+ExecStart=/bin/sh %h/projects/fire/scripts/refresh.sh
+Nice=10
+TimeoutStartSec=14400

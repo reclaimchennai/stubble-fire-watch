@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stubble Fire Watch</title>
+<meta name="description" content="Crop-residue fires and smoke over Punjab, Haryana and the Indo-Gangetic Plain: NASA FIRMS detections since 2003, GEOS-FP smoke, and ICAR-IARI CREAMS bulletins.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reclaim Chennai">
+<meta property="og:url" content="https://fire.reclaimchennai.city/">
+<meta property="og:title" content="Stubble Fire Watch">
+<meta property="og:description" content="Farm fires and smoke over Punjab, Haryana and the Indo-Gangetic Plain, 2003 to today.">
+<meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f5" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://fire.reclaimchennai.city/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // theme before first paint: saved choice, else the OS preference
+  (function () {
+    var t = null; try { t = localStorage.getItem("fw-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="styles.css">
+<script src="vendor/maplibre-gl.js" defer></script>
+<script src="vendor/d3.min.js" defer></script>
+<script src="vendor/icons.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="crumbs">
+    <a class="crumb-dim" href="https://reclaimchennai.city/">Reclaim Chennai</a><span class="crumb-sep">/</span>
+    <span class="crumb"><span class="crumb-mark" data-icon="flame"></span>Stubble Fire Watch</span>
+  </div>
+
+  <div class="controls">
+    <label class="field" title="Season">
+      <span data-icon="calendar"></span><span class="field-k">Season</span>
+      <select id="sel-year" aria-label="Season"></select><span class="caret" data-icon="chevron-down"></span>
+    </label>
+    <div class="field period" title="Analysis period for charts, table and district map">
+      <span class="field-k">Period</span>
+      <input type="date" id="d1" aria-label="Period start">
+      <span class="period-sep">to</span>
+      <input type="date" id="d2" aria-label="Period end">
+    </div>
+    <label class="field" title="Smoke field">
+      <span data-icon="wind"></span><span class="field-k">Smoke</span>
+      <select id="sel-smoke" aria-label="Smoke field">
+        <option value="smoke">Smoke AOD</option>
+        <option value="total">Total AOD</option>
+        <option value="none">Off</option>
+      </select><span class="caret" data-icon="chevron-down"></span>
+    </label>
+    <label class="field" title="Fire layer">
+      <span data-icon="flame"></span><span class="field-k">Fires</span>
+      <select id="sel-fires" aria-label="Fire layer">
+        <option value="points">Last 24 h</option>
+        <option value="districts">District totals</option>
+        <option value="heat">Density</option>
+        <option value="none">Off</option>
+      </select><span class="caret" data-icon="chevron-down"></span>
+    </label>
+  </div>
+
+  <button class="live" id="live" type="button" title="Jump to the latest data">
+    <span class="live-dot" aria-hidden="true"></span>
+    <span class="live-tx"><b id="live-main">Loading latest data...</b><small id="live-sub"></small></span>
+  </button>
+
+  <nav class="topnav">
+    <a class="btn primary" href="db/" id="btn-db"><span data-icon="chart-line"></span><span class="btn-tx">Analysis</span></a>
+    <button class="btn icon" id="btn-about" type="button" title="Data sources and method" aria-label="Data sources and method"><span data-icon="info"></span></button>
+    <button class="btn icon" id="btn-export" type="button" title="Download the period's detections as CSV" aria-label="Download CSV"><span data-icon="download"></span></button>
+    <button class="btn icon" id="theme-btn" type="button" title="Toggle light / dark theme" aria-label="Toggle light / dark theme"><span id="theme-icon" data-icon="sun"></span></button>
+  </nav>
+</header>
+
+<main class="layout">
+  <aside class="sidebar" id="sidebar">
+    <section class="panel">
+      <header class="panel-h">
+        <h2>Daily detections by state</h2>
+        <div class="seg sm" id="seg-metric" role="group" aria-label="Metric">
+          <button type="button" data-v="n" aria-pressed="true">Count</button>
+          <button type="button" data-v="frp" aria-pressed="false">FRP</button>
+        </div>
+      </header>
+      <p class="panel-sub" id="daily-sub"></p>
+      <div class="chart" id="chart-daily"></div>
+      <div class="legend-row" id="legend-states"></div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-h">
+        <h2 id="hist-title">Historical totals</h2>
+        <div class="seg sm" id="seg-basis" role="group" aria-label="Sensor family">
+          <button type="button" data-v="modis" aria-pressed="true" title="MODIS Terra + Aqua, 2003 onward">MODIS</button>
+          <button type="button" data-v="snpp" aria-pressed="false" title="VIIRS S-NPP, 2012 onward">VIIRS</button>
+        </div>
+      </header>
+      <p class="panel-sub" id="hist-sub"></p>
+      <div class="chart" id="chart-hist"></div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-h"><h2>Top districts</h2></header>
+      <p class="panel-sub" id="table-sub"></p>
+      <div class="table-wrap">
+        <table class="board" id="dtable">
+          <thead>
+            <tr><th class="name">District</th><th>Trend</th><th>Fires</th><th>FRP MW</th><th title="VIIRS S-NPP count for these dates relative to its 2016-2025 mean">vs 10-yr</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="card-creams">
+      <header class="panel-h">
+        <h2>Official count, ICAR-IARI CREAMS</h2>
+        <label class="field sm"><select id="sel-creams-state" aria-label="CREAMS state"></select><span class="caret" data-icon="chevron-down"></span></label>
+      </header>
+      <p class="panel-sub" id="creams-sub"></p>
+      <div class="chart" id="chart-creams"></div>
+      <div class="legend-row" id="legend-creams"></div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-h"><h2>Smoke over Punjab, Haryana, Delhi</h2></header>
+      <p class="panel-sub">Box mean 73.5-78.5 E, 27.5-32.5 N, GEOS-FP, 3-hourly</p>
+      <div class="chart" id="chart-smoke"></div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-h"><h2>Detection time of day</h2></header>
+      <p class="panel-sub" id="hour-sub"></p>
+      <div class="chart" id="chart-hour"></div>
+    </section>
+
+    <a class="panel panel-link" href="db/">
+      <span data-icon="chart-line"></span>
+      <span><b>Twenty years of stubble burning</b><small>Season trends, district rankings, burning per hectare of paddy, timing shifts and air quality in Delhi and Punjab.</small></span>
+      <span data-icon="chevron-right"></span>
+    </a>
+  </aside>
+
+  <button class="sidebar-toggle btn icon" id="btn-sidebar" type="button" title="Toggle panel" aria-label="Toggle panel"><span data-icon="panel-left-close"></span></button>
+
+  <section class="mapwrap">
+    <div id="map"></div>
+
+    <div class="map-badge" id="map-badge">Loading 23 seasons of detections and the smoke fields...</div>
+    <div class="sensor-chips" id="sensor-chips"></div>
+
+    <div class="map-tools">
+      <div class="tool-group" id="seg-proj" role="group" aria-label="View">
+        <button type="button" data-v="globe" aria-pressed="true" title="Globe"><span data-icon="globe"></span></button>
+        <button type="button" data-v="mercator" aria-pressed="false" title="Flat map"><span data-icon="map"></span></button>
+        <button type="button" data-v="terrain3d" aria-pressed="false" title="3D terrain: Himalaya and the plains"><span data-icon="mountain-snow"></span></button>
+      </div>
+      <div class="tool-group" id="seg-base" role="group" aria-label="Basemap">
+        <button type="button" data-v="canvas" aria-pressed="true" title="Esri Canvas (follows the theme)"><span class="bm bm-canvas"></span></button>
+        <button type="button" data-v="relief" aria-pressed="false" title="Elevation relief: the plains below 300 m stand out"><span class="bm bm-relief"></span></button>
+        <button type="button" data-v="imagery" aria-pressed="false" title="Esri World Imagery"><span class="bm bm-img"></span></button>
+      </div>
+      <div class="tool-group">
+        <button type="button" id="btn-layers" aria-haspopup="true" aria-expanded="false" title="Layers"><span data-icon="layers"></span></button>
+      </div>
+      <div class="menu layers-menu" id="layers-menu" hidden>
+        <div class="menu-head"><span class="menu-title">Layers</span><button class="btn icon ghost menu-close" type="button" aria-label="Close"><span data-icon="x"></span></button></div>
+        <div class="menu-body">
+          <label><input type="checkbox" id="l-burnscar" checked>Burned area (MODIS, 500 m)</label>
+          <label><input type="checkbox" id="l-hillshade" checked>Hillshade</label>
+          <label><input type="checkbox" id="l-wind" checked>Wind streamlines</label>
+          <label><input type="checkbox" id="l-districts" checked>District boundaries</label>
+          <label><input type="checkbox" id="l-labels" checked>Place names</label>
+          <label><input type="checkbox" id="l-mask" checked>Dim outside the subcontinent</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend-stack">
+      <div class="legend-card" id="legend-smoke">
+        <div class="legend-title" id="legend-smoke-title"></div>
+        <canvas id="smoke-ramp" width="256" height="10"></canvas>
+        <div class="ramp-ticks" id="smoke-ticks"></div>
+        <div class="legend-note" id="legend-smoke-note"></div>
+      </div>
+      <div class="legend-card" id="legend-burn" hidden>
+        <div class="legend-title" id="legend-burn-title">Burned area, MODIS</div>
+        <div class="ramp-bar" style="background:linear-gradient(90deg,#ffec96,#ffb74d 30%,#f4682d 55%,#d62d48 73%,#7a166e)"></div>
+        <div class="ramp-labels"><span>15 Sep</span><span>15 Oct</span><span>1 Nov</span><span>15 Nov</span><span>5 Dec</span></div>
+        <div class="legend-note" id="legend-burn-note"></div>
+      </div>
+      <div class="legend-card" id="legend-fire">
+        <div class="legend-title" id="legend-fire-title"></div>
+        <div id="legend-fire-body"></div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-buttons">
+        <button type="button" id="btn-prev" title="Step back 3 h"><span data-icon="skip-back"></span></button>
+        <button type="button" id="btn-play" class="play" title="Play / pause (space)"><span data-icon="play"></span></button>
+        <button type="button" id="btn-next" title="Step forward 3 h"><span data-icon="skip-forward"></span></button>
+        <button type="button" id="btn-now" title="Jump to the latest data and follow it"><span data-icon="clock"></span></button>
+      </div>
+      <div class="tl-clock">
+        <div class="tl-date" id="tl-date"></div>
+        <div class="tl-time" id="tl-time"></div>
+      </div>
+      <div class="tl-track" id="tl-track"></div>
+      <label class="field sm tl-speed" title="Playback speed">
+        <select id="sel-speed" aria-label="Playback speed">
+          <option value="1">1x</option>
+          <option value="2" selected>2x</option>
+          <option value="4">4x</option>
+          <option value="8">8x</option>
+        </select><span class="caret" data-icon="chevron-down"></span>
+      </label>
+    </div>
+  </section>
+</main>
+
+<div class="tooltip" id="tooltip" hidden></div>
+
+<dialog class="modal" id="modal-about">
+  <header class="modal-h">
+    <h2>Data sources and method</h2>
+    <button class="btn icon ghost" type="button" data-close aria-label="Close"><span data-icon="x"></span></button>
+  </header>
+  <div class="modal-body" id="about-body"></div>
+</dialog>
+
+</body>
+</html>

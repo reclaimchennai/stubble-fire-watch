@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Twenty years of stubble burning — Stubble Fire Watch</title>
+<meta name="description" content="Paddy-residue burning in Punjab, Haryana and the Indo-Gangetic Plain since 2003: season totals, timing, districts, burning per hectare of paddy, the Pakistani Punjab contrast, and what Delhi breathed.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reclaim Chennai">
+<meta property="og:url" content="https://fire.reclaimchennai.city/db/">
+<meta property="og:title" content="Twenty years of stubble burning">
+<meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f5" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://fire.reclaimchennai.city/db/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  (function () {
+    var t = null; try { t = localStorage.getItem("fw-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+  window.__boot = { db: fetch("../data/db/db.json").then(function (r) { return r.json(); }) };
+</script>
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="db.css">
+<script src="../vendor/echarts.min.js" defer></script>
+<script src="../vendor/icons.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="crumbs">
+    <a class="crumb-dim" href="../">Stubble Fire Watch</a><span class="crumb-sep">/</span><span class="crumb">Twenty years</span>
+  </div>
+  <div class="controls">
+    <div class="seg" id="seg-basis" role="group" aria-label="Sensor family">
+      <button type="button" data-v="modis" aria-pressed="false" title="MODIS Terra + Aqua, 1 km, consistent since 2003">MODIS since 2003</button>
+      <button type="button" data-v="snpp" aria-pressed="true" title="VIIRS S-NPP, 375 m, since 2012: sees about five times more small fires">VIIRS since 2012</button>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a class="btn" href="../"><span data-icon="map"></span><span class="btn-tx">Live map</span></a>
+    <button class="btn icon" id="theme-btn" type="button" title="Toggle light / dark theme" aria-label="Toggle light / dark theme"><span id="theme-icon" data-icon="sun"></span></button>
+  </nav>
+</header>
+
+<main class="grid" id="grid">
+  <section class="lede-block">
+    <h1>Twenty years of stubble burning</h1>
+    <p class="lede" id="lede"></p>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <!-- 1. totals -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="chart-column"></span>How much burned, season by season</h2>
+      <p class="sect-lede">Satellite fire detections between 15 September and 30 November, by state. MODIS gives the
+        longest consistent record; VIIRS sees smaller fires. CREAMS is the official count from IARI's daily bulletins.</p>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel"><div class="panel-h"><h2 id="t-totals">Paddy-season detections by state</h2>
+        <div class="seg sm" id="seg-totals" role="group"><button type="button" data-v="sat" aria-pressed="true">Satellite</button><button type="button" data-v="creams" aria-pressed="false">CREAMS official</button></div></div>
+        <div class="chart h-lg" id="c-totals"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Two Punjabs</h2><span class="hint" tabindex="0" data-tip="Same satellite, same season window, same counting. Indian Punjab and Haryana fell after 2021; Pakistani Punjab, which grows paddy on the same plain, did not."><span data-icon="info"></span></span></div>
+        <div class="chart h-lg" id="c-border"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. timing -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="clock"></span>When the burning happens</h2>
+      <p class="sect-lede">Each row is a season, each cell a day: Punjab and Haryana detections. The burn window is set by
+        the paddy harvest and the wheat sowing deadline, and it has barely moved. What has moved is the hour.</p>
+    </div>
+    <div class="panel"><div class="panel-h"><h2>Daily detections, Punjab + Haryana</h2><span class="panel-note" id="n-cal"></span></div>
+      <div class="chart h-cal" id="c-calendar"></div></div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Burn window</h2><span class="hint" tabindex="0" data-tip="Days by which 10 %, 50 % and 90 % of each complete season's Punjab + Haryana detections had happened."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-timing"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Burning after the satellites pass</h2><span class="hint" tabindex="0" data-tip="Polar orbiters cross at about 10:30 (Terra), 13:30 (Aqua, S-NPP) and 01:30 IST. Fires lit in the late afternoon are seen only at night, if still burning. A rising night share and a falling Terra:Aqua ratio both point to burning later in the day."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-overpass"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. where -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="map-pin"></span>Where it burns</h2>
+      <p class="sect-lede">Districts of Punjab, Haryana and Delhi, and across the border, by paddy season.</p>
+      <div class="sect-ctls">
+        <div class="seg" id="seg-mapmetric" role="group" aria-label="Map metric">
+          <button type="button" data-v="n" aria-pressed="true">Detections</button>
+          <button type="button" data-v="perha" aria-pressed="false">Per 1,000 ha of paddy</button>
+          <button type="button" data-v="burned" aria-pressed="false">Paddy burned (MODIS)</button>
+          <button type="button" data-v="change" aria-pressed="false">Change since 2016-18</button>
+        </div>
+        <label class="field yearfield"><span class="field-k">Season</span><input type="range" id="map-year" min="2003" max="2026" step="1"><b id="map-year-label"></b></label>
+        <button class="btn icon" id="map-play" type="button" title="Play through the years" aria-label="Play through the years"><span data-icon="play"></span></button>
+      </div>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel"><div class="panel-h"><h2 id="t-map">District detections</h2></div><div class="chart h-map" id="c-map"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Paddy area and fires, by district</h2><span class="hint" tabindex="0" data-tip="Each dot is an Indian district: kharif rice area (DES / UPAg) against the season's detections. The 2016 cloud and the latest season, same districts."><span data-icon="info"></span></span></div>
+        <div class="chart h-map" id="c-scatter"></div></div>
+    </div>
+    <div class="panel"><div class="panel-h"><h2>Districts that burned most</h2><span class="panel-note">click a column to sort</span></div>
+      <div class="table-wrap tall"><table class="board" id="t-districts"><thead></thead><tbody></tbody></table></div></div>
+  </section>
+
+  <!-- 4. per hectare + intensity -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="trending-down"></span>Same paddy, fewer fires</h2>
+      <p class="sect-lede">Punjab still grows about 3.2 million hectares of kharif rice. The straw did not disappear;
+        the share of it that is burned in the open did.</p>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Detections per 1,000 ha of kharif rice</h2></div><div class="chart h-md" id="c-perha"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Rice area and production</h2><span class="hint" tabindex="0" data-tip="Official state estimates (UPAg / DES). Production is milled rice."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-rice"></div></div>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Fire size: mean radiative power per detection</h2><span class="hint" tabindex="0" data-tip="Total fire radiative power divided by detections, VIIRS S-NPP. Bigger values mean larger or hotter fires per pixel."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-frp"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Official count against satellite count</h2><span class="hint" tabindex="0" data-tip="CREAMS season totals (its own VIIRS-based protocol) against raw FIRMS VIIRS S-NPP detections, Punjab."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-creamsvs"></div></div>
+    </div>
+  </section>
+
+  <!-- 4b. burned area -->
+  <section class="sect" id="sect-burn">
+    <div class="sect-head">
+      <h2><span data-icon="flame"></span>Burned ground, not just fires seen</h2>
+      <p class="sect-lede" id="burn-lede">Fire counts only see what is burning when a satellite passes. NASA's MODIS burned-area
+        product maps the scars instead, whenever the fire was lit. It is coarse (500 m) and misses many small fields, so its
+        hectares are a floor, but it does not depend on the hour of burning.</p>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Burned area each paddy season</h2><span class="hint" tabindex="0" data-tip="MODIS MCD64A1 collection 6.1 burned area, 15 Sep - 5 Dec, within the state. Faded bars are seasons with months missing from the archive. Line: burned area as a share of the official kharif rice area."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-burn"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Fires seen per 1,000 ha burned</h2><span class="hint" tabindex="0" data-tip="Active-fire detections divided by MODIS burned area. If the burning simply shrank, this would hold steady; a fall means a growing share of the burning happens when no satellite is looking."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-burnratio"></div></div>
+    </div>
+  </section>
+
+  <!-- 4c. enforcement -->
+  <section class="sect" id="sect-enf" hidden>
+    <div class="sect-head">
+      <h2><span data-icon="sliders-horizontal"></span>What the states did</h2>
+      <p class="sect-lede">Penalties, police cases, land-record entries and machinery for managing straw in the field, as
+        reported by CAQM, the state governments and answers in Parliament. Every number links to its source; definitions
+        differ between sources, and many figures are cumulative "as on" a date.</p>
+      <div class="sect-ctls">
+        <label class="field"><span class="field-k">Measure</span><select id="enf-metric"></select><span class="caret" data-icon="chevron-down"></span></label>
+      </div>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel"><div class="panel-h"><h2 id="t-enf">Enforcement</h2><span class="panel-note" id="n-enf"></span></div><div class="chart h-md" id="c-enf"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Against fires seen</h2><span class="hint" tabindex="0" data-tip="The selected measure for Punjab and Haryana next to each state's VIIRS paddy-season detections. Coincidence in time is not proof of effect: harvest timing, weather, prices and detection evasion all move the counts."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-enfvs"></div></div>
+    </div>
+    <div class="panel"><div class="panel-h"><h2>Timeline</h2><span class="panel-note">orders, incentives and rule changes</span></div>
+      <div class="table-wrap tall"><table class="board" id="t-events"><thead><tr><th class="name">Date</th><th class="name">State</th><th class="name">What</th><th class="name">Source</th></tr></thead><tbody></tbody></table></div></div>
+  </section>
+
+  <!-- 5. air -->
+  <section class="sect" id="sect-air">
+    <div class="sect-head">
+      <h2><span data-icon="wind"></span>What the air got</h2>
+      <p class="sect-lede" id="air-lede">Daily fine particulate matter (PM2.5) at receptor cities, from the CAMS
+        atmospheric composition model via Open-Meteo, against same-day fire detections; and the boundary layer that
+        decides how much of it stays near the ground.</p>
+      <div class="sect-ctls">
+        <label class="field"><span class="field-k">City</span><select id="air-city"></select><span class="caret" data-icon="chevron-down"></span></label>
+        <label class="field"><span class="field-k">Season</span><select id="air-year"></select><span class="caret" data-icon="chevron-down"></span></label>
+      </div>
+    </div>
+    <div class="panel"><div class="panel-h"><h2 id="t-air">PM2.5 and fires</h2></div><div class="chart h-lg" id="c-air"></div></div>
+    <div class="panel"><div class="panel-h"><h2 id="t-stubble">Stubble burning's share of Delhi's PM2.5</h2><span class="panel-note" id="n-stubble"></span></div><div class="chart h-md" id="c-stubble"></div></div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Season fires against season PM2.5</h2><span class="hint" tabindex="0" data-tip="One dot per season: 15 Oct - 15 Nov mean PM2.5 at the city against Punjab + Haryana detections over the same days. Weather moves PM2.5 too, so this is an association, not an attribution."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-airscatter"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Afternoon mixing height</h2><span class="hint" tabindex="0" data-tip="ERA5 boundary-layer height at 14:00 IST, 15 Oct - 15 Nov mean. A lower lid traps smoke and local emissions alike."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-blh"></div></div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="sect-head"><h2><span data-icon="info"></span>Sources and caveats</h2></div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <p class="foot">Stubble Fire Watch · <a href="../">live map</a> · <a href="https://reclaimchennai.city/">Reclaim Chennai</a> · data built <span id="built"></span></p>
+</main>
+
+<div class="tooltip" id="tooltip" hidden></div>
+</body>
+</html>

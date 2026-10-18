@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# built or downloaded by the pipeline / unzipped from the release
+data/*
+!data/README.md
+web/
+release/
+*.log
+.privacy-patterns

@@ -1,0 +1,76 @@
+/* Analysis page. Tokens and components come from ../theme.css. Mobile first. */
+
+body { min-height: 100vh; }
+.topbar { position: sticky; top: 0; }
+.grid { padding: 8px 8px 28px; display: flex; flex-direction: column; gap: 8px; max-width: 1680px; margin: 0 auto; }
+
+.lede-block { padding: 10px 2px 4px; }
+.lede-block h1 { margin: 0 0 8px; font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+.lede { margin: 0; max-width: 82ch; color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.lede b { color: var(--text); font-weight: 600; }
+
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.stat { background: var(--panel); border: 1px solid var(--border); border-radius: 3px; position: relative; overflow: hidden;
+  min-height: 132px; padding: 10px 10px 48px; display: flex; flex-direction: column; }
+.stat .title { font-size: 12.5px; color: var(--text-2); text-align: center; position: relative; z-index: 2; }
+.stat .value { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; text-align: center; margin-top: 4px; position: relative; z-index: 2; }
+.stat .value small { font-size: 14px; font-weight: 500; color: var(--dim); margin-left: 2px; }
+.stat .sublab { font-size: 11.5px; color: var(--dim); text-align: center; position: relative; z-index: 2; line-height: 1.35; padding: 0 4px; }
+.stat .spark { position: absolute; left: 0; right: 0; bottom: 0; height: 40px; opacity: 0.9; }
+.stat.good .value { color: var(--good); }
+.stat.bad .value { color: var(--bad); }
+.stat.warn .value { color: var(--warn); }
+.stat.accent .value { color: var(--accent-2); }
+
+.sect { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.sect-head { display: flex; flex-direction: column; gap: 6px; padding: 0 2px; }
+.sect-head h2 { margin: 0; font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.sect-head h2 [data-icon] { color: var(--accent-2); }
+.sect-lede { margin: 0; color: var(--text-2); max-width: 84ch; line-height: 1.55; }
+.sect-ctls { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 2px; }
+.panel-note { font-size: 11.5px; color: var(--dim); }
+
+.row2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.h-lg { height: 360px; } .h-md { height: 300px; } .h-map { height: 460px; } .h-cal { height: 420px; }
+
+.yearfield input[type="range"] { width: 160px; accent-color: var(--accent); }
+.yearfield b { min-width: 34px; color: var(--text); font-variant-numeric: tabular-nums; }
+
+.table-wrap.tall { max-height: 520px; }
+#t-districts th { cursor: pointer; user-select: none; }
+#t-districts th:hover { color: var(--text); }
+#t-districts th[aria-sort] { color: var(--text); }
+#t-districts th[aria-sort="ascending"]::after { content: " \2191"; }
+#t-districts th[aria-sort="descending"]::after { content: " \2193"; }
+#t-districts td.name { min-width: 150px; }
+#t-districts .spark { display: block; }
+
+.notes { display: grid; grid-template-columns: 1fr; gap: 10px 24px; padding: 0 2px; }
+.note { line-height: 1.55; color: var(--text-2); }
+.note b { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+.foot { color: var(--dim); font-size: 12px; text-align: center; padding: 18px 8px 0; }
+.foot a { color: var(--dim); }
+
+@media (min-width: 640px) {
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) {
+  .grid { padding: 8px 16px 32px; }
+  .row2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .row2.wide-left { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+  .notes { grid-template-columns: 1fr 1fr; }
+  .lede-block h1 { font-size: 26px; }
+  .h-lg { height: 400px; } .h-md { height: 320px; } .h-map { height: 560px; }
+}
+@media (min-width: 1200px) {
+  .stats { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .stat { min-height: 150px; }
+  .stat .value { font-size: 32px; }
+  .notes { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 719px) {
+  .crumb-dim, .crumbs .crumb-sep { display: none; }
+  .controls { order: 3; flex-basis: 100%; }
+  .seg button { flex: 1; }
+  .btn-tx { display: none; }
+}

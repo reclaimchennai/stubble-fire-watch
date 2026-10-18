@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh Stubble Fire Watch every 6 hours (after the FIRMS NRT and GEOS-FP updates)
+
+[Timer]
+OnBootSec=10min
+OnCalendar=*-*-* 00/6:40:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

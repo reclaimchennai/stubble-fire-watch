@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this data or software, please cite it as below, and credit the upstream sources listed in LICENSES.md."
+title: "Stubble Fire Watch: crop-residue fires, burned area, smoke and air quality over Punjab and Haryana, 2003-2026"
+authors:
+  - name: "Reclaim Chennai"
+    website: "https://reclaimchennai.city"
+repository-code: "https://github.com/reclaimchennai/stubble-fire-watch"
+url: "https://fire.reclaimchennai.city"
+license: MIT
+date-released: "2026-10-18"
+keywords: [stubble burning, crop residue, Punjab, Haryana, Indo-Gangetic Plain, air quality, Delhi, NASA FIRMS, MODIS, VIIRS, burned area, GEOS-FP, CREAMS]

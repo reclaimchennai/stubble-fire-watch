@@ -1,0 +1,10 @@
+[Unit]
+Description=Stubble Fire Watch: hourly FIRMS fast lane (new fire detections, rebuild, publish)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/fire
+ExecStart=/bin/sh %h/projects/fire/scripts/live.sh
+Nice=10
+TimeoutStartSec=1800

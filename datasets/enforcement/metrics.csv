@@ -1,0 +1,42 @@
+metric,label,unit,note
+fire_events,"Paddy residue burning events (satellite, ISRO/CREAMS standard protocol)",count,Active-fire events attributed to paddy residue burning; standard period 15 Sep-30 Nov unless 'period' says otherwise. Context only - not an enforcement figure.
+inspections,Fields inspected / field verifications of reported fire events,count,Cumulative number of reported fire locations visited by field teams.
+burning_confirmed,Sites where crop burning was physically verified,count,Reported fire locations where burning was confirmed on the ground.
+no_burning_found,Sites where no crop burning was found on verification,count,
+non_afl_burning,Non-AFL fields found with burning traces,count,Burnt fields found by Parali Protection Force / nodal officers that were NOT in the satellite active-fire list (AFL).
+ec_cases,Cases in which environmental compensation (EC) was imposed,count,
+ec_imposed_rs,Environmental compensation imposed,Rs,Cumulative amount of EC (challans) imposed on farmers for stubble burning.
+ec_recovered_rs,Environmental compensation recovered / realised / collected,Rs,
+firs,FIRs / police cases registered against farmers,count,FIRs under BNS s.223 (from July 2024) or IPC s.188 (earlier) for violating prohibitory orders; Haryana 2016-2020 figure is 'police complaints / FIRs'.
+red_entries,Red entries in land records (khasra girdawari / farm records),count,
+prosecutions_air_act,"Prosecutions filed u/s 39 of the Air Act, 1981",count,
+officials_show_cause,Warnings / notices / show-cause notices to nodal & supervisory officers,count,
+officials_suspended,Suspension orders against nodal / supervisory officers,count,
+officials_prosecuted,Nodal / supervisory officers against whom prosecution was initiated (s.14 CAQM Act),count,
+officials_chargesheeted,Charge-sheets issued to nodal / supervisory officers,count,
+officials_terminated,Termination orders against nodal / supervisory officers,count,
+numberdars_suspended,Numberdars (village revenue functionaries) suspended,count,
+officials_explanations,Explanations called from officials,count,Haryana Agriculture Dept 'Action Taken Summary'.
+field_functionaries,Field functionaries deployed for stubble-burning monitoring,count,
+crm_machines_year,"CRM machines supplied in the year (subsidised, central CRM scheme)",count,Machines delivered to individual farmers and Custom Hiring Centres in that financial year (FY 2018-19 = season 2018).
+happy_seeders_year,Happy Seeders among CRM machines supplied in the year,count,
+crm_machines_cumulative,"CRM machines supplied / available, cumulative",count,Cumulative since 2018-19 under the CRM scheme unless the note says otherwise ('available' and 'functional' counts are stock figures).
+crm_machines_functional,Functional CRM machines (stock),count,
+chc_year,Custom Hiring Centres established in the year,count,
+chc_count,"Custom Hiring Centres (CRM) established, cumulative",count,
+crm_funds_released_rs_cr,Central CRM-scheme funds released in the financial year,Rs crore,FY 2018-19 = season 2018.
+crm_funds_released_cumulative_rs_cr,"Central CRM-scheme funds released, cumulative since 2018-19",Rs crore,
+crm_funds_utilised_rs_cr,CRM funds utilised / expenditure in the financial year,Rs crore,
+crm_funds_allocated_rs_cr,CRM funds allocated,Rs crore,
+residue_managed_lakh_t,Crop residue managed (as reported),lakh tonnes,
+crm_area_managed_lakh_ha,Area over which crop residue management was adopted,lakh ha,
+ex_situ_tonnes,"Paddy straw used ex-situ (industry, power, CBG, pellets, co-firing, etc.)",tonnes,
+in_situ_tonnes,Paddy straw managed in-situ,tonnes,
+fodder_tonnes,Paddy straw used as fodder,tonnes,
+in_situ_area_registered_acres,Area registered for in-situ management incentive (all in-situ machines),acres,"Haryana 'Crop Residue Management @ Rs 1000/acre' scheme: machine-wise registered area (self-registered, not necessarily verified)."
+super_seeder_area_acres,Area registered under Super Seeder (incentive scheme),acres,
+happy_seeder_area_acres,Area registered under Happy Seeder (incentive scheme),acres,
+ex_situ_area_registered_acres,Area registered for ex-situ (straw baler) management incentive,acres,
+incentive_farmers_registered,Farmers registered for the per-acre CRM incentive,count,
+cbg_plants_functional,Functional Compressed Bio-Gas (CBG) plants (all feedstocks),count,
+incentive_per_acre_rs,Per-acre incentive to farmers for not burning / managing paddy straw,Rs per acre,

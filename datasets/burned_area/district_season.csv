@@ -1,0 +1,1266 @@
+season,district_id,district,state,burned_ha,complete
+2003,38,Chandigarh,Chandigarh,0,True
+2003,60,Central,Delhi,0,True
+2003,61,East,Delhi,0,True
+2003,62,New Delhi,Delhi,0,True
+2003,63,North,Delhi,0,True
+2003,64,North East,Delhi,0,True
+2003,65,North West,Delhi,0,True
+2003,66,Shahdara,Delhi,0,True
+2003,67,South,Delhi,0,True
+2003,68,South East,Delhi,0,True
+2003,69,South West,Delhi,0,True
+2003,70,West,Delhi,0,True
+2003,103,Ambala,Haryana,4615,True
+2003,104,Bhiwani,Haryana,0,True
+2003,105,Faridabad,Haryana,0,True
+2003,106,Fatehabad,Haryana,25738,True
+2003,107,Gurgaon,Haryana,0,True
+2003,108,Hisar,Haryana,3177,True
+2003,109,Jhajjar,Haryana,21,True
+2003,110,Jind,Haryana,9402,True
+2003,111,Kaithal,Haryana,12858,True
+2003,112,Karnal,Haryana,19620,True
+2003,113,Kurukshetra,Haryana,13674,True
+2003,114,Mahendragarh,Haryana,0,True
+2003,115,Mewat,Haryana,0,True
+2003,116,Palwal,Haryana,1331,True
+2003,117,Panchkula,Haryana,64,True
+2003,118,Panipat,Haryana,537,True
+2003,119,Rewari,Haryana,0,True
+2003,120,Rohtak,Haryana,0,True
+2003,121,Sirsa,Haryana,11592,True
+2003,122,Sonipat,Haryana,0,True
+2003,123,Yamunanagar,Haryana,0,True
+2003,260,Amritsar,Punjab,7921,True
+2003,261,Barnala,Punjab,63131,True
+2003,262,Bathinda,Punjab,39884,True
+2003,263,Faridkot,Punjab,26017,True
+2003,264,Fatehgarh Sahib,Punjab,55060,True
+2003,265,Fazilka,Punjab,32585,True
+2003,266,Firozpur,Punjab,60383,True
+2003,267,Gurdaspur,Punjab,12128,True
+2003,268,Hoshiarpur,Punjab,6053,True
+2003,269,Jalandhar,Punjab,30546,True
+2003,270,Kapurthala,Punjab,53836,True
+2003,271,Ludhiana,Punjab,133003,True
+2003,272,Mansa,Punjab,41064,True
+2003,273,Moga,Punjab,104818,True
+2003,274,Muktsar,Punjab,14189,True
+2003,275,Pathankot,Punjab,0,True
+2003,276,Patiala,Punjab,152515,True
+2003,277,Rupnagar,Punjab,10282,True
+2003,278,Sahibzada Ajit Singh Nagar,Punjab,129,True
+2003,279,Sangrur,Punjab,188320,True
+2003,280,Shahid Bhagat Singh Nagar,Punjab,7084,True
+2003,281,Tarn Taran,Punjab,9509,True
+2004,38,Chandigarh,Chandigarh,0,True
+2004,60,Central,Delhi,0,True
+2004,61,East,Delhi,0,True
+2004,62,New Delhi,Delhi,0,True
+2004,63,North,Delhi,0,True
+2004,64,North East,Delhi,0,True
+2004,65,North West,Delhi,0,True
+2004,66,Shahdara,Delhi,0,True
+2004,67,South,Delhi,0,True
+2004,68,South East,Delhi,0,True
+2004,69,South West,Delhi,0,True
+2004,70,West,Delhi,0,True
+2004,103,Ambala,Haryana,2769,True
+2004,104,Bhiwani,Haryana,236,True
+2004,105,Faridabad,Haryana,0,True
+2004,106,Fatehabad,Haryana,39733,True
+2004,107,Gurgaon,Haryana,0,True
+2004,108,Hisar,Haryana,5002,True
+2004,109,Jhajjar,Haryana,0,True
+2004,110,Jind,Haryana,13845,True
+2004,111,Kaithal,Haryana,26231,True
+2004,112,Karnal,Haryana,38317,True
+2004,113,Kurukshetra,Haryana,12257,True
+2004,114,Mahendragarh,Haryana,0,True
+2004,115,Mewat,Haryana,0,True
+2004,116,Palwal,Haryana,2125,True
+2004,117,Panchkula,Haryana,0,True
+2004,118,Panipat,Haryana,343,True
+2004,119,Rewari,Haryana,0,True
+2004,120,Rohtak,Haryana,21,True
+2004,121,Sirsa,Haryana,28056,True
+2004,122,Sonipat,Haryana,0,True
+2004,123,Yamunanagar,Haryana,0,True
+2004,260,Amritsar,Punjab,6976,True
+2004,261,Barnala,Punjab,88890,True
+2004,262,Bathinda,Punjab,25265,True
+2004,263,Faridkot,Punjab,13287,True
+2004,264,Fatehgarh Sahib,Punjab,48406,True
+2004,265,Fazilka,Punjab,28936,True
+2004,266,Firozpur,Punjab,41880,True
+2004,267,Gurdaspur,Punjab,4765,True
+2004,268,Hoshiarpur,Punjab,343,True
+2004,269,Jalandhar,Punjab,30138,True
+2004,270,Kapurthala,Punjab,22625,True
+2004,271,Ludhiana,Punjab,196821,True
+2004,272,Mansa,Punjab,35741,True
+2004,273,Moga,Punjab,90672,True
+2004,274,Muktsar,Punjab,15434,True
+2004,275,Pathankot,Punjab,0,True
+2004,276,Patiala,Punjab,160479,True
+2004,277,Rupnagar,Punjab,3671,True
+2004,278,Sahibzada Ajit Singh Nagar,Punjab,193,True
+2004,279,Sangrur,Punjab,229105,True
+2004,280,Shahid Bhagat Singh Nagar,Punjab,12214,True
+2004,281,Tarn Taran,Punjab,3220,True
+2005,38,Chandigarh,Chandigarh,0,True
+2005,60,Central,Delhi,0,True
+2005,61,East,Delhi,0,True
+2005,62,New Delhi,Delhi,0,True
+2005,63,North,Delhi,0,True
+2005,64,North East,Delhi,0,True
+2005,65,North West,Delhi,0,True
+2005,66,Shahdara,Delhi,0,True
+2005,67,South,Delhi,0,True
+2005,68,South East,Delhi,0,True
+2005,69,South West,Delhi,0,True
+2005,70,West,Delhi,0,True
+2005,103,Ambala,Haryana,5560,True
+2005,104,Bhiwani,Haryana,0,True
+2005,105,Faridabad,Haryana,0,True
+2005,106,Fatehabad,Haryana,39733,True
+2005,107,Gurgaon,Haryana,107,True
+2005,108,Hisar,Haryana,7255,True
+2005,109,Jhajjar,Haryana,0,True
+2005,110,Jind,Haryana,23011,True
+2005,111,Kaithal,Haryana,39927,True
+2005,112,Karnal,Haryana,34946,True
+2005,113,Kurukshetra,Haryana,16056,True
+2005,114,Mahendragarh,Haryana,0,True
+2005,115,Mewat,Haryana,0,True
+2005,116,Palwal,Haryana,4916,True
+2005,117,Panchkula,Haryana,0,True
+2005,118,Panipat,Haryana,11377,True
+2005,119,Rewari,Haryana,0,True
+2005,120,Rohtak,Haryana,494,True
+2005,121,Sirsa,Haryana,12880,True
+2005,122,Sonipat,Haryana,0,True
+2005,123,Yamunanagar,Haryana,0,True
+2005,260,Amritsar,Punjab,26145,True
+2005,261,Barnala,Punjab,93012,True
+2005,262,Bathinda,Punjab,35827,True
+2005,263,Faridkot,Punjab,35848,True
+2005,264,Fatehgarh Sahib,Punjab,30718,True
+2005,265,Fazilka,Punjab,36535,True
+2005,266,Firozpur,Punjab,91874,True
+2005,267,Gurdaspur,Punjab,22475,True
+2005,268,Hoshiarpur,Punjab,10969,True
+2005,269,Jalandhar,Punjab,20886,True
+2005,270,Kapurthala,Punjab,46967,True
+2005,271,Ludhiana,Punjab,102006,True
+2005,272,Mansa,Punjab,63260,True
+2005,273,Moga,Punjab,110399,True
+2005,274,Muktsar,Punjab,26145,True
+2005,275,Pathankot,Punjab,0,True
+2005,276,Patiala,Punjab,153975,True
+2005,277,Rupnagar,Punjab,3005,True
+2005,278,Sahibzada Ajit Singh Nagar,Punjab,1095,True
+2005,279,Sangrur,Punjab,224511,True
+2005,280,Shahid Bhagat Singh Nagar,Punjab,5259,True
+2005,281,Tarn Taran,Punjab,29279,True
+2006,38,Chandigarh,Chandigarh,0,True
+2006,60,Central,Delhi,0,True
+2006,61,East,Delhi,0,True
+2006,62,New Delhi,Delhi,0,True
+2006,63,North,Delhi,0,True
+2006,64,North East,Delhi,0,True
+2006,65,North West,Delhi,0,True
+2006,66,Shahdara,Delhi,0,True
+2006,67,South,Delhi,0,True
+2006,68,South East,Delhi,0,True
+2006,69,South West,Delhi,0,True
+2006,70,West,Delhi,0,True
+2006,103,Ambala,Haryana,2168,True
+2006,104,Bhiwani,Haryana,0,True
+2006,105,Faridabad,Haryana,21,True
+2006,106,Fatehabad,Haryana,40613,True
+2006,107,Gurgaon,Haryana,0,True
+2006,108,Hisar,Haryana,687,True
+2006,109,Jhajjar,Haryana,0,True
+2006,110,Jind,Haryana,13910,True
+2006,111,Kaithal,Haryana,37866,True
+2006,112,Karnal,Haryana,45636,True
+2006,113,Kurukshetra,Haryana,22303,True
+2006,114,Mahendragarh,Haryana,0,True
+2006,115,Mewat,Haryana,0,True
+2006,116,Palwal,Haryana,3370,True
+2006,117,Panchkula,Haryana,0,True
+2006,118,Panipat,Haryana,1567,True
+2006,119,Rewari,Haryana,0,True
+2006,120,Rohtak,Haryana,0,True
+2006,121,Sirsa,Haryana,14575,True
+2006,122,Sonipat,Haryana,902,True
+2006,123,Yamunanagar,Haryana,0,True
+2006,260,Amritsar,Punjab,15370,True
+2006,261,Barnala,Punjab,85434,True
+2006,262,Bathinda,Punjab,36900,True
+2006,263,Faridkot,Punjab,51711,True
+2006,264,Fatehgarh Sahib,Punjab,43705,True
+2006,265,Fazilka,Punjab,58366,True
+2006,266,Firozpur,Punjab,136137,True
+2006,267,Gurdaspur,Punjab,17473,True
+2006,268,Hoshiarpur,Punjab,5667,True
+2006,269,Jalandhar,Punjab,22088,True
+2006,270,Kapurthala,Punjab,45250,True
+2006,271,Ludhiana,Punjab,137661,True
+2006,272,Mansa,Punjab,47139,True
+2006,273,Moga,Punjab,110549,True
+2006,274,Muktsar,Punjab,41386,True
+2006,275,Pathankot,Punjab,0,True
+2006,276,Patiala,Punjab,150862,True
+2006,277,Rupnagar,Punjab,3692,True
+2006,278,Sahibzada Ajit Singh Nagar,Punjab,1245,True
+2006,279,Sangrur,Punjab,227195,True
+2006,280,Shahid Bhagat Singh Nagar,Punjab,4079,True
+2006,281,Tarn Taran,Punjab,50015,True
+2007,38,Chandigarh,Chandigarh,0,True
+2007,60,Central,Delhi,0,True
+2007,61,East,Delhi,0,True
+2007,62,New Delhi,Delhi,0,True
+2007,63,North,Delhi,0,True
+2007,64,North East,Delhi,0,True
+2007,65,North West,Delhi,0,True
+2007,66,Shahdara,Delhi,0,True
+2007,67,South,Delhi,0,True
+2007,68,South East,Delhi,0,True
+2007,69,South West,Delhi,0,True
+2007,70,West,Delhi,0,True
+2007,103,Ambala,Haryana,9466,True
+2007,104,Bhiwani,Haryana,0,True
+2007,105,Faridabad,Haryana,0,True
+2007,106,Fatehabad,Haryana,45250,True
+2007,107,Gurgaon,Haryana,0,True
+2007,108,Hisar,Haryana,1739,True
+2007,109,Jhajjar,Haryana,0,True
+2007,110,Jind,Haryana,14597,True
+2007,111,Kaithal,Haryana,49715,True
+2007,112,Karnal,Haryana,52463,True
+2007,113,Kurukshetra,Haryana,33895,True
+2007,114,Mahendragarh,Haryana,0,True
+2007,115,Mewat,Haryana,0,True
+2007,116,Palwal,Haryana,3327,True
+2007,117,Panchkula,Haryana,0,True
+2007,118,Panipat,Haryana,4765,True
+2007,119,Rewari,Haryana,0,True
+2007,120,Rohtak,Haryana,0,True
+2007,121,Sirsa,Haryana,18589,True
+2007,122,Sonipat,Haryana,966,True
+2007,123,Yamunanagar,Haryana,43,True
+2007,260,Amritsar,Punjab,39626,True
+2007,261,Barnala,Punjab,102843,True
+2007,262,Bathinda,Punjab,39841,True
+2007,263,Faridkot,Punjab,54566,True
+2007,264,Fatehgarh Sahib,Punjab,44477,True
+2007,265,Fazilka,Punjab,66008,True
+2007,266,Firozpur,Punjab,123901,True
+2007,267,Gurdaspur,Punjab,35655,True
+2007,268,Hoshiarpur,Punjab,11334,True
+2007,269,Jalandhar,Punjab,47482,True
+2007,270,Kapurthala,Punjab,64977,True
+2007,271,Ludhiana,Punjab,145646,True
+2007,272,Mansa,Punjab,56455,True
+2007,273,Moga,Punjab,128559,True
+2007,274,Muktsar,Punjab,41601,True
+2007,275,Pathankot,Punjab,0,True
+2007,276,Patiala,Punjab,169731,True
+2007,277,Rupnagar,Punjab,5345,True
+2007,278,Sahibzada Ajit Singh Nagar,Punjab,1159,True
+2007,279,Sangrur,Punjab,270599,True
+2007,280,Shahid Bhagat Singh Nagar,Punjab,7535,True
+2007,281,Tarn Taran,Punjab,48728,True
+2008,38,Chandigarh,Chandigarh,0,True
+2008,60,Central,Delhi,0,True
+2008,61,East,Delhi,0,True
+2008,62,New Delhi,Delhi,0,True
+2008,63,North,Delhi,0,True
+2008,64,North East,Delhi,0,True
+2008,65,North West,Delhi,0,True
+2008,66,Shahdara,Delhi,0,True
+2008,67,South,Delhi,0,True
+2008,68,South East,Delhi,0,True
+2008,69,South West,Delhi,0,True
+2008,70,West,Delhi,0,True
+2008,103,Ambala,Haryana,2855,True
+2008,104,Bhiwani,Haryana,0,True
+2008,105,Faridabad,Haryana,0,True
+2008,106,Fatehabad,Haryana,40635,True
+2008,107,Gurgaon,Haryana,0,True
+2008,108,Hisar,Haryana,2168,True
+2008,109,Jhajjar,Haryana,215,True
+2008,110,Jind,Haryana,16486,True
+2008,111,Kaithal,Haryana,27047,True
+2008,112,Karnal,Haryana,19427,True
+2008,113,Kurukshetra,Haryana,13953,True
+2008,114,Mahendragarh,Haryana,0,True
+2008,115,Mewat,Haryana,21,True
+2008,116,Palwal,Haryana,4830,True
+2008,117,Panchkula,Haryana,0,True
+2008,118,Panipat,Haryana,1266,True
+2008,119,Rewari,Haryana,0,True
+2008,120,Rohtak,Haryana,708,True
+2008,121,Sirsa,Haryana,20285,True
+2008,122,Sonipat,Haryana,1953,True
+2008,123,Yamunanagar,Haryana,0,True
+2008,260,Amritsar,Punjab,13931,True
+2008,261,Barnala,Punjab,87795,True
+2008,262,Bathinda,Punjab,31576,True
+2008,263,Faridkot,Punjab,39819,True
+2008,264,Fatehgarh Sahib,Punjab,65321,True
+2008,265,Fazilka,Punjab,20929,True
+2008,266,Firozpur,Punjab,53386,True
+2008,267,Gurdaspur,Punjab,3714,True
+2008,268,Hoshiarpur,Punjab,2662,True
+2008,269,Jalandhar,Punjab,24793,True
+2008,270,Kapurthala,Punjab,27305,True
+2008,271,Ludhiana,Punjab,206180,True
+2008,272,Mansa,Punjab,59976,True
+2008,273,Moga,Punjab,120831,True
+2008,274,Muktsar,Punjab,17108,True
+2008,275,Pathankot,Punjab,64,True
+2008,276,Patiala,Punjab,173251,True
+2008,277,Rupnagar,Punjab,7406,True
+2008,278,Sahibzada Ajit Singh Nagar,Punjab,2447,True
+2008,279,Sangrur,Punjab,260810,True
+2008,280,Shahid Bhagat Singh Nagar,Punjab,8200,True
+2008,281,Tarn Taran,Punjab,9531,True
+2009,38,Chandigarh,Chandigarh,0,True
+2009,60,Central,Delhi,0,True
+2009,61,East,Delhi,0,True
+2009,62,New Delhi,Delhi,0,True
+2009,63,North,Delhi,0,True
+2009,64,North East,Delhi,0,True
+2009,65,North West,Delhi,0,True
+2009,66,Shahdara,Delhi,0,True
+2009,67,South,Delhi,0,True
+2009,68,South East,Delhi,0,True
+2009,69,South West,Delhi,0,True
+2009,70,West,Delhi,0,True
+2009,103,Ambala,Haryana,8951,True
+2009,104,Bhiwani,Haryana,129,True
+2009,105,Faridabad,Haryana,0,True
+2009,106,Fatehabad,Haryana,88890,True
+2009,107,Gurgaon,Haryana,0,True
+2009,108,Hisar,Haryana,2533,True
+2009,109,Jhajjar,Haryana,0,True
+2009,110,Jind,Haryana,19169,True
+2009,111,Kaithal,Haryana,43211,True
+2009,112,Karnal,Haryana,44585,True
+2009,113,Kurukshetra,Haryana,28507,True
+2009,114,Mahendragarh,Haryana,0,True
+2009,115,Mewat,Haryana,0,True
+2009,116,Palwal,Haryana,6418,True
+2009,117,Panchkula,Haryana,0,True
+2009,118,Panipat,Haryana,11506,True
+2009,119,Rewari,Haryana,0,True
+2009,120,Rohtak,Haryana,150,True
+2009,121,Sirsa,Haryana,25909,True
+2009,122,Sonipat,Haryana,1546,True
+2009,123,Yamunanagar,Haryana,2490,True
+2009,260,Amritsar,Punjab,23849,True
+2009,261,Barnala,Punjab,105870,True
+2009,262,Bathinda,Punjab,52870,True
+2009,263,Faridkot,Punjab,39540,True
+2009,264,Fatehgarh Sahib,Punjab,45422,True
+2009,265,Fazilka,Punjab,88418,True
+2009,266,Firozpur,Punjab,46109,True
+2009,267,Gurdaspur,Punjab,14253,True
+2009,268,Hoshiarpur,Punjab,8865,True
+2009,269,Jalandhar,Punjab,36020,True
+2009,270,Kapurthala,Punjab,43468,True
+2009,271,Ludhiana,Punjab,117204,True
+2009,272,Mansa,Punjab,129589,True
+2009,273,Moga,Punjab,109970,True
+2009,274,Muktsar,Punjab,46710,True
+2009,275,Pathankot,Punjab,0,True
+2009,276,Patiala,Punjab,179068,True
+2009,277,Rupnagar,Punjab,4572,True
+2009,278,Sahibzada Ajit Singh Nagar,Punjab,794,True
+2009,279,Sangrur,Punjab,300329,True
+2009,280,Shahid Bhagat Singh Nagar,Punjab,9960,True
+2009,281,Tarn Taran,Punjab,18589,True
+2010,38,Chandigarh,Chandigarh,0,True
+2010,60,Central,Delhi,0,True
+2010,61,East,Delhi,0,True
+2010,62,New Delhi,Delhi,0,True
+2010,63,North,Delhi,0,True
+2010,64,North East,Delhi,0,True
+2010,65,North West,Delhi,0,True
+2010,66,Shahdara,Delhi,0,True
+2010,67,South,Delhi,0,True
+2010,68,South East,Delhi,0,True
+2010,69,South West,Delhi,0,True
+2010,70,West,Delhi,0,True
+2010,103,Ambala,Haryana,5388,True
+2010,104,Bhiwani,Haryana,0,True
+2010,105,Faridabad,Haryana,64,True
+2010,106,Fatehabad,Haryana,57550,True
+2010,107,Gurgaon,Haryana,0,True
+2010,108,Hisar,Haryana,1095,True
+2010,109,Jhajjar,Haryana,0,True
+2010,110,Jind,Haryana,19920,True
+2010,111,Kaithal,Haryana,28292,True
+2010,112,Karnal,Haryana,26661,True
+2010,113,Kurukshetra,Haryana,11656,True
+2010,114,Mahendragarh,Haryana,0,True
+2010,115,Mewat,Haryana,21,True
+2010,116,Palwal,Haryana,5216,True
+2010,117,Panchkula,Haryana,0,True
+2010,118,Panipat,Haryana,2748,True
+2010,119,Rewari,Haryana,0,True
+2010,120,Rohtak,Haryana,0,True
+2010,121,Sirsa,Haryana,26167,True
+2010,122,Sonipat,Haryana,1309,True
+2010,123,Yamunanagar,Haryana,0,True
+2010,260,Amritsar,Punjab,10690,True
+2010,261,Barnala,Punjab,117998,True
+2010,262,Bathinda,Punjab,71632,True
+2010,263,Faridkot,Punjab,41107,True
+2010,264,Fatehgarh Sahib,Punjab,51926,True
+2010,265,Fazilka,Punjab,78157,True
+2010,266,Firozpur,Punjab,41257,True
+2010,267,Gurdaspur,Punjab,1674,True
+2010,268,Hoshiarpur,Punjab,3113,True
+2010,269,Jalandhar,Punjab,21337,True
+2010,270,Kapurthala,Punjab,27004,True
+2010,271,Ludhiana,Punjab,173423,True
+2010,272,Mansa,Punjab,67875,True
+2010,273,Moga,Punjab,144530,True
+2010,274,Muktsar,Punjab,24278,True
+2010,275,Pathankot,Punjab,0,True
+2010,276,Patiala,Punjab,171083,True
+2010,277,Rupnagar,Punjab,3070,True
+2010,278,Sahibzada Ajit Singh Nagar,Punjab,1696,True
+2010,279,Sangrur,Punjab,288888,True
+2010,280,Shahid Bhagat Singh Nagar,Punjab,3413,True
+2010,281,Tarn Taran,Punjab,20715,True
+2011,38,Chandigarh,Chandigarh,0,True
+2011,60,Central,Delhi,0,True
+2011,61,East,Delhi,0,True
+2011,62,New Delhi,Delhi,0,True
+2011,63,North,Delhi,64,True
+2011,64,North East,Delhi,0,True
+2011,65,North West,Delhi,0,True
+2011,66,Shahdara,Delhi,0,True
+2011,67,South,Delhi,0,True
+2011,68,South East,Delhi,0,True
+2011,69,South West,Delhi,0,True
+2011,70,West,Delhi,0,True
+2011,103,Ambala,Haryana,5774,True
+2011,104,Bhiwani,Haryana,322,True
+2011,105,Faridabad,Haryana,0,True
+2011,106,Fatehabad,Haryana,71181,True
+2011,107,Gurgaon,Haryana,0,True
+2011,108,Hisar,Haryana,6440,True
+2011,109,Jhajjar,Haryana,0,True
+2011,110,Jind,Haryana,22325,True
+2011,111,Kaithal,Haryana,44520,True
+2011,112,Karnal,Haryana,43941,True
+2011,113,Kurukshetra,Haryana,24364,True
+2011,114,Mahendragarh,Haryana,0,True
+2011,115,Mewat,Haryana,0,True
+2011,116,Palwal,Haryana,6547,True
+2011,117,Panchkula,Haryana,0,True
+2011,118,Panipat,Haryana,6182,True
+2011,119,Rewari,Haryana,0,True
+2011,120,Rohtak,Haryana,0,True
+2011,121,Sirsa,Haryana,37093,True
+2011,122,Sonipat,Haryana,2919,True
+2011,123,Yamunanagar,Haryana,21,True
+2011,260,Amritsar,Punjab,39476,True
+2011,261,Barnala,Punjab,115014,True
+2011,262,Bathinda,Punjab,57636,True
+2011,263,Faridkot,Punjab,46924,True
+2011,264,Fatehgarh Sahib,Punjab,64591,True
+2011,265,Fazilka,Punjab,103852,True
+2011,266,Firozpur,Punjab,46924,True
+2011,267,Gurdaspur,Punjab,12278,True
+2011,268,Hoshiarpur,Punjab,12493,True
+2011,269,Jalandhar,Punjab,65170,True
+2011,270,Kapurthala,Punjab,68412,True
+2011,271,Ludhiana,Punjab,163699,True
+2011,272,Mansa,Punjab,69828,True
+2011,273,Moga,Punjab,161445,True
+2011,274,Muktsar,Punjab,50981,True
+2011,275,Pathankot,Punjab,0,True
+2011,276,Patiala,Punjab,191755,True
+2011,277,Rupnagar,Punjab,3842,True
+2011,278,Sahibzada Ajit Singh Nagar,Punjab,4164,True
+2011,279,Sangrur,Punjab,307177,True
+2011,280,Shahid Bhagat Singh Nagar,Punjab,10389,True
+2011,281,Tarn Taran,Punjab,48921,True
+2012,38,Chandigarh,Chandigarh,0,True
+2012,60,Central,Delhi,0,True
+2012,61,East,Delhi,0,True
+2012,62,New Delhi,Delhi,0,True
+2012,63,North,Delhi,0,True
+2012,64,North East,Delhi,0,True
+2012,65,North West,Delhi,0,True
+2012,66,Shahdara,Delhi,0,True
+2012,67,South,Delhi,0,True
+2012,68,South East,Delhi,0,True
+2012,69,South West,Delhi,0,True
+2012,70,West,Delhi,0,True
+2012,103,Ambala,Haryana,7535,True
+2012,104,Bhiwani,Haryana,0,True
+2012,105,Faridabad,Haryana,1181,True
+2012,106,Fatehabad,Haryana,70236,True
+2012,107,Gurgaon,Haryana,0,True
+2012,108,Hisar,Haryana,3392,True
+2012,109,Jhajjar,Haryana,0,True
+2012,110,Jind,Haryana,22818,True
+2012,111,Kaithal,Haryana,44799,True
+2012,112,Karnal,Haryana,41923,True
+2012,113,Kurukshetra,Haryana,25781,True
+2012,114,Mahendragarh,Haryana,0,True
+2012,115,Mewat,Haryana,0,True
+2012,116,Palwal,Haryana,9703,True
+2012,117,Panchkula,Haryana,0,True
+2012,118,Panipat,Haryana,6053,True
+2012,119,Rewari,Haryana,0,True
+2012,120,Rohtak,Haryana,0,True
+2012,121,Sirsa,Haryana,32049,True
+2012,122,Sonipat,Haryana,2597,True
+2012,123,Yamunanagar,Haryana,0,True
+2012,260,Amritsar,Punjab,34539,True
+2012,261,Barnala,Punjab,105741,True
+2012,262,Bathinda,Punjab,84876,True
+2012,263,Faridkot,Punjab,59053,True
+2012,264,Fatehgarh Sahib,Punjab,52205,True
+2012,265,Fazilka,Punjab,82472,True
+2012,266,Firozpur,Punjab,63560,True
+2012,267,Gurdaspur,Punjab,4744,True
+2012,268,Hoshiarpur,Punjab,7255,True
+2012,269,Jalandhar,Punjab,30718,True
+2012,270,Kapurthala,Punjab,39733,True
+2012,271,Ludhiana,Punjab,195983,True
+2012,272,Mansa,Punjab,75109,True
+2012,273,Moga,Punjab,174775,True
+2012,274,Muktsar,Punjab,45486,True
+2012,275,Pathankot,Punjab,0,True
+2012,276,Patiala,Punjab,175333,True
+2012,277,Rupnagar,Punjab,2791,True
+2012,278,Sahibzada Ajit Singh Nagar,Punjab,408,True
+2012,279,Sangrur,Punjab,303227,True
+2012,280,Shahid Bhagat Singh Nagar,Punjab,5753,True
+2012,281,Tarn Taran,Punjab,29923,True
+2013,38,Chandigarh,Chandigarh,0,True
+2013,60,Central,Delhi,0,True
+2013,61,East,Delhi,0,True
+2013,62,New Delhi,Delhi,0,True
+2013,63,North,Delhi,0,True
+2013,64,North East,Delhi,0,True
+2013,65,North West,Delhi,0,True
+2013,66,Shahdara,Delhi,0,True
+2013,67,South,Delhi,0,True
+2013,68,South East,Delhi,0,True
+2013,69,South West,Delhi,0,True
+2013,70,West,Delhi,0,True
+2013,103,Ambala,Haryana,14082,True
+2013,104,Bhiwani,Haryana,43,True
+2013,105,Faridabad,Haryana,0,True
+2013,106,Fatehabad,Haryana,65535,True
+2013,107,Gurgaon,Haryana,0,True
+2013,108,Hisar,Haryana,3134,True
+2013,109,Jhajjar,Haryana,0,True
+2013,110,Jind,Haryana,19598,True
+2013,111,Kaithal,Haryana,63968,True
+2013,112,Karnal,Haryana,57872,True
+2013,113,Kurukshetra,Haryana,49414,True
+2013,114,Mahendragarh,Haryana,0,True
+2013,115,Mewat,Haryana,0,True
+2013,116,Palwal,Haryana,9273,True
+2013,117,Panchkula,Haryana,64,True
+2013,118,Panipat,Haryana,8200,True
+2013,119,Rewari,Haryana,301,True
+2013,120,Rohtak,Haryana,859,True
+2013,121,Sirsa,Haryana,26553,True
+2013,122,Sonipat,Haryana,1717,True
+2013,123,Yamunanagar,Haryana,472,True
+2013,260,Amritsar,Punjab,14769,True
+2013,261,Barnala,Punjab,95652,True
+2013,262,Bathinda,Punjab,54738,True
+2013,263,Faridkot,Punjab,40077,True
+2013,264,Fatehgarh Sahib,Punjab,44005,True
+2013,265,Fazilka,Punjab,78909,True
+2013,266,Firozpur,Punjab,90200,True
+2013,267,Gurdaspur,Punjab,12579,True
+2013,268,Hoshiarpur,Punjab,6891,True
+2013,269,Jalandhar,Punjab,59160,True
+2013,270,Kapurthala,Punjab,59954,True
+2013,271,Ludhiana,Punjab,139378,True
+2013,272,Mansa,Punjab,55275,True
+2013,273,Moga,Punjab,152257,True
+2013,274,Muktsar,Punjab,31576,True
+2013,275,Pathankot,Punjab,43,True
+2013,276,Patiala,Punjab,178210,True
+2013,277,Rupnagar,Punjab,4207,True
+2013,278,Sahibzada Ajit Singh Nagar,Punjab,3799,True
+2013,279,Sangrur,Punjab,230350,True
+2013,280,Shahid Bhagat Singh Nagar,Punjab,6912,True
+2013,281,Tarn Taran,Punjab,18182,True
+2014,38,Chandigarh,Chandigarh,0,True
+2014,60,Central,Delhi,0,True
+2014,61,East,Delhi,0,True
+2014,62,New Delhi,Delhi,0,True
+2014,63,North,Delhi,0,True
+2014,64,North East,Delhi,0,True
+2014,65,North West,Delhi,0,True
+2014,66,Shahdara,Delhi,0,True
+2014,67,South,Delhi,0,True
+2014,68,South East,Delhi,0,True
+2014,69,South West,Delhi,0,True
+2014,70,West,Delhi,0,True
+2014,103,Ambala,Haryana,2919,True
+2014,104,Bhiwani,Haryana,0,True
+2014,105,Faridabad,Haryana,0,True
+2014,106,Fatehabad,Haryana,95802,True
+2014,107,Gurgaon,Haryana,0,True
+2014,108,Hisar,Haryana,966,True
+2014,109,Jhajjar,Haryana,129,True
+2014,110,Jind,Haryana,26017,True
+2014,111,Kaithal,Haryana,60426,True
+2014,112,Karnal,Haryana,70859,True
+2014,113,Kurukshetra,Haryana,19148,True
+2014,114,Mahendragarh,Haryana,0,True
+2014,115,Mewat,Haryana,0,True
+2014,116,Palwal,Haryana,3907,True
+2014,117,Panchkula,Haryana,0,True
+2014,118,Panipat,Haryana,1030,True
+2014,119,Rewari,Haryana,0,True
+2014,120,Rohtak,Haryana,0,True
+2014,121,Sirsa,Haryana,75173,True
+2014,122,Sonipat,Haryana,0,True
+2014,123,Yamunanagar,Haryana,1224,True
+2014,260,Amritsar,Punjab,26017,True
+2014,261,Barnala,Punjab,115400,True
+2014,262,Bathinda,Punjab,88160,True
+2014,263,Faridkot,Punjab,73649,True
+2014,264,Fatehgarh Sahib,Punjab,49951,True
+2014,265,Fazilka,Punjab,134591,True
+2014,266,Firozpur,Punjab,83438,True
+2014,267,Gurdaspur,Punjab,9016,True
+2014,268,Hoshiarpur,Punjab,7728,True
+2014,269,Jalandhar,Punjab,42438,True
+2014,270,Kapurthala,Punjab,40935,True
+2014,271,Ludhiana,Punjab,194180,True
+2014,272,Mansa,Punjab,81678,True
+2014,273,Moga,Punjab,161273,True
+2014,274,Muktsar,Punjab,131500,True
+2014,275,Pathankot,Punjab,43,True
+2014,276,Patiala,Punjab,177501,True
+2014,277,Rupnagar,Punjab,2876,True
+2014,278,Sahibzada Ajit Singh Nagar,Punjab,859,True
+2014,279,Sangrur,Punjab,288823,True
+2014,280,Shahid Bhagat Singh Nagar,Punjab,8136,True
+2014,281,Tarn Taran,Punjab,50209,True
+2015,38,Chandigarh,Chandigarh,0,True
+2015,60,Central,Delhi,0,True
+2015,61,East,Delhi,0,True
+2015,62,New Delhi,Delhi,0,True
+2015,63,North,Delhi,0,True
+2015,64,North East,Delhi,0,True
+2015,65,North West,Delhi,0,True
+2015,66,Shahdara,Delhi,0,True
+2015,67,South,Delhi,0,True
+2015,68,South East,Delhi,0,True
+2015,69,South West,Delhi,0,True
+2015,70,West,Delhi,0,True
+2015,103,Ambala,Haryana,1395,True
+2015,104,Bhiwani,Haryana,0,True
+2015,105,Faridabad,Haryana,0,True
+2015,106,Fatehabad,Haryana,115744,True
+2015,107,Gurgaon,Haryana,0,True
+2015,108,Hisar,Haryana,3306,True
+2015,109,Jhajjar,Haryana,0,True
+2015,110,Jind,Haryana,25781,True
+2015,111,Kaithal,Haryana,41086,True
+2015,112,Karnal,Haryana,33980,True
+2015,113,Kurukshetra,Haryana,18525,True
+2015,114,Mahendragarh,Haryana,0,True
+2015,115,Mewat,Haryana,0,True
+2015,116,Palwal,Haryana,5817,True
+2015,117,Panchkula,Haryana,0,True
+2015,118,Panipat,Haryana,3542,True
+2015,119,Rewari,Haryana,0,True
+2015,120,Rohtak,Haryana,43,True
+2015,121,Sirsa,Haryana,110356,True
+2015,122,Sonipat,Haryana,1567,True
+2015,123,Yamunanagar,Haryana,172,True
+2015,260,Amritsar,Punjab,35247,True
+2015,261,Barnala,Punjab,90951,True
+2015,262,Bathinda,Punjab,135643,True
+2015,263,Faridkot,Punjab,99967,True
+2015,264,Fatehgarh Sahib,Punjab,38982,True
+2015,265,Fazilka,Punjab,136652,True
+2015,266,Firozpur,Punjab,116023,True
+2015,267,Gurdaspur,Punjab,12343,True
+2015,268,Hoshiarpur,Punjab,4164,True
+2015,269,Jalandhar,Punjab,35805,True
+2015,270,Kapurthala,Punjab,36771,True
+2015,271,Ludhiana,Punjab,171534,True
+2015,272,Mansa,Punjab,129954,True
+2015,273,Moga,Punjab,151914,True
+2015,274,Muktsar,Punjab,118470,True
+2015,275,Pathankot,Punjab,193,True
+2015,276,Patiala,Punjab,122914,True
+2015,277,Rupnagar,Punjab,2726,True
+2015,278,Sahibzada Ajit Singh Nagar,Punjab,1395,True
+2015,279,Sangrur,Punjab,246085,True
+2015,280,Shahid Bhagat Singh Nagar,Punjab,7878,True
+2015,281,Tarn Taran,Punjab,106943,True
+2016,38,Chandigarh,Chandigarh,0,True
+2016,60,Central,Delhi,0,True
+2016,61,East,Delhi,0,True
+2016,62,New Delhi,Delhi,0,True
+2016,63,North,Delhi,0,True
+2016,64,North East,Delhi,0,True
+2016,65,North West,Delhi,0,True
+2016,66,Shahdara,Delhi,0,True
+2016,67,South,Delhi,0,True
+2016,68,South East,Delhi,0,True
+2016,69,South West,Delhi,0,True
+2016,70,West,Delhi,0,True
+2016,103,Ambala,Haryana,4680,True
+2016,104,Bhiwani,Haryana,3113,True
+2016,105,Faridabad,Haryana,21,True
+2016,106,Fatehabad,Haryana,106921,True
+2016,107,Gurgaon,Haryana,0,True
+2016,108,Hisar,Haryana,12751,True
+2016,109,Jhajjar,Haryana,0,True
+2016,110,Jind,Haryana,13352,True
+2016,111,Kaithal,Haryana,52420,True
+2016,112,Karnal,Haryana,51454,True
+2016,113,Kurukshetra,Haryana,31877,True
+2016,114,Mahendragarh,Haryana,0,True
+2016,115,Mewat,Haryana,0,True
+2016,116,Palwal,Haryana,5366,True
+2016,117,Panchkula,Haryana,322,True
+2016,118,Panipat,Haryana,1395,True
+2016,119,Rewari,Haryana,0,True
+2016,120,Rohtak,Haryana,1159,True
+2016,121,Sirsa,Haryana,73843,True
+2016,122,Sonipat,Haryana,3692,True
+2016,123,Yamunanagar,Haryana,2683,True
+2016,260,Amritsar,Punjab,46753,True
+2016,261,Barnala,Punjab,120187,True
+2016,262,Bathinda,Punjab,147964,True
+2016,263,Faridkot,Punjab,99194,True
+2016,264,Fatehgarh Sahib,Punjab,40828,True
+2016,265,Fazilka,Punjab,122549,True
+2016,266,Firozpur,Punjab,108875,True
+2016,267,Gurdaspur,Punjab,9574,True
+2016,268,Hoshiarpur,Punjab,6289,True
+2016,269,Jalandhar,Punjab,60019,True
+2016,270,Kapurthala,Punjab,52184,True
+2016,271,Ludhiana,Punjab,167605,True
+2016,272,Mansa,Punjab,117826,True
+2016,273,Moga,Punjab,178982,True
+2016,274,Muktsar,Punjab,125661,True
+2016,275,Pathankot,Punjab,21,True
+2016,276,Patiala,Punjab,153245,True
+2016,277,Rupnagar,Punjab,2426,True
+2016,278,Sahibzada Ajit Singh Nagar,Punjab,4722,True
+2016,279,Sangrur,Punjab,289832,True
+2016,280,Shahid Bhagat Singh Nagar,Punjab,6397,True
+2016,281,Tarn Taran,Punjab,33229,True
+2017,38,Chandigarh,Chandigarh,0,True
+2017,60,Central,Delhi,0,True
+2017,61,East,Delhi,0,True
+2017,62,New Delhi,Delhi,0,True
+2017,63,North,Delhi,0,True
+2017,64,North East,Delhi,0,True
+2017,65,North West,Delhi,0,True
+2017,66,Shahdara,Delhi,0,True
+2017,67,South,Delhi,0,True
+2017,68,South East,Delhi,0,True
+2017,69,South West,Delhi,0,True
+2017,70,West,Delhi,0,True
+2017,103,Ambala,Haryana,8093,True
+2017,104,Bhiwani,Haryana,0,True
+2017,105,Faridabad,Haryana,0,True
+2017,106,Fatehabad,Haryana,81678,True
+2017,107,Gurgaon,Haryana,0,True
+2017,108,Hisar,Haryana,2190,True
+2017,109,Jhajjar,Haryana,0,True
+2017,110,Jind,Haryana,15799,True
+2017,111,Kaithal,Haryana,53321,True
+2017,112,Karnal,Haryana,45078,True
+2017,113,Kurukshetra,Haryana,36041,True
+2017,114,Mahendragarh,Haryana,0,True
+2017,115,Mewat,Haryana,21,True
+2017,116,Palwal,Haryana,5603,True
+2017,117,Panchkula,Haryana,0,True
+2017,118,Panipat,Haryana,1116,True
+2017,119,Rewari,Haryana,86,True
+2017,120,Rohtak,Haryana,665,True
+2017,121,Sirsa,Haryana,102650,True
+2017,122,Sonipat,Haryana,2683,True
+2017,123,Yamunanagar,Haryana,1095,True
+2017,260,Amritsar,Punjab,24042,True
+2017,261,Barnala,Punjab,49135,True
+2017,262,Bathinda,Punjab,61264,True
+2017,263,Faridkot,Punjab,35161,True
+2017,264,Fatehgarh Sahib,Punjab,49393,True
+2017,265,Fazilka,Punjab,63346,True
+2017,266,Firozpur,Punjab,56605,True
+2017,267,Gurdaspur,Punjab,7492,True
+2017,268,Hoshiarpur,Punjab,5495,True
+2017,269,Jalandhar,Punjab,22861,True
+2017,270,Kapurthala,Punjab,24128,True
+2017,271,Ludhiana,Punjab,81463,True
+2017,272,Mansa,Punjab,77749,True
+2017,273,Moga,Punjab,54695,True
+2017,274,Muktsar,Punjab,41773,True
+2017,275,Pathankot,Punjab,0,True
+2017,276,Patiala,Punjab,134505,True
+2017,277,Rupnagar,Punjab,5560,True
+2017,278,Sahibzada Ajit Singh Nagar,Punjab,1610,True
+2017,279,Sangrur,Punjab,225542,True
+2017,280,Shahid Bhagat Singh Nagar,Punjab,3070,True
+2017,281,Tarn Taran,Punjab,33873,True
+2018,38,Chandigarh,Chandigarh,0,True
+2018,60,Central,Delhi,0,True
+2018,61,East,Delhi,0,True
+2018,62,New Delhi,Delhi,0,True
+2018,63,North,Delhi,0,True
+2018,64,North East,Delhi,0,True
+2018,65,North West,Delhi,0,True
+2018,66,Shahdara,Delhi,0,True
+2018,67,South,Delhi,0,True
+2018,68,South East,Delhi,0,True
+2018,69,South West,Delhi,0,True
+2018,70,West,Delhi,0,True
+2018,103,Ambala,Haryana,1009,True
+2018,104,Bhiwani,Haryana,1438,True
+2018,105,Faridabad,Haryana,0,True
+2018,106,Fatehabad,Haryana,85606,True
+2018,107,Gurgaon,Haryana,0,True
+2018,108,Hisar,Haryana,8758,True
+2018,109,Jhajjar,Haryana,0,True
+2018,110,Jind,Haryana,27841,True
+2018,111,Kaithal,Haryana,59096,True
+2018,112,Karnal,Haryana,29258,True
+2018,113,Kurukshetra,Haryana,21466,True
+2018,114,Mahendragarh,Haryana,0,True
+2018,115,Mewat,Haryana,0,True
+2018,116,Palwal,Haryana,4529,True
+2018,117,Panchkula,Haryana,0,True
+2018,118,Panipat,Haryana,1073,True
+2018,119,Rewari,Haryana,0,True
+2018,120,Rohtak,Haryana,1546,True
+2018,121,Sirsa,Haryana,58280,True
+2018,122,Sonipat,Haryana,1159,True
+2018,123,Yamunanagar,Haryana,773,True
+2018,260,Amritsar,Punjab,17280,True
+2018,261,Barnala,Punjab,106642,True
+2018,262,Bathinda,Punjab,143907,True
+2018,263,Faridkot,Punjab,77878,True
+2018,264,Fatehgarh Sahib,Punjab,25888,True
+2018,265,Fazilka,Punjab,144294,True
+2018,266,Firozpur,Punjab,113297,True
+2018,267,Gurdaspur,Punjab,14962,True
+2018,268,Hoshiarpur,Punjab,3499,True
+2018,269,Jalandhar,Punjab,31641,True
+2018,270,Kapurthala,Punjab,28249,True
+2018,271,Ludhiana,Punjab,117311,True
+2018,272,Mansa,Punjab,98979,True
+2018,273,Moga,Punjab,162411,True
+2018,274,Muktsar,Punjab,124137,True
+2018,275,Pathankot,Punjab,0,True
+2018,276,Patiala,Punjab,166983,True
+2018,277,Rupnagar,Punjab,0,True
+2018,278,Sahibzada Ajit Singh Nagar,Punjab,2426,True
+2018,279,Sangrur,Punjab,278992,True
+2018,280,Shahid Bhagat Singh Nagar,Punjab,1996,True
+2018,281,Tarn Taran,Punjab,32757,True
+2019,38,Chandigarh,Chandigarh,0,True
+2019,60,Central,Delhi,0,True
+2019,61,East,Delhi,0,True
+2019,62,New Delhi,Delhi,0,True
+2019,63,North,Delhi,0,True
+2019,64,North East,Delhi,0,True
+2019,65,North West,Delhi,0,True
+2019,66,Shahdara,Delhi,0,True
+2019,67,South,Delhi,0,True
+2019,68,South East,Delhi,0,True
+2019,69,South West,Delhi,0,True
+2019,70,West,Delhi,0,True
+2019,103,Ambala,Haryana,3907,True
+2019,104,Bhiwani,Haryana,0,True
+2019,105,Faridabad,Haryana,0,True
+2019,106,Fatehabad,Haryana,69764,True
+2019,107,Gurgaon,Haryana,0,True
+2019,108,Hisar,Haryana,4744,True
+2019,109,Jhajjar,Haryana,0,True
+2019,110,Jind,Haryana,39368,True
+2019,111,Kaithal,Haryana,57829,True
+2019,112,Karnal,Haryana,45636,True
+2019,113,Kurukshetra,Haryana,21401,True
+2019,114,Mahendragarh,Haryana,0,True
+2019,115,Mewat,Haryana,0,True
+2019,116,Palwal,Haryana,5882,True
+2019,117,Panchkula,Haryana,0,True
+2019,118,Panipat,Haryana,5173,True
+2019,119,Rewari,Haryana,0,True
+2019,120,Rohtak,Haryana,1095,True
+2019,121,Sirsa,Haryana,21659,True
+2019,122,Sonipat,Haryana,2125,True
+2019,123,Yamunanagar,Haryana,944,True
+2019,260,Amritsar,Punjab,14640,True
+2019,261,Barnala,Punjab,119393,True
+2019,262,Bathinda,Punjab,164622,True
+2019,263,Faridkot,Punjab,65342,True
+2019,264,Fatehgarh Sahib,Punjab,35805,True
+2019,265,Fazilka,Punjab,124223,True
+2019,266,Firozpur,Punjab,111515,True
+2019,267,Gurdaspur,Punjab,22926,True
+2019,268,Hoshiarpur,Punjab,4894,True
+2019,269,Jalandhar,Punjab,42653,True
+2019,270,Kapurthala,Punjab,35848,True
+2019,271,Ludhiana,Punjab,143177,True
+2019,272,Mansa,Punjab,115808,True
+2019,273,Moga,Punjab,149123,True
+2019,274,Muktsar,Punjab,73048,True
+2019,275,Pathankot,Punjab,0,True
+2019,276,Patiala,Punjab,146698,True
+2019,277,Rupnagar,Punjab,21,True
+2019,278,Sahibzada Ajit Singh Nagar,Punjab,2061,True
+2019,279,Sangrur,Punjab,255165,True
+2019,280,Shahid Bhagat Singh Nagar,Punjab,3864,True
+2019,281,Tarn Taran,Punjab,54566,True
+2020,38,Chandigarh,Chandigarh,0,True
+2020,60,Central,Delhi,0,True
+2020,61,East,Delhi,0,True
+2020,62,New Delhi,Delhi,0,True
+2020,63,North,Delhi,0,True
+2020,64,North East,Delhi,0,True
+2020,65,North West,Delhi,0,True
+2020,66,Shahdara,Delhi,0,True
+2020,67,South,Delhi,0,True
+2020,68,South East,Delhi,0,True
+2020,69,South West,Delhi,0,True
+2020,70,West,Delhi,0,True
+2020,103,Ambala,Haryana,5324,True
+2020,104,Bhiwani,Haryana,107,True
+2020,105,Faridabad,Haryana,0,True
+2020,106,Fatehabad,Haryana,50831,True
+2020,107,Gurgaon,Haryana,0,True
+2020,108,Hisar,Haryana,3413,True
+2020,109,Jhajjar,Haryana,0,True
+2020,110,Jind,Haryana,23419,True
+2020,111,Kaithal,Haryana,27584,True
+2020,112,Karnal,Haryana,13996,True
+2020,113,Kurukshetra,Haryana,18225,True
+2020,114,Mahendragarh,Haryana,0,True
+2020,115,Mewat,Haryana,0,True
+2020,116,Palwal,Haryana,1159,True
+2020,117,Panchkula,Haryana,0,True
+2020,118,Panipat,Haryana,3714,True
+2020,119,Rewari,Haryana,0,True
+2020,120,Rohtak,Haryana,4808,True
+2020,121,Sirsa,Haryana,23527,True
+2020,122,Sonipat,Haryana,3220,True
+2020,123,Yamunanagar,Haryana,1696,True
+2020,260,Amritsar,Punjab,71997,True
+2020,261,Barnala,Punjab,121218,True
+2020,262,Bathinda,Punjab,171963,True
+2020,263,Faridkot,Punjab,63947,True
+2020,264,Fatehgarh Sahib,Punjab,45164,True
+2020,265,Fazilka,Punjab,80218,True
+2020,266,Firozpur,Punjab,103272,True
+2020,267,Gurdaspur,Punjab,43383,True
+2020,268,Hoshiarpur,Punjab,7642,True
+2020,269,Jalandhar,Punjab,50466,True
+2020,270,Kapurthala,Punjab,33487,True
+2020,271,Ludhiana,Punjab,153653,True
+2020,272,Mansa,Punjab,117247,True
+2020,273,Moga,Punjab,180657,True
+2020,274,Muktsar,Punjab,81205,True
+2020,275,Pathankot,Punjab,451,True
+2020,276,Patiala,Punjab,152665,True
+2020,277,Rupnagar,Punjab,2683,True
+2020,278,Sahibzada Ajit Singh Nagar,Punjab,1910,True
+2020,279,Sangrur,Punjab,284831,True
+2020,280,Shahid Bhagat Singh Nagar,Punjab,1181,True
+2020,281,Tarn Taran,Punjab,75410,True
+2021,38,Chandigarh,Chandigarh,0,True
+2021,60,Central,Delhi,0,True
+2021,61,East,Delhi,0,True
+2021,62,New Delhi,Delhi,0,True
+2021,63,North,Delhi,0,True
+2021,64,North East,Delhi,0,True
+2021,65,North West,Delhi,0,True
+2021,66,Shahdara,Delhi,0,True
+2021,67,South,Delhi,0,True
+2021,68,South East,Delhi,0,True
+2021,69,South West,Delhi,0,True
+2021,70,West,Delhi,0,True
+2021,103,Ambala,Haryana,5281,True
+2021,104,Bhiwani,Haryana,301,True
+2021,105,Faridabad,Haryana,0,True
+2021,106,Fatehabad,Haryana,84468,True
+2021,107,Gurgaon,Haryana,0,True
+2021,108,Hisar,Haryana,11763,True
+2021,109,Jhajjar,Haryana,0,True
+2021,110,Jind,Haryana,41021,True
+2021,111,Kaithal,Haryana,45572,True
+2021,112,Karnal,Haryana,34045,True
+2021,113,Kurukshetra,Haryana,27047,True
+2021,114,Mahendragarh,Haryana,0,True
+2021,115,Mewat,Haryana,0,True
+2021,116,Palwal,Haryana,4486,True
+2021,117,Panchkula,Haryana,1825,True
+2021,118,Panipat,Haryana,12472,True
+2021,119,Rewari,Haryana,0,True
+2021,120,Rohtak,Haryana,5710,True
+2021,121,Sirsa,Haryana,62874,True
+2021,122,Sonipat,Haryana,10776,True
+2021,123,Yamunanagar,Haryana,1803,True
+2021,260,Amritsar,Punjab,40850,True
+2021,261,Barnala,Punjab,110785,True
+2021,262,Bathinda,Punjab,136480,True
+2021,263,Faridkot,Punjab,54931,True
+2021,264,Fatehgarh Sahib,Punjab,46903,True
+2021,265,Fazilka,Punjab,137854,True
+2021,266,Firozpur,Punjab,77020,True
+2021,267,Gurdaspur,Punjab,13738,True
+2021,268,Hoshiarpur,Punjab,3778,True
+2021,269,Jalandhar,Punjab,77406,True
+2021,270,Kapurthala,Punjab,39368,True
+2021,271,Ludhiana,Punjab,164321,True
+2021,272,Mansa,Punjab,106278,True
+2021,273,Moga,Punjab,165480,True
+2021,274,Muktsar,Punjab,71696,True
+2021,275,Pathankot,Punjab,86,True
+2021,276,Patiala,Punjab,172843,True
+2021,277,Rupnagar,Punjab,2962,True
+2021,278,Sahibzada Ajit Singh Nagar,Punjab,2876,True
+2021,279,Sangrur,Punjab,286805,True
+2021,280,Shahid Bhagat Singh Nagar,Punjab,7213,True
+2021,281,Tarn Taran,Punjab,49414,True
+2022,38,Chandigarh,Chandigarh,0,True
+2022,60,Central,Delhi,0,True
+2022,61,East,Delhi,0,True
+2022,62,New Delhi,Delhi,0,True
+2022,63,North,Delhi,0,True
+2022,64,North East,Delhi,0,True
+2022,65,North West,Delhi,0,True
+2022,66,Shahdara,Delhi,0,True
+2022,67,South,Delhi,0,True
+2022,68,South East,Delhi,0,True
+2022,69,South West,Delhi,0,True
+2022,70,West,Delhi,0,True
+2022,103,Ambala,Haryana,7298,True
+2022,104,Bhiwani,Haryana,0,True
+2022,105,Faridabad,Haryana,0,True
+2022,106,Fatehabad,Haryana,53793,True
+2022,107,Gurgaon,Haryana,0,True
+2022,108,Hisar,Haryana,4014,True
+2022,109,Jhajjar,Haryana,193,True
+2022,110,Jind,Haryana,35741,True
+2022,111,Kaithal,Haryana,56369,True
+2022,112,Karnal,Haryana,15670,True
+2022,113,Kurukshetra,Haryana,29151,True
+2022,114,Mahendragarh,Haryana,0,True
+2022,115,Mewat,Haryana,0,True
+2022,116,Palwal,Haryana,2104,True
+2022,117,Panchkula,Haryana,0,True
+2022,118,Panipat,Haryana,5946,True
+2022,119,Rewari,Haryana,0,True
+2022,120,Rohtak,Haryana,2705,True
+2022,121,Sirsa,Haryana,27433,True
+2022,122,Sonipat,Haryana,11785,True
+2022,123,Yamunanagar,Haryana,258,True
+2022,260,Amritsar,Punjab,25974,True
+2022,261,Barnala,Punjab,116023,True
+2022,262,Bathinda,Punjab,175483,True
+2022,263,Faridkot,Punjab,61886,True
+2022,264,Fatehgarh Sahib,Punjab,23956,True
+2022,265,Fazilka,Punjab,94020,True
+2022,266,Firozpur,Punjab,90736,True
+2022,267,Gurdaspur,Punjab,4680,True
+2022,268,Hoshiarpur,Punjab,3928,True
+2022,269,Jalandhar,Punjab,33744,True
+2022,270,Kapurthala,Punjab,42889,True
+2022,271,Ludhiana,Punjab,121991,True
+2022,272,Mansa,Punjab,148587,True
+2022,273,Moga,Punjab,156593,True
+2022,274,Muktsar,Punjab,99623,True
+2022,275,Pathankot,Punjab,0,True
+2022,276,Patiala,Punjab,116688,True
+2022,277,Rupnagar,Punjab,1503,True
+2022,278,Sahibzada Ajit Singh Nagar,Punjab,1309,True
+2022,279,Sangrur,Punjab,265941,True
+2022,280,Shahid Bhagat Singh Nagar,Punjab,4830,True
+2022,281,Tarn Taran,Punjab,62294,True
+2023,38,Chandigarh,Chandigarh,0,False
+2023,60,Central,Delhi,0,False
+2023,61,East,Delhi,0,False
+2023,62,New Delhi,Delhi,0,False
+2023,63,North,Delhi,0,False
+2023,64,North East,Delhi,0,False
+2023,65,North West,Delhi,0,False
+2023,66,Shahdara,Delhi,0,False
+2023,67,South,Delhi,0,False
+2023,68,South East,Delhi,0,False
+2023,69,South West,Delhi,0,False
+2023,70,West,Delhi,0,False
+2023,103,Ambala,Haryana,3735,False
+2023,104,Bhiwani,Haryana,21,False
+2023,105,Faridabad,Haryana,0,False
+2023,106,Fatehabad,Haryana,54459,False
+2023,107,Gurgaon,Haryana,0,False
+2023,108,Hisar,Haryana,451,False
+2023,109,Jhajjar,Haryana,0,False
+2023,110,Jind,Haryana,11441,False
+2023,111,Kaithal,Haryana,4765,False
+2023,112,Karnal,Haryana,86,False
+2023,113,Kurukshetra,Haryana,3907,False
+2023,114,Mahendragarh,Haryana,0,False
+2023,115,Mewat,Haryana,0,False
+2023,116,Palwal,Haryana,794,False
+2023,117,Panchkula,Haryana,0,False
+2023,118,Panipat,Haryana,107,False
+2023,119,Rewari,Haryana,0,False
+2023,120,Rohtak,Haryana,172,False
+2023,121,Sirsa,Haryana,24815,False
+2023,122,Sonipat,Haryana,2876,False
+2023,123,Yamunanagar,Haryana,107,False
+2023,260,Amritsar,Punjab,10132,False
+2023,261,Barnala,Punjab,101254,False
+2023,262,Bathinda,Punjab,143993,False
+2023,263,Faridkot,Punjab,55983,False
+2023,264,Fatehgarh Sahib,Punjab,30868,False
+2023,265,Fazilka,Punjab,100546,False
+2023,266,Firozpur,Punjab,91380,False
+2023,267,Gurdaspur,Punjab,1138,False
+2023,268,Hoshiarpur,Punjab,2340,False
+2023,269,Jalandhar,Punjab,37866,False
+2023,270,Kapurthala,Punjab,35526,False
+2023,271,Ludhiana,Punjab,85971,False
+2023,272,Mansa,Punjab,122098,False
+2023,273,Moga,Punjab,128430,False
+2023,274,Muktsar,Punjab,90328,False
+2023,275,Pathankot,Punjab,0,False
+2023,276,Patiala,Punjab,95180,False
+2023,277,Rupnagar,Punjab,129,False
+2023,278,Sahibzada Ajit Singh Nagar,Punjab,1331,False
+2023,279,Sangrur,Punjab,269740,False
+2023,280,Shahid Bhagat Singh Nagar,Punjab,644,False
+2023,281,Tarn Taran,Punjab,73263,False
+2024,38,Chandigarh,Chandigarh,0,True
+2024,60,Central,Delhi,0,True
+2024,61,East,Delhi,0,True
+2024,62,New Delhi,Delhi,0,True
+2024,63,North,Delhi,0,True
+2024,64,North East,Delhi,0,True
+2024,65,North West,Delhi,0,True
+2024,66,Shahdara,Delhi,0,True
+2024,67,South,Delhi,0,True
+2024,68,South East,Delhi,0,True
+2024,69,South West,Delhi,0,True
+2024,70,West,Delhi,0,True
+2024,103,Ambala,Haryana,0,True
+2024,104,Bhiwani,Haryana,386,True
+2024,105,Faridabad,Haryana,0,True
+2024,106,Fatehabad,Haryana,8114,True
+2024,107,Gurgaon,Haryana,0,True
+2024,108,Hisar,Haryana,902,True
+2024,109,Jhajjar,Haryana,0,True
+2024,110,Jind,Haryana,11634,True
+2024,111,Kaithal,Haryana,2791,True
+2024,112,Karnal,Haryana,1567,True
+2024,113,Kurukshetra,Haryana,0,True
+2024,114,Mahendragarh,Haryana,0,True
+2024,115,Mewat,Haryana,0,True
+2024,116,Palwal,Haryana,43,True
+2024,117,Panchkula,Haryana,0,True
+2024,118,Panipat,Haryana,3456,True
+2024,119,Rewari,Haryana,0,True
+2024,120,Rohtak,Haryana,0,True
+2024,121,Sirsa,Haryana,8264,True
+2024,122,Sonipat,Haryana,2039,True
+2024,123,Yamunanagar,Haryana,0,True
+2024,260,Amritsar,Punjab,7170,True
+2024,261,Barnala,Punjab,48148,True
+2024,262,Bathinda,Punjab,52291,True
+2024,263,Faridkot,Punjab,26145,True
+2024,264,Fatehgarh Sahib,Punjab,1460,True
+2024,265,Fazilka,Punjab,108102,True
+2024,266,Firozpur,Punjab,50380,True
+2024,267,Gurdaspur,Punjab,43,True
+2024,268,Hoshiarpur,Punjab,107,True
+2024,269,Jalandhar,Punjab,129,True
+2024,270,Kapurthala,Punjab,1073,True
+2024,271,Ludhiana,Punjab,1417,True
+2024,272,Mansa,Punjab,41987,True
+2024,273,Moga,Punjab,52441,True
+2024,274,Muktsar,Punjab,65342,True
+2024,275,Pathankot,Punjab,0,True
+2024,276,Patiala,Punjab,9102,True
+2024,277,Rupnagar,Punjab,0,True
+2024,278,Sahibzada Ajit Singh Nagar,Punjab,86,True
+2024,279,Sangrur,Punjab,163827,True
+2024,280,Shahid Bhagat Singh Nagar,Punjab,0,True
+2024,281,Tarn Taran,Punjab,4143,True
+2025,38,Chandigarh,Chandigarh,0,False
+2025,60,Central,Delhi,0,False
+2025,61,East,Delhi,0,False
+2025,62,New Delhi,Delhi,0,False
+2025,63,North,Delhi,0,False
+2025,64,North East,Delhi,0,False
+2025,65,North West,Delhi,0,False
+2025,66,Shahdara,Delhi,0,False
+2025,67,South,Delhi,0,False
+2025,68,South East,Delhi,0,False
+2025,69,South West,Delhi,0,False
+2025,70,West,Delhi,0,False
+2025,103,Ambala,Haryana,0,False
+2025,104,Bhiwani,Haryana,944,False
+2025,105,Faridabad,Haryana,0,False
+2025,106,Fatehabad,Haryana,10454,False
+2025,107,Gurgaon,Haryana,0,False
+2025,108,Hisar,Haryana,9574,False
+2025,109,Jhajjar,Haryana,1224,False
+2025,110,Jind,Haryana,22926,False
+2025,111,Kaithal,Haryana,11012,False
+2025,112,Karnal,Haryana,64,False
+2025,113,Kurukshetra,Haryana,0,False
+2025,114,Mahendragarh,Haryana,0,False
+2025,115,Mewat,Haryana,64,False
+2025,116,Palwal,Haryana,215,False
+2025,117,Panchkula,Haryana,0,False
+2025,118,Panipat,Haryana,236,False
+2025,119,Rewari,Haryana,0,False
+2025,120,Rohtak,Haryana,3714,False
+2025,121,Sirsa,Haryana,4830,False
+2025,122,Sonipat,Haryana,4207,False
+2025,123,Yamunanagar,Haryana,0,False
+2025,260,Amritsar,Punjab,10690,False
+2025,261,Barnala,Punjab,47096,False
+2025,262,Bathinda,Punjab,33809,False
+2025,263,Faridkot,Punjab,15284,False
+2025,264,Fatehgarh Sahib,Punjab,708,False
+2025,265,Fazilka,Punjab,55468,False
+2025,266,Firozpur,Punjab,36943,False
+2025,267,Gurdaspur,Punjab,279,False
+2025,268,Hoshiarpur,Punjab,0,False
+2025,269,Jalandhar,Punjab,0,False
+2025,270,Kapurthala,Punjab,537,False
+2025,271,Ludhiana,Punjab,3477,False
+2025,272,Mansa,Punjab,41558,False
+2025,273,Moga,Punjab,40871,False
+2025,274,Muktsar,Punjab,32113,False
+2025,275,Pathankot,Punjab,0,False
+2025,276,Patiala,Punjab,39927,False
+2025,277,Rupnagar,Punjab,0,False
+2025,278,Sahibzada Ajit Singh Nagar,Punjab,0,False
+2025,279,Sangrur,Punjab,149553,False
+2025,280,Shahid Bhagat Singh Nagar,Punjab,215,False
+2025,281,Tarn Taran,Punjab,8393,False

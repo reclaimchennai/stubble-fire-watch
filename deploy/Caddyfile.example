@@ -1,0 +1,29 @@
+fire.example.org {
+	encode zstd gzip {
+		match {
+			header Content-Type text/*
+			header Content-Type application/json*
+			header Content-Type application/geo+json*
+			header Content-Type application/javascript*
+			header Content-Type application/octet-stream*
+			header Content-Type image/svg+xml*
+		}
+	}
+	root * /srv/fire/web
+	file_server
+
+	@html path / /db /db/ *.html
+	header @html Cache-Control "no-cache"
+	@code path /app.js /styles.css /theme.css /db/app.js /db/db.css
+	header @code Cache-Control "public, max-age=300, must-revalidate"
+	@data path /data/*
+	header @data Cache-Control "public, max-age=1800, must-revalidate"
+	@vendor path /vendor/*
+	header @vendor Cache-Control "public, max-age=2592000"
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}

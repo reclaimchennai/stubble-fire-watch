@@ -1,0 +1,3142 @@
+{
+ "failed": [],
+ "events_vs_highlights": [
+  {
+   "file": "49.RiceResidueFireBulletin_18Nov_2018_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "highlights": 111,
+   "event_rows": 0
+  },
+  {
+   "file": "50.RiceResidueFireBulletin_19Nov_2018_ICAR.pdf",
+   "state": "Punjab",
+   "highlights": 759,
+   "event_rows": 752
+  },
+  {
+   "file": "27.RiceResidueFireBulletin_27Oct_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "highlights": 37,
+   "event_rows": 0
+  },
+  {
+   "file": "77.RiceResidueFireBulletin_30Nov_2021_ICAR.pdf",
+   "state": "Punjab",
+   "highlights": 8,
+   "event_rows": 5
+  },
+  {
+   "file": "10.RiceResidueFireBulletin_24Sep_2023_ICAR.pdf",
+   "state": "Rajasthan",
+   "highlights": 1,
+   "event_rows": 0
+  },
+  {
+   "file": "12.RiceResidueFireBulletin_26Sep_2023_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "highlights": 1,
+   "event_rows": 0
+  },
+  {
+   "file": "24.RiceResidueFireBulletin_08Oct_2023_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "highlights": 9,
+   "event_rows": 27
+  },
+  {
+   "file": "54.RiceResidueFireBulletin_07Nov_2023_ICAR.pdf",
+   "state": "Delhi",
+   "highlights": 0,
+   "event_rows": 1
+  },
+  {
+   "file": "19.RiceResidueFireBulletin_03Oct_2024_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "highlights": 7,
+   "event_rows": 2
+  },
+  {
+   "file": "28.RiceResidueFireBulletin_12Oct_2024_ICAR.pdf",
+   "state": "Haryana",
+   "highlights": 98,
+   "event_rows": 99
+  },
+  {
+   "file": "10.RiceResidueFireBulletin_24Sep_2025_ICAR.pdf",
+   "state": "Haryana",
+   "highlights": 1,
+   "event_rows": 0
+  },
+  {
+   "file": "36.RiceResidueFireBulletin_20Oct_2025_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "highlights": 45,
+   "event_rows": 44
+  },
+  {
+   "file": "18.RiceResidueFireBulletin_02Oct_2026_ICAR.pdf",
+   "state": "Rajasthan",
+   "highlights": 0,
+   "event_rows": 2
+  },
+  {
+   "file": "18.RiceResidueFireBulletin_02Oct_2026_ICAR.pdf",
+   "state": "Uttarakhand",
+   "highlights": 2,
+   "event_rows": 0
+  },
+  {
+   "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
+   "state": "Punjab",
+   "highlights": 6,
+   "event_rows": 0
+  },
+  {
+   "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
+   "state": "Haryana",
+   "highlights": 2,
+   "event_rows": 0
+  },
+  {
+   "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "highlights": 10,
+   "event_rows": 0
+  },
+  {
+   "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "highlights": 715,
+   "event_rows": 0
+  },
+  {
+   "file": "18.WheatResidueFireBulletin_18Apr_2022_ICAR.pdf",
+   "state": "Delhi",
+   "highlights": 0,
+   "event_rows": 2
+  }
+ ],
+ "table_total_vs_highlights": [
+  {
+   "file": "43.RiceResidueFireBulletin_27Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "highlights_cum": 143,
+   "table_total": 144
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2023_ICAR.pdf",
+   "state": "Punjab",
+   "highlights_cum": 1734,
+   "table_total": 1794
+  },
+  {
+   "file": "72.RiceResidueFireBulletin_25Nov_2025_ICAR.pdf",
+   "state": "Punjab",
+   "highlights_cum": 5092,
+   "table_total": 5095
+  },
+  {
+   "file": "72.RiceResidueFireBulletin_25Nov_2025_ICAR.pdf",
+   "state": "Haryana",
+   "highlights_cum": 623,
+   "table_total": 631
+  },
+  {
+   "file": "06.RiceResidueFireBulletin_20Sep_2026_ICAR.pdf",
+   "state": "Punjab",
+   "highlights_cum": 14,
+   "table_total": 15
+  },
+  {
+   "file": "46.WheatResidueFireBulletin_16May_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "highlights_cum": 26795,
+   "table_total": 26759
+  },
+  {
+   "file": "12.WheatResidueFireBulletin_12Apr_2026_ICAR.pdf",
+   "state": "Haryana",
+   "highlights_cum": 12,
+   "table_total": 14
+  }
+ ],
+ "table_sum_vs_total": [
+  {
+   "file": "09.RiceResidueFireBulletin_09Oct_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 417,
+   "total_row": 471
+  },
+  {
+   "file": "17.RiceResidueFireBulletin_17Oct_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2017,
+   "sum_rows": 2535,
+   "total_row": 2335
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_09Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 6508,
+   "total_row": 6405
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_10Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 6593,
+   "total_row": 6490
+  },
+  {
+   "file": "42.RiceResidueFireBulletin_11Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 6789,
+   "total_row": 6686
+  },
+  {
+   "file": "43.RiceResidueFireBulletin_12Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 6911,
+   "total_row": 6808
+  },
+  {
+   "file": "45.RiceResidueFireBulletin_14Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 7246,
+   "total_row": 7143
+  },
+  {
+   "file": "46.RiceResidueFireBulletin_15Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 7353,
+   "total_row": 7250
+  },
+  {
+   "file": "47.RiceResidueFireBulletin_16Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 7557,
+   "total_row": 7454
+  },
+  {
+   "file": "48.RiceResidueFireBulletin_17Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 7846,
+   "total_row": 7743
+  },
+  {
+   "file": "49.RiceResidueFireBulletin_18Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 8202,
+   "total_row": 8099
+  },
+  {
+   "file": "50.RiceResidueFireBulletin_19Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 8361,
+   "total_row": 8258
+  },
+  {
+   "file": "52.RiceResidueFireBulletin_21Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 8610,
+   "total_row": 8507
+  },
+  {
+   "file": "53.RiceResidueFireBulletin_22Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 8732,
+   "total_row": 8629
+  },
+  {
+   "file": "54.RiceResidueFireBulletin_23Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50091,
+   "total_row": 50094
+  },
+  {
+   "file": "54.RiceResidueFireBulletin_23Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 8912,
+   "total_row": 8809
+  },
+  {
+   "file": "55.RiceResidueFireBulletin_24Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50384,
+   "total_row": 50387
+  },
+  {
+   "file": "55.RiceResidueFireBulletin_24Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 9064,
+   "total_row": 8961
+  },
+  {
+   "file": "57.RiceResidueFireBulletin_26Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50658,
+   "total_row": 50661
+  },
+  {
+   "file": "57.RiceResidueFireBulletin_26Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 9202,
+   "total_row": 9099
+  },
+  {
+   "file": "58.RiceResidueFireBulletin_27Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50671,
+   "total_row": 50674
+  },
+  {
+   "file": "58.RiceResidueFireBulletin_27Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 9204,
+   "total_row": 9101
+  },
+  {
+   "file": "59.RiceResidueFireBulletin_28Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50675,
+   "total_row": 50678
+  },
+  {
+   "file": "59.RiceResidueFireBulletin_28Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 9253,
+   "total_row": 9150
+  },
+  {
+   "file": "61.RiceResidueFireBulletin_30Nov_2019_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2019,
+   "sum_rows": 50735,
+   "total_row": 50738
+  },
+  {
+   "file": "61.RiceResidueFireBulletin_30Nov_2019_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_rows": 9328,
+   "total_row": 9225
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 8795,
+   "total_row": 8695
+  },
+  {
+   "file": "35.RiceResidueFireBulletin_04Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 8941,
+   "total_row": 8841
+  },
+  {
+   "file": "36.RiceResidueFireBulletin_05Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 9286,
+   "total_row": 9186
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 9608,
+   "total_row": 9508
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_07Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 10429,
+   "total_row": 10329
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_08Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 10861,
+   "total_row": 10761
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_09Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 11469,
+   "total_row": 11369
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_10Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 11953,
+   "total_row": 11853
+  },
+  {
+   "file": "42.RiceResidueFireBulletin_11Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 12669,
+   "total_row": 12569
+  },
+  {
+   "file": "43.RiceResidueFireBulletin_12Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 13303,
+   "total_row": 13203
+  },
+  {
+   "file": "44.RiceResidueFireBulletin_13Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 13692,
+   "total_row": 13592
+  },
+  {
+   "file": "45.RiceResidueFireBulletin_14Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 13863,
+   "total_row": 13763
+  },
+  {
+   "file": "46.RiceResidueFireBulletin_15Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 13970,
+   "total_row": 13870
+  },
+  {
+   "file": "47.RiceResidueFireBulletin_16Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 14288,
+   "total_row": 14188
+  },
+  {
+   "file": "48.RiceResidueFireBulletin_17Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 14587,
+   "total_row": 14487
+  },
+  {
+   "file": "49.RiceResidueFireBulletin_18Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 14899,
+   "total_row": 14799
+  },
+  {
+   "file": "50.RiceResidueFireBulletin_19Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15024,
+   "total_row": 14924
+  },
+  {
+   "file": "51.RiceResidueFireBulletin_20Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15228,
+   "total_row": 15128
+  },
+  {
+   "file": "52.RiceResidueFireBulletin_21Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15343,
+   "total_row": 15243
+  },
+  {
+   "file": "53.RiceResidueFireBulletin_22Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15461,
+   "total_row": 15361
+  },
+  {
+   "file": "54.RiceResidueFireBulletin_23Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15558,
+   "total_row": 15458
+  },
+  {
+   "file": "55.RiceResidueFireBulletin_24Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15594,
+   "total_row": 15494
+  },
+  {
+   "file": "56.RiceResidueFireBulletin_25Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15662,
+   "total_row": 15562
+  },
+  {
+   "file": "57.RiceResidueFireBulletin_26Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15687,
+   "total_row": 15587
+  },
+  {
+   "file": "58.RiceResidueFireBulletin_27Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15721,
+   "total_row": 15621
+  },
+  {
+   "file": "59.RiceResidueFireBulletin_28Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15744,
+   "total_row": 15644
+  },
+  {
+   "file": "60.RiceResidueFireBulletin_29Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15772,
+   "total_row": 15672
+  },
+  {
+   "file": "61.RiceResidueFireBulletin_30Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_rows": 15786,
+   "total_row": 15686
+  },
+  {
+   "file": "05.RiceResidueFireBulletin_19Sep_2021_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_rows": 57,
+   "total_row": 85
+  },
+  {
+   "file": "01.RiceResidueFireBulletin_15Sep_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_rows": 11661,
+   "total_row": 12456
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2021,
+   "sum_rows": 5234,
+   "total_row": 5438
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2022,
+   "sum_rows": 3404,
+   "total_row": 3696
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2020,
+   "sum_rows": 1484,
+   "total_row": 1454
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2021,
+   "sum_rows": 1484,
+   "total_row": 1508
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 811,
+   "total_row": 893
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_rows": 566,
+   "total_row": 586
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2021,
+   "sum_rows": 652,
+   "total_row": 634
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2022,
+   "sum_rows": 207,
+   "total_row": 228
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2020,
+   "sum_rows": 4,
+   "total_row": 6
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2022,
+   "sum_rows": 35,
+   "total_row": 3
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2020,
+   "sum_rows": 361,
+   "total_row": 391
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2021,
+   "sum_rows": 49,
+   "total_row": 45
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2022,
+   "sum_rows": 177,
+   "total_row": 71
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2020,
+   "sum_rows": 743,
+   "total_row": 825
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2021,
+   "sum_rows": 153,
+   "total_row": 165
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2022,
+   "sum_rows": 693,
+   "total_row": 114
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_rows": 13099,
+   "total_row": 13894
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2021,
+   "sum_rows": 5854,
+   "total_row": 6058
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2022,
+   "sum_rows": 4306,
+   "total_row": 4598
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2020,
+   "sum_rows": 1590,
+   "total_row": 1560
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2021,
+   "sum_rows": 1702,
+   "total_row": 1726
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 1028,
+   "total_row": 1110
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_rows": 650,
+   "total_row": 670
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2021,
+   "sum_rows": 660,
+   "total_row": 642
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2022,
+   "sum_rows": 316,
+   "total_row": 337
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2020,
+   "sum_rows": 5,
+   "total_row": 7
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2022,
+   "sum_rows": 35,
+   "total_row": 3
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2020,
+   "sum_rows": 384,
+   "total_row": 414
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2021,
+   "sum_rows": 56,
+   "total_row": 52
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2022,
+   "sum_rows": 197,
+   "total_row": 91
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2020,
+   "sum_rows": 947,
+   "total_row": 1029
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2021,
+   "sum_rows": 185,
+   "total_row": 197
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2022,
+   "sum_rows": 763,
+   "total_row": 184
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_rows": 14010,
+   "total_row": 14805
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2021,
+   "sum_rows": 5854,
+   "total_row": 6058
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2022,
+   "sum_rows": 5325,
+   "total_row": 5617
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2020,
+   "sum_rows": 1647,
+   "total_row": 1617
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2021,
+   "sum_rows": 1740,
+   "total_row": 1764
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 1278,
+   "total_row": 1360
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_rows": 713,
+   "total_row": 733
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2021,
+   "sum_rows": 671,
+   "total_row": 653
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2022,
+   "sum_rows": 531,
+   "total_row": 552
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2020,
+   "sum_rows": 5,
+   "total_row": 7
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2022,
+   "sum_rows": 37,
+   "total_row": 5
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2020,
+   "sum_rows": 404,
+   "total_row": 434
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2021,
+   "sum_rows": 60,
+   "total_row": 56
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2022,
+   "sum_rows": 204,
+   "total_row": 98
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2020,
+   "sum_rows": 1097,
+   "total_row": 1179
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2021,
+   "sum_rows": 219,
+   "total_row": 231
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2022,
+   "sum_rows": 789,
+   "total_row": 210
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_rows": 15426,
+   "total_row": 16221
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2021,
+   "sum_rows": 5930,
+   "total_row": 6134
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2022,
+   "sum_rows": 5506,
+   "total_row": 5798
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2020,
+   "sum_rows": 1802,
+   "total_row": 1772
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2021,
+   "sum_rows": 1811,
+   "total_row": 1835
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 1290,
+   "total_row": 1372
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_rows": 763,
+   "total_row": 783
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2021,
+   "sum_rows": 689,
+   "total_row": 671
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2022,
+   "sum_rows": 540,
+   "total_row": 561
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2020,
+   "sum_rows": 6,
+   "total_row": 8
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Delhi",
+   "year": 2022,
+   "sum_rows": 37,
+   "total_row": 5
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2020,
+   "sum_rows": 422,
+   "total_row": 452
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2021,
+   "sum_rows": 62,
+   "total_row": 58
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2022,
+   "sum_rows": 208,
+   "total_row": 102
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2020,
+   "sum_rows": 1241,
+   "total_row": 1323
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2021,
+   "sum_rows": 279,
+   "total_row": 291
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2022_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2022,
+   "sum_rows": 789,
+   "total_row": 210
+  },
+  {
+   "file": "04.RiceResidueFireBulletin_18Sep_2025_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2025,
+   "sum_rows": 46,
+   "total_row": 47
+  },
+  {
+   "file": "05.RiceResidueFireBulletin_19Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "06.RiceResidueFireBulletin_20Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "07.RiceResidueFireBulletin_21Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "08.RiceResidueFireBulletin_22Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "09.RiceResidueFireBulletin_23Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "10.RiceResidueFireBulletin_24Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "11.RiceResidueFireBulletin_25Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "12.RiceResidueFireBulletin_26Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "13.RiceResidueFireBulletin_27Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "14.RiceResidueFireBulletin_28Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "15.RiceResidueFireBulletin_29Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "16.RiceResidueFireBulletin_30Sep_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "17.RiceResidueFireBulletin_01Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "18.RiceResidueFireBulletin_02Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "19.RiceResidueFireBulletin_03Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "20.RiceResidueFireBulletin_04Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2,
+   "total_row": 3
+  },
+  {
+   "file": "21.RiceResidueFireBulletin_05Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 7,
+   "total_row": 8
+  },
+  {
+   "file": "22.RiceResidueFireBulletin_06Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 7,
+   "total_row": 8
+  },
+  {
+   "file": "23.RiceResidueFireBulletin_07Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 7,
+   "total_row": 8
+  },
+  {
+   "file": "24.RiceResidueFireBulletin_08Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 8,
+   "total_row": 9
+  },
+  {
+   "file": "25.RiceResidueFireBulletin_09Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 9,
+   "total_row": 10
+  },
+  {
+   "file": "26.RiceResidueFireBulletin_10Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 18,
+   "total_row": 19
+  },
+  {
+   "file": "27.RiceResidueFireBulletin_11Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 19,
+   "total_row": 20
+  },
+  {
+   "file": "28.RiceResidueFireBulletin_12Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 19,
+   "total_row": 20
+  },
+  {
+   "file": "29.RiceResidueFireBulletin_13Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 27,
+   "total_row": 28
+  },
+  {
+   "file": "30.RiceResidueFireBulletin_14Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 44,
+   "total_row": 45
+  },
+  {
+   "file": "31.RiceResidueFireBulletin_15Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 74,
+   "total_row": 75
+  },
+  {
+   "file": "32.RiceResidueFireBulletin_16Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 95,
+   "total_row": 96
+  },
+  {
+   "file": "33.RiceResidueFireBulletin_17Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 110,
+   "total_row": 111
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_18Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 149,
+   "total_row": 150
+  },
+  {
+   "file": "35.RiceResidueFireBulletin_19Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 173,
+   "total_row": 174
+  },
+  {
+   "file": "36.RiceResidueFireBulletin_20Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 211,
+   "total_row": 212
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_21Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 252,
+   "total_row": 253
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_22Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 291,
+   "total_row": 292
+  },
+  {
+   "file": "39.RiceResidueFireBulletin_23Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 334,
+   "total_row": 335
+  },
+  {
+   "file": "40.RiceResidueFireBulletin_24Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 357,
+   "total_row": 358
+  },
+  {
+   "file": "41.RiceResidueFireBulletin_25Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 472,
+   "total_row": 473
+  },
+  {
+   "file": "42.RiceResidueFireBulletin_26Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 508,
+   "total_row": 509
+  },
+  {
+   "file": "43.RiceResidueFireBulletin_27Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 537,
+   "total_row": 538
+  },
+  {
+   "file": "44.RiceResidueFireBulletin_28Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 543,
+   "total_row": 544
+  },
+  {
+   "file": "45.RiceResidueFireBulletin_29Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 579,
+   "total_row": 580
+  },
+  {
+   "file": "46.RiceResidueFireBulletin_30Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 615,
+   "total_row": 616
+  },
+  {
+   "file": "47.RiceResidueFireBulletin_31Oct_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 640,
+   "total_row": 641
+  },
+  {
+   "file": "48.RiceResidueFireBulletin_01Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 684,
+   "total_row": 685
+  },
+  {
+   "file": "49.RiceResidueFireBulletin_02Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 718,
+   "total_row": 719
+  },
+  {
+   "file": "50.RiceResidueFireBulletin_03Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 777,
+   "total_row": 778
+  },
+  {
+   "file": "51.RiceResidueFireBulletin_04Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 811,
+   "total_row": 812
+  },
+  {
+   "file": "52.RiceResidueFireBulletin_05Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 881,
+   "total_row": 882
+  },
+  {
+   "file": "53.RiceResidueFireBulletin_06Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 964,
+   "total_row": 965
+  },
+  {
+   "file": "54.RiceResidueFireBulletin_07Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1013,
+   "total_row": 1014
+  },
+  {
+   "file": "55.RiceResidueFireBulletin_08Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1133,
+   "total_row": 1134
+  },
+  {
+   "file": "56.RiceResidueFireBulletin_09Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1274,
+   "total_row": 1275
+  },
+  {
+   "file": "57.RiceResidueFireBulletin_10Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1384,
+   "total_row": 1385
+  },
+  {
+   "file": "58.RiceResidueFireBulletin_11Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1576,
+   "total_row": 1577
+  },
+  {
+   "file": "59.RiceResidueFireBulletin_12Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1735,
+   "total_row": 1736
+  },
+  {
+   "file": "60.RiceResidueFireBulletin_13Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 1855,
+   "total_row": 1856
+  },
+  {
+   "file": "61.RiceResidueFireBulletin_14Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2014,
+   "total_row": 2015
+  },
+  {
+   "file": "62.RiceResidueFireBulletin_15Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2139,
+   "total_row": 2140
+  },
+  {
+   "file": "63.RiceResidueFireBulletin_16Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2346,
+   "total_row": 2347
+  },
+  {
+   "file": "64.RiceResidueFireBulletin_17Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2449,
+   "total_row": 2450
+  },
+  {
+   "file": "65.RiceResidueFireBulletin_18Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2514,
+   "total_row": 2515
+  },
+  {
+   "file": "66.RiceResidueFireBulletin_19Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2604,
+   "total_row": 2605
+  },
+  {
+   "file": "67.RiceResidueFireBulletin_20Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2662,
+   "total_row": 2663
+  },
+  {
+   "file": "68.RiceResidueFireBulletin_21Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2744,
+   "total_row": 2745
+  },
+  {
+   "file": "69.RiceResidueFireBulletin_22Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2782,
+   "total_row": 2783
+  },
+  {
+   "file": "70.RiceResidueFireBulletin_23Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2803,
+   "total_row": 2804
+  },
+  {
+   "file": "71.RiceResidueFireBulletin_24Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2840,
+   "total_row": 2841
+  },
+  {
+   "file": "72.RiceResidueFireBulletin_25Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2852,
+   "total_row": 2853
+  },
+  {
+   "file": "73.RiceResidueFireBulletin_26Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2866,
+   "total_row": 2867
+  },
+  {
+   "file": "74.RiceResidueFireBulletin_27Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2882,
+   "total_row": 2883
+  },
+  {
+   "file": "75.RiceResidueFireBulletin_28Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2882,
+   "total_row": 2883
+  },
+  {
+   "file": "76.RiceResidueFireBulletin_29Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2887,
+   "total_row": 2888
+  },
+  {
+   "file": "77.RiceResidueFireBulletin_30Nov_2025_ICAR.pdf",
+   "state": "Rajasthan",
+   "year": 2025,
+   "sum_rows": 2889,
+   "total_row": 2890
+  },
+  {
+   "file": "24.WheatResidueFireBulletin_24Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 129,
+   "total_row": 130
+  },
+  {
+   "file": "25.WheatResidueFireBulletin_25Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 161,
+   "total_row": 162
+  },
+  {
+   "file": "26.WheatResidueFireBulletin_26Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 177,
+   "total_row": 178
+  },
+  {
+   "file": "27.WheatResidueFireBulletin_27Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 246,
+   "total_row": 247
+  },
+  {
+   "file": "28.WheatResidueFireBulletin_28Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 255,
+   "total_row": 256
+  },
+  {
+   "file": "29.WheatResidueFireBulletin_29Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 256,
+   "total_row": 257
+  },
+  {
+   "file": "30.WheatResidueFireBulletin_30Apr_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 262,
+   "total_row": 263
+  },
+  {
+   "file": "31.WheatResidueFireBulletin_01May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 262,
+   "total_row": 263
+  },
+  {
+   "file": "32.WheatResidueFireBulletin_02May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 300,
+   "total_row": 301
+  },
+  {
+   "file": "33.WheatResidueFireBulletin_03May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 312,
+   "total_row": 313
+  },
+  {
+   "file": "34.WheatResidueFireBulletin_04May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 406,
+   "total_row": 407
+  },
+  {
+   "file": "36.WheatResidueFireBulletin_06May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 998,
+   "total_row": 999
+  },
+  {
+   "file": "37.WheatResidueFireBulletin_07May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1192,
+   "total_row": 1193
+  },
+  {
+   "file": "38.WheatResidueFireBulletin_08May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1325,
+   "total_row": 1326
+  },
+  {
+   "file": "39.WheatResidueFireBulletin_09May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1359,
+   "total_row": 1360
+  },
+  {
+   "file": "40.WheatResidueFireBulletin_10May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1483,
+   "total_row": 1484
+  },
+  {
+   "file": "41.WheatResidueFireBulletin_11May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1669,
+   "total_row": 1670
+  },
+  {
+   "file": "42.WheatResidueFireBulletin_12May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1732,
+   "total_row": 1733
+  },
+  {
+   "file": "45.WheatResidueFireBulletin_15May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1822,
+   "total_row": 1823
+  },
+  {
+   "file": "46.WheatResidueFireBulletin_16May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1843,
+   "total_row": 1844
+  },
+  {
+   "file": "47.WheatResidueFireBulletin_17May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1866,
+   "total_row": 1867
+  },
+  {
+   "file": "48.WheatResidueFireBulletin_18May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1875,
+   "total_row": 1876
+  },
+  {
+   "file": "49.WheatResidueFireBulletin_19May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1883,
+   "total_row": 1884
+  },
+  {
+   "file": "50.WheatResidueFireBulletin_20May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1885,
+   "total_row": 1886
+  },
+  {
+   "file": "51.WheatResidueFireBulletin_21May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1889,
+   "total_row": 1890
+  },
+  {
+   "file": "52.WheatResidueFireBulletin_22May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1891,
+   "total_row": 1892
+  },
+  {
+   "file": "53.WheatResidueFireBulletin_23May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1893,
+   "total_row": 1894
+  },
+  {
+   "file": "54.WheatResidueFireBulletin_24May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1893,
+   "total_row": 1894
+  },
+  {
+   "file": "55.WheatResidueFireBulletin_25May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1893,
+   "total_row": 1894
+  },
+  {
+   "file": "56.WheatResidueFireBulletin_26May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1893,
+   "total_row": 1894
+  },
+  {
+   "file": "57.WheatResidueFireBulletin_27May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1894,
+   "total_row": 1895
+  },
+  {
+   "file": "58.WheatResidueFireBulletin_28May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1897,
+   "total_row": 1898
+  },
+  {
+   "file": "59.WheatResidueFireBulletin_29May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1897,
+   "total_row": 1898
+  },
+  {
+   "file": "60.WheatResidueFireBulletin_30May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1899,
+   "total_row": 1900
+  },
+  {
+   "file": "61.WheatResidueFireBulletin_31May_2023_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1899,
+   "total_row": 1900
+  },
+  {
+   "file": "03.WheatResidueFireBulletin_03Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 0,
+   "total_row": 1
+  },
+  {
+   "file": "06.WheatResidueFireBulletin_06Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1,
+   "total_row": 2
+  },
+  {
+   "file": "07.WheatResidueFireBulletin_07Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 3,
+   "total_row": 4
+  },
+  {
+   "file": "08.WheatResidueFireBulletin_08Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 6,
+   "total_row": 9
+  },
+  {
+   "file": "09.WheatResidueFireBulletin_09Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 11,
+   "total_row": 14
+  },
+  {
+   "file": "10.WheatResidueFireBulletin_10Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 15,
+   "total_row": 18
+  },
+  {
+   "file": "11.WheatResidueFireBulletin_11Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 18,
+   "total_row": 19
+  },
+  {
+   "file": "11.WheatResidueFireBulletin_11Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 16,
+   "total_row": 19
+  },
+  {
+   "file": "14.WheatResidueFireBulletin_14Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 30,
+   "total_row": 31
+  },
+  {
+   "file": "14.WheatResidueFireBulletin_14Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 26,
+   "total_row": 29
+  },
+  {
+   "file": "15.WheatResidueFireBulletin_15Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 37,
+   "total_row": 38
+  },
+  {
+   "file": "15.WheatResidueFireBulletin_15Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 45,
+   "total_row": 48
+  },
+  {
+   "file": "17.WheatResidueFireBulletin_17Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 63,
+   "total_row": 64
+  },
+  {
+   "file": "17.WheatResidueFireBulletin_17Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 65,
+   "total_row": 68
+  },
+  {
+   "file": "19.WheatResidueFireBulletin_19Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 103,
+   "total_row": 104
+  },
+  {
+   "file": "19.WheatResidueFireBulletin_19Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 80,
+   "total_row": 83
+  },
+  {
+   "file": "20.WheatResidueFireBulletin_20Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 117,
+   "total_row": 118
+  },
+  {
+   "file": "20.WheatResidueFireBulletin_20Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 88,
+   "total_row": 91
+  },
+  {
+   "file": "22.WheatResidueFireBulletin_22Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 134,
+   "total_row": 135
+  },
+  {
+   "file": "22.WheatResidueFireBulletin_22Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 105,
+   "total_row": 108
+  },
+  {
+   "file": "23.WheatResidueFireBulletin_23Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 156,
+   "total_row": 157
+  },
+  {
+   "file": "23.WheatResidueFireBulletin_23Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 108,
+   "total_row": 111
+  },
+  {
+   "file": "26.WheatResidueFireBulletin_26Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 439,
+   "total_row": 440
+  },
+  {
+   "file": "26.WheatResidueFireBulletin_26Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 178,
+   "total_row": 181
+  },
+  {
+   "file": "27.WheatResidueFireBulletin_27Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 875,
+   "total_row": 876
+  },
+  {
+   "file": "27.WheatResidueFireBulletin_27Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 247,
+   "total_row": 250
+  },
+  {
+   "file": "28.WheatResidueFireBulletin_28Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 1328,
+   "total_row": 1329
+  },
+  {
+   "file": "28.WheatResidueFireBulletin_28Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 256,
+   "total_row": 259
+  },
+  {
+   "file": "29.WheatResidueFireBulletin_29Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 1673,
+   "total_row": 1674
+  },
+  {
+   "file": "29.WheatResidueFireBulletin_29Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 257,
+   "total_row": 260
+  },
+  {
+   "file": "30.WheatResidueFireBulletin_30Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2032,
+   "total_row": 2033
+  },
+  {
+   "file": "30.WheatResidueFireBulletin_30Apr_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 263,
+   "total_row": 266
+  },
+  {
+   "file": "32.WheatResidueFireBulletin_02May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2250,
+   "total_row": 2251
+  },
+  {
+   "file": "32.WheatResidueFireBulletin_02May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 301,
+   "total_row": 304
+  },
+  {
+   "file": "33.WheatResidueFireBulletin_03May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2327,
+   "total_row": 2328
+  },
+  {
+   "file": "33.WheatResidueFireBulletin_03May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 313,
+   "total_row": 316
+  },
+  {
+   "file": "34.WheatResidueFireBulletin_04May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2399,
+   "total_row": 2400
+  },
+  {
+   "file": "34.WheatResidueFireBulletin_04May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 407,
+   "total_row": 410
+  },
+  {
+   "file": "36.WheatResidueFireBulletin_06May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2466,
+   "total_row": 2467
+  },
+  {
+   "file": "36.WheatResidueFireBulletin_06May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 999,
+   "total_row": 1002
+  },
+  {
+   "file": "37.WheatResidueFireBulletin_07May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2574,
+   "total_row": 2575
+  },
+  {
+   "file": "37.WheatResidueFireBulletin_07May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1193,
+   "total_row": 1196
+  },
+  {
+   "file": "38.WheatResidueFireBulletin_08May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2684,
+   "total_row": 2685
+  },
+  {
+   "file": "38.WheatResidueFireBulletin_08May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1326,
+   "total_row": 1329
+  },
+  {
+   "file": "39.WheatResidueFireBulletin_09May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2711,
+   "total_row": 2712
+  },
+  {
+   "file": "39.WheatResidueFireBulletin_09May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1360,
+   "total_row": 1363
+  },
+  {
+   "file": "40.WheatResidueFireBulletin_10May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2745,
+   "total_row": 2746
+  },
+  {
+   "file": "40.WheatResidueFireBulletin_10May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1484,
+   "total_row": 1487
+  },
+  {
+   "file": "41.WheatResidueFireBulletin_11May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2751,
+   "total_row": 2752
+  },
+  {
+   "file": "41.WheatResidueFireBulletin_11May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1670,
+   "total_row": 1673
+  },
+  {
+   "file": "43.WheatResidueFireBulletin_13May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2809,
+   "total_row": 2810
+  },
+  {
+   "file": "43.WheatResidueFireBulletin_13May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1780,
+   "total_row": 1783
+  },
+  {
+   "file": "44.WheatResidueFireBulletin_14May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2844,
+   "total_row": 2845
+  },
+  {
+   "file": "44.WheatResidueFireBulletin_14May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1796,
+   "total_row": 1799
+  },
+  {
+   "file": "45.WheatResidueFireBulletin_15May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2850,
+   "total_row": 2851
+  },
+  {
+   "file": "45.WheatResidueFireBulletin_15May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1823,
+   "total_row": 1826
+  },
+  {
+   "file": "46.WheatResidueFireBulletin_16May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2853,
+   "total_row": 2854
+  },
+  {
+   "file": "46.WheatResidueFireBulletin_16May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1844,
+   "total_row": 1847
+  },
+  {
+   "file": "48.WheatResidueFireBulletin_18May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2856,
+   "total_row": 2857
+  },
+  {
+   "file": "48.WheatResidueFireBulletin_18May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1876,
+   "total_row": 1879
+  },
+  {
+   "file": "50.WheatResidueFireBulletin_20May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2874,
+   "total_row": 2875
+  },
+  {
+   "file": "50.WheatResidueFireBulletin_20May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1886,
+   "total_row": 1889
+  },
+  {
+   "file": "51.WheatResidueFireBulletin_21May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2878,
+   "total_row": 2879
+  },
+  {
+   "file": "51.WheatResidueFireBulletin_21May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1890,
+   "total_row": 1893
+  },
+  {
+   "file": "54.WheatResidueFireBulletin_24May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2879,
+   "total_row": 2880
+  },
+  {
+   "file": "54.WheatResidueFireBulletin_24May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1894,
+   "total_row": 1897
+  },
+  {
+   "file": "55.WheatResidueFireBulletin_25May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2879,
+   "total_row": 2880
+  },
+  {
+   "file": "55.WheatResidueFireBulletin_25May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1894,
+   "total_row": 1897
+  },
+  {
+   "file": "57.WheatResidueFireBulletin_27May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2879,
+   "total_row": 2880
+  },
+  {
+   "file": "57.WheatResidueFireBulletin_27May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1895,
+   "total_row": 1898
+  },
+  {
+   "file": "59.WheatResidueFireBulletin_29May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2886,
+   "total_row": 2887
+  },
+  {
+   "file": "59.WheatResidueFireBulletin_29May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1898,
+   "total_row": 1901
+  },
+  {
+   "file": "60.WheatResidueFireBulletin_30May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2886,
+   "total_row": 2887
+  },
+  {
+   "file": "60.WheatResidueFireBulletin_30May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1900,
+   "total_row": 1903
+  },
+  {
+   "file": "61.WheatResidueFireBulletin_31May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2022,
+   "sum_rows": 2886,
+   "total_row": 2887
+  },
+  {
+   "file": "61.WheatResidueFireBulletin_31May_2025_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2023,
+   "sum_rows": 1900,
+   "total_row": 1903
+  }
+ ],
+ "district_sum_vs_total": [
+  {
+   "file": "26.RiceResidueFireBulletin_26Oct_2018_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 3,
+   "total_row": null,
+   "state_total": 1669
+  },
+  {
+   "file": "30.RiceResidueFireBulletin_30Oct_2018_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 9,
+   "total_row": null,
+   "state_total": 2514
+  },
+  {
+   "file": "33.RiceResidueFireBulletin_02Nov_2018_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 4,
+   "total_row": null,
+   "state_total": 2965
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2016,
+   "sum_districts": 5447,
+   "total_row": 5486,
+   "state_total": 5486
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2017,
+   "sum_districts": 4816,
+   "total_row": 4887,
+   "state_total": 4887
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 3534,
+   "total_row": 3609,
+   "state_total": 3609
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2019,
+   "sum_districts": 1861,
+   "total_row": 1939,
+   "state_total": 1939
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_07Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2016,
+   "sum_districts": 5690,
+   "total_row": 5730,
+   "state_total": 5730
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_07Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2017,
+   "sum_districts": 4965,
+   "total_row": 5036,
+   "state_total": 5036
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_07Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 3638,
+   "total_row": 3717,
+   "state_total": 3717
+  },
+  {
+   "file": "38.RiceResidueFireBulletin_07Nov_2019_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2019,
+   "sum_districts": 1894,
+   "total_row": 1972,
+   "state_total": 1972
+  },
+  {
+   "file": "02.RiceResidueFireBulletin_02Oct_2020_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2016,
+   "sum_districts": 157,
+   "total_row": 160,
+   "state_total": 160
+  },
+  {
+   "file": "02.RiceResidueFireBulletin_02Oct_2020_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_districts": 249,
+   "total_row": 250,
+   "state_total": 250
+  },
+  {
+   "file": "04.RiceResidueFireBulletin_04Oct_2020_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2016,
+   "sum_districts": 258,
+   "total_row": 263,
+   "state_total": 263
+  },
+  {
+   "file": "04.RiceResidueFireBulletin_04Oct_2020_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2017,
+   "sum_districts": 264,
+   "total_row": 269,
+   "state_total": 269
+  },
+  {
+   "file": "04.RiceResidueFireBulletin_04Oct_2020_ICAR.pdf",
+   "state": "Punjab",
+   "year": 2020,
+   "sum_districts": 536,
+   "total_row": 537,
+   "state_total": 537
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2016,
+   "sum_districts": 64239,
+   "total_row": 55544,
+   "state_total": 8695
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2017,
+   "sum_districts": 48488,
+   "total_row": 40739,
+   "state_total": 7749
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2018,
+   "sum_districts": 32584,
+   "total_row": 27584,
+   "state_total": 5000
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2019,
+   "sum_districts": 29780,
+   "total_row": 25366,
+   "state_total": 4414
+  },
+  {
+   "file": "34.RiceResidueFireBulletin_03Nov_2020_ICAR.pdf",
+   "state": "Haryana",
+   "year": 2020,
+   "sum_districts": 43573,
+   "total_row": 40105,
+   "state_total": 3468
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2016,
+   "sum_districts": 4307,
+   "total_row": null,
+   "state_total": 5486
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2017,
+   "sum_districts": 4063,
+   "total_row": null,
+   "state_total": 4887
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2018,
+   "sum_districts": 3032,
+   "total_row": null,
+   "state_total": 3609
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2019,
+   "sum_districts": 1632,
+   "total_row": null,
+   "state_total": 1939
+  },
+  {
+   "file": "37.RiceResidueFireBulletin_06Nov_2020_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2020,
+   "sum_districts": 1459,
+   "total_row": null,
+   "state_total": 1644
+  },
+  {
+   "file": "10.WheatResidueFireBulletin_10Apr_2023_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2022,
+   "sum_districts": 7515,
+   "total_row": 0,
+   "state_total": 7515
+  },
+  {
+   "file": "10.WheatResidueFireBulletin_10Apr_2023_ICAR.pdf",
+   "state": "Madhya Pradesh",
+   "year": 2023,
+   "sum_districts": 5696,
+   "total_row": 1,
+   "state_total": 5695
+  },
+  {
+   "file": "06.WheatResidueFireBulletin_06Apr_2026_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2022,
+   "sum_districts": 121,
+   "total_row": 119,
+   "state_total": 119
+  },
+  {
+   "file": "06.WheatResidueFireBulletin_06Apr_2026_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2023,
+   "sum_districts": 123,
+   "total_row": 122,
+   "state_total": 122
+  },
+  {
+   "file": "06.WheatResidueFireBulletin_06Apr_2026_ICAR.pdf",
+   "state": "Uttar Pradesh",
+   "year": 2024,
+   "sum_districts": 89,
+   "total_row": 88,
+   "state_total": 88
+  }
+ ],
+ "non_monotonic_cumulative": [
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2023-10-22",
+   "prev": 1764,
+   "cum": 1734
+  }
+ ],
+ "cum_delta_vs_day": [
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2018-11-19",
+   "cum_delta": 752,
+   "day": 759
+  },
+  {
+   "season": "rice",
+   "state": "Haryana",
+   "date": "2018-11-13",
+   "cum_delta": 144,
+   "day": 146
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2021-10-24",
+   "cum_delta": 251,
+   "day": 0
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2021-11-30",
+   "cum_delta": 5,
+   "day": 8
+  },
+  {
+   "season": "rice",
+   "state": "Haryana",
+   "date": "2021-10-24",
+   "cum_delta": 120,
+   "day": 38
+  },
+  {
+   "season": "rice",
+   "state": "Uttar Pradesh",
+   "date": "2021-10-24",
+   "cum_delta": 12,
+   "day": 11
+  },
+  {
+   "season": "rice",
+   "state": "Madhya Pradesh",
+   "date": "2021-10-16",
+   "cum_delta": 22,
+   "day": 13
+  },
+  {
+   "season": "rice",
+   "state": "Madhya Pradesh",
+   "date": "2021-10-24",
+   "cum_delta": 43,
+   "day": 34
+  },
+  {
+   "season": "rice",
+   "state": "Uttar Pradesh",
+   "date": "2022-10-28",
+   "cum_delta": 25,
+   "day": 34
+  },
+  {
+   "season": "rice",
+   "state": "Rajasthan",
+   "date": "2022-10-27",
+   "cum_delta": 20,
+   "day": 21
+  },
+  {
+   "season": "rice",
+   "state": "Rajasthan",
+   "date": "2022-10-28",
+   "cum_delta": 47,
+   "day": 46
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2023-10-22",
+   "cum_delta": -30,
+   "day": 30
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2023-10-23",
+   "cum_delta": 212,
+   "day": 152
+  },
+  {
+   "season": "rice",
+   "state": "Uttar Pradesh",
+   "date": "2023-09-26",
+   "cum_delta": 0,
+   "day": 1
+  },
+  {
+   "season": "rice",
+   "state": "Uttar Pradesh",
+   "date": "2023-10-08",
+   "cum_delta": 27,
+   "day": 9
+  },
+  {
+   "season": "rice",
+   "state": "Delhi",
+   "date": "2023-11-07",
+   "cum_delta": 1,
+   "day": 0
+  },
+  {
+   "season": "rice",
+   "state": "Rajasthan",
+   "date": "2023-09-24",
+   "cum_delta": 0,
+   "day": 1
+  },
+  {
+   "season": "rice",
+   "state": "Madhya Pradesh",
+   "date": "2024-10-03",
+   "cum_delta": 2,
+   "day": 7
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2025-11-25",
+   "cum_delta": 0,
+   "day": 3
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2025-11-26",
+   "cum_delta": 9,
+   "day": 6
+  },
+  {
+   "season": "rice",
+   "state": "Haryana",
+   "date": "2025-11-25",
+   "cum_delta": 0,
+   "day": 8
+  },
+  {
+   "season": "rice",
+   "state": "Haryana",
+   "date": "2025-11-26",
+   "cum_delta": 19,
+   "day": 11
+  },
+  {
+   "season": "rice",
+   "state": "Madhya Pradesh",
+   "date": "2025-10-20",
+   "cum_delta": 44,
+   "day": 45
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2026-09-20",
+   "cum_delta": 7,
+   "day": 8
+  },
+  {
+   "season": "rice",
+   "state": "Punjab",
+   "date": "2026-09-21",
+   "cum_delta": 6,
+   "day": 5
+  },
+  {
+   "season": "rice",
+   "state": "Rajasthan",
+   "date": "2026-10-02",
+   "cum_delta": 2,
+   "day": 0
+  },
+  {
+   "season": "rice",
+   "state": "Uttarakhand",
+   "date": "2026-10-02",
+   "cum_delta": 0,
+   "day": 2
+  },
+  {
+   "season": "wheat",
+   "state": "Delhi",
+   "date": "2022-04-18",
+   "cum_delta": 2,
+   "day": 0
+  },
+  {
+   "season": "wheat",
+   "state": "Haryana",
+   "date": "2023-04-24",
+   "cum_delta": 23,
+   "day": 22
+  },
+  {
+   "season": "wheat",
+   "state": "Haryana",
+   "date": "2026-04-12",
+   "cum_delta": 0,
+   "day": 2
+  },
+  {
+   "season": "wheat",
+   "state": "Haryana",
+   "date": "2026-04-13",
+   "cum_delta": 4,
+   "day": 2
+  }
+ ],
+ "no_highlights": [
+  "Fire_bulletin_2018/01.RiceResidueFireBulletin_01Oct_2018_ICAR.pdf",
+  "Fire_bulletin_2018/02.RiceResidueFireBulletin_02Oct_2018_ICAR.pdf",
+  "Fire_bulletin_2019/01.RiceResidueFireBulletin_01Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/02.RiceResidueFireBulletin_02Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/03.RiceResidueFireBulletin_03Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/04.RiceResidueFireBulletin_04Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/05.RiceResidueFireBulletin_05Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/06.RiceResidueFireBulletin_06Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/07.RiceResidueFireBulletin_07Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2019/08.RiceResidueFireBulletin_08Oct_2019_ICAR.pdf",
+  "Fire_bulletin_2020/01.RiceResidueFireBulletin_01Oct_2020_ICAR.pdf",
+  "Fire_bulletin_2020/02.RiceResidueFireBulletin_02Oct_2020_ICAR.pdf",
+  "Fire_bulletin_2020/03.RiceResidueFireBulletin_03Oct_2020_ICAR.pdf",
+  "Fire_bulletin_2021/01.RiceResidueFireBulletin_01Sep_2021_ICAR.pdf"
+ ],
+ "date_mismatch": [
+  {
+   "file": "Fire_bulletin_2021/01.RiceResidueFireBulletin_01Sep_2021_ICAR.pdf",
+   "note": "filename date 2021-09-01 != events date 2021-09-15"
+  },
+  {
+   "file": "Fire_bulletin_2021/03.RiceResidueFireBulletin_17Sep_2021_ICAR.pdf",
+   "note": "filename date 2021-09-17 != events date 2021-09-28"
+  },
+  {
+   "file": "Fire_bulletin_2022/Fire_bulletin_2022w/19.WheatResidueFireBulletin_18Apr_2022_ICAR.pdf",
+   "note": "filename date 2022-04-18 != events date 2022-04-19"
+  },
+  {
+   "file": "Fire_bulletin_2024/Fire_bulletin_2024r/09.RiceResidueFireBulletin_22Sep_2024_ICAR.pdf",
+   "note": "filename date 2024-09-22 != events date 2024-09-23"
+  }
+ ],
+ "duplicates": [
+  {
+   "file": "Fire_bulletin_2019/32.RiceResidueFireBulletin_01Nov_2019_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2019/32.RiceResidueFireBulletin_01 Nov_2019_ICAR.pdf"
+  },
+  {
+   "file": "Fire_bulletin_2019/35.RiceResidueFireBulletin_04Nov_2019_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2019/35.RiceResidueFireBulletin_04 Nov_2019_ICAR.pdf"
+  },
+  {
+   "file": "Fire_bulletin_2021/14.RiceResidueFireBulletin_28Sep_2021_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2021/03.RiceResidueFireBulletin_17Sep_2021_ICAR.pdf"
+  },
+  {
+   "file": "Fire_bulletin_2021/34.RiceResidueFireBulletin_18Oct_2021_ICAR .pdf",
+   "duplicate_of": "Fire_bulletin_2021/34.RiceResidueFireBulletin_18Oct_2021_ICAR.pdf"
+  },
+  {
+   "file": "Fire_bulletin_2021/44.RiceResidueFireBulletin_28Oct_2021_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2021/44.RiceResidueFireBulletin_28Oct_2021_ICAR_r1.pdf"
+  },
+  {
+   "file": "wheat/06.WheatResidueFireBulletin_06Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/06.WheatResidueFireBulletin_06Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/07.WheatResidueFireBulletin_07Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/07.WheatResidueFireBulletin_07Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/08.WheatResidueFireBulletin_08Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/08.WheatResidueFireBulletin_08Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/09.WheatResidueFireBulletin_09Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/09.WheatResidueFireBulletin_09Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/10.WheatResidueFireBulletin_10Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/10.WheatResidueFireBulletin_10Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/11.WheatResidueFireBulletin_11Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/11.WheatResidueFireBulletin_11Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/12.WheatResidueFireBulletin_12Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/12.WheatResidueFireBulletin_12Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/13.WheatResidueFireBulletin_13Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/13.WheatResidueFireBulletin_13Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/14.WheatResidueFireBulletin_14Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/14.WheatResidueFireBulletin_14Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/15.WheatResidueFireBulletin_15Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/15.WheatResidueFireBulletin_15Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/16.WheatResidueFireBulletin_16Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/16.WheatResidueFireBulletin_16Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/17.WheatResidueFireBulletin_17Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/17.WheatResidueFireBulletin_17Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/18.WheatResidueFireBulletin_18Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/18.WheatResidueFireBulletin_18Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/20.WheatResidueFireBulletin_20Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/20.WheatResidueFireBulletin_20Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/21.WheatResidueFireBulletin_21Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/21.WheatResidueFireBulletin_21Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/22.WheatResidueFireBulletin_22Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/22.WheatResidueFireBulletin_22Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/23.WheatResidueFireBulletin_23Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/23.WheatResidueFireBulletin_23Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/24.WheatResidueFireBulletin_24Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/24.WheatResidueFireBulletin_24Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/25.WheatResidueFireBulletin_25Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/25.WheatResidueFireBulletin_25Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/26.WheatResidueFireBulletin_26Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/26.WheatResidueFireBulletin_26Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/27.WheatResidueFireBulletin_27Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/27.WheatResidueFireBulletin_27Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/28.WheatResidueFireBulletin_28Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/28.WheatResidueFireBulletin_28Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/29.WheatResidueFireBulletin_29Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/29.WheatResidueFireBulletin_29Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/30.WheatResidueFireBulletin_30Apr_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/30.WheatResidueFireBulletin_30Apr_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/31.WheatResidueFireBulletin_01May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/31.WheatResidueFireBulletin_01May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/32.WheatResidueFireBulletin_02May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/32.WheatResidueFireBulletin_02May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/33.WheatResidueFireBulletin_03May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/33.WheatResidueFireBulletin_03May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/34.WheatResidueFireBulletin_04May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/34.WheatResidueFireBulletin_04May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/36.WheatResidueFireBulletin_06May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/36.WheatResidueFireBulletin_06May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/37.WheatResidueFireBulletin_07May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/37.WheatResidueFireBulletin_07May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/38.WheatResidueFireBulletin_08May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/38.WheatResidueFireBulletin_08May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/39.WheatResidueFireBulletin_09May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/39.WheatResidueFireBulletin_09May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/40.WheatResidueFireBulletin_10May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/40.WheatResidueFireBulletin_10May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/41.WheatResidueFireBulletin_11May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/41.WheatResidueFireBulletin_11May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/42.WheatResidueFireBulletin_12May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/42.WheatResidueFireBulletin_12May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/45.WheatResidueFireBulletin_15May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/45.WheatResidueFireBulletin_15May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/46.WheatResidueFireBulletin_16May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/46.WheatResidueFireBulletin_16May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/47.WheatResidueFireBulletin_17May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/47.WheatResidueFireBulletin_17May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/48.WheatResidueFireBulletin_18May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/48.WheatResidueFireBulletin_18May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/49.WheatResidueFireBulletin_19May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/49.WheatResidueFireBulletin_19May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/50.WheatResidueFireBulletin_20May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/50.WheatResidueFireBulletin_20May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/51.WheatResidueFireBulletin_21May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/51.WheatResidueFireBulletin_21May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/52.WheatResidueFireBulletin_22May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/52.WheatResidueFireBulletin_22May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/53.WheatResidueFireBulletin_23May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/53.WheatResidueFireBulletin_23May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/54.WheatResidueFireBulletin_24May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/54.WheatResidueFireBulletin_24May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/55.WheatResidueFireBulletin_25May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/55.WheatResidueFireBulletin_25May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/56.WheatResidueFireBulletin_26May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/56.WheatResidueFireBulletin_26May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/57.WheatResidueFireBulletin_27May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/57.WheatResidueFireBulletin_27May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/58.WheatResidueFireBulletin_28May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/58.WheatResidueFireBulletin_28May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/59.WheatResidueFireBulletin_29May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/59.WheatResidueFireBulletin_29May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/60.WheatResidueFireBulletin_30May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/60.WheatResidueFireBulletin_30May_2023_ICAR.pdf"
+  },
+  {
+   "file": "wheat/61.WheatResidueFireBulletin_31May_2023_ICAR.pdf",
+   "duplicate_of": "Fire_bulletin_2023/Fire_bulletin_2023w/61.WheatResidueFireBulletin_31May_2023_ICAR.pdf"
+  }
+ ],
+ "event_list_other_date": [
+  {
+   "file": "49.RiceResidueFireBulletin_18Nov_2018_ICAR.pdf",
+   "bulletin_date": "2018-11-18",
+   "event_list_dates": {
+    "2018-11-17": 111
+   }
+  },
+  {
+   "file": "01.RiceResidueFireBulletin_01Oct_2019_ICAR.pdf",
+   "bulletin_date": "2019-10-01",
+   "event_list_dates": {
+    "2018-10-01": 3
+   }
+  },
+  {
+   "file": "02.RiceResidueFireBulletin_02Oct_2019_ICAR.pdf",
+   "bulletin_date": "2019-10-02",
+   "event_list_dates": {
+    "2018-10-02": 20
+   }
+  },
+  {
+   "file": "27.RiceResidueFireBulletin_27Oct_2020_ICAR.pdf",
+   "bulletin_date": "2020-10-27",
+   "event_list_dates": {
+    "2020-10-26": 37
+   }
+  },
+  {
+   "file": "10.RiceResidueFireBulletin_24Sep_2025_ICAR.pdf",
+   "bulletin_date": "2025-09-24",
+   "event_list_dates": {
+    "2025-09-19": 1
+   }
+  },
+  {
+   "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
+   "bulletin_date": "2022-04-01",
+   "event_list_dates": {
+    "2022-04-08": 789
+   }
+  }
+ ],
+ "summary": {
+  "failed": 0,
+  "events_vs_highlights": 19,
+  "table_total_vs_highlights": 7,
+  "table_sum_vs_total": 309,
+  "district_sum_vs_total": 31,
+  "non_monotonic_cumulative": 1,
+  "cum_delta_vs_day": 31,
+  "no_highlights": 14,
+  "date_mismatch": 4,
+  "duplicates": 57,
+  "event_list_other_date": 6,
+  "primary_bulletins": 789,
+  "pdfs": 852,
+  "event_rows_district_unmatched": 7
+ },
+ "event_districts_unmatched": [
+  {
+   "state": "Punjab",
+   "district": "Punjab",
+   "events": 6
+  },
+  {
+   "state": "Punjab",
+   "district": "Kharar",
+   "events": 1
+  }
+ ]
+}

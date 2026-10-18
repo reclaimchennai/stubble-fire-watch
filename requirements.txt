@@ -1,0 +1,16 @@
+# data pipeline (Python 3.11+)
+numpy
+pandas
+pyarrow
+pillow
+shapely
+requests
+pdfplumber
+pymupdf
+duckdb
+rasterio
+geopandas
+pyogrio
+xarray
+netCDF4
+# system tools used by some steps: GDAL command-line utilities (gdalwarp, gdal_translate, gdal2tiles.py, ogr2ogr)
