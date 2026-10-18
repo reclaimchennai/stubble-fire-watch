@@ -1351,6 +1351,7 @@ def manifest(counts):
         "fire_detections_all.csv.gz": "All FIRMS detections 2003-present in the box 68.5-89E 21-35.5N, all days, one CSV (same columns as the per-year parquet minus geometry)",
         "creams_events.parquet": "ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326)",
         "creams_events.csv.gz": "ICAR-IARI CREAMS bulletin annexure events (CSV)",
+        "dashboard-data.zip": "everything the web dashboard loads (unzip at the repository root)",
     }
     import xarray as xr
     for p in sorted(AS.iterdir()):
@@ -1365,6 +1366,10 @@ def manifest(counts):
                 d = f"FIRMS detections {m.group(1)}, all days (GeoParquet, EPSG:4326)"
         elif p.name == "fire_detections_all.csv.gz":
             size = f"{sum(counts.values())} rows" if counts else ""
+        elif p.suffix == ".zip":
+            import zipfile
+            with zipfile.ZipFile(p) as z:
+                size = f"{len(z.infolist())} files"
         elif p.name == "creams_events.csv.gz":
             size = f"{pq.ParquetFile(AS / 'creams_events.parquet').metadata.num_rows} rows"
         elif p.suffix == ".nc":

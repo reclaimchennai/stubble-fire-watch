@@ -48,7 +48,7 @@ Download from the GitHub Release; checksums in `SHA256SUMS`, list in `MANIFEST.c
 | `burned_area_2025.tif` | 0.1 MB | 790 x 1170 px | MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0) |
 | `creams_events.csv.gz` | 8.9 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (CSV) |
 | `creams_events.parquet` | 18.1 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326) |
-| `dashboard-data.zip` | 96.3 MB |  |  |
+| `dashboard-data.zip` | 96.3 MB | 26885 files | everything the web dashboard loads (unzip at the repository root) |
 | `fire_detections_2003.parquet` | 1.1 MB | 31959 rows | FIRMS detections 2003, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_2004.parquet` | 1.2 MB | 35948 rows | FIRMS detections 2004, all days (GeoParquet, EPSG:4326) |
 | `fire_detections_2005.parquet` | 1.3 MB | 40562 rows | FIRMS detections 2005, all days (GeoParquet, EPSG:4326) |
