@@ -96,7 +96,7 @@ sources and caveats. The full list is in [`DATA_DICTIONARY.md`](DATA_DICTIONARY.
 
 | Dataset | Coverage | Formats | Where |
 |---|---|---|---|
-| **Fire detections**: every MODIS and VIIRS (S-NPP, NOAA-20, NOAA-21) detection over 68.5-89 E, 21-35.5 N, with district and state (the dashboard covers all of India, 66-98 E, 6-37.5 N, since Oct 2026; the next release's files will too) | 2003 to today, 10.5 million rows | GeoParquet per year, CSV | release |
+| **Fire detections**: every MODIS and VIIRS (S-NPP, NOAA-20, NOAA-21) detection over India and Pakistan (66-98 E, 6-37.5 N; releases before v2026.10.29 cover only 68.5-89 E, 21-35.5 N), with district and state | 2003 to today, 17.7 million rows | GeoParquet per year, CSV | release |
 | Fire counts and radiative power by state, sensor and day; by district and season; by hour | 2003 to today | CSV, Parquet | [`datasets/fires`](datasets/fires) |
 | **ICAR-IARI CREAMS** official counts, parsed from 851 daily bulletins: state and district daily series, multi-year comparison tables | 2016 to today | CSV | [`datasets/creams`](datasets/creams) |
 | CREAMS geolocated residue-burning events from the bulletin annexures | 2018 onward, 698,696 events | GeoParquet, CSV | release |

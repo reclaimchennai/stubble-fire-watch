@@ -8,14 +8,14 @@ Exported by `scripts/export_release.py` on 2026-10-29.
 
 | folder | contents | files |
 |---|---|---|
-| [fires/](datasets/fires/README.md) | NASA FIRMS active-fire detections aggregated by day / state / district / season / sensor, IST hour of burning | `daily_by_state.csv.gz` (1.4 MB), `daily_by_state.parquet` (0.8 MB), `district_daily_paddy.csv.gz` (1.4 MB), `district_season.csv` (3.0 MB), `hourly_ist_paddy.csv` (40 kB), `season_totals.csv` (0.2 MB) |
-| [creams/](datasets/creams/README.md) | ICAR-IARI CREAMS official daily residue-burning counts (state, district), year comparisons, bulletin list | `bulletin_state_tables_long.csv.gz` (2.3 MB), `bulletins.csv` (0.2 MB), `district_daily.csv` (34.7 MB), `monthly_reports.csv` (0.2 MB), `state_daily.csv` (1.0 MB), `validation.json` (74 kB), `year_compare.csv` (0.6 MB) |
+| [fires/](datasets/fires/README.md) | NASA FIRMS active-fire detections aggregated by day / state / district / season / sensor, IST hour of burning | `daily_by_state.csv.gz` (2.4 MB), `daily_by_state.parquet` (1.3 MB), `district_daily_paddy.csv.gz` (1.9 MB), `district_season.csv` (4.8 MB), `hourly_ist_paddy.csv` (41 kB), `season_totals.csv` (0.3 MB) |
+| [creams/](datasets/creams/README.md) | ICAR-IARI CREAMS official daily residue-burning counts (state, district), year comparisons, bulletin list | `bulletin_state_tables_long.csv.gz` (2.3 MB), `bulletins.csv` (0.2 MB), `district_daily.csv` (35.3 MB), `monthly_reports.csv` (0.2 MB), `state_daily.csv` (1.0 MB), `validation.json` (74 kB), `year_compare.csv` (0.7 MB) |
 | [burned_area/](datasets/burned_area/README.md) | NASA MODIS MCD64A1 burned area per season, state, district and burn date (Punjab, Haryana) | `daily_by_state.csv` (0.3 MB), `district_season.csv` (44 kB), `firms_check.csv` (1 kB), `state_season.csv` (10 kB) |
 | [s2_night/](datasets/s2_night/README.md) | Sentinel-2A night hot spots (SWIR, 20 m), 9 and 12 Dec 2025, with FIRMS match rates and land-cover setting | `hot_spots.csv` (29 kB), `hot_spots.geojson` (98 kB), `validation.csv` (3 kB) |
 | [air/](datasets/air/README.md) | CPCB ground PM2.5/PM10 (via OpenAQ), CAMS PM/AOD + ERA5 meteorology at receptor cities, modelled stubble share of Delhi PM2.5 | `cams_era5_cities.csv` (0 kB), `cams_era5_daily.csv` (1.3 MB), `cpcb_pm25_daily.csv` (1.3 MB), `cpcb_pm25_monthly.csv` (93 kB), `cpcb_stations.csv` (17 kB), `stubble_share_delhi.csv` (0.2 MB) |
 | [paddy/](datasets/paddy/README.md) | Kharif rice area and production by state (1966+) and district (1997+), UPAg/DES | `rice_area_district.csv` (0.5 MB), `rice_area_state.csv` (38 kB) |
 | [enforcement/](datasets/enforcement/README.md) | Enforcement and crop-residue-management indicators with source documents and policy timeline | `ENFORCEMENT_SOURCES.md` (54 kB), `events.csv` (14 kB), `metrics.csv` (4 kB), `sources.csv` (40 kB), `values.csv` (0.4 MB) |
-| [boundaries/](datasets/boundaries/README.md) | District / state / country polygons used for all attributions (GeoJSON + GeoPackage) | `boundaries.gpkg` (3.3 MB), `districts.geojson` (1.9 MB), `states.geojson` (0.4 MB), `subcontinent.geojson` (0.5 MB) |
+| [boundaries/](datasets/boundaries/README.md) | District / state / country polygons used for all attributions (GeoJSON + GeoPackage) | `boundaries.gpkg` (4.8 MB), `districts.geojson` (3.1 MB), `states.geojson` (0.6 MB), `subcontinent.geojson` (0.5 MB) |
 | [south/](datasets/south/README.md) | North to south: Chennai and east-coast air quality, 5-day back-trajectory fire exposure, Bay of Bengal / Arabian Sea cyclone tracks | `chennai_hourly.csv` (1.0 MB), `chennai_reference_stations.csv` (1 kB), `cities_daily.csv` (2.3 MB), `cyclone_track_points.csv` (1.1 MB), `cyclone_tracks.geojson` (0.3 MB), `cyclones.csv` (37 kB), `trajectory_exposure_daily.csv` (0.4 MB), `trajectory_paths_chennai.csv` (0.4 MB) |
 
 ## Release assets
@@ -47,43 +47,43 @@ Download from the GitHub Release; checksums in `SHA256SUMS`, list in `MANIFEST.c
 | `burned_area_2023.tif` | 0.1 MB | 790 x 1170 px | MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0) |
 | `burned_area_2024.tif` | 0.1 MB | 790 x 1170 px | MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0) |
 | `burned_area_2025.tif` | 0.1 MB | 790 x 1170 px | MODIS MCD64A1 burn-date codes (COG, EPSG:32643): 0 none, 10+d burned on season day d (Sep 15 = 0) |
-| `creams_events.csv.gz` | 8.9 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (CSV) |
-| `creams_events.parquet` | 18.1 MB | 698753 rows | ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326) |
-| `dashboard-data.zip` | 96.3 MB | 26885 files | everything the web dashboard loads (unzip at the repository root) |
-| `fire_detections_2003.parquet` | 1.1 MB | 31959 rows | FIRMS detections 2003, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2004.parquet` | 1.2 MB | 35948 rows | FIRMS detections 2004, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2005.parquet` | 1.3 MB | 40562 rows | FIRMS detections 2005, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2006.parquet` | 1.0 MB | 30579 rows | FIRMS detections 2006, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2007.parquet` | 1.3 MB | 39278 rows | FIRMS detections 2007, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2008.parquet` | 1.7 MB | 49739 rows | FIRMS detections 2008, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2009.parquet` | 1.8 MB | 50479 rows | FIRMS detections 2009, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2010.parquet` | 1.6 MB | 45148 rows | FIRMS detections 2010, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2011.parquet` | 1.6 MB | 47503 rows | FIRMS detections 2011, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2012.parquet` | 13.9 MB | 375615 rows | FIRMS detections 2012, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2013.parquet` | 11.5 MB | 306042 rows | FIRMS detections 2013, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2014.parquet` | 12.8 MB | 342002 rows | FIRMS detections 2014, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2015.parquet` | 11.7 MB | 309701 rows | FIRMS detections 2015, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2016.parquet` | 17.6 MB | 481186 rows | FIRMS detections 2016, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2017.parquet` | 16.0 MB | 427781 rows | FIRMS detections 2017, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2018.parquet` | 26.2 MB | 715013 rows | FIRMS detections 2018, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2019.parquet` | 24.9 MB | 670263 rows | FIRMS detections 2019, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2020.parquet` | 24.0 MB | 649255 rows | FIRMS detections 2020, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2021.parquet` | 37.2 MB | 1020015 rows | FIRMS detections 2021, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2022.parquet` | 29.8 MB | 802301 rows | FIRMS detections 2022, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2023.parquet` | 35.7 MB | 965471 rows | FIRMS detections 2023, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2024.parquet` | 40.6 MB | 1084934 rows | FIRMS detections 2024, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2025.parquet` | 44.1 MB | 1185951 rows | FIRMS detections 2025, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_2026.parquet` | 31.8 MB | 847058 rows | FIRMS detections 2026, all days (GeoParquet, EPSG:4326) |
-| `fire_detections_all.csv.gz` | 236.8 MB | 10553783 rows | All FIRMS detections 2003-present in the box 68.5-89E 21-35.5N, all days, one CSV (same columns as the per-year parquet minus geometry) |
+| `creams_events.csv.gz` | 8.9 MB | 700112 rows | ICAR-IARI CREAMS bulletin annexure events (CSV) |
+| `creams_events.parquet` | 18.2 MB | 700112 rows | ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326) |
+| `dashboard-data.zip` | 121.8 MB | 26891 files | everything the web dashboard loads (unzip at the repository root) |
+| `fire_detections_2003.parquet` | 2.2 MB | 62308 rows | FIRMS detections 2003, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2004.parquet` | 2.6 MB | 71465 rows | FIRMS detections 2004, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2005.parquet` | 2.5 MB | 69910 rows | FIRMS detections 2005, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2006.parquet` | 2.5 MB | 70058 rows | FIRMS detections 2006, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2007.parquet` | 2.8 MB | 80434 rows | FIRMS detections 2007, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2008.parquet` | 2.8 MB | 79894 rows | FIRMS detections 2008, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2009.parquet` | 3.4 MB | 97564 rows | FIRMS detections 2009, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2010.parquet` | 2.9 MB | 82102 rows | FIRMS detections 2010, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2011.parquet` | 2.8 MB | 78697 rows | FIRMS detections 2011, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2012.parquet` | 26.1 MB | 694940 rows | FIRMS detections 2012, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2013.parquet` | 21.5 MB | 565312 rows | FIRMS detections 2013, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2014.parquet` | 23.7 MB | 625396 rows | FIRMS detections 2014, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2015.parquet` | 20.8 MB | 547130 rows | FIRMS detections 2015, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2016.parquet` | 29.2 MB | 779973 rows | FIRMS detections 2016, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2017.parquet` | 26.2 MB | 691742 rows | FIRMS detections 2017, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2018.parquet` | 40.0 MB | 1062295 rows | FIRMS detections 2018, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2019.parquet` | 42.1 MB | 1113950 rows | FIRMS detections 2019, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2020.parquet` | 39.0 MB | 1041160 rows | FIRMS detections 2020, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2021.parquet` | 62.1 MB | 1658280 rows | FIRMS detections 2021, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2022.parquet` | 47.4 MB | 1266621 rows | FIRMS detections 2022, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2023.parquet` | 61.5 MB | 1622364 rows | FIRMS detections 2023, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2024.parquet` | 65.1 MB | 1724371 rows | FIRMS detections 2024, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2025.parquet` | 74.5 MB | 1971027 rows | FIRMS detections 2025, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_2026.parquet` | 61.2 MB | 1610095 rows | FIRMS detections 2026, all days (GeoParquet, EPSG:4326) |
+| `fire_detections_all.csv.gz` | 401.2 MB | 17667088 rows | All FIRMS detections 2003-present in the box 66-98 E, 6-37.5 N, all days, one CSV (same columns as the per-year parquet minus geometry) |
 | `s2night_R012_b11_max_100m.tif` | 13.7 MB | 3726 x 2848 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
 | `s2night_R012_b12_max_100m.tif` | 12.2 MB | 3726 x 2848 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
 | `s2night_R055_b11_max_100m.tif` | 13.6 MB | 3715 x 2853 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
 | `s2night_R055_b12_max_100m.tif` | 12.1 MB | 3715 x 2853 px | Sentinel-2A night (Dec 2025): maximum SWIR radiance per 100 m cell, W m-2 sr-1 um-1 (COG, EPSG:4326) |
-| `smoke_geosfp_2026.nc` | 36.6 MB | time=321 x lat=81 x lon=97 | GEOS-FP smoke AOD, total AOD, OC/BC/BrC AOD, 10 m wind; 3-hourly, 0.3125 x 0.25 deg (NetCDF4/CF) |
+| `smoke_geosfp_2026.nc` | 104.5 MB | time=424 x lat=137 x lon=123 | GEOS-FP smoke AOD, total AOD, OC/BC/BrC AOD, 10 m wind; 3-hourly, 0.3125 x 0.25 deg (NetCDF4/CF) |
 
 ### `fire_detections_<year>.parquet` and `fire_detections_all.csv.gz`
 
-Every FIRMS detection in the box 68.5-89 E, 21-35.5 N on every day of every year, after the dashboard's filters: static land sources (type 2) and offshore (type 3) removed; near-real-time rows in 0.01-degree cells flagged static in any archive year removed; for years covered by the FIRMS yearly country archive only NOAA-21 is taken from the API; duplicate API rows (same position, time, sensor) dropped. GeoParquet 1.x (WKB points, EPSG:4326, zstd). CREAMS events are a separate asset. Row counts reconcile exactly with the dashboard's daily counts (sensor x state x day).
+Every FIRMS detection in the box 66-98 E, 6-37.5 N (India and Pakistan country files) on every day of every year, after the dashboard's filters: static land sources (type 2) and offshore (type 3) removed; near-real-time rows in 0.01-degree cells flagged static in any archive year removed; for years covered by the FIRMS yearly country archive only NOAA-21 is taken from the API; duplicate API rows (same position, time, sensor) dropped. GeoParquet 1.x (WKB points, EPSG:4326, zstd). CREAMS events are a separate asset. Row counts reconcile exactly with the dashboard's daily counts (sensor x state x day).
 
 | column | unit | meaning |
 |---|---|---|

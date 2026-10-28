@@ -118,12 +118,13 @@ def static_cells(arch):
 
 
 def api_rows():
-    """{year: [rows]} from the API cache; once a year has country files only NOAA-21 is taken from the API."""
+    """({year: [rows]}, static cells) from the API cache; once a year has country files only NOAA-21 is taken from the API."""
     archived = set(archive_files())
-    out, seen = defaultdict(list), set()
+    out, seen, static = defaultdict(list), set(), set()
     for f in sorted(glob.glob(str(RAW_A / "*.csv"))):
         for r in read_csv(f, archive=False):
-            if r[0] == "STATIC":
+            if r[0] == "STATIC":            # standard-processing API files carry the type column too
+                static.add((round(r[1] / RES), round(r[2] / RES)))
                 continue
             y = int(r[2][:4])
             if y in archived and r[5] != 4:
@@ -133,7 +134,7 @@ def api_rows():
                 continue
             seen.add(k)
             out[y].append(r)
-    return out
+    return out, static
 
 
 def rows_for_year(year, files, api, creams):
@@ -198,8 +199,8 @@ def main():
     dist_state = np.array([st_index[m["state"]] for m in dmeta])
 
     arch = archive_files()
-    static = static_cells(arch)
-    api = api_rows()
+    api, api_static = api_rows()
+    static = static_cells(arch) | api_static
     creams = iter_creams()
     years = sorted(set(arch) | set(api) | set(creams))
     last_utc_row = None

@@ -46,6 +46,7 @@ import pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_fires as bf  # noqa: E402  (re-use the dashboard's filters and district raster)
+BOX = f"{bf.W:g}-{bf.E:g} E, {bf.S:g}-{bf.N:g} N"
 
 REL = ROOT / "release"
 DS = REL / "datasets"
@@ -288,8 +289,8 @@ def export_fires():
                   "Rice season (Sep 15-Nov 30) only, nonzero district-days."),
     ]
     write_readme(out, "Satellite active-fire detections (NASA FIRMS), aggregated",
-                 "Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections over north-west India and "
-                 "Pakistan Punjab (box 68.5-89 E, 21-35.5 N), aggregated by day, state, district, season and sensor. These are the "
+                 "Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections over India and "
+                 f"Pakistan (box {BOX}), aggregated by day, state, district, season and sensor. These are the "
                  "numbers the dashboard plots. Point-level detections (all days of every year, 2003 onwards) are in the release "
                  "assets `fire_detections_<year>.parquet` / `fire_detections_all.csv.gz`.",
                  secs,
@@ -1020,7 +1021,7 @@ def export_boundaries():
          "subcontinent": ("", "true for India, Pakistan, Nepal, Bangladesh, Bhutan, Sri Lanka"), "geometry": ("WGS84", "polygon geometry")}
     secs = [table_doc(f"{n}.geojson (layer `{n}` in boundaries.gpkg)", df, D) for n, df in layers.items()]
     write_readme(out, "Boundaries",
-                 "District (ADM2) and state (ADM1) polygons for the analysis region (68.5-89 E, 21-35.5 N), and country outlines, as used by the dashboard. "
+                 f"District (ADM2) and state (ADM1) polygons for the analysis region ({BOX}), and country outlines, as used by the dashboard. "
                  "`boundaries.gpkg` holds the same three layers.",
                  secs, "India and Pakistan districts/states intersecting the region; countries clipped to 40-125 E, 12 S-58 N, simplified (0.01 deg).",
                  "- India districts: geoBoundaries gbOpen IND ADM2 (source: Pathways Data / lgdirectory.gov.in, 2021) - **Open Database License (ODbL) 1.0**. "
@@ -1090,7 +1091,7 @@ def firms_frame(path, archive):
     conf = np.where(c.isin(["l", "low"]), 0, np.where(c.isin(["h", "high"]), 2, np.where(c.isin(["n", "nominal"]), 1,
                     np.where(cn.isna(), 1, np.where(cn < 30, 0, np.where(cn < 80, 1, 2))))))
     df["conf_code"] = conf
-    df["frp_f"] = pd.to_numeric(df["frp"].replace("", np.nan), errors="coerce")
+    df["frp_f"] = pd.to_numeric(df["frp"].replace("", np.nan), errors="coerce").clip(lower=0)   # as build_fires.read_csv
     df["hhmm"] = pd.to_numeric(df["acq_time"].replace("", "0")).astype(int)
     df["archive"] = archive
     if archive:
@@ -1208,6 +1209,13 @@ def export_detections(S):
     with gzip.open(tmp, "wt", compresslevel=6, newline="") as gz:
         first = True
         for y, raw in detection_frames():
+            # as build_fires: API rows that fall in no India/Pakistan district (Nepal, Bangladesh, Myanmar, sea) are dropped
+            col = ((raw.lon.to_numpy() - bf.W) / bf.RES).astype(int)
+            row = ((bf.N - raw.lat.to_numpy()) / bf.RES).astype(int)
+            ins = (row >= 0) & (row < raster.shape[0]) & (col >= 0) & (col < raster.shape[1])
+            d0 = np.zeros(len(raw), np.int64)
+            d0[ins] = raster[row[ins], col[ins]]
+            raw = raw[raw.archive.to_numpy() | (d0 > 0)].reset_index(drop=True)
             df, did = tidy_detections(raw, raster, dmeta, dcountry)
             # reconcile with summary.json daily counts (sensor x state x day-of-year)
             si = np.where(did > 0, dist_state[np.maximum(did - 1, 0)], len(states))
@@ -1270,7 +1278,7 @@ def export_creams_events():
     # vs dashboard: CREAMS 'sensor' in summary.json = events inside the box with a parsable date/time
     S = jload(DATA / "fires" / "summary.json")
     ref = sum(sum(v["n"]) for bys in S["daily"].values() for sen, bst in bys.items() if sen.startswith("CREAMS") for v in bst.values())
-    inbox = sum(1 for _ in bf.iter_creams())  # the dashboard's own reader (strict ISO times, box filter)
+    inbox = sum(len(v) for v in bf.iter_creams().values())  # the dashboard's own reader (strict ISO times, box filter)
     check(inbox == ref, f"creams_events read by build_fires.iter_creams {inbox:,} == summary.json CREAMS count {ref:,}")
     log(f"creams_events: {int(out.acq_datetime_utc.isna().sum()):,} rows without a usable time; {int(out.latitude.isna().sum()):,} without latitude")
     return len(out)
@@ -1324,10 +1332,16 @@ def export_burned_tifs():
 # ---------------------------------------------------------------------------------------------
 # B4. GEOS-FP smoke NetCDF
 # ---------------------------------------------------------------------------------------------
+import fetch_smoke as fs  # noqa: E402
+SMOKE_ORIGIN = (round((fs.LAT0 + 90) / fs.DLAT), round((fs.LON0 + 180) / fs.DLON))
+
+
 def load_chunks(run, var):
     frames = {}
     for f in glob.glob(str(DATA / "raw" / "smoke" / f"{run}_{var}_*.npy")):
-        a, b, step = map(int, Path(f).stem.split("_")[3:6])
+        a, b, step, y0, x0 = map(int, Path(f).stem.split("_")[3:8])
+        if (y0, x0) != SMOKE_ORIGIN:     # chunks cached for an older, smaller domain
+            continue
         arr = np.load(f)
         for i in range(len(arr)):
             frames[a + i * step] = arr[i]
@@ -1391,13 +1405,19 @@ def export_smoke():
                 f[np.abs(f) > 1e3] = np.nan
                 arr[i] = f
         wind[v] = arr
-    lat = np.arange(meta["tile_h"]) * 0.25 + 18.0
+    lat = np.arange(meta["tile_h"]) * 0.25 + (meta["bounds"][1] + 0.125)
     lon = np.arange(meta["tile_w"]) * 0.3125 + (meta["bounds"][0] + 0.15625)
     # validation against the dashboard's regional box means
     box = np.ix_((lat >= 27.5) & (lat <= 32.5), (lon >= 73.5) & (lon <= 78.5))
     bm = np.array([float(np.nanmean(f[box])) for f in smoke])
-    dev = np.nanmax(np.abs(bm - np.array(meta["box_smoke_mean"])))
-    check(dev < 2e-3, f"smoke NetCDF: Punjab-Haryana-Delhi box mean smoke AOD vs smoke_meta.json, max abs diff {dev:.5f}")
+    prim_all = (status["ocexttau"] == 0) & (status["bcexttau"] == 0) & (status["brexttau"] == 0)
+    interp_dash = np.zeros(n, bool)
+    interp_dash[[i for i in meta.get("interpolated_frames", []) if i < n]] = True
+    same = prim_all & ~interp_dash   # frames both sides took from the primary run
+    dev = np.nanmax(np.abs(bm - np.array(meta["box_smoke_mean"]))[same])
+    check(dev < 2e-3, f"smoke NetCDF: Punjab-Haryana-Delhi box mean smoke AOD vs smoke_meta.json on the {int(same.sum())} frames both take from "
+                      f"the primary run, max abs diff {dev:.5f}; {int((~same).sum())} gap frames differ by design (this file fills them from other cached "
+                      "runs where it can, the dashboard interpolates)")
     tm = np.array([float(np.nanmean(f[box])) for f in data["totexttau"]])
     tdev = np.abs(tm - np.array(meta["box_total_mean"]))
     okt = status["totexttau"] == 0
@@ -1437,7 +1457,7 @@ def export_smoke():
             "lon": ("lon", lon, {"standard_name": "longitude", "units": "degrees_east", "long_name": "grid-cell centre longitude"}),
         },
         attrs={
-            "title": f"GEOS-FP smoke and total aerosol optical depth with 10 m winds, northern South Asia, season {times[0].year}",
+            "title": f"GEOS-FP smoke and total aerosol optical depth with 10 m winds, South Asia and the Bay of Bengal, season {times[0].year}",
             "Conventions": "CF-1.8",
             "institution": "NASA Global Modeling and Assimilation Office (GMAO)",
             "source": "GEOS-FP seamless collections tavg3_2d_aer_Nx (3-hourly) and tavg1_2d_slv_Nx (hourly), 0.3125 x 0.25 deg, via the NCCS OPeNDAP server (https://opendap.nccs.nasa.gov/dods/GEOS-5/fp/0.25_deg/seamless/)",
@@ -1471,7 +1491,7 @@ def sha256(p):
 def manifest(counts):
     rows = []
     desc = {
-        "fire_detections_all.csv.gz": "All FIRMS detections 2003-present in the box 68.5-89E 21-35.5N, all days, one CSV (same columns as the per-year parquet minus geometry)",
+        "fire_detections_all.csv.gz": f"All FIRMS detections 2003-present in the box {BOX}, all days, one CSV (same columns as the per-year parquet minus geometry)",
         "creams_events.parquet": "ICAR-IARI CREAMS bulletin annexure events (GeoParquet, EPSG:4326)",
         "creams_events.csv.gz": "ICAR-IARI CREAMS bulletin annexure events (CSV)",
         "dashboard-data.zip": "everything the web dashboard loads (unzip at the repository root)",
@@ -1499,6 +1519,12 @@ def manifest(counts):
             with xr.open_dataset(p) as r:
                 size = " x ".join(f"{k}={v}" for k, v in r.sizes.items())
             d = "GEOS-FP smoke AOD, total AOD, OC/BC/BrC AOD, 10 m wind; 3-hourly, 0.3125 x 0.25 deg (NetCDF4/CF)"
+        elif p.suffix == ".zip":  # scan the text members, not the compressed bytes (random bytes match the e-mail pattern)
+            import zipfile
+            with zipfile.ZipFile(p) as z:
+                for zi in z.infolist():
+                    if Path(zi.filename).suffix.lower() in (".json", ".geojson", ".csv", ".md", ".txt", ".html", ".js", ".css"):
+                        scan(f"{name}:{zi.filename}", z.read(zi))
         elif p.suffix == ".tif":
             import rasterio
             with rasterio.open(p) as r:
@@ -1573,7 +1599,7 @@ def write_docs(counts, rows_manifest):
     for r in rows_manifest:
         lines.append(f"| `{r['file']}` | {r['bytes'] / 1e6:.1f} MB | {r['rows_or_size']} | {r['description']} |")
     lines += ["", "### `fire_detections_<year>.parquet` and `fire_detections_all.csv.gz`", "",
-              "Every FIRMS detection in the box 68.5-89 E, 21-35.5 N on every day of every year, after the dashboard's filters: static land sources "
+              f"Every FIRMS detection in the box {BOX} (India and Pakistan country files) on every day of every year, after the dashboard's filters: static land sources "
               "(type 2) and offshore (type 3) removed; near-real-time rows in 0.01-degree cells flagged static in any archive year removed; for years covered "
               "by the FIRMS yearly country archive only NOAA-21 is taken from the API; duplicate API rows (same position, time, sensor) dropped. "
               "GeoParquet 1.x (WKB points, EPSG:4326, zstd). CREAMS events are a separate asset. Row counts reconcile exactly with the dashboard's "
@@ -1708,8 +1734,15 @@ def privacy_grep():
                     txt += [x for x in row if isinstance(x, str)]
             con.close()
             scan(name, "\n".join(txt).encode())
+        elif p.suffix == ".zip":  # scan the text members, not the compressed bytes (random bytes match the e-mail pattern)
+            import zipfile
+            with zipfile.ZipFile(p) as z:
+                for zi in z.infolist():
+                    if Path(zi.filename).suffix.lower() in (".json", ".geojson", ".csv", ".md", ".txt", ".html", ".js", ".css"):
+                        scan(f"{name}:{zi.filename}", z.read(zi))
         elif p.suffix == ".tif":
-            scan(name + ":gdalinfo", subprocess.run(["gdalinfo", str(p)], capture_output=True).stdout)
+            # run from the file's folder: gdalinfo echoes its argument ("Files: ..."), which is not in the file
+            scan(name + ":gdalinfo", subprocess.run(["gdalinfo", p.name], capture_output=True, cwd=p.parent).stdout)
         else:
             scan(name, p.read_bytes())
     return hits

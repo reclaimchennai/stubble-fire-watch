@@ -1,12 +1,12 @@
 # Boundaries
 
-District (ADM2) and state (ADM1) polygons for the analysis region (68.5-89 E, 21-35.5 N), and country outlines, as used by the dashboard. `boundaries.gpkg` holds the same three layers.
+District (ADM2) and state (ADM1) polygons for the analysis region (66-98 E, 6-37.5 N), and country outlines, as used by the dashboard. `boundaries.gpkg` holds the same three layers.
 
 ## Files
 
 ### `districts.geojson (layer `districts` in boundaries.gpkg)`
 
-529 rows.
+857 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -19,7 +19,7 @@ District (ADM2) and state (ADM1) polygons for the analysis region (68.5-89 E, 21
 
 ### `states.geojson (layer `states` in boundaries.gpkg)`
 
-26 rows.
+43 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -47,7 +47,7 @@ India and Pakistan districts/states intersecting the region; countries clipped t
 - India states: geoBoundaries gbOpen IND ADM1 (DataMeet India / Election Commission of India) - CC BY 2.5 IN.
 - Pakistan ADM1/ADM2: geoBoundaries gbOpen PAK - public domain.
 - Countries: Natural Earth 1:10m admin-0 countries, India point of view - public domain.
-Cite: Runfola et al. (2020) geoBoundaries, PLoS ONE 15(4): e0231866. Licences checked against the geoBoundaries API on 2026-10-18.
+Cite: Runfola et al. (2020) geoBoundaries, PLoS ONE 15(4): e0231866. Licences checked against the geoBoundaries API on 2026-10-29.
 
 ## Known caveats
 

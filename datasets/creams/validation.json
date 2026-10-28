@@ -86,6 +86,12 @@
    "event_rows": 0
   },
   {
+   "file": "42.RiceResidueFireBulletin_26Oct_2026_ICAR.pdf",
+   "state": "Uttarakhand",
+   "highlights": 111,
+   "event_rows": 11
+  },
+  {
    "file": "01.WheatResidueFireBulletin_01Apr_2022_ICAR.pdf",
    "state": "Punjab",
    "highlights": 6,
@@ -2762,6 +2768,13 @@
   },
   {
    "season": "rice",
+   "state": "Punjab",
+   "date": "2026-10-22",
+   "cum_delta": 56,
+   "day": 36
+  },
+  {
+   "season": "rice",
    "state": "Rajasthan",
    "date": "2026-10-02",
    "cum_delta": 2,
@@ -2769,10 +2782,24 @@
   },
   {
    "season": "rice",
+   "state": "Rajasthan",
+   "date": "2026-10-22",
+   "cum_delta": 79,
+   "day": 56
+  },
+  {
+   "season": "rice",
    "state": "Uttarakhand",
    "date": "2026-10-02",
    "cum_delta": 0,
    "day": 2
+  },
+  {
+   "season": "rice",
+   "state": "Uttarakhand",
+   "date": "2026-10-26",
+   "cum_delta": 11,
+   "day": 111
   },
   {
    "season": "wheat",
@@ -3113,18 +3140,18 @@
  ],
  "summary": {
   "failed": 0,
-  "events_vs_highlights": 19,
+  "events_vs_highlights": 20,
   "table_total_vs_highlights": 7,
   "table_sum_vs_total": 309,
   "district_sum_vs_total": 31,
   "non_monotonic_cumulative": 1,
-  "cum_delta_vs_day": 31,
+  "cum_delta_vs_day": 34,
   "no_highlights": 14,
   "date_mismatch": 4,
   "duplicates": 57,
   "event_list_other_date": 6,
-  "primary_bulletins": 789,
-  "pdfs": 852,
+  "primary_bulletins": 799,
+  "pdfs": 862,
   "event_rows_district_unmatched": 7
  },
  "event_districts_unmatched": [

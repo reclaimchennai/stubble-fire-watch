@@ -6,7 +6,7 @@ Official daily counts of paddy- and wheat-residue burning events in Punjab, Hary
 
 ### `state_daily.csv`
 
-5,458 rows.
+5,588 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -25,7 +25,7 @@ Official daily counts of paddy- and wheat-residue burning events in Punjab, Hary
 
 ### `district_daily.csv`
 
-194,903 rows.
+198,423 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -45,7 +45,7 @@ Official daily counts of paddy- and wheat-residue burning events in Punjab, Hary
 
 ### `year_compare.csv`
 
-5,447 rows.
+5,577 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -62,7 +62,7 @@ Official daily counts of paddy- and wheat-residue burning events in Punjab, Hary
 
 ### `bulletins.csv`
 
-852 rows.
+862 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -91,7 +91,7 @@ Official daily counts of paddy- and wheat-residue burning events in Punjab, Hary
 
 ### `bulletin_state_tables_long.csv.gz`
 
-538,853 rows. Every cell of the date-wise multi-year state tables printed in each bulletin (one row per bulletin x state x year x day); the raw material of state_daily / year_compare.
+558,208 rows. Every cell of the date-wise multi-year state tables printed in each bulletin (one row per bulletin x state x year x day); the raw material of state_daily / year_compare.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -109,7 +109,7 @@ Consistency checks run when the bulletins were parsed: bulletins that failed, ev
 
 ## Coverage
 
-Bulletins 2018-2026 (rice seasons from 2018, wheat seasons where published); multi-year tables in bulletins reach back to 2016. 852 PDFs listed.
+Bulletins 2018-2026 (rice seasons from 2018, wheat seasons where published); multi-year tables in bulletins reach back to 2016. 862 PDFs listed.
 
 ## Source and licence
 

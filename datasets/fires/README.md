@@ -1,12 +1,12 @@
 # Satellite active-fire detections (NASA FIRMS), aggregated
 
-Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections over north-west India and Pakistan Punjab (box 68.5-89 E, 21-35.5 N), aggregated by day, state, district, season and sensor. These are the numbers the dashboard plots. Point-level detections (all days of every year, 2003 onwards) are in the release assets `fire_detections_<year>.parquet` / `fire_detections_all.csv.gz`.
+Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections over India and Pakistan (box 66-98 E, 6-37.5 N), aggregated by day, state, district, season and sensor. These are the numbers the dashboard plots. Point-level detections (all days of every year, 2003 onwards) are in the release assets `fire_detections_<year>.parquet` / `fire_detections_all.csv.gz`.
 
 ## Files
 
 ### `season_totals.csv`
 
-3,622 rows.
+5,654 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -20,7 +20,7 @@ Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections 
 
 ### `daily_by_state.parquet / daily_by_state.csv.gz`
 
-248,093 rows. Whole calendar year, only rows with at least one detection.
+394,973 rows. Whole calendar year, only rows with at least one detection.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -33,7 +33,7 @@ Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections 
 
 ### `district_season.csv`
 
-52,512 rows.
+84,875 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -59,7 +59,7 @@ Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections 
 
 ### `district_daily_paddy.csv.gz`
 
-319,753 rows. Rice season (Sep 15-Nov 30) only, nonzero district-days.
+427,728 rows. Rice season (Sep 15-Nov 30) only, nonzero district-days.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -74,7 +74,7 @@ Counts and fire radiative power (FRP) of MODIS and VIIRS active-fire detections 
 
 ## Coverage
 
-MODIS Terra/Aqua 2003 onwards, VIIRS S-NPP 2012 onwards, NOAA-20 2018 onwards, NOAA-21 2023 onwards; last detection date 2026-10-18 (summary generated 2026-10-18T12:04Z).
+MODIS Terra/Aqua 2003 onwards, VIIRS S-NPP 2012 onwards, NOAA-20 2018 onwards, NOAA-21 2023 onwards; last detection date 2026-10-28 (summary generated 2026-10-28T21:21Z).
 
 ## Source and licence
 
@@ -88,7 +88,6 @@ NASA FIRMS (https://firms.modaps.eosdis.nasa.gov/): MODIS Collection 6.1 (MCD14)
 - Dates are UTC acquisition dates; seasons are defined on UTC dates (a 01:30 IST overpass on Oct 2 is dated Oct 1 UTC).
 - Year-to-year comparisons are affected by overpass-time drift (Terra/Aqua orbits drifted after ~2020; S-NPP data gaps, e.g. no S-NPP after 2023-11-01 in some feeds) and by later sowing/harvest.
 - CREAMS (ICAR-IARI) bulletin events, which the dashboard also shows as a 'sensor', are excluded here; see ../creams/.
-- The FIRMS API returned empty files (no detections at all, i.e. a feed gap rather than no fires) for: VIIRS_SNPP_NRT 2026-07-11 .. 2026-07-15; VIIRS_SNPP_SP 2026-05-01 .. 2026-05-05; VIIRS_SNPP_SP 2026-05-06 .. 2026-05-10; VIIRS_SNPP_SP 2026-05-11 .. 2026-05-15; VIIRS_SNPP_SP 2026-05-16 .. 2026-05-20; VIIRS_SNPP_SP 2026-05-21 .. 2026-05-25; VIIRS_SNPP_SP 2026-05-26 .. 2026-05-30. Counts for those sensors and dates are missing (they are not zero-fire days).
 - Current-year values come from near-real-time data and will change when standard-processing data replace them.
 
 ## How it was produced

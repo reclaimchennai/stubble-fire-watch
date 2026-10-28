@@ -89,7 +89,7 @@ Ground PM2.5/PM10 from CPCB continuous monitoring stations (via OpenAQ), modelle
 
 ### `stubble_share_delhi.csv`
 
-1,930 rows.
+1,929 rows.
 
 | column | type | unit | meaning |
 |---|---|---|---|
@@ -105,7 +105,7 @@ Ground PM2.5/PM10 from CPCB continuous monitoring stations (via OpenAQ), modelle
 
 ## Coverage
 
-CPCB: 36 cities, 92 stations, 2016-09-01..2026-10-18 (winters only; OpenAQ has no CPCB data Oct 2022 - Feb 2025). CAMS/ERA5: 7 cities, 2003-09-15..2026-10-16 (CAMS values null before Aug 2022). Stubble share: 2019-11-04..2026-10-18, sparse.
+CPCB: 36 cities, 92 stations, 2016-09-01..2026-10-18 (winters only; OpenAQ has no CPCB data Oct 2022 - Feb 2025). CAMS/ERA5: 7 cities, 2003-09-15..2026-10-16 (CAMS values null before Aug 2022). Stubble share: 2019-11-04..2026-10-17, sparse.
 
 ## Source and licence
 
