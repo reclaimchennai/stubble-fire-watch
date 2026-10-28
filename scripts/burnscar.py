@@ -61,7 +61,7 @@ def get_json(url, body=None, tries=4):
 def season_mosaic(year, bbox, sdir):
     """Warp each month's Burn_Date tiles to UTM 43N; keep the first burn inside the season window."""
     feats = get_json(f"{STAC}/search", {"collections": ["modis-64A1-061"], "bbox": bbox,
-                                        "datetime": f"{year}-09-01/{year}-12-31", "limit": 100})["features"]
+                                        "datetime": f"{year}-09-01T00:00:00Z/{year}-12-31T23:59:59Z", "limit": 100})["features"]
     if not feats:
         return None, []
     tok = get_json(TOKEN_URL)["token"]

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>North to south — Stubble Fire Watch</title>
+<meta name="description" content="Does smoke from north Indian farm fires reach Chennai? Five-day back-trajectories, fire detections, ground and model air quality, and the cyclones that reshuffle the air over the Bay of Bengal.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reclaim Chennai">
+<meta property="og:url" content="https://fire.reclaimchennai.city/south/">
+<meta property="og:title" content="North to south: farm-fire smoke, cyclones and Chennai's air">
+<meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f5" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://fire.reclaimchennai.city/south/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  (function () {
+    var t = null; try { t = localStorage.getItem("fw-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+  window.__boot = { south: fetch("../data/db/south.json").then(function (r) { return r.json(); }) };
+</script>
+<link rel="stylesheet" href="../vendor/maplibre-gl.css">
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="../db/db.css">
+<link rel="stylesheet" href="south.css">
+<script src="../vendor/maplibre-gl.js" defer></script>
+<script src="../vendor/echarts.min.js" defer></script>
+<script src="../vendor/icons.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="crumbs">
+    <a class="crumb-dim" href="../">Stubble Fire Watch</a><span class="crumb-sep">/</span><span class="crumb">North to south</span>
+  </div>
+  <div class="controls">
+    <label class="field"><span class="field-k">Receptor</span><select id="sel-city"></select><span class="caret" data-icon="chevron-down"></span></label>
+  </div>
+  <nav class="topnav">
+    <a class="btn" href="../db/"><span data-icon="chart-column"></span><span class="btn-tx">Twenty years</span></a>
+    <a class="btn" href="../"><span data-icon="map"></span><span class="btn-tx">Live map</span></a>
+    <button class="btn icon" id="theme-btn" type="button" title="Toggle light / dark theme" aria-label="Toggle light / dark theme"><span id="theme-icon" data-icon="sun"></span></button>
+  </nav>
+</header>
+
+<main class="grid" id="grid">
+  <section class="lede-block">
+    <h1>Does north Indian farm-fire smoke reach Chennai?</h1>
+    <p class="lede" id="lede">Loading…</p>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <!-- 1. trajectories map -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="route"></span>Where the air came from</h2>
+      <p class="sect-lede">Each line traces the air that arrived over the city at 11:30 IST five days back in time, along the 850 hPa
+        winds (about 1.5 km up) of NASA's GEOS-FP analysis. Orange lines crossed Punjab, Haryana or Delhi while fields there were
+        burning; blue lines spent most of the five days over the sea. Dots are VIIRS fire detections of the five days before the
+        selected date; the dashed line is a cyclone track.</p>
+      <div class="sect-ctls">
+        <label class="field"><span class="field-k">Season</span><select id="map-year"></select><span class="caret" data-icon="chevron-down"></span></label>
+        <button class="btn icon" id="map-prev" type="button" aria-label="Previous day"><span data-icon="chevron-left"></span></button>
+        <label class="field datefield"><input type="range" id="map-day" min="0" max="91" value="30" aria-label="Day" autocomplete="off"><b id="map-date"></b></label>
+        <button class="btn icon" id="map-next" type="button" aria-label="Next day"><span data-icon="chevron-right"></span></button>
+        <button class="btn icon" id="map-play" type="button" aria-label="Play"><span data-icon="play"></span></button>
+        <div class="seg sm" id="seg-paths" role="group" aria-label="Lines shown">
+          <button type="button" data-v="day" aria-pressed="true">Selected day</button>
+          <button type="button" data-v="season" aria-pressed="false">Whole season</button>
+        </div>
+      </div>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel map-panel"><div class="map h-map" id="map"></div>
+        <div class="map-legend" id="map-legend"></div></div>
+      <div class="panel"><div class="panel-h"><h2 id="t-dayinfo">That day</h2></div><div id="dayinfo" class="dayinfo"></div>
+        <div class="chart h-sm" id="c-daypm"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. how often -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="wind"></span>How often northern air reaches the south</h2>
+      <p class="sect-lede" id="freq-lede">October and November days, by where the five-day back-trajectory had been.</p>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2 id="t-freq">Where the city's air came from, by season</h2><span class="hint" tabindex="0" data-tip="Days are classed from the four daily trajectories (00, 06, 12, 18 UTC arrivals). NW fires: the air crossed the Punjab-Haryana-Delhi box on a day it held VIIRS detections. Gangetic plain: at least 6 h over the plain (74-88 E, 24-31 N) but no live NW fires. Sea: at least 60 % of the hours over the Bay of Bengal or Arabian Sea. Peninsula: the rest."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-freq"></div></div>
+      <div class="panel"><div class="panel-h"><h2>North to south: share of days with NW fire air</h2><span class="hint" tabindex="0" data-tip="Share of 1 Oct - 30 Nov days, all seasons with winds (2018 onward), on which the receptor's back-trajectory met Punjab-Haryana-Delhi fires. Same method for every city."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-gradient"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. does it show -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2><span data-icon="chart-column"></span>Does it show in the air?</h2>
+      <p class="sect-lede" id="effect-lede">Median PM2.5 and carbon monoxide by where the air came from, on dry days with no cyclone within 800 km,
+        month by month, so that the monsoon's rain and wind shifts are not mistaken for smoke.</p>
+      <div class="sect-ctls">
+        <div class="seg sm" id="seg-var" role="group" aria-label="Measure">
+          <button type="button" data-v="pm25" aria-pressed="true">PM2.5, ground monitors</button>
+          <button type="button" data-v="cams_pm25" aria-pressed="false">PM2.5, CAMS model</button>
+          <button type="button" data-v="cams_co" aria-pressed="false">CO, CAMS model</button>
+        </div>
+      </div>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel"><div class="panel-h"><h2 id="t-classes">By air-mass origin</h2><span class="panel-note" id="n-classes"></span></div>
+        <div class="chart h-md" id="c-classes"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Holding the weather fixed</h2><span class="hint" tabindex="0" data-tip="Ordinary least squares on daily values, October to December, cyclone days left out: log of the measure against log(1 + NW fire exposure), log(1 + other fire exposure), the share of hours over the sea, log(1 + rain), wind speed, log boundary-layer height and month. Bars are the change in the measure for a tenfold rise in fire exposure, with 95 % intervals (robust standard errors). Days are not independent, so the intervals are too narrow if anything."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-reg"></div><p class="panel-sub" id="n-reg"></p></div>
+    </div>
+    <div class="panel"><div class="panel-h"><h2 id="t-season">The season, day by day</h2>
+      <label class="field sm"><span class="field-k">Season</span><select id="season-year"></select><span class="caret" data-icon="chevron-down"></span></label></div>
+      <div class="chart h-lg" id="c-season"></div></div>
+  </section>
+
+  <!-- 4. cyclones -->
+  <section class="sect" id="sect-cyclones">
+    <div class="sect-head">
+      <h2><span data-icon="tornado"></span>Cyclones and the air</h2>
+      <p class="sect-lede" id="cy-lede">Bay of Bengal storms that passed within 800 km of Chennai since 2016 (IMD best track via IBTrACS;
+        IMD RSMC bulletins for the current storm), and Chennai's air in the week either side of the closest approach.</p>
+    </div>
+    <div class="panel"><div class="panel-h"><h2 id="t-arnab">Cyclone Arnab, hour by hour in Chennai</h2><span class="panel-note" id="n-arnab"></span></div>
+      <div class="chart h-lg" id="c-arnab"></div><p class="panel-sub" id="s-arnab"></p></div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Before and after a cyclone</h2><span class="hint" tabindex="0" data-tip="Chennai daily PM2.5 relative to the same storm's mean over days -7 to -3, median and interquartile range across storms, by day from the closest approach. Ground monitors where they exist, otherwise the CAMS model (scaled to the same baseline). Storms passing north of Chennai pull land air from the north-west on their way; storms passing south bring sea air and rain."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-composite"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Storms near Chennai</h2></div>
+        <div class="table-wrap tall"><table class="board" id="t-storms"><thead><tr><th class="name">Storm</th><th class="name">Peak</th><th class="num">Closest</th><th class="num">PM2.5 before</th><th class="num">peak ±3 d</th><th class="num">after rain</th></tr></thead><tbody></tbody></table></div></div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="sect-head"><h2><span data-icon="info"></span>Sources, method and caveats</h2></div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <p class="foot">Stubble Fire Watch · <a href="../">live map</a> · <a href="../db/">twenty years</a> · <a href="https://pol.reclaimchennai.city/">Chennai air (pol)</a> · <a href="https://github.com/reclaimchennai/stubble-fire-watch">open data and code</a> · data built <span id="built"></span></p>
+</main>
+</body>
+</html>

@@ -31,12 +31,11 @@ OUT = ROOT / "data" / "smoke"
 CACHE = ROOT / "data" / "raw" / "smoke"
 BASE = "https://opendap.nccs.nasa.gov/dods/GEOS-5/fp/0.25_deg/seamless"
 
-# Region: northern subcontinent and its upwind margin
-LON0, LON1, LAT0, LAT1 = 64.0, 94.0, 18.0, 38.0
+# Region: all of India, its upwind margin and the Bay of Bengal / Arabian Sea (was 64-94E, 18-38N until Oct 2026)
+LON0, LON1, LAT0, LAT1 = 62.0, 100.0, 4.0, 38.0
 DLON, DLAT = 0.3125, 0.25
 AOD_MAX = 2.0
 WIND_MAX = 20.0
-TILE_COLS = 16
 
 
 def get(url, tries=4):
@@ -150,13 +149,19 @@ def fetch_var(coll, run, var, ti0, ti1, step, yi, xi):
         return np.concatenate(list(ex.map(one, range(ti0, ti1 + 1, chunk))))
 
 
+def atlas_cols(n, h, w):
+    """Tiles per row that keep the atlas near-square, so it stays within WebGL's 4096 px texture limit longer."""
+    return max(1, math.ceil(math.sqrt(n * h / w)))
+
+
 def atlas(frames, encode):
     n, h, w = frames.shape[:3]
-    rows = math.ceil(n / TILE_COLS)
+    cols = atlas_cols(n, h, w)
+    rows = math.ceil(n / cols)
     chans = 1 if frames.ndim == 3 else frames.shape[3]
-    img = np.zeros((rows * h, TILE_COLS * w, chans), np.uint8)
+    img = np.zeros((rows * h, cols * w, chans), np.uint8)
     for i in range(n):
-        r, c = divmod(i, TILE_COLS)
+        r, c = divmod(i, cols)
         # flip so north is up in the image
         img[r * h:(r + 1) * h, c * w:(c + 1) * w] = encode(frames[i])[::-1].reshape(h, w, chans)
     return img, rows
@@ -239,13 +244,14 @@ def main():
     lat_c = np.linspace(yi[0] * DLAT - 90, yi[1] * DLAT - 90, h)
     lon_c = np.linspace(xi[0] * DLON - 180, xi[1] * DLON - 180, w)
     box = np.ix_((lat_c >= 27.5) & (lat_c <= 32.5), (lon_c >= 73.5) & (lon_c <= 78.5))
+    chn = np.ix_((lat_c >= 12.5) & (lat_c <= 13.75), (lon_c >= 79.6) & (lon_c <= 80.6))
     meta = {
         "source": "NASA GMAO GEOS-FP tavg3_2d_aer_Nx + tavg1_2d_slv_Nx (seamless)",
         "aer_run": aer_run, "wind_run": slv_run,
         "analysis_until": run_time.strftime("%Y-%m-%dT%H:%MZ"),
         "bounds": [xi[0] * DLON - 180 - DLON / 2, yi[0] * DLAT - 90 - DLAT / 2,
                    xi[1] * DLON - 180 + DLON / 2, yi[1] * DLAT - 90 + DLAT / 2],
-        "tile_w": w, "tile_h": h, "cols": TILE_COLS, "rows": rows,
+        "tile_w": w, "tile_h": h, "cols": atlas_cols(len(smoke), h, w), "rows": rows,
         "aod_max": AOD_MAX, "aod_encoding": "aod = (px/255)^2 * aod_max",
         "wind_max": WIND_MAX, "wind_encoding": "m/s = px/255 * 2*wind_max - wind_max",
         "times": [t.strftime("%Y-%m-%dT%H:%MZ") for t in times],
@@ -254,6 +260,9 @@ def main():
         "box_name": "Punjab-Haryana-Delhi box (73.5-78.5E, 27.5-32.5N)",
         "box_smoke_mean": [round(float(f[box].mean()), 4) for f in smoke],
         "box_total_mean": [round(float(f[box].mean()), 4) for f in total],
+        "chennai_box_name": "Chennai box (79.6-80.6E, 12.5-13.75N)",
+        "chennai_smoke_mean": [round(float(f[chn].mean()), 4) for f in smoke],
+        "chennai_total_mean": [round(float(f[chn].mean()), 4) for f in total],
     }
     (OUT / "smoke_meta.json").write_text(json.dumps(meta))
     # keep the chunk cache to the runs that can still be used for gap filling

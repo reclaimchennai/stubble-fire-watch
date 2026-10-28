@@ -2,7 +2,7 @@
 
 Open datasets behind the paddy-stubble-burning dashboard (north-west India and Pakistan Punjab). Every folder under `datasets/` has a README with each column's type, unit and meaning, coverage, source, licence, caveats and loading snippets. Large files are attached to the GitHub Release (see *Release assets* below). Licences: [LICENSES.md](LICENSES.md).
 
-Exported by `scripts/export_release.py` on 2026-10-18.
+Exported by `scripts/export_release.py` on 2026-10-29.
 
 ## Repository datasets
 
@@ -16,6 +16,7 @@ Exported by `scripts/export_release.py` on 2026-10-18.
 | [paddy/](datasets/paddy/README.md) | Kharif rice area and production by state (1966+) and district (1997+), UPAg/DES | `rice_area_district.csv` (0.5 MB), `rice_area_state.csv` (38 kB) |
 | [enforcement/](datasets/enforcement/README.md) | Enforcement and crop-residue-management indicators with source documents and policy timeline | `ENFORCEMENT_SOURCES.md` (54 kB), `events.csv` (14 kB), `metrics.csv` (4 kB), `sources.csv` (40 kB), `values.csv` (0.4 MB) |
 | [boundaries/](datasets/boundaries/README.md) | District / state / country polygons used for all attributions (GeoJSON + GeoPackage) | `boundaries.gpkg` (3.3 MB), `districts.geojson` (1.9 MB), `states.geojson` (0.4 MB), `subcontinent.geojson` (0.5 MB) |
+| [south/](datasets/south/README.md) | North to south: Chennai and east-coast air quality, 5-day back-trajectory fire exposure, Bay of Bengal / Arabian Sea cyclone tracks | `chennai_hourly.csv` (1.0 MB), `chennai_reference_stations.csv` (1 kB), `cities_daily.csv` (2.3 MB), `cyclone_track_points.csv` (1.1 MB), `cyclone_tracks.geojson` (0.3 MB), `cyclones.csv` (37 kB), `trajectory_exposure_daily.csv` (0.4 MB), `trajectory_paths_chennai.csv` (0.4 MB) |
 
 ## Release assets
 

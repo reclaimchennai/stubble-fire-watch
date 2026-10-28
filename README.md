@@ -8,6 +8,7 @@ haze as it drifts over Delhi, official burning counts parsed from 851 daily bull
 paddy area by district, and what Punjab and Haryana did about it.
 
 **Live:** [fire.reclaimchennai.city](https://fire.reclaimchennai.city) · **Analysis:** [fire.reclaimchennai.city/db](https://fire.reclaimchennai.city/db/) ·
+**North to south:** [fire.reclaimchennai.city/south](https://fire.reclaimchennai.city/south/) ·
 **Data:** [`datasets/`](datasets/) and the [latest release](../../releases/latest) · **Method:** [`docs/METHODS.md`](docs/METHODS.md)
 
 ![Smoke drifting over the plains, with each day's fire detections](docs/images/smoke.gif)
@@ -32,6 +33,30 @@ follows the latest one.
 | **Enforcement arrived late.** | Punjab imposed ₹1.26 crore in environmental compensation and registered 1,963 FIRs and 2,176 red entries in land records in 2025, against fires it had once counted in the lakhs. |
 
 All figures are computed from the datasets in this repository; the analysis page draws them as charts.
+
+### North to south: does the smoke reach Chennai?
+
+Since October 2026 the fire map and the smoke field cover all of India and the Bay of Bengal, and a third page,
+[`/south`](https://fire.reclaimchennai.city/south/), asks whether north Indian farm fires foul the air 2,000 km
+away in Chennai. Every day of every October-December since 2018, four five-day back-trajectories are run from
+Chennai and eight other cities through NASA GEOS-FP 850 hPa winds, and each is scored by the fires it crossed.
+
+| | |
+|---|---|
+| **Rarely.** | On **10.5%** of October-November days (54 of 515, 2018-2026) the air arriving over Chennai had crossed Punjab, Haryana or Delhi while fields there were burning. Kolkata: 28%, Visakhapatnam: 21%, Bengaluru: 9%, Delhi: 99%. |
+| **But it shows when it does.** | Holding rain, wind, mixing height, sea exposure and month fixed, a tenfold rise in the north-western fires the air met goes with **+25%** PM2.5 at Chennai's monitors (95% interval +9 to +43%). Over a season that is about 3% of Chennai's PM2.5; on the days the smoke arrives, up to a third. |
+| **The plain's air is dirty anyway.** | On dry October days Chennai reads a median **49 µg/m³** when the air met the north-western fires, **51** when it came over the Gangetic plain but missed them, and **24** when it came off the Bay of Bengal. |
+| **Cyclones matter more.** | Across 37 storms that passed within 800 km since 2016, Chennai's PM2.5 ran about **23% higher** for days after a storm passing to its north (land air pulled down from the north), and about **35% lower** after one passing to its south (rain and sea air). |
+| **Arnab, October 2026.** | The very severe cyclonic storm passed 409 km NNE of Chennai on 27 October. On 26-27 October the city's air came down the east coast from the Gangetic plain, crossing about 245 fire detections in central and eastern India, and Chennai's sensor network rose from a median 20 to a peak of **151 µg/m³**. |
+
+![Chennai's air on 27 Oct 2026: five-day back-trajectory down the east coast, fires of the previous five days, Cyclone Arnab's track](docs/images/south-trajectory.png)
+
+| | |
+|---|---|
+| ![Where Chennai's air came from, by season, and the north-south gradient](docs/images/south-frequency.png) | ![PM2.5 by air-mass origin and the regression](docs/images/south-effect.png) |
+| ![Cyclone Arnab hour by hour in Chennai](docs/images/south-arnab.png) | ![Chennai PM2.5 before and after cyclones](docs/images/south-cyclones.png) |
+
+![The live map now covers all of India, with cyclone tracks](docs/images/map-all-india.png)
 
 ![Twenty-three seasons of burned area, Punjab and Haryana, coloured by burn date](docs/images/burned-area-2003-2025.gif)
 
@@ -71,7 +96,7 @@ sources and caveats. The full list is in [`DATA_DICTIONARY.md`](DATA_DICTIONARY.
 
 | Dataset | Coverage | Formats | Where |
 |---|---|---|---|
-| **Fire detections**: every MODIS and VIIRS (S-NPP, NOAA-20, NOAA-21) detection over 68.5-89 E, 21-35.5 N, with district and state | 2003 to today, 10.5 million rows | GeoParquet per year, CSV | release |
+| **Fire detections**: every MODIS and VIIRS (S-NPP, NOAA-20, NOAA-21) detection over 68.5-89 E, 21-35.5 N, with district and state (the dashboard covers all of India, 66-98 E, 6-37.5 N, since Oct 2026; the next release's files will too) | 2003 to today, 10.5 million rows | GeoParquet per year, CSV | release |
 | Fire counts and radiative power by state, sensor and day; by district and season; by hour | 2003 to today | CSV, Parquet | [`datasets/fires`](datasets/fires) |
 | **ICAR-IARI CREAMS** official counts, parsed from 851 daily bulletins: state and district daily series, multi-year comparison tables | 2016 to today | CSV | [`datasets/creams`](datasets/creams) |
 | CREAMS geolocated residue-burning events from the bulletin annexures | 2018 onward, 698,696 events | GeoParquet, CSV | release |
@@ -84,6 +109,7 @@ sources and caveats. The full list is in [`DATA_DICTIONARY.md`](DATA_DICTIONARY.
 | **Paddy**: kharif rice area and production by district and state | 1997 to 2025 | CSV | [`datasets/paddy`](datasets/paddy) |
 | **Enforcement and residue management**: compensation imposed and recovered, FIRs, red entries, inspections, action against officials, CRM machines, custom hiring centres, funds; policy timeline with sources | 2016 to 2026 | CSV, Markdown | [`datasets/enforcement`](datasets/enforcement) |
 | Boundaries: districts, states, subcontinent outline (India's official view) | | GeoJSON, GeoPackage | [`datasets/boundaries`](datasets/boundaries) |
+| **North to south**: daily air quality and weather at Chennai and 8 receptor cities (CPCB/TNPCB via OpenAQ, CAMS, ERA5), Chennai hourly reference monitors, 5-day back-trajectory fire exposure per city and day, Chennai trajectory paths, 247 Bay of Bengal / Arabian Sea cyclones with tracks | 2016 onward (trajectories 2018 onward, cyclones 2003 onward) | CSV, GeoJSON | [`datasets/south`](datasets/south) |
 | **Dashboard bundle**: everything the web app loads, ready to serve | | ZIP | release |
 
 ```python

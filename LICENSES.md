@@ -2,7 +2,7 @@
 
 The code in this repository and the derived tables are offered for research and journalism. Each dataset keeps the licence or terms of its
 upstream source, listed below; when you reuse a file, cite the original source as shown. Status column: **verified** = checked against the
-provider's own licence statement on 2026-10-18; **stated** = taken from the provider's documentation as recorded at download time, not re-checked;
+provider's own licence statement on 2026-10-29; **stated** = taken from the provider's documentation as recorded at download time, not re-checked;
 **uncertain** = no explicit licence found.
 
 | dataset(s) | upstream source | licence / terms | status |
@@ -19,6 +19,10 @@ provider's own licence statement on 2026-10-18; **stated** = taken from the prov
 | air/cpcb_* | CPCB CAAQMS data redistributed by OpenAQ API v3 | OpenAQ terms: users must comply with each provider's terms and credit both the original provider (CPCB) and OpenAQ. CPCB data are Indian government data; no separate licence was found on the OpenAQ records. | verified (OpenAQ terms); CPCB licence uncertain |
 | air/cams_era5_* | Open-Meteo Air Quality API (CAMS global forecasts) and Historical Weather API (ERA5/ERA5-Land) | Open-Meteo: CC BY 4.0 (attribute Open-Meteo). Underlying CAMS and C3S ERA5 data: Copernicus licence / CC BY 4.0 - "Contains modified Copernicus Atmosphere Monitoring Service and Climate Change Service information". | stated (Open-Meteo licence page is script-rendered and was not re-read) |
 | air/stubble_share_delhi | IITM Pune (MoES): SAFAR, DSS, AQEWS public web pages, mostly via Internet Archive captures | Public government web pages; no explicit licence found. Cite IITM and the capture URL. | uncertain |
+| south/cities_daily, south/chennai_hourly (openaq_*, cams_*, era5) | CPCB/TNPCB monitors via OpenAQ v3; CAMS and ERA5 via Open-Meteo | As air/cpcb_* and air/cams_era5_* above. | stated |
+| south/chennai_hourly (tnpcb_cpcb_pol_runningmean) | TNPCB public station pages, as collected by pol.reclaimchennai.city (Reclaim Chennai) | Public government web pages; no explicit licence found. Cite TNPCB. Converted from AQI sub-indices to concentrations here. | uncertain |
+| south/trajectory_* | Computed here from NASA GMAO GEOS-FP winds and NASA FIRMS VIIRS detections | NASA open data, no restrictions; cite GEOS-FP and FIRMS. Derived values: same terms as this repository's code. | stated |
+| south/cyclones*, south/cyclone_* | IBTrACS v04r01 (NOAA NCEI; Knapp et al. 2010, doi:10.25921/82ty-9e16), which carries IMD RSMC New Delhi best tracks; IMD RSMC advisories for the current storm | IBTrACS: NOAA open data, no restrictions; cite IBTrACS and the agencies. IMD bulletins: public Government of India bulletins; cite IMD RSMC New Delhi. | stated |
 | paddy/ (1997-98 district rows) | DES Crop Production Statistics via the India Data Portal mirror | ODC-By (as recorded at download) | stated |
 | paddy/ | UPAg (Unified Portal for Agricultural Statistics) / DES, Ministry of Agriculture & Farmers Welfare, Area-Production-Yield | Government Open Data License - India (GODL) is the default for Indian government open data; not stated on every UPAg download. | uncertain |
 | enforcement/ | Lok Sabha / Rajya Sabha answers, CAQM directions and reports, NGT and Supreme Court filings, Punjab / Haryana departments and pollution control boards, data.gov.in (OGD) tables | Public government documents; data.gov.in resources are under GODL. Values are short factual extracts with quotes and source URLs. | data.gov.in verified as GODL by its portal terms; others uncertain |

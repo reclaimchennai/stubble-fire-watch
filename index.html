@@ -74,6 +74,7 @@
   </button>
 
   <nav class="topnav">
+    <a class="btn" href="south/" id="btn-south" title="Does farm-fire smoke reach Chennai? Trajectories, air quality and cyclones"><span data-icon="route"></span><span class="btn-tx">North to south</span></a>
     <a class="btn primary" href="db/" id="btn-db"><span data-icon="chart-line"></span><span class="btn-tx">Analysis</span></a>
     <button class="btn icon" id="btn-about" type="button" title="Data sources and method" aria-label="Data sources and method"><span data-icon="info"></span></button>
     <button class="btn icon" id="btn-export" type="button" title="Download the period's detections as CSV" aria-label="Download CSV"><span data-icon="download"></span></button>
@@ -148,6 +149,11 @@
       <span><b>Twenty years of stubble burning</b><small>Season trends, district rankings, burning per hectare of paddy, timing shifts and air quality in Delhi and Punjab.</small></span>
       <span data-icon="chevron-right"></span>
     </a>
+    <a class="panel panel-link" href="south/">
+      <span data-icon="route"></span>
+      <span><b>North to south</b><small>Does the smoke reach Chennai? Five-day back-trajectories, fires met on the way, ground air quality, and what cyclones do to it.</small></span>
+      <span data-icon="chevron-right"></span>
+    </a>
   </aside>
 
   <button class="sidebar-toggle btn icon" id="btn-sidebar" type="button" title="Toggle panel" aria-label="Toggle panel"><span data-icon="panel-left-close"></span></button>
@@ -177,6 +183,7 @@
         <div class="menu-body">
           <label><input type="checkbox" id="l-burnscar" checked>Burned area (MODIS, 500 m)</label>
           <label title="One-off: ESA's Sentinel-2A night campaign, 9 and 12 Dec 2025, 22:30 IST"><input type="checkbox" id="l-s2night">Night hot spots, Sentinel-2 (Dec 2025)</label>
+          <label title="Bay of Bengal and Arabian Sea storms of the selected year: IMD best track via IBTrACS; the current storm from IMD RSMC advisories"><input type="checkbox" id="l-cyclones" checked>Cyclone tracks (IMD)</label>
           <label><input type="checkbox" id="l-hillshade" checked>Hillshade</label>
           <label><input type="checkbox" id="l-wind" checked>Wind streamlines</label>
           <label><input type="checkbox" id="l-districts" checked>District boundaries</label>

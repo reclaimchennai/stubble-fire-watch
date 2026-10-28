@@ -20,7 +20,8 @@ from shapely.ops import unary_union
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "boundaries"
 OUT = ROOT / "data" / "geo"
-REGION = box(68.5, 21, 89, 35.5)          # analysis area (same as FIRMS bbox)
+REGION = box(66, 6, 98, 37.5)             # analysis area (same as FIRMS bbox): all of India since Oct 2026
+NORTH = box(68.5, 21, 89, 35.5)           # the original northern area: its districts keep ids 0..n-1
 VIEW = box(40, -12, 125, 58)              # outline/mask area (large enough for tilted views)
 SUBCONTINENT = {"India", "Pakistan", "Nepal", "Bangladesh", "Bhutan", "Sri Lanka"}
 STATE_FIX = {"Dadra and Nagar Haveli and Daman and Diu": "Dadra & Nagar Haveli and Daman & Diu",
@@ -94,8 +95,10 @@ def main():
             if not cands:
                 continue
             st = max(cands)[1]
-            dists.append({"name": clean(f["properties"]["shapeName"]), "state": st, "country": cname, "g": g})
-    dists.sort(key=lambda d: (d["country"], d["state"], d["name"]))
+            dists.append({"name": clean(f["properties"]["shapeName"]), "state": st, "country": cname, "g": g,
+                          "new": not g.intersects(NORTH)})
+    # ids are referenced by burned-area and rice-area files: northern districts first, as before, then the rest
+    dists.sort(key=lambda d: (d["new"], d["country"], d["state"], d["name"]))
     out = []
     for i, d in enumerate(dists):
         out.append({"type": "Feature", "id": i,

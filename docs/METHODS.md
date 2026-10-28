@@ -269,3 +269,75 @@ Country outlines are Natural Earth 1:10m from India's point of view; states and 
 districts from the Local Government Directory, 2021). The map is MapLibre GL (globe, 3D terrain with AWS Terrain
 Tiles, elevation tinting), D3 for the side charts and ECharts for the analysis page, with Esri basemaps loaded at
 view time and not redistributed.
+
+
+## 9. North to south: trajectories, Chennai's air and cyclones
+
+**Question.** Does smoke from crop fires in Punjab, Haryana and Delhi reach Chennai, about 2,000 km away, and what do
+Bay of Bengal cyclones do to the city's air?
+
+**Extent.** From October 2026 the fire layer covers 66-98 E, 6-37.5 N (India and Pakistan country files; API rows
+outside India/Pakistan districts are dropped so the current year matches the archive) and the GEOS-FP smoke field
+62-100 E, 4-38 N. District ids 0-528 are unchanged; the 328 new districts follow them.
+
+**Winds and trajectories** (`scripts/transport.py`). NASA GMAO GEOS-FP assimilation, `tavg1_2d_slv_Nx` U850/V850,
+hourly means sampled every 3 h on a 0.625 x 0.5 degree grid over 60-100 E, 0-40 N, 15 September - 31 December of each
+year from 2018 (the collection starts December 2017). Over the Tibetan plateau 850 hPa is below ground; those cells
+are masked and a trajectory that reaches them stops. For each receptor and day, four parcels arrive at 00, 06, 12 and
+18 UTC and are integrated 120 h backward with a second-order Runge-Kutta (Heun) scheme and a 15-minute step, with
+bilinear interpolation in space and linear in time. The trajectories are two-dimensional and isobaric: no vertical
+motion, turbulent mixing, rain-out or chemistry.
+
+**Fires met.** VIIRS S-NPP vegetation-fire detections (FIRMS type 0) are counted per day on a 0.5 degree grid. At every
+hourly trajectory point the detections in the cell under it, on that day and the day before, are summed: `fire_all`.
+`fire_nw` is the same sum restricted to the Punjab-Haryana-Delhi box (73.5-78.5 E, 27.5-32.5 N). Hours over the
+Indo-Gangetic Plain box (74-88 E, 24-31 N) and over the sea (a coastline approximation) are also recorded. Values are
+averaged over the day's four trajectories.
+
+**Day classes.** *NW fires*: `fire_nw` >= 1. *Gangetic plain*: >= 6 h over the plain, no live NW fires. *Sea*: >= 60% of
+the 121 hourly points over the sea. *Peninsula*: the rest.
+
+**Air quality** (`scripts/build_aq_south.py`). CPCB/TNPCB continuous monitors via OpenAQ v3: daily city means of
+stations within 35 km, with the QA rules of section 5 plus a flat-line test (a sensor repeating one value all day is
+dropped; 2,705 PM2.5 sensor-days). OpenAQ holds no CPCB data from November 2022 to February 2025; CAMS (via Open-Meteo,
+from August 2022) fills those seasons but reads Chennai's PM2.5 at about half the monitors. In `build_south.py` a
+city-day reported by two or fewer stations is dropped when PM2.5 > 3 x CAMS + 50 (one day: Chennai 4 Dec 2025,
+324 µg/m³ the day after 142 mm of rain). The hourly Chennai panel adds the TNPCB/CPCB values collected by
+pol.reclaimchennai.city. These are AQI sub-indices of 24 h (PM, NO2) and 8 h (CO) running means, converted back with
+CPCB breakpoints; after conversion they match OpenAQ's own 24 h means (r = 0.90). It also adds the aqi.in low-cost
+network, which reads about 1.24 x the reference monitors and is shown but not redistributed.
+
+**Effect estimate** (`scripts/build_south.py`). Ordinary least squares on daily values, October-December, days with a
+cyclone within 800 km left out: log(PM2.5) on log(1 + `fire_nw`), log(1 + other fires), the share of hours over the
+sea, log(1 + rain), 10 m wind speed, log boundary-layer height and month dummies, with HC1 robust standard errors.
+The reported effect is the change for a tenfold rise in (1 + fires met), 10^b - 1. Days are serially correlated, so
+the intervals are, if anything, too narrow. The comparison is observational: air from the north-west is also drier
+and slower, and it passes over the cities and industry of the plain and the east coast.
+
+**Cyclones** (`scripts/build_cyclones.py`). IBTrACS v04r01 North Indian basin (IMD best track) for 2003-2025.
+The current storm comes from IMD RSMC New Delhi Tropical Weather Outlooks and Tropical Cyclone Advisories (observed
+positions with the bulletin URL and issue time; forecasts kept apart), with JTWC and GDACS fixes as a cross-check.
+The closest approach to Chennai is measured to the track line. For the composite, each storm within 800 km since 2016
+contributes Chennai's daily PM2.5 for days -7 to +7 from the closest approach. Values are divided by the storm's own
+mean over days -7 to -3, using ground data where at least three of those days exist and CAMS otherwise. Medians and
+quartiles are taken across storms, split by whether the storm passed north or south of the city.
+
+**Results (2018-2026).**
+- **How often:** Chennai's air met north-western fires on 10.5% of October-November days.
+- **Fire effect:** a tenfold rise in fires met goes with +25% PM2.5 (95% interval +9 to +43%). That is about 3% of the
+  season's PM2.5, and a median of 31% on the days the smoke arrives.
+- **Air-mass origin:** on dry October days the median PM2.5 was 49 µg/m³ (NW fires), 51 (plain, no fires) and 24 (sea).
+- **Cyclones:** PM2.5 ran about 23% higher for days after storms that passed north of Chennai and about 35% lower after
+  those that passed south.
+- **Arnab (Oct 2026):** Chennai's sensors went from a median 20 to a peak of 151 µg/m³ on 26-27 October, while the air
+  came down the east coast from the Gangetic plain.
+
+## 10. A field-scale burnt-area method from CEEW (tested and rejected)
+
+CEEW's October 2026 issue brief "Beyond Single Sources" fills Sentinel-2's revisit gaps with commercial PlanetScope
+imagery to count newly burnt fields. It was reproduced over its own study area with free HLS/Landsat imagery
+filling the gaps. The burnt-pixel rule (BAIS2 >= 0.78 and Tasseled Cap brightness <= 0.34) flagged 77% of cropland
+in 2025 and 74% in 2021, while VIIRS counted 177 and 3,450 fires over the same area. A same-morning Landsat
+placebo found as many "new" fields as the real gap-fill. The rule cannot tell burnt from harvested paddy, the
+failure that also sank the classifier in section 3b, so it is not used. Details:
+[`burnfield_pilot.md`](burnfield_pilot.md).

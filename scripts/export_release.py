@@ -718,6 +718,129 @@ pm <- read_csv("cpcb_pm25_daily.csv")""")
 
 
 # ---------------------------------------------------------------------------------------------
+# North to south: Chennai and east-coast air, back-trajectories, cyclones
+# ---------------------------------------------------------------------------------------------
+def export_south():
+    out = DS / "south"
+    out.mkdir(parents=True, exist_ok=True)
+    A = jload(EXTRAS / "aq_south.json")
+    T = jload(EXTRAS / "transport.json")
+    C = jload(EXTRAS / "cyclones.json")
+
+    keys = ["pm25", "pm10", "n_stations", "cams_pm25", "cams_pm10", "cams_co", "cams_aod", "cams_dust", "wind", "wdir", "precip", "blh", "blh14"]
+    frames = []
+    for city, c in A["cities"].items():
+        d = c["daily"]
+        df = pd.DataFrame({"date": d["date"], **{k: d.get(k) for k in keys}})
+        df.insert(0, "city", city)
+        frames.append(df)
+    cd = pd.concat(frames, ignore_index=True)
+    cd["n_stations"] = cd["n_stations"].astype("Int64")
+    write_csv(cd, out / "cities_daily.csv")
+
+    hourly = []
+    # aqi.in low-cost readings are a commercial service's data: shown on the site as a city mean, not redistributed here
+    for src, h in A["chennai_hourly"].items():
+        if src.startswith("aqi_in"):
+            continue
+        for k, v in h.items():
+            if k in ("time", "n_stations") or not isinstance(v, list):
+                continue
+            hourly.append(pd.DataFrame({"time_ist": h["time"], "source": src, "variable": k, "value": v}))
+    ch = pd.concat(hourly, ignore_index=True).dropna(subset=["value"])
+    write_csv(ch, out / "chennai_hourly.csv")
+    st = pd.DataFrame([{k: s.get(k) for k in ("uid", "name", "lat", "lon", "source", "kind", "first_hour", "last_hour", "n_hours", "qa_excluded")}
+                       for s in A["chennai_stations"] if s.get("source") != "aqi.in"])
+    write_csv(st, out / "chennai_reference_stations.csv")
+
+    rows, paths = [], []
+    for y, yr in T["years"].items():
+        for name, t in yr.items():
+            for i, d in enumerate(t["date"]):
+                rows.append((name, d, t["n"][i], t["fire_all"][i], t["fire_nw"][i], t["igp_h"][i], t["nw_h"][i], t["sea_h"][i]))
+                if name == "Chennai" and t["path"][i]:
+                    for k, (lo, la) in enumerate(t["path"][i]):
+                        paths.append((d, k * 6, lo, la))
+    tr = pd.DataFrame(rows, columns=["receptor", "date", "n_trajectories", "fire_all", "fire_nw", "igp_hours", "nw_hours", "sea_hours"])
+    tr["n_trajectories"] = tr["n_trajectories"].astype("Int64")
+    write_csv(tr, out / "trajectory_exposure_daily.csv")
+    tp = pd.DataFrame(paths, columns=["arrival_date", "hours_back", "lon", "lat"])
+    write_csv(tp, out / "trajectory_paths_chennai.csv")
+
+    srows, prows = [], []
+    for s in C["storms"]:
+        lf = s.get("landfall") or {}
+        srows.append((s["id"], s.get("name"), s["season"], s.get("basin"), s.get("grade_max"), s.get("imd_wind_max_kt"), s.get("imd_pres_min_hpa"),
+                      s.get("start"), s.get("end"), lf.get("t"), lf.get("lat"), lf.get("lon"), s.get("closest_to_chennai_km"), s.get("closest_time"),
+                      (s.get("closest") or {}).get("bearing_from_chennai"), s.get("status", "best track")))
+        for q in s["track"]:
+            prows.append((s["id"], s.get("name"), q["t"], q["lat"], q["lon"], q.get("wind_kt"), q.get("pres_hpa"), q.get("grade"), q.get("kind"),
+                          q.get("agency", ""), q.get("source", "")))
+    sd = pd.DataFrame(srows, columns=["storm_id", "name", "season", "basin", "grade_max", "imd_wind_max_kt", "imd_pres_min_hpa", "start_utc", "end_utc",
+                                      "landfall_utc", "landfall_lat", "landfall_lon", "closest_to_chennai_km", "closest_time_utc", "bearing_from_chennai", "status"])
+    pt = pd.DataFrame(prows, columns=["storm_id", "name", "time_utc", "lat", "lon", "wind_kt", "pres_hpa", "grade", "kind", "agency", "source"])
+    write_csv(sd, out / "cyclones.csv")
+    write_csv(pt, out / "cyclone_track_points.csv")
+    (out / "cyclone_tracks.geojson").write_bytes((DATA / "geo" / "cyclone_tracks.geojson").read_bytes())
+
+    check(len(sd) == len(C["storms"]), f"south/cyclones rows {len(sd):,} == cyclones.json {len(C['storms']):,}")
+    check(set(tr.receptor) <= set(T["receptors"]), "south/trajectory receptors match transport.json")
+    D = {"city": ("", "receptor city"), "date": ("IST date", "local calendar day"), "pm25": ("ug/m3", "ground PM2.5, city mean of CPCB/TNPCB stations within 35 km (OpenAQ)"),
+         "pm10": ("ug/m3", "ground PM10, same"), "n_stations": ("count", "stations in the PM2.5 mean"), "cams_pm25": ("ug/m3", "CAMS model PM2.5, daily mean"),
+         "cams_pm10": ("ug/m3", "CAMS PM10"), "cams_co": ("ug/m3", "CAMS carbon monoxide, a combustion tracer"), "cams_aod": ("unitless", "CAMS AOD 550 nm"),
+         "cams_dust": ("ug/m3", "CAMS dust"), "wind": ("m/s", "ERA5 10 m wind speed"), "wdir": ("deg (from)", "ERA5 10 m wind direction"),
+         "precip": ("mm", "ERA5 precipitation, daily sum"), "blh": ("m", "ERA5 boundary-layer height, daily mean"), "blh14": ("m", "ERA5 boundary-layer height at 14:00 IST"),
+         "time_ist": ("YYYY-MM-DDTHH", "start of the hour, IST"), "source": ("", "openaq_cpcb_caaqms (hourly reference monitors), tnpcb_cpcb_pol_runningmean (24 h / 8 h running means published by TNPCB, converted from the AQI sub-index), airnow_us_consulate, cams_model, era5"),
+         "variable": ("", "pm25, pm10, co (mg/m3 for OpenAQ CPCB, ug/m3 for CAMS), no2, pm25_24h, pm10_24h, co_8h, no2_24h, wind, wdir, precip, blh, aod"), "value": ("", "value in the variable's unit"),
+         "receptor": ("", "city the trajectories arrive at"), "n_trajectories": ("count", "trajectories of the four daily arrivals (00, 06, 12, 18 UTC) that ran at least 24 h"),
+         "fire_all": ("detection-days", "VIIRS S-NPP detections in the 0.5 deg cells under the hourly trajectory points, same day and day before, mean over the day's trajectories"),
+         "fire_nw": ("detection-days", "the same, only inside the Punjab-Haryana-Delhi box 73.5-78.5 E, 27.5-32.5 N"),
+         "igp_hours": ("hours", "hours of the 120 h spent over the Indo-Gangetic Plain box 74-88 E, 24-31 N"), "nw_hours": ("hours", "hours over the Punjab-Haryana-Delhi box"),
+         "sea_hours": ("hours", "hours over the Bay of Bengal / Arabian Sea (coastline approximation)"),
+         "arrival_date": ("UTC date", "arrival at Chennai at 06 UTC (11:30 IST)"), "hours_back": ("h", "hours before arrival"), "lon": ("deg", "longitude"), "lat": ("deg", "latitude"),
+         "storm_id": ("", "IBTrACS storm id (SID)"), "name": ("", "storm name"), "season": ("year", "season"), "basin": ("", "basin where the storm started"),
+         "grade_max": ("", "highest IMD grade: D, DD, CS, SCS, VSCS, ESCS, SuCS"), "imd_wind_max_kt": ("kt", "IMD peak 3-min sustained wind"), "imd_pres_min_hpa": ("hPa", "IMD minimum central pressure"),
+         "grade": ("", "IMD grade at the fix: D, DD, CS, SCS, VSCS, ESCS, SuCS (blank where IMD has none)"),
+         "start_utc": ("UTC", "first track point"), "end_utc": ("UTC", "last track point"),
+         "landfall_lat": ("deg", "landfall latitude"), "landfall_lon": ("deg", "landfall longitude"),
+         "status": ("", "best track, or operational (not best track) for the current storm"),
+         "landfall_utc": ("UTC", "first crossing of the coast (IBTrACS land flag; IMD statement for the current storm)"), "closest_to_chennai_km": ("km", "minimum distance of the track line to Chennai (13.08 N, 80.27 E)"),
+         "closest_time_utc": ("UTC", "time of the closest approach"), "bearing_from_chennai": ("", "direction of the closest point seen from Chennai"),
+         "time_utc": ("UTC", "fix time"), "wind_kt": ("kt", "IMD 3-min wind (USA 1-min where IMD has none)"), "pres_hpa": ("hPa", "central pressure"),
+         "kind": ("", "best (IBTrACS best track), observed (operational fix), forecast (IMD forecast point)"), "agency": ("", "agency of the fix"), "source": ("", "URL of the bulletin for operational fixes")}
+    secs = [table_doc("cities_daily.csv", cd, D, "2016 to today, every day."), table_doc("chennai_hourly.csv", ch, D, "From 31 Aug 2026, long format."),
+            table_doc("chennai_reference_stations.csv", st, {**D, "source": ("", "network: tnpcb, cpcb, airnow"), "uid": ("", "station id in the pol database / OpenAQ"),
+                "kind": ("", "monitor type"), "first_hour": ("IST hour", "first hour with data"), "last_hour": ("IST hour", "last hour with data"),
+                "n_hours": ("hours", "hours with PM2.5"), "qa_excluded": ("", "true if left out of the city mean (distance or QA)")}), table_doc("trajectory_exposure_daily.csv", tr, D, "15 Sep - 31 Dec of 2018 onward."),
+            table_doc("trajectory_paths_chennai.csv", tp, D), table_doc("cyclones.csv", sd, D), table_doc("cyclone_track_points.csv", pt, D)]
+    write_readme(out, "North to south: Chennai's air, back-trajectories and cyclones",
+                 "Daily air quality and weather at Chennai and eight other receptor cities from Delhi down the east coast, five-day back-trajectories that say whether "
+                 "the air had passed over burning fields in Punjab, Haryana and Delhi, and every Bay of Bengal / Arabian Sea cyclone since 2003. Built to test whether "
+                 "north Indian farm-fire smoke reaches Chennai, and what cyclones do to the city's air.",
+                 secs,
+                 f"Cities: {cd.city.nunique()}, {cd.date.min()}..{cd.date.max()}. Trajectories: {tr.receptor.nunique()} receptors, {tr.date.min()}..{tr.date.max()} (seasons only). "
+                 f"Cyclones: {len(sd)} storms {sd.season.min()}-{sd.season.max()}, {len(pt):,} track points.",
+                 "- CPCB / TNPCB monitors via OpenAQ (credit OpenAQ and CPCB); TNPCB running means as collected by pol.reclaimchennai.city.\n"
+                 "- CAMS and ERA5 via Open-Meteo (CC BY 4.0; contains modified Copernicus Atmosphere Monitoring Service / Climate Change Service information).\n"
+                 "- Winds for the trajectories: NASA GMAO GEOS-FP assimilation (tavg1_2d_slv_Nx U850/V850), public domain.\n"
+                 "- Fires: NASA FIRMS VIIRS S-NPP (public domain; cite FIRMS).\n"
+                 "- Cyclones: IBTrACS v04r01 (Knapp et al. 2010; NOAA NCEI) and IMD RSMC New Delhi advisories (Government of India).\n\nSee ../../LICENSES.md.",
+                 ["Trajectories are 2-D at 850 hPa: no vertical motion, mixing, rain-out or chemistry. A path over Punjab says the air could have carried smoke, not that it did.",
+                  "OpenAQ has no CPCB data from Nov 2022 to Feb 2025 and thin coverage in 2018, early 2019 and 2021; CAMS fills the gap but reads Chennai PM2.5 about half of the monitors.",
+                  "The TNPCB values collected by pol.reclaimchennai.city are AQI sub-indices of 24 h (PM, NO2) and 8 h (CO) running means; they are converted back to concentrations here with CPCB breakpoints.",
+                  "OpenAQ labels CPCB CO and NO2 as ppb; the values are CPCB's mg/m3 and ug/m3.",
+                  "aqi.in low-cost sensor readings used on the website are not redistributed here.",
+                  "IBTrACS landfall times can be hours off for storms that hug the coast (Michaung 2023, Fengal 2024); the current storm is operational data, not best track."],
+                 f"`scripts/build_aq_south.py`, `scripts/transport.py`, `scripts/build_cyclones.py` write `data/db/extras/*.json`; `{SCRIPT}` flattens them.",
+                 """import pandas as pd
+t = pd.read_csv("trajectory_exposure_daily.csv", parse_dates=["date"])
+a = pd.read_csv("cities_daily.csv", parse_dates=["date"])
+chn = t[t.receptor == "Chennai"].merge(a[a.city == "Chennai"], on="date")""",
+                 """library(readr)
+t <- read_csv("trajectory_exposure_daily.csv")""")
+
+
+# ---------------------------------------------------------------------------------------------
 # A5. paddy
 # ---------------------------------------------------------------------------------------------
 def export_paddy():
@@ -1438,7 +1561,8 @@ def write_docs(counts, rows_manifest):
               "air": "CPCB ground PM2.5/PM10 (via OpenAQ), CAMS PM/AOD + ERA5 meteorology at receptor cities, modelled stubble share of Delhi PM2.5",
               "paddy": "Kharif rice area and production by state (1966+) and district (1997+), UPAg/DES",
               "enforcement": "Enforcement and crop-residue-management indicators with source documents and policy timeline",
-              "boundaries": "District / state / country polygons used for all attributions (GeoJSON + GeoPackage)"}
+              "boundaries": "District / state / country polygons used for all attributions (GeoJSON + GeoPackage)",
+              "south": "North to south: Chennai and east-coast air quality, 5-day back-trajectory fire exposure, Bay of Bengal / Arabian Sea cyclone tracks"}
     for t, d in topics.items():
         if not (DS / t).exists():
             continue
@@ -1503,6 +1627,10 @@ provider's own licence statement on {TODAY}; **stated** = taken from the provide
 | air/cpcb_* | CPCB CAAQMS data redistributed by OpenAQ API v3 | OpenAQ terms: users must comply with each provider's terms and credit both the original provider (CPCB) and OpenAQ. CPCB data are Indian government data; no separate licence was found on the OpenAQ records. | verified (OpenAQ terms); CPCB licence uncertain |
 | air/cams_era5_* | Open-Meteo Air Quality API (CAMS global forecasts) and Historical Weather API (ERA5/ERA5-Land) | Open-Meteo: CC BY 4.0 (attribute Open-Meteo). Underlying CAMS and C3S ERA5 data: Copernicus licence / CC BY 4.0 - "Contains modified Copernicus Atmosphere Monitoring Service and Climate Change Service information". | stated (Open-Meteo licence page is script-rendered and was not re-read) |
 | air/stubble_share_delhi | IITM Pune (MoES): SAFAR, DSS, AQEWS public web pages, mostly via Internet Archive captures | Public government web pages; no explicit licence found. Cite IITM and the capture URL. | uncertain |
+| south/cities_daily, south/chennai_hourly (openaq_*, cams_*, era5) | CPCB/TNPCB monitors via OpenAQ v3; CAMS and ERA5 via Open-Meteo | As air/cpcb_* and air/cams_era5_* above. | stated |
+| south/chennai_hourly (tnpcb_cpcb_pol_runningmean) | TNPCB public station pages, as collected by pol.reclaimchennai.city (Reclaim Chennai) | Public government web pages; no explicit licence found. Cite TNPCB. Converted from AQI sub-indices to concentrations here. | uncertain |
+| south/trajectory_* | Computed here from NASA GMAO GEOS-FP winds and NASA FIRMS VIIRS detections | NASA open data, no restrictions; cite GEOS-FP and FIRMS. Derived values: same terms as this repository's code. | stated |
+| south/cyclones*, south/cyclone_* | IBTrACS v04r01 (NOAA NCEI; Knapp et al. 2010, doi:10.25921/82ty-9e16), which carries IMD RSMC New Delhi best tracks; IMD RSMC advisories for the current storm | IBTrACS: NOAA open data, no restrictions; cite IBTrACS and the agencies. IMD bulletins: public Government of India bulletins; cite IMD RSMC New Delhi. | stated |
 | paddy/ (1997-98 district rows) | DES Crop Production Statistics via the India Data Portal mirror | ODC-By (as recorded at download) | stated |
 | paddy/ | UPAg (Unified Portal for Agricultural Statistics) / DES, Ministry of Agriculture & Farmers Welfare, Area-Production-Yield | Government Open Data License - India (GODL) is the default for Indian government open data; not stated on every UPAg download. | uncertain |
 | enforcement/ | Lok Sabha / Rajya Sabha answers, CAQM directions and reports, NGT and Supreme Court filings, Punjab / Haryana departments and pollution control boards, data.gov.in (OGD) tables | Public government documents; data.gov.in resources are under GODL. Values are short factual extracts with quotes and source URLs. | data.gov.in verified as GODL by its portal terms; others uncertain |
@@ -1603,6 +1731,8 @@ def main():
         export_fires()
         export_creams()
         export_air()
+        if (EXTRAS / "transport.json").exists():
+            export_south()
         export_paddy()
         export_enforcement()
         export_boundaries()

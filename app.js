@@ -280,6 +280,15 @@ function addOverlayLayers() {
   map.addLayer({ id: "s2night", type: "circle", source: "s2night", layout: { visibility: "none" },
     paint: { "circle-color": s2c, "circle-radius": s2r(0.8), "circle-stroke-width": 1.4, "circle-stroke-color": "#ffffff" } });
 
+  // cyclone tracks of the selected year (scripts/build_cyclones.py): IBTrACS best track, the current storm from IMD advisories
+  map.addSource("cyclones", { type: "geojson", data: { type: "FeatureCollection", features: [] }, attribution: "Cyclones: IMD via IBTrACS (NOAA NCEI), IMD RSMC New Delhi" });
+  const cyColor = theme() === "dark" ? "#dfe3ea" : "#2b2f36";
+  map.addLayer({ id: "cyclone-line", type: "line", source: "cyclones", filter: ["all", ["==", ["geometry-type"], "LineString"], ["!=", ["get", "kind"], "forecast"]],
+    layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": cyColor, "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.2, 8, 2.4], "line-dasharray": [2, 1.6], "line-opacity": 0.85 } });
+  map.addLayer({ id: "cyclone-pt", type: "circle", source: "cyclones", filter: ["all", ["==", ["geometry-type"], "Point"], ["in", ["get", "feature"], ["literal", ["observed", "landfall"]]]],
+    paint: { "circle-radius": ["match", ["get", "feature"], "landfall", 5, 2.6], "circle-color": ["match", ["get", "feature"], "landfall", "#ff5a4e", cyColor], "circle-stroke-width": 1, "circle-stroke-color": "rgba(0,0,0,0.6)" } });
+  updateCyclones();
+
   map.addSource("labels", { type: "raster", tiles: [REF_TILES[theme()]], tileSize: 256, maxzoom: 16 });
   map.addLayer({ id: "labels", type: "raster", source: "labels", paint: { "raster-opacity": 0.9 } });
   if ($("#l-s2night").checked) setS2night(true);   // ticked before the map was ready
@@ -354,6 +363,7 @@ function bindLayerToggles() {
   $("#l-hillshade").onchange = (e) => vis(["hillshade"], e.target.checked);
   $("#l-burnscar").onchange = () => updateBurnscar();
   $("#l-s2night").onchange = (e) => setS2night(e.target.checked);
+  $("#l-cyclones").onchange = () => updateCyclones();
   $("#l-wind").onchange = (e) => { S.showWind = e.target.checked; vis(["wind"], e.target.checked); };
   $("#l-districts").onchange = (e) => vis(["district-line"], e.target.checked);
   $("#l-labels").onchange = (e) => vis(["labels"], e.target.checked);
@@ -692,6 +702,19 @@ function setS2night(on) {
   const b = map.getBounds(), box = [72.6, 29.2, 78.5, 32.3];
   if (b.getWest() > box[2] || b.getEast() < box[0] || b.getSouth() > box[3] || b.getNorth() < box[1] || map.getZoom() < 5.5)
     map.easeTo({ center: [75.6, 30.8], zoom: 6.3, duration: 1200 });   // fitBounds throws on the globe in small viewports
+}
+
+// cyclone tracks: loaded once, filtered to the selected year
+function updateCyclones() {
+  if (!map || !map.getSource("cyclones")) return;
+  const on = $("#l-cyclones").checked;
+  ["cyclone-line", "cyclone-pt"].forEach((id) => map.setLayoutProperty(id, "visibility", on ? "visible" : "none"));
+  if (!on) return;
+  if (!S.cyclones) { S.cyclones = getJSON("data/geo/cyclone_tracks.geojson").catch(() => null); }
+  S.cyclones.then((g) => {
+    if (!g || !map.getSource("cyclones")) return;
+    map.getSource("cyclones").setData({ type: "FeatureCollection", features: g.features.filter((f) => f.properties.season === S.year) });
+  });
 }
 
 // burn scars exist per paddy season; show the selected season's tiles when they are built
@@ -1044,7 +1067,10 @@ function renderLive() {
 }
 async function pollLive() {
   try {
-    const sum = await fetch(`data/fires/summary.json?ts=${Date.now()}`, { cache: "no-store" }).then((r) => r.json());
+    // live.json is a few bytes; the multi-megabyte summary is refetched only when it has changed
+    const live = await fetch(`data/fires/live.json?ts=${Date.now()}`, { cache: "no-store" }).then((r) => r.json()).catch(() => null);
+    const sum = live && live.generated === S.summary.generated ? S.summary
+      : await fetch(`data/fires/summary.json?ts=${Date.now()}`, { cache: "no-store" }).then((r) => r.json());
     const meta = await fetch(`data/smoke/smoke_meta.json?ts=${Date.now()}`, { cache: "no-store" }).then((r) => r.json()).catch(() => null);
     S.lastCheck = Date.now();
     let reload = false;
@@ -1108,6 +1134,7 @@ async function setYear(year, keepWindow) {
   $("#sel-year").value = `${year}|${S.season}`;
   S.points = await loadPoints(year, S.season);
   updateBurnscar();
+  updateCyclones();
   const [a, b] = seasonRange(year, S.season);
   const last = lastDataDay() + DAY;
   S.t0 = a;
@@ -1204,7 +1231,7 @@ function aboutHTML() {
   <p>MODIS Terra/Aqua (1 km, 2003 onward), VIIRS S-NPP (375 m, 2012 onward), VIIRS NOAA-20 (2018 onward), and VIIRS NOAA-21 (2023 onward, via the API).
   Archive years come from the public FIRMS yearly country files for India and Pakistan; the current year from the FIRMS area API (standard processing to June, near-real-time after).
   Static industrial sources (FIRMS type 2) and offshore detections are removed, including from near-real-time data where the archive flagged the same 1 km cell.
-  ${fmt(d3.sum(yrs, (y) => f[y].points))} records in ${yrs[0]}-${yrs.at(-1)} within 68.5-89 E, 21-35.5 N (FIRMS detections plus CREAMS events). Latest detection: ${S.summary.last_detection_date}.</p>
+  ${fmt(d3.sum(yrs, (y) => f[y].points))} records in ${yrs[0]}-${yrs.at(-1)} within ${S.summary.bbox[0]}-${S.summary.bbox[2]} E, ${S.summary.bbox[1]}-${S.summary.bbox[3]} N, India and Pakistan (FIRMS detections plus CREAMS events). Latest detection: ${S.summary.last_detection_date}.</p>
   <p>Detections are not de-duplicated across sensors: the same field can be seen by several satellites. Compare years with a single sensor family (the MODIS / VIIRS switch on the historical chart). Satellites only see fires burning at overpass time (roughly 10:30, 13:30 and 01:30 IST), and smoke or cloud can hide them, so counts are an index, not a field census.</p>
   <h3>Smoke: NASA GMAO GEOS-FP</h3>
   <p>${M ? `Run ${M.aer_run}: 3-hourly aerosol optical depth at 550 nm from organic carbon, black carbon and brown carbon (the smoke-dominated species), plus total AOD and 10 m wind, at 0.3125 x 0.25 degrees. Analysis until ${M.analysis_until}, forecast after. ${M.times.length} frames from ${M.times[0]}.` : "Not loaded."}

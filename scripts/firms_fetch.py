@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "firms_api"
-BBOX = "68.5,21,89,35.5"  # W,S,E,N: northern subcontinent / Indo-Gangetic Plain
+BBOX = "66,6,98,37.5"     # W,S,E,N: all of India (68.5,21,89,35.5 until Oct 2026)
 CHUNK = 5                 # FIRMS area API max day_range
 
 

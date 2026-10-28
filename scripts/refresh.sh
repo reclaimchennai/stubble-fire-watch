@@ -18,6 +18,8 @@ step $PY scripts/build_db_extras.py --aq-only
 # ground PM2.5 and enforcement figures change slowly: once a day, on the 00:40 UTC run
 if [ "$(date -u +%H)" = "00" ]; then
   [ -f scripts/build_aq_ground.py ] && step $PY scripts/build_aq_ground.py
+  step $PY scripts/build_aq_south.py --pol-export   # Chennai + east-coast receptors; reads the pol database read-only
+  step $PY scripts/build_cyclones.py
   if [ -f scripts/build_enforcement.py ]; then
     E=data/db/extras/enforcement.json
     cp "$E" "$E.prev" 2>/dev/null
@@ -27,7 +29,10 @@ if [ "$(date -u +%H)" = "00" ]; then
       || { [ -f "$E.prev" ] && mv "$E.prev" "$E" && echo "!! enforcement shrank; kept the previous file"; }
   fi
 fi
+step $PY scripts/transport.py winds $(date +%Y)    # GEOS-FP 850 hPa winds for this season (past seasons are cached)
+step $PY scripts/transport.py run
 step $PY scripts/build_db.py
+[ -f data/db/extras/aq_south.json ] && step $PY scripts/build_south.py
 step sh scripts/publish.sh
 # Open-Meteo responses are cached under their end date; drop superseded ones (older than 3 days, not season ends)
 find data/raw/extras/openmeteo -name '*.json' -mtime +3 ! -name '*-01-31.json' -delete 2>/dev/null

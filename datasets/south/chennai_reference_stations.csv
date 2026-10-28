@@ -1,0 +1,10 @@
+uid,name,lat,lon,source,kind,first_hour,last_hour,n_hours,qa_excluded
+OPENAQ_8558,US Consulate,13.0878,80.2785,airnow,US consulate BAM (AirNow via OpenAQ),2026-10-09T14,2026-10-16T02,139,False
+CPCB_MANALI,Manali,13.17,80.258,cpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,1368,False
+CPCB_VELACHERY_RES_AREA,Velachery Res. Area,12.975,80.22,cpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T02,1308,False
+TNPCB_ANTHONI_PILLAI_NAGAR,Anthoni Pillai Nagar,13.4128,80.108,tnpcb,CAAQMS reference monitor,2026-10-09T11,2026-10-28T21,465,True
+TNPCB_ARUMBAKKAM,Arumbakkam,13.073,80.21,tnpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,1039,False
+TNPCB_KODUNGAIYUR,Kodungaiyur,13.125,80.235,tnpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,1006,False
+TNPCB_MANALI_VILLAGE,Manali Village,13.17,80.26,tnpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,1351,False
+TNPCB_PERUNGUDI,Perungudi,12.965,80.242,tnpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,834,False
+TNPCB_ROYAPURAM,Royapuram,13.108,80.293,tnpcb,CAAQMS reference monitor,2026-09-01T00,2026-10-28T21,1070,False
