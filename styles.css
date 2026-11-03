@@ -107,6 +107,11 @@ body { display: flex; flex-direction: column; }
 .ramp-ticks span:first-child { transform: none; }
 .ramp-ticks span:last-child { transform: translateX(-100%); }
 .legend-note { font-size: 10.5px; color: var(--dim); margin-top: 2px; line-height: 1.4; }
+.fire-key + .fire-key { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+.fk-label { display: block; font-size: 11px; color: var(--text-2); margin-bottom: 4px; }
+.fire-age { display: flex; gap: 12px; font-size: 10.5px; color: var(--dim); }
+.fire-age .fa { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.fire-age .fa-dot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,0.35); }
 .fire-scale { display: flex; align-items: flex-end; gap: 12px; font-size: 10.5px; color: var(--dim); }
 .fire-scale .fs { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .fire-scale .fd { border-radius: 50%; background: radial-gradient(circle, #fff6c2 0%, #ffb02e 45%, #ff4d1a 100%); box-shadow: 0 0 6px rgba(255,120,40,0.7); }

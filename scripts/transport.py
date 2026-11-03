@@ -122,6 +122,9 @@ def fetch_year(year):
                     raise ValueError("whole frame missing")
                 arr[bad] = np.nan
                 np.save(f, arr)
+                for g in CACHE.glob(f"{var}_{a}_*_{XI[0]}_{YI[0]}_{STRIDE}.npy"):   # shorter copies of this chunk
+                    if int(g.name.split("_")[2]) < b:
+                        g.unlink()
                 print(f"  {year} {var} {a}-{b}", file=sys.stderr)
                 return
             except (AssertionError, ValueError) as e:
@@ -138,15 +141,16 @@ def load_year(year):
     i0, i1 = season_steps(year)
     out = {}
     for var in ("u850", "v850"):
-        parts = []
-        for f in sorted(CACHE.glob(f"{var}_*_{XI[0]}_{YI[0]}_{STRIDE}.npy"), key=lambda p: int(p.name.split("_")[1])):
+        best = {}   # the season's open tail chunk is re-cached as it grows: keep the longest copy per start step
+        for f in CACHE.glob(f"{var}_*_{XI[0]}_{YI[0]}_{STRIDE}.npy"):
             a, b = int(f.name.split("_")[1]), int(f.name.split("_")[2])
-            if a >= i0 and a <= i1:
-                parts.append((a, np.load(f)))
+            if i0 <= a <= i1 and (a not in best or b > best[a][0]):
+                best[a] = (b, f)
+        parts = [(a, np.load(f)) for a, (b, f) in sorted(best.items())]
         if not parts:
             return None
         start = parts[0][0]
-        n = (parts[-1][0] - start) // 3 + len(parts[-1][1])
+        n = max((a - start) // 3 + len(p) for a, p in parts)
         arr = np.full((n, len(LATS), len(LONS)), np.nan, np.float32)
         for a, p in parts:
             k = (a - start) // 3

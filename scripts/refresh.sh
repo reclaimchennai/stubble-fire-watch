@@ -3,6 +3,7 @@
 # new CREAMS bulletins, receptor-city air quality; rebuild everything and publish to web/.
 # A failing source is logged and skipped so the others still update.
 cd "$(dirname "$0")/.."
+HOUR=$(date -u +%H)                     # taken now: waiting for the lock and the slower steps can push the run past the hour
 exec 9>data/.pipeline.lock              # shared with live.sh: one writer at a time
 flock -w 3600 9 || { echo "!! another run holds the lock; skipping"; exit 0; }
 PY=.venv/bin/python
@@ -16,7 +17,7 @@ step $PY scripts/fetch_smoke.py
 step $PY scripts/burnscar.py --season $(( $(date +%Y) - 1 )) $(date +%Y)   # MODIS burned area lags ~2 months
 step $PY scripts/build_db_extras.py --aq-only
 # ground PM2.5 and enforcement figures change slowly: once a day, on the 00:40 UTC run
-if [ "$(date -u +%H)" = "00" ]; then
+if [ "$HOUR" = "00" ] || [ "${FORCE_DAILY:-0}" = "1" ]; then
   [ -f scripts/build_aq_ground.py ] && step $PY scripts/build_aq_ground.py
   step $PY scripts/build_aq_south.py --pol-export   # Chennai + east-coast receptors; reads the pol database read-only
   step $PY scripts/build_cyclones.py

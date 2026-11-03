@@ -186,7 +186,7 @@ function initMap() {
     renderMap();
   });
   $("#map-legend").innerHTML = CLS_ORDER.map((k) => `<span class="lg" title="${CLS[k].tip}"><i style="background:${CLS[k].color}"></i>${CLS[k].label}</span>`).join("") +
-    `<span class="lg"><i class="dot" style="background:#ff8a3d"></i>fires, 5 days</span><span class="lg"><i class="dash"></i>cyclone</span>`;
+    `<span class="lg" title="VIIRS fire detections in the five days up to the selected date"><i class="dot" style="background:#ff8a3d"></i>fires seen in the 5 days before</span><span class="lg"><i class="dash"></i>cyclone</span>`;
 }
 function mapDate() { return addDays(`${mapYear}-10-01`, mapDay); }
 async function renderMap() {
@@ -285,17 +285,19 @@ function renderEffect() {
 
   const rows = Object.keys(VARS).flatMap((vv) => [["log1p_fire_nw", "NW fires"], ["log1p_fire_other", "other fires"]].map(([term, lab]) => ({ vv, lab, e: effect(city, vv, term) }))).filter((x) => x.e);
   chart("c-reg").setOption(base({
-    grid: { left: 150, right: 30, top: 14, bottom: 30 },
+    grid: { left: 8, right: 18, top: 14, bottom: 30, containLabel: true },   // labels sized to fit, never clipped
     tooltip: { ...base().tooltip, trigger: "item", formatter: (p) => { const x = rows[p.dataIndex]; return `<div class="tt-title">${VARS[x.vv].short}: tenfold ${x.lab}</div>${tipRow(p.color, "change", `${fmt1(x.e.pct)}%`)}${tipRow("transparent", "95% interval", `${fmt1(x.e.lo)} to ${fmt1(x.e.hi)}%`)}${tipRow("transparent", "days, R²", `${fmt(x.e.n)}, ${x.e.r2}`)}`; } },
-    xAxis: vAxis({ axisLabel: { color: t.dim, formatter: (v2) => `${v2}%` } }),
-    yAxis: cAxis(rows.map((x) => `${VARS[x.vv].short}, ${x.lab}`), { inverse: true }),
+    // axis spans the confidence intervals, not just the bars, so no whisker runs into the labels or off the edge
+    xAxis: vAxis({ min: Math.floor(Math.min(0, ...rows.map((x) => x.e.lo)) / 10) * 10, max: Math.ceil(Math.max(0, ...rows.map((x) => x.e.hi)) / 10) * 10, interval: 10,
+      axisLabel: { color: t.dim, formatter: (v2) => `${v2}%` } }),
+    yAxis: cAxis(rows.map((x) => `${VARS[x.vv].short}\n${x.lab}`), { inverse: true, axisLabel: { color: t.dim, lineHeight: 14 } }),
     series: [
       { type: "bar", barWidth: "45%", data: rows.map((x) => ({ value: +x.e.pct.toFixed(1), itemStyle: { color: x.lab === "NW fires" ? CLS.nw_fire.color : t.dim } })) },
       { type: "custom", renderItem: (params, api) => {
           const x = rows[api.value(0)], y = api.coord([0, api.value(0)])[1], a = api.coord([x.e.lo, 0])[0], b = api.coord([x.e.hi, 0])[0];
           return { type: "group", children: [{ type: "line", shape: { x1: a, y1: y, x2: b, y2: y }, style: { stroke: t.text, lineWidth: 1.2 } },
             { type: "line", shape: { x1: a, y1: y - 4, x2: a, y2: y + 4 }, style: { stroke: t.text, lineWidth: 1.2 } }, { type: "line", shape: { x1: b, y1: y - 4, x2: b, y2: y + 4 }, style: { stroke: t.text, lineWidth: 1.2 } }] };
-        }, data: rows.map((x, i) => [i]), z: 3, tooltip: { show: false } },
+        }, data: rows.map((x, i) => [i]), z: 3, clip: true, tooltip: { show: false } },
     ],
   }), true);
   const g = (R().regression || {})[v];

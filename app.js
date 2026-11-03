@@ -761,8 +761,11 @@ function renderFireLegend() {
   $("#legend-fire").hidden = S.fireMode === "none";
   if (S.fireMode === "points") {
     title.textContent = "Fire detections, previous 24 h";
-    body.innerHTML = `<div class="fire-scale">${[[5, 4], [30, 6], [150, 9]].map(([f, r]) => `<div class="fs"><div class="fd" style="width:${r * 2}px;height:${r * 2}px"></div>${f} MW</div>`).join("")}
-      <div class="fs" style="flex:1;align-items:stretch"><div class="choro-ramp" style="background:linear-gradient(90deg,#fff6c2,#ffd166,#ff8a2b,#c2185b)"></div><div style="display:flex;justify-content:space-between"><span>new</span><span>24 h old</span></div></div></div>`;
+    // two separate keys: dot size = fire radiative power, dot colour = hours since the satellite pass (same stops as ageColor)
+    body.innerHTML = `<div class="fire-key"><span class="fk-label">Size: fire intensity (FRP)</span>
+        <div class="fire-scale">${[[5, 4], [30, 6], [150, 9]].map(([f, r]) => `<div class="fs"><div class="fd" style="width:${r * 2}px;height:${r * 2}px"></div>${f} MW</div>`).join("")}</div></div>
+      <div class="fire-key" title="Detections fade as they age; nothing older than 24 h is drawn."><span class="fk-label">Colour: hours since the satellite saw it</span>
+        <div class="fire-age">${[["#fff6c2", "just now"], ["#ffd166", "2 h"], ["#ff8a2b", "8 h"], ["#c2185b", "24 h"]].map(([c, l]) => `<div class="fa"><span class="fa-dot" style="background:${c}"></span>${l}</div>`).join("")}</div></div>`;
   } else if (S.fireMode === "districts") {
     title.textContent = `Detections per district, ${fmtDM(S.d1)}-${fmtDM(S.d2)}`;
     body.innerHTML = `<div style="display:flex">${CHORO.map((c) => `<div style="flex:1;height:10px;background:${c}"></div>`).join("")}</div>

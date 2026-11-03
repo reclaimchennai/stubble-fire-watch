@@ -240,7 +240,8 @@ def get_json(url, params, cache, max_age_days=None):
                 time.sleep(30 * (attempt + 1))
                 continue
             raise
-        except (urllib.error.URLError, TimeoutError) as e:
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, ConnectionError) as e:
+            # an empty or cut-off body (seen under load) is retried like a timeout
             log(f"  Open-Meteo {type(e).__name__}; retry")
             time.sleep(15 * (attempt + 1))
     else:
