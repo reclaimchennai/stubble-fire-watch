@@ -51,7 +51,10 @@ function dayRows(name = city) {
 const chennaiByDate = () => { if (!D._cbd) { D._cbd = {}; for (const r of dayRows("Chennai")) D._cbd[r.date] = r; } return D._cbd; };
 const years = () => [...new Set(dayRows("Chennai").map((r) => +r.date.slice(0, 4)))].sort();
 const seasonDates = (y) => { const out = []; for (let d = `${y}-10-01`; d <= `${y}-12-31`; d = addDays(d, 1)) out.push(d); return out; };
-function arnab() { return D.cyclones.find((c) => c.name === "ARNAB") || D.cyclones.filter((c) => c.season === Math.max(...D.cyclones.map((x) => x.season))).at(-1); }
+// storms of the latest season, newest closest approach first; the hourly panel shows one of them
+const recentStorms = () => { const y = Math.max(...D.cyclones.map((x) => x.season)); return D.cyclones.filter((c) => c.season === y).sort((a, b) => b.closest_time.localeCompare(a.closest_time)); };
+let stormId = null;
+const storm = () => recentStorms().find((c) => c.id === stormId) || recentStorms()[0];
 const isNorth = (b) => !!b && (b.startsWith("N") || b === "ENE" || b === "WNW");
 
 // ---------------------------------------------------------------- chart scaffolding (same look as /db)
@@ -107,7 +110,9 @@ function renderHeader() {
   const nwN = classMedian("Chennai", "pm25", "10", "nw_fire"), maN = classMedian("Chennai", "pm25", "10", "marine"), igN = classMedian("Chennai", "pm25", "10", "igp");
   const coD = octNovMean("Delhi", "cams_co"), coC = octNovMean("Chennai", "cams_co");
   const near = D.cyclones.filter((c) => c.closest_km <= 500);
-  const a = arnab(), ap = a ? cyclonePeak(a) : null;
+  const a = storm(), ap = a ? cyclonePeak(a) : null;   // the storm in the hourly panel, for the last tile
+  const stormLine = recentStorms().filter((c) => c.name && c.name !== "UNNAMED" && c.grade_max).reverse().map((a) => [a, cyclonePeak(a)]).filter(([, ap]) => ap && ap.peak).map(([a, ap]) =>
+    `${esc(titleCase(a.name))} (${esc(a.grade_max)}) passed ${fmt(a.closest_km)} km ${esc(a.bearing || "")} of Chennai on ${dayLabel(a.closest_time.slice(0, 10))}, and Chennai's sensor network went from a median <b>${fmt(ap.before)}</b> the week before to a peak of <b>${fmt(ap.peak)} µg/m³</b>.`).join(" ");
   const sig = (e) => e && (e.lo > 0 || e.hi < 0);
   const N = compositeOf(D.cyclones.filter((c) => isNorth(c.bearing))), So = compositeOf(D.cyclones.filter((c) => !isNorth(c.bearing)));
   const after = (C) => median(C.med.slice(8, 12));                  // days +1 to +4
@@ -121,8 +126,7 @@ function renderHeader() {
     Across the season that is a few per cent of Chennai's PM2.5; on the handful of days the smoke arrives it can be a third.
     Cyclones matter more. ${N.n ? `When a storm passes north of Chennai it pulls land air down from the north and PM2.5 runs about <b>${fmt(Math.abs((after(N) - 1) * 100))}% ${after(N) >= 1 ? "higher" : "lower"}</b> for the next few days;` : ""}
     ${So.n ? `when it passes south, rain and sea air leave it about <b>${fmt(Math.abs((after(So) - 1) * 100))}% ${after(So) >= 1 ? "higher" : "lower"}</b>.` : ""}
-    ${a && ap && ap.peak ? `${esc(titleCase(a.name))} (${esc(a.grade_max)}) passed ${fmt(a.closest_km)} km ${esc(a.bearing || "")} of Chennai on ${dayLabel(a.closest_time.slice(0, 10))};
-    as it drew air in from the Gangetic plain, Chennai's sensor network rose from a median <b>${fmt(ap.before)}</b> to a peak of <b>${fmt(ap.peak)} µg/m³</b>.` : ""}`;
+    ${stormLine}`;
 
   const tiles = [
     { title: "Oct-Nov days with NW fire air", value: `${fmt1(cs.share)}<small>%</small>`, sub: `${esc(city)}, ${fmt(cs.nw)} of ${fmt(cs.days)} days since 2018`, cls: "warn" },
@@ -331,9 +335,9 @@ function renderSeason() {
 
 // ---------------------------------------------------------------- cyclones
 function renderArnab() {
-  const a = arnab(); if (!a) return;
-  const t = th(), H = D.chennai.hourly, t0 = istHour(new Date(Date.parse(a.closest_time) - 10 * 864e5).toISOString());
-  const ser = (src, k) => { const h = H[src]; if (!h || !h[k]) return []; return h.time.map((tt, i) => [Date.parse(tt + ":00:00+05:30"), h[k][i]]).filter((p) => istHour(new Date(p[0]).toISOString()) >= t0); };   // nulls kept: gaps stay gaps
+  const a = storm(); if (!a) return;
+  const t = th(), H = D.chennai.hourly, w0 = Date.parse(a.closest_time) - 8 * 864e5, w1 = Date.parse(a.closest_time) + 6 * 864e5;
+  const ser = (src, k) => { const h = H[src]; if (!h || !h[k]) return []; return h.time.map((tt, i) => [Date.parse(tt + ":00:00+05:30"), h[k][i]]).filter((p) => p[0] >= w0 && p[0] <= w1); };   // nulls kept: gaps stay gaps
   $("#t-arnab").textContent = `Cyclone ${titleCase(a.name)}, hour by hour in Chennai`;
   const lf = a.landfall, ca = Date.parse(a.closest_time);
   $("#n-arnab").textContent = `closest ${fmt(a.closest_km)} km ${a.bearing || ""}, ${a.grade_max}`;
@@ -408,7 +412,7 @@ function renderNotes() {
     ["Fires met", "VIIRS S-NPP vegetation-fire detections (FIRMS, type 0) on a 0.5 degree grid, counted where an hourly trajectory point fell on the day of the detection or the day after. NW fires are those in the Punjab-Haryana-Delhi box (73.5-78.5 E, 27.5-32.5 N)."],
     ["Ground air quality", "CPCB and TNPCB continuous monitors via OpenAQ (daily city means of stations within 35 km, the same quality checks as the Delhi data plus a flat-line test). OpenAQ has no CPCB data from November 2022 to February 2025; those seasons rely on the CAMS model. The hourly Chennai panel also uses the aqi.in low-cost network and the TNPCB/CPCB values collected by pol.reclaimchennai.city, which are 24-hour running means converted back from the AQI sub-index."],
     ["Model air quality and weather", "CAMS global atmospheric composition forecasts (PM2.5, CO, from August 2022) and ERA5 reanalysis (rain, wind, boundary-layer height), both via Open-Meteo. CAMS reads Chennai's PM2.5 about half of the ground monitors in October-November; its carbon monoxide is used as a combustion tracer."],
-    ["Cyclones", "IBTrACS v04r01 (IMD best track, NOAA NCEI) for 2016 onward; the current storm from IMD RSMC New Delhi advisories (observed positions only on the map). Distances are to the track line; 'north' storms passed north of Chennai."],
+    ["Cyclones", "IBTrACS v04r01 (IMD best track, NOAA NCEI) for 2016 onward; this season's storms from IMD RSMC New Delhi advisories (observed positions only on the map). Distances are to the track line; 'north' storms passed north of Chennai."],
     ["What this can and cannot say", "The comparison is observational. Air from the north-west is also drier, slower and passes over the Gangetic plain's cities and the east coast's industry, so a difference between air masses is an upper bound on what the farm fires add. The regression holds rain, wind, mixing height, sea exposure and month fixed, but not those other sources."],
   ];
   $("#notes").innerHTML = notes.map(([h, p]) => `<div class="note"><b>${h}</b>${p}</div>`).join("");
@@ -436,6 +440,7 @@ function bind() {
   document.querySelectorAll("#seg-paths button").forEach((b) => b.onclick = () => { pathMode = b.dataset.v; press("#seg-paths", pathMode); renderMap(); });
   $("#map-year").onchange = (e) => { mapYear = +e.target.value; setDayMax(); renderMap(); };
   $("#season-year").onchange = (e) => { seasonYear = +e.target.value; renderSeason(); };
+  $("#sel-storm").onchange = (e) => { stormId = e.target.value; renderArnab(); };
   $("#map-day").oninput = (e) => { mapDay = +e.target.value; renderMap(); };
   const step = (k) => { mapDay = Math.max(0, Math.min(+$("#map-day").max, mapDay + k)); $("#map-day").value = mapDay; renderMap(); };
   $("#map-prev").onclick = () => step(-1); $("#map-next").onclick = () => step(1);
@@ -460,10 +465,12 @@ async function boot() {
   mapYear = seasonYear = ys.at(-1);
   $("#map-year").innerHTML = $("#season-year").innerHTML = ys.slice().reverse().map((y) => `<option value="${y}">${y}</option>`).join("");
   // open on the latest cyclone's closest approach if it is this season, else the season's last day
-  const a = arnab();
+  const a = storm();
   mapDay = a && a.closest_time.startsWith(String(mapYear)) && a.closest_time.slice(5, 10) >= "10-01" ? Math.round((Date.parse(a.closest_time.slice(0, 10)) - Date.parse(`${mapYear}-10-01`)) / 864e5) : lastDay(mapYear);
   mapDay = Math.min(mapDay, lastDay(mapYear));
   setDayMax();
+  $("#sel-storm").innerHTML = recentStorms().filter((c) => c.name).map((c) => `<option value="${esc(c.id)}">${esc(titleCase(c.name))}, ${dayLabel(c.closest_time.slice(0, 10))}</option>`).join("");
+  stormId = $("#sel-storm").value;
   renderAll();
   initMap();
 }

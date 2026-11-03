@@ -53,9 +53,14 @@ UA = {"User-Agent": "Mozilla/5.0 (StubbleFireWatch cyclone builder)"}
 # assigned to the storm. Extend this list when a new system forms.
 CURRENT = [
     {"name": "ARNAB", "sid": "2026299N16089", "atcf": "io0226", "basin": "Bay of Bengal",
-     "season": 2026, "imd_from": "2026-10-24T00:00", "imd_to": "2026-11-10T00:00"},
+     "season": 2026, "imd_from": "2026-10-24T00:00", "imd_to": "2026-10-30T12:00"},
+    # JTWC 04B; formed as a depression near 10.5N 88.6E on 31 Oct. The sid is provisional until IBTrACS lists it
+    # (storms are also matched by name and season, so a different IBTrACS sid cannot duplicate it).
+    {"name": "MURASU", "sid": "2026304N11089", "atcf": "io0426", "basin": "Bay of Bengal",
+     "season": 2026, "imd_from": "2026-10-30T12:00", "imd_to": "2026-11-15T00:00"},
 ]
-CURRENT_MONTH = "2026-10"   # used for the GDACS sweep for any other NI system
+RECENT_DAYS = 45   # window for the GDACS sweep and the check for named systems missing from CURRENT
+RECENT_FROM = (dt.date.today() - dt.timedelta(days=RECENT_DAYS)).isoformat()
 
 GRADES = ["D", "DD", "CS", "SCS", "VSCS", "ESCS", "SuCS"]
 GRADE_NAMES = {
@@ -483,7 +488,7 @@ def build_imd(refresh, offline):
 # ----------------------------------------------------------------- GDACS / JTWC
 def gdacs_events(refresh, offline):
     today = dt.date.today()
-    url = (GDACS_API + f"events/geteventlist/SEARCH?eventlist=TC&fromDate={CURRENT_MONTH}-01"
+    url = (GDACS_API + f"events/geteventlist/SEARCH?eventlist=TC&fromDate={RECENT_FROM}"
            f"&toDate={today.isoformat()}&alertlevel=")
     f = fetch(url, RAW / "gdacs_tc_search.json", refresh=refresh, offline=offline, max_age_h=1)
     if not f:
@@ -787,22 +792,24 @@ def main():
                     "note": "TC events in the North Indian Ocean this month: " + ", ".join(e["name"] for e in gd_evs)})
 
     by_sid = {s["id"]: s for s in hist}
-    storms = [finalize_hist(s) for s in hist if s["id"] not in {c["sid"] for c in CURRENT}]
+    cur = {(c["name"], c["season"]) for c in CURRENT}
+    storms = [finalize_hist(s) for s in hist if s["id"] not in {c["sid"] for c in CURRENT} and (s["name"], s["season"]) not in cur]
     current = []
     for cfg in CURRENT:
-        st = build_current(cfg, imd, by_sid.get(cfg["sid"]), gd_evs, a.refresh, a.offline, sources)
+        ib_storm = by_sid.get(cfg["sid"]) or next((s for s in hist if (s["name"], s["season"]) == (cfg["name"], cfg["season"])), None)
+        st = build_current(cfg, imd, ib_storm, gd_evs, a.refresh, a.offline, sources)
         current.append(st)
     # IMD-named systems this month that are not configured: flag them so a human adds them
     notes = []
     known = {c["name"].lower() for c in CURRENT}
     for r in imd:
-        if r["base"].strftime("%Y-%m") == CURRENT_MONTH and r["obs"] and r["subject"]:
+        if r["base"].date().isoformat() >= RECENT_FROM and r["obs"] and r["subject"]:
             nm = re.search(r"[“\"]\s*(\w+)\s*[”\"]", r["subject"])
             if nm and nm.group(1).lower() not in known:
                 notes.append(f"IMD bulletin {r['file']} names an unconfigured system {nm.group(1)}")
     for e in gd_evs:
         nm = e["name"].split()[-1].split("-")[0].lower()
-        if nm not in known and e["fromdate"][:7] == CURRENT_MONTH:
+        if nm not in known and e["fromdate"][:10] >= RECENT_FROM:
             notes.append(f"GDACS lists {e['name']} ({e['fromdate']}..{e['todate']}) not in CURRENT")
     storms += current
     storms.sort(key=lambda s: (s["start"] or "", s["id"]))

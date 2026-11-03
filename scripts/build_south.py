@@ -22,6 +22,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 EX = ROOT / "data" / "db" / "extras"
 OUT = ROOT / "data" / "db" / "south.json"
+OUT_DELHI = ROOT / "data" / "db" / "delhi_air.json"
 CHENNAI = (13.08, 80.27)
 SEASON_MONTHS = (10, 11, 12)
 CYCLONE_KM = 800
@@ -80,6 +81,78 @@ def ols(y, X, names):
     r2 = 1 - (e @ e) / ((y - y.mean()) @ (y - y.mean()))
     return {"n": int(n), "r2": round(float(r2), 3),
             "coef": {nm: {"b": round(float(b), 4), "se": round(float(s), 4)} for nm, b, s in zip(["const"] + names, beta, se)}}
+
+
+# Delhi sits inside the Punjab-Haryana-Delhi box, so the south's fire/no-fire class says nothing there (its
+# trajectory meets some fire on nearly every season day). Days are classed by where the air came from instead,
+# and the fire it met is kept as a separate, graded measure.
+DELHI = (28.61, 77.21)
+DELHI_CLS = {
+    "stagnant": "stayed within 350 km of Delhi for the five days",
+    "nw": "most of the five days over Punjab and Haryana (north-west)",
+    "east": "most of the five days east of 78.5 E, over the Gangetic plain",
+    "west": "from the west or south-west: Rajasthan and the Thar",
+}
+FIRE_LEVELS = [("low", 0, 10), ("some", 10, 50), ("heavy", 50, None)]
+
+
+def delhi_class(path):
+    far = max(hav((q[1], q[0]), DELHI) for q in path)
+    pts = path[1:] or path
+    east = sum(q[0] > 78.5 for q in pts) / len(pts)
+    nw = sum(q[0] < 77.0 and q[1] > 28.8 for q in pts) / len(pts)
+    return ("stagnant" if far < 350 else "east" if east >= 0.5 else "nw" if nw >= 0.5 else "west"), round(far)
+
+
+def fire_level(f):
+    return next((k for k, lo, hi in FIRE_LEVELS if f >= lo and (hi is None or f < hi)), None) if f is not None else None
+
+
+def build_delhi(aq, tr):
+    D = aq["cities"]["Delhi"]["daily"]
+    idx = {d: i for i, d in enumerate(D["date"])}
+    days, paths = [], {}
+    for y, yr in sorted(tr["years"].items()):
+        t = yr.get("Delhi")
+        if not t:
+            continue
+        for i, d in enumerate(t["date"]):
+            p = t["path"][i]
+            if not p:
+                continue
+            cls, far = delhi_class(p)
+            j = idx.get(d)
+            g = (lambda k: D[k][j] if j is not None else None)
+            days.append({"date": d, "cls": cls, "far_km": far, "fire_nw": t["fire_nw"][i], "fire": fire_level(t["fire_nw"][i]),
+                         "pm25": g("pm25"), "n_stations": g("n_stations"), "cams_pm25": g("cams_pm25"), "cams_co": g("cams_co"),
+                         "precip": g("precip"), "wind": g("wind"), "blh14": g("blh14")})
+            paths[d] = p
+    on = [r for r in days if r["date"][5:7] in ("10", "11")]
+    by_year = {}
+    for r in on:
+        f = by_year.setdefault(r["date"][:4], {"days": 0, **{c: 0 for c in DELHI_CLS}})
+        f["days"] += 1
+        f[r["cls"]] += 1
+    # medians on dry Oct-Nov days, by origin x fire met
+    med = {}
+    for var in ("pm25", "cams_pm25", "cams_co"):
+        for c in DELHI_CLS:
+            for lv, *_ in FIRE_LEVELS:
+                v = [r[var] for r in on if r["cls"] == c and r["fire"] == lv and r[var] is not None and (r["precip"] or 0) < 1]
+                if v:
+                    med.setdefault(var, {}).setdefault(c, {})[lv] = {
+                        "n": len(v), "median": round(float(np.median(v)), 1),
+                        "q25": round(float(np.percentile(v, 25)), 1), "q75": round(float(np.percentile(v, 75)), 1)}
+    out = {"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
+           "receptor": {"name": "Delhi", "lat": DELHI[0], "lon": DELHI[1]},
+           "method": "120 h back-trajectories at 850 hPa (transport.py), arrival 06 UTC path drawn; class from the 6-hourly "
+                     "path points; fire_nw = VIIRS S-NPP detections met in the Punjab-Haryana-Delhi box, averaged over the "
+                     "four daily arrivals; medians on dry days (ERA5 rain < 1 mm), October-November",
+           "classes": DELHI_CLS, "fire_levels": [{"key": k, "min": lo, "max": hi} for k, lo, hi in FIRE_LEVELS],
+           "days": {k: [r[k] for r in days] for k in days[0]} if days else {}, "paths": paths,
+           "by_year": by_year, "medians": med, "sources": {"aq": aq["sources"], "transport": tr["method"]}}
+    OUT_DELHI.write_text(json.dumps(out, separators=(",", ":"), allow_nan=False, default=lambda o: None))
+    print("wrote", OUT_DELHI, OUT_DELHI.stat().st_size)
 
 
 def main():
@@ -186,6 +259,8 @@ def main():
                                           if p.get("kind") != "forecast"][::2 if s["season"] < 2026 else 1]})
     OUT.write_text(json.dumps(out, separators=(",", ":"), allow_nan=False, default=lambda o: None))
     print("wrote", OUT, OUT.stat().st_size)
+    if "Delhi" in aq["cities"]:
+        build_delhi(aq, tr)
 
 
 if __name__ == "__main__":

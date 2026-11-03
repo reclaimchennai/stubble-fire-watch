@@ -13,5 +13,6 @@ for d in fires smoke geo burnscar s2night; do [ -d "data/$d" ] && rsync -a --del
 cp data/creams/creams_dashboard.json "$W/data/creams/"
 cp data/db/db.json "$W/data/db/"
 [ -f data/db/south.json ] && cp data/db/south.json "$W/data/db/"
+[ -f data/db/delhi_air.json ] && cp data/db/delhi_air.json "$W/data/db/"
 .venv/bin/python scripts/stamp.py "$W" || python3 scripts/stamp.py "$W"
 echo "published to $W/ ($(du -sh "$W" | cut -f1))"

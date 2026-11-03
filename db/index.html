@@ -24,9 +24,13 @@
 </script>
 <link rel="stylesheet" href="../theme.css">
 <link rel="stylesheet" href="db.css">
+<link rel="stylesheet" href="../vendor/maplibre-gl.css">
+<link rel="stylesheet" href="../south/south.css">
 <script src="../vendor/echarts.min.js" defer></script>
 <script src="../vendor/icons.js" defer></script>
+<script src="../vendor/maplibre-gl.js" defer></script>
 <script src="app.js" defer></script>
+<script src="delhi.js" defer></script>
 </head>
 <body>
 
@@ -196,6 +200,33 @@
     <div class="row2">
       <div class="panel"><div class="panel-h"><h2>Season fires against season PM2.5</h2><span class="hint" tabindex="0" data-tip="One dot per season: 15 Oct - 15 Nov mean PM2.5 at the city against Punjab + Haryana detections over the same days. Weather moves PM2.5 too, so this is an association, not an attribution."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-airscatter"></div></div>
       <div class="panel"><div class="panel-h"><h2>Afternoon mixing height</h2><span class="hint" tabindex="0" data-tip="ERA5 boundary-layer height at 14:00 IST, 15 Oct - 15 Nov mean. A lower lid traps smoke and local emissions alike."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-blh"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. Delhi back-trajectories (delhi.js) -->
+  <section class="sect" id="sect-dair">
+    <div class="sect-head">
+      <h2><span data-icon="route"></span>Where Delhi's air came from</h2>
+      <p class="sect-lede" id="d-lede">Five-day back-trajectories for Delhi, day by day.</p>
+      <div class="sect-ctls">
+        <label class="field"><span class="field-k">Season</span><select id="dmap-year" autocomplete="off"></select><span class="caret" data-icon="chevron-down"></span></label>
+        <button class="btn icon" id="dmap-prev" type="button" aria-label="Previous day"><span data-icon="chevron-left"></span></button>
+        <label class="field datefield"><input type="range" id="dmap-day" min="0" max="107" value="0" aria-label="Day" autocomplete="off"><b id="dmap-date"></b></label>
+        <button class="btn icon" id="dmap-next" type="button" aria-label="Next day"><span data-icon="chevron-right"></span></button>
+        <button class="btn icon" id="dmap-play" type="button" aria-label="Play"><span data-icon="play"></span></button>
+        <div class="seg sm" id="seg-dpaths" role="group" aria-label="Lines shown">
+          <button type="button" data-v="day" aria-pressed="true">Selected day</button>
+          <button type="button" data-v="season" aria-pressed="false">Whole season</button>
+        </div>
+      </div>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel map-panel"><div class="map h-map" id="dmap"></div><div class="map-legend" id="dmap-legend"></div></div>
+      <div class="panel"><div class="panel-h"><h2 id="t-dday">That day</h2></div><div id="d-dayinfo" class="dayinfo"></div><div class="chart h-sm" id="c-dday"></div></div>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Where Delhi's air came from, October-November</h2><span class="hint" tabindex="0" data-tip="From the path of the 06 UTC arrival, sampled every 6 h: stagnant = never more than 350 km from Delhi in five days; east = at least half the points east of 78.5 E; north-west = at least half over Punjab and Haryana (west of 77 E, north of 28.8 N); otherwise west / south-west."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-dfreq"></div></div>
+      <div class="panel"><div class="panel-h"><h2>Delhi PM2.5 by where the air came from and the fire it met</h2><span class="hint" tabindex="0" data-tip="Median of daily CPCB monitor means, dry October-November days (ERA5 rain under 1 mm), 2018 onward. Fire met: VIIRS S-NPP detections in the Punjab-Haryana-Delhi box that the four daily trajectories passed over, averaged. Groups with fewer than three days are left out. Weather differs between groups too: north-west air in burning season is also slow, cool air under a low lid, so the gap is an upper bound on what the fires add."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-dmed"></div></div>
     </div>
   </section>
 
