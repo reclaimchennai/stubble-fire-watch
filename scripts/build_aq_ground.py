@@ -534,30 +534,47 @@ def ts_iso(ts):
 
 
 def dss_daily_from_page(html_text):
-    """DSS index.php 'data2' = Daily Mean contribution from Stubble/Biomass Burning to PM2.5 in Delhi."""
-    c = chartjs(html_text).get("data2")
-    if not c:
-        return {}
-    labs, ds = c
-    key = next((k for k in ds if re.search(r"stubble|biomass", k, re.I)), None)
-    if not key:
-        return {}
-    res = {}
-    for lab, v in zip(labs, ds[key]):
-        if v is not None and re.match(r"\d{4}-\d{2}-\d{2}", lab):
-            res.setdefault(lab[:10], v)  # first occurrence of a repeated date
-    return res
+    """DSS index.php 'data2' = Daily Mean contribution from Stubble/Biomass Burning to PM2.5 in Delhi;
+    'data' = the 4-day source-apportionment stack (Delhi sectors, NCR districts, stubble, others), keyed by
+    its first date (the issue)."""
+    ch = chartjs(html_text)
+    res, fc = {}, {}
+    c = ch.get("data2")
+    if c:
+        labs, ds = c
+        key = next((k for k in ds if re.search(r"stubble|biomass", k, re.I)), None)
+        for lab, v in zip(labs, ds.get(key, [])):
+            if v is not None and re.match(r"\d{4}-\d{2}-\d{2}", lab):
+                res.setdefault(lab[:10], v)  # first occurrence of a repeated date
+    c = ch.get("data")
+    if c and c[0] and all(re.match(r"\d{4}-\d{2}-\d{2}", lab) for lab in c[0]):
+        labs, ds = c
+        src = {k.strip(): [None if v is None else round(v, 3) for v in vals]
+               for k, vals in ds.items() if len(vals) == len(labs)}
+        if src:
+            fc[labs[0][:10]] = {"dates": [lab[:10] for lab in labs], "sources": src}
+    return res, fc
 
 
 def obfire_from_page(html_text):
-    """ob_fire_count.php: data2 'PM2.5' fire contribution; 'VIIRS YYYY' daily fire counts."""
+    """ob_fire_count.php: data2 'PM2.5' and 'CO' fire contributions; 'VIIRS YYYY' daily fire counts;
+    'Fire CO%' hourly (keyed YYYY-MM-DDTHH, IST as labelled)."""
     ch = chartjs(html_text)
-    share, viirs = {}, {}
+    share, viirs, co, co_h = {}, {}, {}, {}
     if "data2" in ch:
         labs, ds = ch["data2"]
         for lab, v in zip(labs, ds.get("PM2.5", [])):
             if v is not None and re.match(r"\d{4}-\d{2}-\d{2}", lab):
                 share.setdefault(lab[:10], v)
+        for lab, v in zip(labs, ds.get("CO", [])):
+            if v is not None and re.match(r"\d{4}-\d{2}-\d{2}", lab):
+                co.setdefault(lab[:10], v)
+    for name, (labs, ds) in ch.items():
+        vals = ds.get("Fire CO%")
+        if vals and len(vals) == len(labs):
+            for lab, v in zip(labs, vals):
+                if v is not None and re.match(r"\d{4}-\d{2}-\d{2} \d{2}", lab):
+                    co_h.setdefault(f"{lab[:10]}T{lab[11:13]}", v)
     for name, (labs, ds) in ch.items():
         for k, vals in ds.items():
             m = re.fullmatch(r"VIIRS (\d{4})", k.strip())
@@ -566,7 +583,7 @@ def obfire_from_page(html_text):
             for lab, v in zip(labs, vals):
                 if v is not None and lab[:4] == m.group(1):
                     viirs.setdefault(lab[:10], v)
-    return share, viirs
+    return share, viirs, co, co_h
 
 
 def collect_ews(page, parse, live_name):
@@ -586,9 +603,11 @@ def collect_ews(page, parse, live_name):
         if txt:
             pages.append((c["timestamp"], f"{WB}/web/{c['timestamp']}/{c['original']}", ts_iso(c["timestamp"]), txt))
     live_url = page["live"]
-    txt = web_get(live_url, RAW / "live" / f"{live_name}_{TODAY.isoformat()}.html", timeout=60)
-    if txt:
-        pages.append(("99999999999999", live_url, TODAY.isoformat(), txt))
+    web_get(live_url, RAW / "live" / f"{live_name}_{TODAY.isoformat()}.html", timeout=60)
+    # every day's saved copy of the live page, not just today's: the 4-day forecasts are only kept this way
+    for f in sorted((RAW / "live").glob(f"{live_name}_????-??-??.html")):
+        day = f.stem[-10:]
+        pages.append((day.replace("-", "") + "999999", live_url, day, f.read_text(errors="replace")))
     merged, conflicts = {}, []
     for ts, url, retrieved, txt in pages:
         parsed = parse(txt)
@@ -596,7 +615,7 @@ def collect_ews(page, parse, live_name):
         for i, series in enumerate(parsed):
             m = merged.setdefault(i, {})
             for d, v in series.items():
-                if d in m and abs(m[d]["v"] - v) > 1e-6:
+                if d in m and isinstance(v, float) and abs(m[d]["v"] - v) > 1e-6:
                     conflicts.append({"series_index": i, "date": d, "old": m[d]["v"], "old_url": m[d]["url"], "new": v, "new_url": url})
                 m[d] = {"v": v, "url": url, "retrieved": retrieved}
     return merged, conflicts, len(pages)
@@ -688,6 +707,9 @@ def build_stubble():
                           "url": [m[d]["url"] for d in ds], "retrieved": [m[d]["retrieved"] for d in ds]}
     notes["IITM_DSS"] = {"pages_parsed": npages, "conflicting_values_between_captures": conflicts[:50],
                          "n_conflicts": len(conflicts)}
+    # 4-day source apportionment, one entry per issue (a page left unchanged for months repeats one issue)
+    f = merged.get(1, {})
+    forecasts = [{"issued": d, **f[d]["v"], "url": f[d]["url"], "retrieved": f[d]["retrieved"]} for d in sorted(f)]
     sources.append({
         "series": "IITM_DSS", "name": "IITM Decision Support System for Air Quality Management in Delhi",
         "page": f"{EWS}/dss/index.php",
@@ -697,7 +719,7 @@ def build_stubble():
         "access": "no API; values parsed from page HTML. Past seasons from Internet Archive Wayback captures "
                   "(each value's capture URL given); current season from the live page",
         "method": "WRF-Chem based DSS; the day-0 value is the model run for the previous day; forward days in "
-                  "the page's 4-day forecast (not stored here) use climatological fire emissions",
+                  "the page's 4-day forecast (dss_forecasts) use climatological fire emissions",
         "coverage_note": "2021-2022 DSS pages carried only hourly 5-day forecast stacks, no daily series - "
                          "not included (would require averaging = derivation)",
         "fire_count": "not published with this series (null)"})
@@ -718,6 +740,19 @@ def build_stubble():
         "n_conflicts": len(c1), "conflicting_values_between_captures": c1[:50],
         "note": "a count captured on the same day it refers to is partial; later captures supersede it. "
                 "The last date of the newest capture/live page may still be partial"}
+    m = merged.get(2, {})
+    ds = sorted(m)
+    series["IITM_AQEWS_fire_contribution_CO"] = {
+        "date": ds, "share_pct": [m[d]["v"] for d in ds], "fire_count": [None] * len(ds),
+        "url": [m[d]["url"] for d in ds], "retrieved": [m[d]["retrieved"] for d in ds]}
+    c2 = [c for c in conflicts if c["series_index"] == 2]
+    notes["IITM_AQEWS_fire_contribution_CO"] = {"n_conflicts": len(c2), "conflicting_values_between_captures": c2[:50]}
+    h = merged.get(3, {})
+    urls = sorted({h[k]["url"] for k in h})
+    hourly = {"IITM_AQEWS_fire_CO_hourly": {
+        "time": sorted(h), "share_pct": [h[k]["v"] for k in sorted(h)],
+        "url_index": [urls.index(h[k]["url"]) for k in sorted(h)], "urls": urls,
+        "time_basis": "labels as published (IST), hour ending"}}
     v = merged.get(1, {})
     dv = sorted(v)
     series["IITM_AQEWS_VIIRS_fire_count"] = {
@@ -737,6 +772,22 @@ def build_stubble():
                  "with equal length); domain described by IITM as 'northern India', not state-specific",
         "caveat": "IITM notes SNPP-VIIRS unavailable since 2023-11-01 (NOAA-20/21 used); counts are not the "
                   "SAFAR 'effective fire count'"})
+    sources.append({
+        "series": "IITM_AQEWS_fire_contribution_CO", "name": "IITM AQEWS 'Daily Mean Fire Contribution to Air "
+        "Pollution in Delhi' (CO dataset)", "page": f"{EWS}/ob_fire_count.php",
+        "field": "inline Chart.js 'data2', dataset 'CO' (% of Delhi surface CO from fire emissions)",
+        "access": "Wayback captures + live page"})
+    sources.append({
+        "series": "IITM_AQEWS_fire_CO_hourly", "name": "IITM AQEWS 'CO Fire % Hourly'", "page": f"{EWS}/ob_fire_count.php",
+        "field": "inline Chart.js stack with dataset 'Fire CO%' (hourly, about the last 30-60 days per capture)",
+        "access": "Wayback captures + live page; later captures win"})
+    sources.append({
+        "series": "dss_forecasts", "name": "IITM DSS 'Daily Mean of Local and Non-Local Fractional Contribution "
+        "to PM2.5 in Delhi for the next four days'", "page": f"{EWS}/dss/index.php",
+        "field": "inline Chart.js 'data': one dataset per source (8 Delhi sectors, 19 NCR districts, Stubble "
+                 "Burning, Others), % of Delhi PM2.5 for 4 dates; issued = first date",
+        "caveat": "days after the first use climatological fire counts and emissions (IITM's own note); the "
+                  "page sometimes stays on one issue for weeks, so issues are not daily before the live archive"})
     # ---- SAFAR
     rows = []
     for ts, date, share, fire, basis, kind, quote in SAFAR_ENTRIES:
@@ -797,7 +848,8 @@ def build_stubble():
         "splice them into one series without noting the break",
         "DSS 'Biomass Burning' (2023) vs 'Stubble Burning' (2024+) labels refer to the same chart",
         "values are model attributions, not measurements"],
-        "build_notes": notes, "retrieved": TODAY.isoformat(), "series": series}
+        "build_notes": notes, "retrieved": TODAY.isoformat(), "series": series, "hourly": hourly,
+        "dss_forecasts": forecasts}
     OUT_STUBBLE.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
     for k, s in series.items():
         yrs = defaultdict(int)

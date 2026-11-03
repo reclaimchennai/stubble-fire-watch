@@ -180,6 +180,7 @@ table.board tbody tr:hover { background: var(--hover); }
 .tt-title { color: var(--text); font-weight: 600; margin-bottom: 3px; }
 .tt-row { display: flex; justify-content: space-between; gap: 16px; }
 .tt-row span:last-child { color: var(--text); font-variant-numeric: tabular-nums; }
+.tt-sub { color: var(--dim); font-size: 11px; margin: 0 0 3px 16px; max-width: 280px; white-space: normal; line-height: 1.35; }
 
 /* dialog */
 .modal { width: min(720px, calc(100% - 32px)); max-height: calc(100% - 64px); background: var(--panel); color: var(--text);

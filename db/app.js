@@ -600,21 +600,24 @@ function renderAir() {
   const S = (D.stubble || {}).series || {};
   const onSeason = (ser) => { const out = new Array(D.season_days).fill(null); if (!ser) return out;
     ser.date.forEach((d, i) => { if (!d.startsWith(String(y))) return; const k = Math.round((Date.parse(d + "T00:00:00Z") - Date.UTC(y, 8, 15)) / 864e5); if (k >= 0 && k < D.season_days && ser.share_pct[i] != null) out[k] = ser.share_pct[i]; }); return out; };
-  const dss = onSeason(S.IITM_DSS), safar = onSeason(S.SAFAR);
-  const anyShare = dss.some((v) => v != null) || safar.some((v) => v != null);
+  const dss = onSeason(S.IITM_DSS), safar = onSeason(S.SAFAR), coF = onSeason(S.IITM_AQEWS_fire_contribution_CO);
+  const anyShare = [dss, safar, coF].some((a) => a.some((v) => v != null));
   $("#t-stubble").textContent = `Stubble burning's modelled share of Delhi's PM2.5, ${y}`;
   $("#n-stubble").textContent = anyShare ? "" : `No published daily share archived for ${y}; IITM DSS daily values exist for 2023 onward, SAFAR bulletins for scattered days in 2019-2022.`;
+  const narrow = document.getElementById("c-stubble").clientWidth < 560;
   chart("c-stubble").setOption(base({
-    grid: { left: 52, right: 56, top: 36, bottom: 30 },
+    grid: { left: 52, right: 56, top: narrow ? 66 : 44, bottom: 30 },
     tooltip: { ...base().tooltip, valueFormatter: (v) => (v == null ? "–" : `${(+v).toFixed(1)}`) },
-    xAxis: cAxis(days, { axisLabel: { color: t.dim, interval: 7 } }),
-    yAxis: [vAxis({ max: 60, axisLabel: { color: t.dim, formatter: (v) => `${v}%` } }), vAxis({ name: "detections", splitLine: { show: false } })],
+    xAxis: cAxis(days, { axisLabel: { color: t.dim, interval: narrow ? 15 : 7 } }),
+    yAxis: [vAxis({ max: 60, axisLabel: { color: t.dim, formatter: (v) => `${v}%` } }), vAxis({ splitLine: { show: false } })],
     series: [
       { name: "Detections, Punjab + Haryana", type: "bar", yAxisIndex: 1, barMaxWidth: 8, itemStyle: { color: HEAT[2], opacity: 0.45 }, data: fires },
       { name: "IITM DSS: stubble share (%)", type: "line", smooth: 0.15, symbolSize: 4, connectNulls: false, lineStyle: { width: 2.3, color: t.warn }, itemStyle: { color: t.warn }, data: dss },
+      { name: "IITM AQEWS: fire share of CO (%)", type: "line", smooth: 0.15, symbol: "none", connectNulls: false, lineStyle: { width: 1.6, type: "dashed", color: "#4ea8de" }, itemStyle: { color: "#4ea8de" }, data: coF },
       { name: "SAFAR bulletin (%)", type: "scatter", symbol: "diamond", symbolSize: 10, itemStyle: { color: t.accent }, data: safar },
     ],
   }), true);
+  renderDSS(y);
 
   // season association, one dot per season: 15 Oct - 15 Nov mean PM2.5 against detections over the same days
   const W0 = 30, W1 = 62;
@@ -648,6 +651,73 @@ function renderAir() {
   }
 }
 
+// IITM DSS source apportionment: 29 sources folded into five groups (hover lists the largest members)
+const DSS_GROUPS = [
+  { name: "Stubble burning", color: "#c2185b", test: (k) => /stubble|biomass/i.test(k) },
+  { name: "Delhi transport", color: "#e9b221", test: (k) => /^Delhi Transport/i.test(k) },
+  { name: "Other Delhi sources", color: "#4ea8de", test: (k) => /^Delhi /i.test(k) },
+  { name: "NCR and nearby districts", color: "#8c7ae6", test: (k) => !/^Delhi |stubble|biomass|^Others$/i.test(k) },
+  { name: "Others, outside the region", color: "#8a8f98", test: (k) => /^Others$/i.test(k) },
+];
+const dssGroup = (k) => DSS_GROUPS.find((g) => g.test(k));
+function dssSplit(src, i) {   // [{name, color, v, top: [[label, v]...]}] for column i of one issue
+  return DSS_GROUPS.map((g) => {
+    const m = Object.entries(src).filter(([k]) => dssGroup(k) === g).map(([k, a]) => [k.replace(/^Delhi /, ""), a[i]])
+      .filter(([, v]) => v != null).sort((a, b) => b[1] - a[1]);
+    return { ...g, v: m.length ? sum(m.map((x) => x[1])) : null, top: m.slice(0, 4) };
+  });
+}
+function dssOption(cols, labels, title) {
+  const t = th();
+  return base({
+    grid: { left: 44, right: 14, top: 58, bottom: 40 },
+    legend: { ...base().legend, top: 2, data: DSS_GROUPS.map((g) => g.name) },
+    tooltip: { ...base().tooltip, axisPointer: { type: "shadow", shadowStyle: { color: t.grid } }, formatter: (ps) => {
+      const c = cols[ps[0].dataIndex];
+      return `<div class="tt-title">${title(ps[0].dataIndex)}</div>` + c.slice().reverse().filter((g) => g.v != null).map((g) =>
+        tipRow(g.color, g.name, `${g.v.toFixed(1)}%`) + (g.top.length > 1 ? `<div class="tt-sub">${g.top.map(([k, v]) => `${k} ${v.toFixed(1)}`).join(" · ")}</div>` : "")).join(""); } },
+    xAxis: cAxis(labels, { axisLabel: { color: t.dim, interval: 0, hideOverlap: true, lineHeight: 14 } }),
+    yAxis: vAxis({ max: 100, axisLabel: { color: t.dim, formatter: (v) => `${v}%` } }),
+    series: DSS_GROUPS.map((g, gi) => ({ name: g.name, type: "bar", stack: "s", barMaxWidth: 46, itemStyle: { color: g.color }, emphasis: { focus: "series" },
+      data: cols.map((c) => (c[gi].v == null ? null : +c[gi].v.toFixed(2))) })),
+  });
+}
+function renderDSS(y) {
+  const t = th(), F = (D.stubble || {}).dss_forecasts || [];
+  const dlab = (d) => { const x = new Date(d + "T00:00:00Z"); return `${x.getUTCDate()} ${MONTHS[x.getUTCMonth()]}`; };
+  const last = F.at(-1);
+  if (last) {
+    $("#n-dssfc").textContent = `issued ${dlab(last.issued)} ${last.issued.slice(0, 4)}`;
+    chart("c-dssfc").setOption(dssOption(last.dates.map((d, i) => dssSplit(last.sources, i)), last.dates.map((d, i) => `${dlab(d)}\n${i ? "typical fires" : "observed fires"}`),
+      (i) => `${dlab(last.dates[i])} ${last.dates[i].slice(0, 4)}${i ? ": climatological fires" : ": observed fires"}`), true);
+  }
+  // first day of each archived issue in the selected season (15 Sep .. 31 Jan)
+  const inSeason = F.filter((f) => f.issued >= `${y}-09-15` && f.issued <= `${y + 1}-01-31`);
+  $("#t-dssarch").textContent = `Source split on archived days, ${y} season`;
+  $("#n-dssarch").textContent = inSeason.length ? `${inSeason.length} day${inSeason.length > 1 ? "s" : ""} on file` : "";
+  chart("c-dssarch").setOption(inSeason.length
+    ? dssOption(inSeason.map((f) => dssSplit(f.sources, 0)), inSeason.map((f) => dlab(f.issued)), (i) => `${dlab(inSeason[i].issued)} ${inSeason[i].issued.slice(0, 4)}, first day of that issue`)
+    : { title: { text: `No IITM DSS issue archived for the ${y} season`, left: "center", top: "middle", textStyle: { color: t.dim, fontSize: 12.5, fontWeight: 400 } } }, true);
+  // hourly CO fire share, 15 Sep .. 31 Jan
+  const H = ((D.stubble || {}).hourly || {}).IITM_AQEWS_fire_CO_hourly;
+  const t0 = Date.UTC(y, 8, 15), t1 = Date.UTC(y + 1, 0, 31, 23);
+  const pts = [];
+  if (H) H.time.forEach((s, i) => { const ms = Date.parse(`${s}:00:00+05:30`); if (ms >= t0 && ms <= t1) pts.push([ms, H.share_pct[i]]); });
+  for (let i = pts.length - 1; i > 0; i--) if (pts[i][0] - pts[i - 1][0] > 3 * 36e5) pts.splice(i, 0, [pts[i - 1][0] + 36e5, null]);   // break the line over gaps
+  const ist = (ms) => { const d = new Date(ms + 19800e3); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`; };
+  $("#t-coh").textContent = `Hour by hour: fire share of Delhi's carbon monoxide, ${y} season`;
+  $("#n-coh").textContent = pts.length ? "" : `No hourly values archived for ${y}; IITM's page keeps only about the last month.`;
+  chart("c-coh").setOption(base({
+    grid: { left: 8, right: 18, top: 16, bottom: 26, containLabel: true },
+    legend: { show: false },
+    tooltip: { ...base().tooltip, formatter: (ps) => { const d = new Date(ps[0].value[0] + 19800e3);
+      return `<div class="tt-title">${ist(ps[0].value[0])}, ${String(d.getUTCHours()).padStart(2, "0")}:00 IST</div>${tipRow("#4ea8de", "fire share of CO", ps[0].value[1] == null ? "–" : `${(+ps[0].value[1]).toFixed(1)}%`)}`; } },
+    xAxis: { type: "time", min: t0, max: t1, axisLabel: { color: t.dim, formatter: ist }, axisLine: { lineStyle: { color: t.axis } }, splitLine: { show: false } },
+    yAxis: vAxis({ min: 0, axisLabel: { color: t.dim, formatter: (v) => `${+v.toFixed(2)}%` } }),
+    series: [{ name: "fire share of CO", type: "line", symbol: "none", connectNulls: false, sampling: "lttb", lineStyle: { width: 1.2, color: "#4ea8de" }, areaStyle: { color: "#4ea8de", opacity: 0.15 }, data: pts }],
+  }), true);
+}
+
 // ---------------------------------------------------------------- notes
 function renderNotes() {
   const r = "Kharif rice area and production: DA&FW / DES via UPAg (district APY, final estimates; state-wise official APY), as compiled for agri.reclaimchennai.city. Milled rice, agricultural year starting in the fire season's year.";
@@ -661,7 +731,7 @@ function renderNotes() {
     ["Night hot spots", "ESA's Sentinel-2A night-time campaign (3-22 Dec 2025; scenes of 9 and 12 Dec over Punjab), orthorectified radiance, 20 m. Clusters bright in both B12 and B11 (0.5 W m-2 sr-1 um-1 over a 1 km background); none pass on the negated images. Matched to FIRMS within 1 km; setting from ESA WorldCover 2021. Hot spots on open land may still be lone factories or brick kilns. A one-off test: ESA's second campaign (Jul-Sep 2026) is restricted to expert users and no campaign has covered the October-November burning season."],
     ["Districts", "geoBoundaries district polygons (India: LGD 2021). Districts created after 2021 are counted inside their parent polygon. Pakistan's districts are shown for comparison; no paddy area is available for them here."],
     ["Air quality", "Ground PM2.5: CPCB continuous ambient air-quality stations via the OpenAQ v3 API, daily means kept only with 18+ hours of data, city value = mean of stations reporting (Delhi grew from 6 stations in 2016 to about 40). OpenAQ holds no CPCB data from late 2022 to February 2025. Model PM2.5: CAMS via Open-Meteo, from August 2022, good at day-to-day swings but biased low in absolute level. Weather moves PM2.5 as much as fires do; the scatter is an association, not an attribution."],
-    ["Stubble share", "IITM Pune's Decision Support System for Delhi (2023 onward, daily model mean, from the live page and Wayback Machine captures) and SAFAR's daily bulletin (2019-2022, scattered days from archived captures, dates may be off by one). Both are model attributions, from different models; they are not spliced into one series."],
+    ["Stubble share", "IITM Pune's Decision Support System for Delhi (2023 onward, daily model mean, from the live page and Wayback Machine captures) and SAFAR's daily bulletin (2019-2022, scattered days from archived captures, dates may be off by one). Both are model attributions, from different models; they are not spliced into one series. IITM's 4-day source split and hourly CO fire share are saved from the live page every day (and taken from Wayback captures for past seasons), since IITM keeps no archive of its own."],
   ];
   $("#notes").innerHTML = notes.map(([h, b]) => `<div class="note"><b>${h}</b>${b}</div>`).join("");
   $("#built").textContent = `${D.generated}, fires to ${D.last_detection_date}`;
