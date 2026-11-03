@@ -31,6 +31,7 @@
 <script src="../vendor/maplibre-gl.js" defer></script>
 <script src="app.js" defer></script>
 <script src="delhi.js" defer></script>
+<script src="ndvi.js" defer></script>
 </head>
 <body>
 
@@ -134,6 +135,18 @@
   </section>
 
   <!-- 4b. burned area -->
+  <section class="sect" id="sect-ndvi" hidden>
+    <div class="sect-head">
+      <h2><span data-icon="trending-up"></span>What the crop predicts, and what the satellite sees</h2>
+      <p class="sect-lede" id="ndvi-lede">Crop greenness in early September against fires seen in October and November.</p>
+    </div>
+    <div class="row2 wide-left">
+      <div class="panel"><div class="panel-h"><h2>September NDVI against Oct–Nov Aqua fire detections, Punjab + Haryana</h2><span class="hint" tabindex="0" data-tip="Each point is a season: mean Aqua MODIS NDVI (MYD13Q1, 16-day composite from 6 Sep) over Punjab and Haryana against Aqua MODIS fire detections there, 1 Oct - 30 Nov. Line: least-squares fit on the grey seasons, with its 95% prediction band. Refit on every refresh. After Jethva et al. 2019 and Jethva 2022."><span data-icon="info"></span></span></div><div class="chart h-lg" id="c-ndvisc"></div></div>
+      <div class="panel"><div class="panel-h"><h2>This season</h2></div><div id="ndvi-info" class="dayinfo"></div><div class="chart h-sm" id="c-ndvicum"></div></div>
+    </div>
+    <div class="panel"><div class="panel-h"><h2>Seen as a share of predicted</h2><span class="hint" tabindex="0" data-tip="Each season's Aqua MODIS detections divided by what its September NDVI predicts. The current season is compared up to the same day, using a fit of each year's count to that day. Jethva 2026 (Remote Sensing 18:1506) uses geostationary data to show the peak burning moving to late afternoon, after the 13:30 pass."><span data-icon="info"></span></span></div><div class="chart h-md" id="c-ndviratio"></div><p class="panel-note" id="ndvi-src"></p></div>
+  </section>
+
   <section class="sect" id="sect-burn">
     <div class="sect-head">
       <h2><span data-icon="flame"></span>Burned ground, not just fires seen</h2>
