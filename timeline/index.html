@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Season timeline — Stubble Fire Watch</title>
+<meta name="description" content="The burning season since 1 September, every three hours: farm fires from five polar satellites, Meteosat and INSAT-3DS, CREAMS events, smoke and wind over the subcontinent, and the daily AQI of nine cities.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reclaim Chennai">
+<meta property="og:url" content="https://fire.reclaimchennai.city/timeline/">
+<meta property="og:title" content="Season timeline: fires, smoke and air">
+<meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f5" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://fire.reclaimchennai.city/timeline/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  (function () {
+    var t = null; try { t = localStorage.getItem("fw-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+  window.__boot = { meta: fetch("../data/timeline/meta.json", { cache: "no-cache" }).then(function (r) { return r.json(); }) };
+</script>
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="../vendor/maplibre-gl.css">
+<link rel="stylesheet" href="timeline.css">
+<script src="../vendor/icons.js" defer></script>
+<script src="../vendor/maplibre-gl.js" defer></script>
+<script src="timeline.js" defer></script>
+</head>
+<body>
+
+<header class="tl-top">
+  <div class="crumbs"><a class="crumb-dim" href="../">Stubble Fire Watch</a><span class="crumb-sep">/</span><span class="crumb">Season timeline</span></div>
+  <nav class="tl-nav"><a href="../">Map</a><a href="../db/">Analysis</a></nav>
+</header>
+
+<main class="tl">
+  <div class="tl-mapwrap" id="mapwrap">
+    <div id="map" aria-label="Animated map of fires, smoke and wind since 1 September"></div>
+    <div class="tl-date" aria-live="off"><b id="d-date">–</b><span id="d-time"></span></div>
+    <div class="tl-ctl" id="ctl">
+      <button type="button" id="play" class="tl-play" aria-label="Pause"><span id="play-ic" data-icon="pause"></span></button>
+      <input type="range" id="slider" min="0" max="1000" value="0" step="1" aria-label="Date and time" autocomplete="off">
+      <span class="tl-ctl-d" id="ctl-d"></span>
+    </div>
+    <div class="tl-load" id="load">Loading the season…</div>
+  </div>
+
+  <section class="tl-legend" aria-label="Legend">
+    <div class="strip-h"><span>Fires</span><span class="strip-note">tap to hide or show</span></div>
+    <div class="fire-strip" id="lg-fire"></div>
+    <div class="strip-h"><span>Smoke aerosol optical depth</span><span class="strip-note">organic + black + brown carbon, GEOS-FP</span></div>
+    <div class="aer-strip"><div class="aer-bar" id="aer-bar"></div><div class="aer-ticks" id="aer-ticks"></div></div>
+  </section>
+
+  <section class="tl-aqi" aria-label="Air Quality Index">
+    <div class="strip-h"><span>AQI <b id="aqi-date"></b></span><span class="strip-note">CPCB daily bulletin, 24 h to 4 pm</span></div>
+    <div class="aqi-grid" id="aqi"></div>
+    <div class="aqi-scale" id="aqi-scale"></div>
+  </section>
+
+  <p class="tl-foot" id="foot"></p>
+</main>
+</body>
+</html>

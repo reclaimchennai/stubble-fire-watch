@@ -10,3 +10,7 @@ web/
 release/
 *.log
 .privacy-patterns
+# satellite-portal credentials (never commit)
+MOSDAC.env
+LSASAF.env
+*.env

@@ -9,6 +9,7 @@ paddy area by district, and what Punjab and Haryana did about it.
 
 **Live:** [fire.reclaimchennai.city](https://fire.reclaimchennai.city) · **Analysis:** [fire.reclaimchennai.city/db](https://fire.reclaimchennai.city/db/) ·
 **North to south:** [fire.reclaimchennai.city/south](https://fire.reclaimchennai.city/south/) ·
+**Season timeline:** [fire.reclaimchennai.city/timeline](https://fire.reclaimchennai.city/timeline/) ·
 **Data:** [`datasets/`](datasets/) and the [latest release](../../releases/latest) · **Method:** [`docs/METHODS.md`](docs/METHODS.md)
 
 ![Smoke drifting over the plains, with each day's fire detections](docs/images/smoke.gif)

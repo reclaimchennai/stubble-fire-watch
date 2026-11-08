@@ -34,6 +34,7 @@ step $PY scripts/transport.py winds $(date +%Y)    # GEOS-FP 850 hPa winds for t
 step $PY scripts/transport.py run
 step $PY scripts/build_db.py
 step $PY scripts/build_ndvi_fire.py            # NDVI vs Aqua fire regression, refit each run (NDVI cached per year)
+step $PY scripts/build_timeline.py             # /timeline: smoke, wind, fires and CPCB AQI since 1 Sep (past days cached)
 [ -f data/db/extras/aq_south.json ] && step $PY scripts/build_south.py
 step sh scripts/publish.sh
 # Open-Meteo responses are cached under their end date; drop superseded ones (older than 3 days, not season ends)

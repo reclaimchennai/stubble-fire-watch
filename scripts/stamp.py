@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 W = Path(sys.argv[1] if len(sys.argv) > 1 else "web")
-ASSETS = ["styles.css", "theme.css", "app.js", "db/app.js", "db/delhi.js", "db/ndvi.js", "db/db.css", "south/app.js", "south/south.css", "vendor/icons.js"]
+ASSETS = ["styles.css", "theme.css", "app.js", "db/app.js", "db/delhi.js", "db/ndvi.js", "db/db.css", "south/app.js", "south/south.css", "timeline/timeline.js", "timeline/timeline.css", "vendor/icons.js"]
 h = {a: hashlib.md5((W / a).read_bytes()).hexdigest()[:8] for a in ASSETS if (W / a).exists()}
 
 
@@ -22,6 +22,8 @@ stamp(W / "styles.css", {"theme.css": "theme.css"})
 h["styles.css"] = hashlib.md5((W / "styles.css").read_bytes()).hexdigest()[:8]
 stamp(W / "index.html", {"styles.css": "styles.css", "app.js": "app.js", "vendor/icons.js": "vendor/icons.js"})
 stamp(W / "db" / "index.html", {"../theme.css": "theme.css", "db.css": "db/db.css", "app.js": "db/app.js", "delhi.js": "db/delhi.js", "ndvi.js": "db/ndvi.js", "../vendor/icons.js": "vendor/icons.js"})
+if (W / "timeline" / "index.html").exists():
+    stamp(W / "timeline" / "index.html", {"../theme.css": "theme.css", "timeline.css": "timeline/timeline.css", "timeline.js": "timeline/timeline.js", "../vendor/icons.js": "vendor/icons.js"})
 if (W / "south" / "index.html").exists():
     stamp(W / "south" / "index.html", {"../theme.css": "theme.css", "../db/db.css": "db/db.css", "south.css": "south/south.css", "app.js": "south/app.js", "../vendor/icons.js": "vendor/icons.js"})
 print("stamped", h)
