@@ -237,20 +237,16 @@ def rnd(f):
     return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in f.items()}
 
 
-def main():
-    nd = ndvi_years()
-    daily, last = daily_counts()
-    cur = last.year
-    a = season_idx(cur)
-    k = min(NDAYS, max(0, last.timetuple().tm_yday - a))          # days of the current season observed so far
+def analyse(daily, nd, cur, k):
+    """Rows per season, the season and count-to-date fits, and the typical cumulative share by day."""
     years = sorted(y for y in daily if str(y) in nd)
     rows = []
     for y in years:
         v = daily[y]
         complete = y < cur or k >= NDAYS
         rows.append({"year": y, "ndvi": nd[str(y)]["ndvi"], "valid_frac": nd[str(y)]["valid_frac"], "source": nd[str(y)]["source"],
-                     "season": sum(v) if complete else None, "to_date": sum(v[:k]) if k else 0, "complete": complete,
-                     "cum": np.cumsum(v).tolist()})
+                     "season": round(sum(v)) if complete else None, "to_date": round(sum(v[:k])) if k else 0, "complete": complete,
+                     "cum": [round(x) for x in np.cumsum(v).tolist()]})
     fy = [r for r in rows if r["year"] in FIT_YEARS and r["complete"]]
     fit = ols([r["ndvi"] for r in fy], [r["season"] for r in fy])
     fit_td = ols([r["ndvi"] for r in fy], [r["to_date"] for r in fy]) if k else None
@@ -265,6 +261,36 @@ def main():
             r["ratio_to_date"] = round(r["to_date"] / p2, 3) if p2 > 0 else None
     # median share of the season total reached by each day, fit years: turns a season prediction into a day-by-day path
     share = np.median(np.array([np.asarray(r["cum"]) / r["season"] for r in fy if r["season"]]), axis=0)
+    return rows, fit, fit_td, share
+
+
+def main():
+    nd = ndvi_years()
+    daily, last = daily_counts()
+    cur = last.year
+    a = season_idx(cur)
+    k = min(NDAYS, max(0, last.timetuple().tm_yday - a))          # days of the current season observed so far
+    rows, fit, fit_td, share = analyse(daily, nd, cur, k)
+    # the same with the fires only Meteosat / INSAT-3DS saw, as Aqua-equivalent detections (scripts/build_fire_index.py)
+    combo = None
+    fi = ROOT / "data" / "db" / "extras" / "fire_index.json"
+    if fi.exists():
+        F = json.loads(fi.read_text())
+        dc = {y: list(v) for y, v in daily.items()}
+        for y, v in dc.items():
+            fy_ = F["years"].get(str(y))
+            if not fy_:
+                continue
+            off = (dt.date.fromisoformat(fy_["first_utc_date"]) - dt.date(y, *SEASON[0])).days
+            for st in STATES.values():
+                add = fy_["states"].get(st, {}).get("added_aqua")
+                for j, x in enumerate(add or []):
+                    if 0 <= off + j < NDAYS:
+                        v[off + j] += x
+        c_rows, c_fit, c_td, c_share = analyse(dc, nd, cur, k)
+        combo = {"label": "Aqua MODIS + geostationary-only", "r_aqua": F.get("r_aqua"),
+                 "fit": rnd(c_fit), "fit_to_date": rnd(c_td) if c_td else None,
+                 "typical_share": [round(float(x), 4) for x in c_share], "years": c_rows}
     out = {
         "generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
         "region": "Punjab + Haryana",
@@ -274,6 +300,7 @@ def main():
         "fit": rnd(fit), "fit_to_date": rnd(fit_td) if fit_td else None,
         "typical_share": [round(float(s), 4) for s in share],
         "years": rows,
+        "combo": combo,
         "method": ("NDVI: Aqua MODIS MYD13Q1 v061 16-day composite starting day 249 (6 Sep), mean of good/marginal 250 m pixels "
                    "inside Punjab + Haryana. Fires: Aqua MODIS detections 1 Oct - 30 Nov in the same states, static sources removed. "
                    f"Ordinary least squares on {FIT_YEARS[0]}-{FIT_YEARS[-1]}; 95% prediction intervals. Refit on every refresh; "

@@ -276,6 +276,18 @@ def static_filter(rows):
     return out
 
 
+def geo_filter(rows):
+    """Geostationary pixels: drop 0.04-degree cells on FIRMS's static list or seen on 40+ days (industry, flares)."""
+    sp = ROOT / "data" / "raw" / "firms_static_cells.json"
+    static4 = {(round(c[0] * 0.01 / 0.04), round(c[1] * 0.01 / 0.04)) for c in json.loads(sp.read_text())["cells"]} if sp.exists() else set()
+    days = defaultdict(set)
+    for lon, lat, t, s, _ in rows:
+        days[(s, round(lon / 0.04), round(lat / 0.04))].add(t.date())
+    out = [r for r in rows if (round(r[0] / 0.04), round(r[1] / 0.04)) not in static4 and len(days[(r[3], round(r[0] / 0.04), round(r[1] / 0.04))]) < 40]
+    print(f"  geostationary pixels: kept {len(out)} of {len(rows)}", file=sys.stderr)
+    return out
+
+
 def india_test():
     from shapely.geometry import Point, shape
     from shapely.prepared import prep
@@ -380,6 +392,68 @@ def write_fires(rows, t0):
     return files
 
 
+# ---------------------------------------------------------------- fires by state, per IST day
+STATES = [("Punjab", "India", "Punjab"), ("Haryana", "India", "Haryana"), ("Delhi", "India", "Delhi"),
+          ("Uttar Pradesh", "India", "Uttar Pradesh"), ("Rajasthan", "India", "Rajasthan"),
+          ("Madhya Pradesh", "India", "Madhya Pradesh"), ("Punjab (PK)", "Pakistan", "Punjab")]
+
+
+def state_counts(rows, t0, t1):
+    """Per state and IST day: VIIRS and MODIS detections, Meteosat and INSAT-3DS fire cells (0.04 degree, unique per
+    day), and the all-satellite index (scripts/build_fire_index.py) where it exists."""
+    from shapely.geometry import Point, shape
+    from shapely.prepared import prep
+    g = json.loads((ROOT / "data" / "geo" / "states.geojson").read_text())
+    polys = []
+    for key, country, name in STATES:
+        f = next((f for f in g["features"] if f["properties"].get("country") == country and f["properties"]["name"] == name), None)
+        if f:
+            sh = shape(f["geometry"])
+            polys.append((key, sh.bounds, prep(sh)))
+    ist = dt.timedelta(hours=5, minutes=30)
+    d0 = (t0 + ist).date()
+    nd = ((t1 + ist).date() - d0).days + 1
+    keys = ["viirs", "modis", "msg", "insat"]
+    out = {k: {c: [0] * nd for c in keys} for k, _, _ in polys}
+    cells = defaultdict(set)
+    for lon, lat, t, s, _ in rows:
+        if s == 5:
+            continue
+        hit = next((k for k, (x0, y0, x1, y1), pp in polys if x0 <= lon <= x1 and y0 <= lat <= y1 and pp.contains(Point(lon, lat))), None)
+        if hit is None:
+            continue
+        i = ((t + ist).date() - d0).days
+        if not 0 <= i < nd:
+            continue
+        if s <= 1:
+            out[hit]["modis"][i] += 1
+        elif s <= 4:
+            out[hit]["viirs"][i] += 1
+        else:
+            c = "msg" if s == 6 else "insat"
+            cl = (c, hit, i, round(lon / 0.04), round(lat / 0.04))
+            if cl not in cells[c]:
+                cells[c].add(cl)
+                out[hit][c][i] += 1
+    fi = ROOT / "data" / "db" / "extras" / "fire_index.json"
+    idx = {}
+    if fi.exists():
+        y = json.loads(fi.read_text())["years"].get(str(t0.year))
+        if y:
+            f0 = dt.date.fromisoformat(y["first_utc_date"])
+            for k, _, _ in polys:
+                v = y["states"].get(k)
+                if v:
+                    arr = [None] * nd
+                    for j, (a, b) in enumerate(zip(v.get("base", v.get("snpp")), v["added"])):
+                        i = (f0 + dt.timedelta(days=j) - d0).days
+                        if 0 <= i < nd:
+                            arr[i] = round(a + b)
+                    idx[k] = arr
+    return {"first_ist_date": d0.isoformat(), "days": nd,
+            "states": [{"name": k, **out[k], "index": idx.get(k)} for k, _, _ in polys]}
+
+
 # ---------------------------------------------------------------- CPCB AQI bulletin
 ROW = re.compile(r"^\s*\d+\s+(.+?)\s+(Good|Satisfactory|Moderate|Very Poor|Poor|Severe)\s+(\d+)\s+(.+?)\s+(\d+)\s*/\s*(\d+)\s*$")
 
@@ -439,8 +513,12 @@ def main():
     chunks, w, h, filled = pack_atlases(days, t0)
     rows = firms_rows(t0, t1)
     n_firms = len(rows)
-    rows = static_filter(rows) + creams_rows(t0, t1) + meteosat_rows(t0, t1) + insat_rows(t0, t1)
+    rows = static_filter(rows) + creams_rows(t0, t1) + geo_filter(meteosat_rows(t0, t1) + insat_rows(t0, t1))
     fires = write_fires(rows, t0)
+    sc = state_counts(rows, t0, t1)
+    tmp = OUT / ".states.json.tmp"
+    tmp.write_text(json.dumps(sc, separators=(",", ":")))
+    os.replace(tmp, OUT / "states.json")
     aqi = aqi_days(t0, t1)
     tmp = OUT / ".aqi.json.tmp"
     tmp.write_text(json.dumps(aqi, separators=(",", ":")))
@@ -459,6 +537,7 @@ def main():
                 "wind_max": WIND_MAX, "wind_encoding": "G, B: m/s = px/255 * 2*wind_max - wind_max"},
         "fires": {"sensors": SENSORS, "tstep_s": TSTEP, "files": fires, "firms_rows": n_firms,
                   "record": "u16 lon, u16 lat (scaled over region), u16 time (tstep_s from start), u8 sensor, u8 frp = log2(1+MW)*25"},
+        "states": {"file": "states.json"},
         "aqi": {"file": "aqi.json", "days": len(aqi["dates"]), "last": aqi["dates"][-1] if aqi["dates"] else None},
     }
     tmp = OUT / ".meta.json.tmp"

@@ -280,6 +280,13 @@ function addOverlayLayers() {
   map.addLayer({ id: "s2night", type: "circle", source: "s2night", layout: { visibility: "none" },
     paint: { "circle-color": s2c, "circle-radius": s2r(0.8), "circle-stroke-width": 1.4, "circle-stroke-color": "#ffffff" } });
 
+  // INSAT-3DS fire cells (scripts/fetch_insat3ds.py): 0.1 deg squares, coloured by the IST hour first seen
+  map.addSource("insat3ds", { type: "geojson", data: { type: "FeatureCollection", features: [] }, attribution: "INSAT-3DS fire: ISRO/SAC via MOSDAC" });
+  map.addLayer({ id: "insat3ds", type: "fill", source: "insat3ds", layout: { visibility: "none" },
+    paint: { "fill-color": ["step", ["get", "h"], "#3d93cc", 13, "#9aa0aa", 15, "#e8691c"],
+      "fill-opacity": ["interpolate", ["linear"], ["get", "age"], 0, 0.85, 24, 0.25], "fill-outline-color": "rgba(255,255,255,0.35)" } });
+  if ($("#l-insat3ds").checked) setTimeout(() => setInsat3ds(true));   // ticked before the map was ready, or after a style reload
+
   // cyclone tracks of the selected year (scripts/build_cyclones.py): IBTrACS best track, the current storm from IMD advisories
   map.addSource("cyclones", { type: "geojson", data: { type: "FeatureCollection", features: [] }, attribution: "Cyclones: IMD via IBTrACS (NOAA NCEI), IMD RSMC New Delhi" });
   const cyColor = theme() === "dark" ? "#dfe3ea" : "#2b2f36";
@@ -363,6 +370,7 @@ function bindLayerToggles() {
   $("#l-hillshade").onchange = (e) => vis(["hillshade"], e.target.checked);
   $("#l-burnscar").onchange = () => updateBurnscar();
   $("#l-s2night").onchange = (e) => setS2night(e.target.checked);
+  $("#l-insat3ds").onchange = (e) => setInsat3ds(e.target.checked);
   $("#l-cyclones").onchange = () => updateCyclones();
   $("#l-wind").onchange = (e) => { S.showWind = e.target.checked; vis(["wind"], e.target.checked); };
   $("#l-districts").onchange = (e) => vis(["district-line"], e.target.checked);
@@ -606,9 +614,10 @@ let hoverId = null, popup = null;
 function bindMapEvents() {
   const tip = $("#tooltip");
   map.on("mousemove", (e) => {
-    const f = map.queryRenderedFeatures(e.point, { layers: ["s2night", "fires-core", "district-hover"].filter((l) => map.getLayer(l)) });
+    const f = map.queryRenderedFeatures(e.point, { layers: ["s2night", "fires-core", "insat3ds", "district-hover"].filter((l) => map.getLayer(l)) });
     const fire = f.find((x) => x.layer.id === "fires-core");
     const s2 = f.find((x) => x.layer.id === "s2night");
+    const g3 = f.find((x) => x.layer.id === "insat3ds");
     const dist = map.queryRenderedFeatures(e.point, { layers: ["district-hover"] })[0];
     const id = dist ? dist.id : null;
     if (id !== hoverId) {
@@ -619,6 +628,7 @@ function bindMapEvents() {
     map.getCanvas().style.cursor = fire ? "pointer" : "";
     if (s2) { tip.innerHTML = s2nightTip(s2.properties); }
     else if (fire) { tip.innerHTML = fireTip(fire.properties); }
+    else if (g3) { tip.innerHTML = `<div class="tt-title">INSAT-3DS fire cell</div><div class="tt-row"><span>First seen</span><span>${fmtDay(g3.properties.t)}, ${fmtClock(g3.properties.t)}</span></div><div class="tt-row"><span>Position</span><span>~${(+g3.properties.lat).toFixed(1)}° N, ${(+g3.properties.lon).toFixed(1)}° E</span></div>`; }
     else if (dist) { tip.innerHTML = districtTip(id); }
     else { tip.hidden = true; return; }
     tip.hidden = false;
@@ -702,6 +712,43 @@ function setS2night(on) {
   const b = map.getBounds(), box = [72.6, 29.2, 78.5, 32.3];
   if (b.getWest() > box[2] || b.getEast() < box[0] || b.getSouth() > box[3] || b.getNorth() < box[1] || map.getZoom() < 5.5)
     map.easeTo({ center: [75.6, 30.8], zoom: 6.3, duration: 1200 });   // fitBounds throws on the globe in small viewports
+}
+
+// INSAT-3DS fire cells: one file per season, loaded on first use; cells first seen in the 24 h before the map time
+const g3sCache = new Map();
+function setInsat3ds(on) {
+  if (!map || !map.getSource("insat3ds")) return;
+  map.setLayoutProperty("insat3ds", "visibility", on ? "visible" : "none");
+  $("#legend-g3s").hidden = !on;
+  if (on) updateInsat3ds(true);
+}
+let lastG3Key = "";
+function updateInsat3ds(force) {
+  if (!map || !map.getSource("insat3ds") || !$("#l-insat3ds").checked) return;
+  const y = S.year, key = `${y}|${Math.floor(S.t / (30 * 60e3))}`;
+  if (!force && key === lastG3Key) return;
+  lastG3Key = key;
+  if (!g3sCache.has(y)) {
+    g3sCache.set(y, getJSON(`data/geostationary/insat3ds_cells_${y}.json`).then((d) => {
+      const t0 = Date.parse(d.season_start_ist + "+05:30"), h = d.cell_deg / 2;
+      return { h, cells: d.cells.map(([lon, lat, m]) => [lon, lat, t0 + m * 60e3]) };
+    }).catch(() => null));
+  }
+  g3sCache.get(y).then((d) => {
+    if (y !== S.year) return;
+    const note = $("#legend-g3s-note");
+    if (!d) { map.getSource("insat3ds").setData({ type: "FeatureCollection", features: [] });
+      note.textContent = `No INSAT-3DS fire maps for ${y}: the product starts with the 2025 season.`; return; }
+    const lo = S.t - 24 * HOUR, feats = [];
+    for (const [lon, lat, t] of d.cells) {
+      if (t <= lo || t > S.t) continue;
+      feats.push({ type: "Feature", properties: { t, lon, lat, age: (S.t - t) / HOUR, h: istDate(t).getUTCHours() + istDate(t).getUTCMinutes() / 60 },
+        geometry: { type: "Polygon", coordinates: [[[lon - d.h, lat - d.h], [lon + d.h, lat - d.h], [lon + d.h, lat + d.h], [lon - d.h, lat + d.h], [lon - d.h, lat - d.h]]] } });
+    }
+    map.getSource("insat3ds").setData({ type: "FeatureCollection", features: feats });
+    const late = feats.filter((f) => f.properties.h >= 15).length;
+    note.textContent = `${fmt(feats.length)} cells (0.1°) in the 24 h to ${fmtClock(S.t)}, ${feats.length ? Math.round((100 * late) / feats.length) : 0}% first seen after 15:00 IST. Read off MOSDAC's maps: positions are coarse.`;
+  });
 }
 
 // cyclone tracks: loaded once, filtered to the selected year
@@ -1037,6 +1084,7 @@ function setTime(t, fromPlay) {
   moveHead();
   drawSmoke();
   updateFires(!fromPlay);
+  updateInsat3ds();
   updateBadge();
   // cheap redraws of now-lines only when the day changes
   const day = Math.floor((S.t + IST) / DAY);
@@ -1118,6 +1166,7 @@ function loop(ts) {
 function refreshAll() {
   updatePeriodLayers();
   updateFires(true);
+  updateInsat3ds(true);
   renderDaily(); renderHist(); renderTable(); renderHourChart(); renderTimeline();
   renderFireLegend(); renderSmokeLegend(); updateBadge();
 }

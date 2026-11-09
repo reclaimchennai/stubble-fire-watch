@@ -183,6 +183,7 @@
         <div class="menu-body">
           <label><input type="checkbox" id="l-burnscar" checked>Burned area (MODIS, 500 m)</label>
           <label title="One-off: ESA's Sentinel-2A night campaign, 9 and 12 Dec 2025, 22:30 IST"><input type="checkbox" id="l-s2night">Night hot spots, Sentinel-2 (Dec 2025)</label>
+          <label title="INSAT-3DS every 30 minutes (from 2025): fire cells seen in the 24 hours before the map time, coloured by the hour they were first seen. Read from MOSDAC's published maps, so positions are coarse (~0.1-0.2 deg)"><input type="checkbox" id="l-insat3ds">Fire cells, INSAT-3DS every 30 min</label>
           <label title="Bay of Bengal and Arabian Sea storms of the selected year: IMD best track via IBTrACS; the current storm from IMD RSMC advisories"><input type="checkbox" id="l-cyclones" checked>Cyclone tracks (IMD)</label>
           <label><input type="checkbox" id="l-hillshade" checked>Hillshade</label>
           <label><input type="checkbox" id="l-wind" checked>Wind streamlines</label>
@@ -214,6 +215,15 @@
           <span><i style="background:#e8e8e8"></i>known industrial source</span>
         </div>
         <div class="legend-note" id="legend-s2n-note">Hot spots in the SWIR bands on 9 and 12 Dec 2025 (22:32 / 22:42 IST). Heat sources, not counted as crop fires.</div>
+      </div>
+      <div class="legend-card" id="legend-g3s" hidden>
+        <div class="legend-title">INSAT-3DS fire cells, first seen</div>
+        <div class="s2n-keys g3s-keys">
+          <span><i style="background:#3d93cc"></i>before 13:00 IST</span>
+          <span><i style="background:#9aa0aa"></i>13:00-15:00 (polar passes)</span>
+          <span><i style="background:#e8691c"></i>after 15:00 IST</span>
+        </div>
+        <div class="legend-note" id="legend-g3s-note">Cells (0.1&deg;) with an INSAT-3DS fire marker in the 24 h before the map time. Positions are read off MOSDAC's maps and are coarse.</div>
       </div>
       <div class="legend-card" id="legend-fire">
         <div class="legend-title" id="legend-fire-title"></div>

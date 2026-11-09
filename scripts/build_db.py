@@ -41,6 +41,7 @@ def main():
     aq_ground = load("data/db/extras/aq_ground.json")
     stubble = load("data/db/extras/stubble_share.json")
     enforcement = load("data/db/extras/enforcement.json")
+    findex = load("data/db/extras/fire_index.json")
     last = dt.date.fromisoformat(S["last_detection_date"])
     years = sorted(int(y) for y in S["daily"])
 
@@ -68,9 +69,29 @@ def main():
                     daily[b][st][y] = n
                     frp[b][st][y] = round(f)
 
+    # ---- "VIIRS + geostationary" (scripts/build_fire_index.py): S-NPP plus fires only Meteosat / INSAT-3DS saw,
+    # in S-NPP-equivalent detections, 1 Oct - 30 Nov from 2017; outside that window and coverage it equals S-NPP
+    if findex:
+        daily["combo"], frp["combo"] = {}, {}
+        for st in STATES:
+            daily["combo"][st], frp["combo"][st] = {}, {}
+            for y, n in daily["snpp"][st].items():
+                fy = findex["years"].get(str(y))
+                if y < 2017 or not fy:
+                    continue
+                rec = fy["states"].get(st)
+                v = [0.0] * SEASON_DAYS
+                if rec:
+                    off = (dt.date.fromisoformat(fy["first_utc_date"]) - dt.date(y, 9, 15)).days
+                    for k, (bv, av) in enumerate(zip(rec["base"], rec["added"])):
+                        if 0 <= off + k < SEASON_DAYS:
+                            v[off + k] = bv + av
+                daily["combo"][st][y] = [round(x, 1) for x in v]
+                frp["combo"][st][y] = frp["snpp"][st].get(y)
+
     # ---- timing: day of season when 10/50/90 % of the season's detections had happened (Punjab+Haryana)
     timing = {}
-    for b in BASIS:
+    for b in daily:
         timing[b] = []
         for y in years:
             if y not in daily[b]["Punjab"]:
@@ -113,8 +134,17 @@ def main():
             dist[b][y] = [sum(a[i] for a in arrs) for i in focus_ids]
 
     # ---- calendar: Punjab+Haryana daily counts per season day, per year (for the heat strip)
+    if findex:
+        dist["combo"] = {}
+        for y in dist["snpp"]:
+            fy = findex["years"].get(str(y))
+            if y < 2017 or not fy:
+                continue
+            base, add = fy.get("district_base", {}), fy.get("district_added", {})
+            dist["combo"][y] = [round(base.get(str(i), 0) + add.get(str(i), 0)) for i in focus_ids]
+
     calendar = {}
-    for b in ("modis", "snpp"):
+    for b in [k for k in ("modis", "snpp", "combo") if k in daily]:
         calendar[b] = {y: [daily[b]["Punjab"][y][k] + daily[b]["Haryana"].get(y, [0] * SEASON_DAYS)[k] for k in range(SEASON_DAYS)]
                        for y in years if y in daily[b]["Punjab"]}
 
@@ -137,6 +167,11 @@ def main():
         out["stubble"] = stubble
     if enforcement:
         out["enforcement"] = enforcement
+    if findex:
+        out["fire_index"] = {k: findex.get(k) for k in ("name", "version", "r", "r_aqua", "k_aqua_only", "calibration", "cell_deg", "window_h", "coverage", "method")}
+        out["fire_index"]["crosscheck_ph"] = {y: v["crosscheck_ph"] for y, v in findex["years"].items() if v.get("crosscheck_ph")}
+        out["fire_index"]["ph"] = {y: {k: round(sum(sum(v["states"].get(st, {}).get(k, [])) for st in ("Punjab", "Haryana"))) for k in ("base", "added", "geo_only", "aqua_only")}
+                                   for y, v in findex["years"].items()}
     p = OUT / "db.json"
     p.write_text(json.dumps(out, separators=(",", ":")))
     print(f"wrote {p} ({p.stat().st_size / 1e6:.1f} MB); " + ", ".join(f"{k}={'yes' if k in out else 'no'}" for k in ("rice", "aq", "burn", "aq_ground", "stubble", "enforcement")))

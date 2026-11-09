@@ -1,6 +1,6 @@
 #!/bin/sh
 # Server refresh, run by fire-refresh.timer every 6 hours: new FIRMS detections, the latest GEOS-FP run,
-# new CREAMS bulletins, receptor-city air quality; rebuild everything and publish to web/.
+# new CREAMS bulletins, Meteosat afternoon fires, receptor-city air quality; rebuild everything and publish to web/.
 # A failing source is logged and skipped so the others still update.
 cd "$(dirname "$0")/.."
 HOUR=$(date -u +%H)                     # taken now: waiting for the lock and the slower steps can push the run past the hour
@@ -15,6 +15,8 @@ step $PY scripts/build_creams_dashboard.py
 step $PY scripts/build_fires.py
 step $PY scripts/fetch_smoke.py
 step $PY scripts/burnscar.py --season $(( $(date +%Y) - 1 )) $(date +%Y)   # MODIS burned area lags ~2 months
+step $PY scripts/fetch_geostationary.py           # Meteosat 15-min fires; downloads only from 1 Oct, rebuilds the json always
+step $PY scripts/fetch_insat3ds.py                # INSAT-3DS 30-min fire maps (open MOSDAC gallery), same season
 step $PY scripts/build_db_extras.py --aq-only
 # ground PM2.5 and enforcement figures change slowly: once a day, on the 00:40 UTC run
 if [ "$HOUR" = "00" ] || [ "${FORCE_DAILY:-0}" = "1" ]; then
@@ -32,6 +34,7 @@ if [ "$HOUR" = "00" ] || [ "${FORCE_DAILY:-0}" = "1" ]; then
 fi
 step $PY scripts/transport.py winds $(date +%Y)    # GEOS-FP 850 hPa winds for this season (past seasons are cached)
 step $PY scripts/transport.py run
+step $PY scripts/build_fire_index.py            # VIIRS S-NPP + geostationary-only fires (Meteosat, INSAT-3DS)
 step $PY scripts/build_db.py
 step $PY scripts/build_ndvi_fire.py            # NDVI vs Aqua fire regression, refit each run (NDVI cached per year)
 step $PY scripts/build_timeline.py             # /timeline: smoke, wind, fires and CPCB AQI since 1 Sep (past days cached)

@@ -33,7 +33,8 @@ const charts = {};
 const lastDate = () => new Date(D.last_detection_date + "T00:00:00Z");
 const curYear = () => lastDate().getUTCFullYear();
 const seasonComplete = (y) => y < curYear() || lastDate() >= new Date(Date.UTC(y, 10, 30));
-const basisYears = (b = basis) => D.years.filter((y) => (b === "modis" ? y >= 2003 : y >= 2012));
+const basisYears = (b = basis) => D.years.filter((y) => (b === "modis" ? y >= 2003 : b === "combo" ? y >= 2017 && D.daily.combo : y >= 2012));
+const basisLabel = (b = basis, long = false) => (b === "modis" ? (long ? "MODIS Terra + Aqua" : "MODIS") : b === "combo" ? (long ? "All-satellite index" : "all satellites") : "VIIRS S-NPP");
 const seasonTotal = (st, y, b = basis) => sum(((D.daily[b] || {})[st] || {})[y]);
 const creamsSeries = (st, y) => (((D.creams || {}).cumulative || {})[st] || {})[y] || null;
 const creamsTotal = (st, y) => { const s = creamsSeries(st, y); return s ? s.at(-1)[1] : null; };
@@ -151,7 +152,7 @@ function renderTotals() {
     years = basisYears();
     series = IN_STATES.map((st) => ({ name: st, type: "bar", stack: "s", barMaxWidth: 26, itemStyle: { color: STATE_COLORS[st] }, emphasis: { focus: "series" },
       data: years.map((y) => ({ value: seasonTotal(st, y), itemStyle: { opacity: seasonComplete(y) ? 1 : 0.45 } })) }));
-    $("#t-totals").textContent = `Paddy-season detections by state, ${basis === "modis" ? "MODIS" : "VIIRS S-NPP"}`;
+    $("#t-totals").textContent = `Paddy-season detections by state, ${basisLabel()}`;
   }
   chart("c-totals").setOption(base({
     tooltip: { ...base().tooltip, formatter: (ps) => {
@@ -178,7 +179,7 @@ function renderTiming() {
   const data = [];
   years.forEach((y, yi) => cal[y].forEach((v, k) => data.push([k, yi, v])));
   const breaks = basis === "modis" ? [1, 10, 40, 100, 250, 500, 1000] : [1, 25, 100, 400, 1000, 2500, 5000];
-  $("#n-cal").textContent = `${basis === "modis" ? "MODIS Terra + Aqua" : "VIIRS S-NPP"} detections per day`;
+  $("#n-cal").textContent = `${basisLabel(basis, true)} detections per day`;
   chart("c-calendar").setOption(base({
     grid: { left: 44, right: 16, top: 10, bottom: 64 },
     tooltip: { trigger: "item", backgroundColor: t.panel, borderColor: t.border, textStyle: { color: t.text, fontSize: 12 },
@@ -253,7 +254,7 @@ function renderMap() {
   slider.disabled = mapMetric === "change"; $("#map-play").disabled = mapMetric === "change";
   const data = MAP_FEATS.map((f) => ({ name: f.properties.name, value: mapValue(f.properties.id, mapYear),
     ...(f.properties.country === "Pakistan" ? { itemStyle: { borderType: "dashed", borderColor: t.dim } } : {}) }));
-  const lab = basis === "modis" ? "MODIS" : "VIIRS S-NPP";
+  const lab = basisLabel();
   let vm;
   if (mapMetric === "change") {
     $("#t-map").textContent = `${lab} detections, 2023-25 against 2016-18`;
@@ -428,6 +429,73 @@ function renderBurn() {
     Over the same seasons VIIRS detections fell ${Math.abs(Math.round(pct(seasonTotal("Punjab", last, "snpp"), seasonTotal("Punjab", peak, "snpp"))))}%:
     ${r(last) != null && r(peak) != null ? `<b>${r(peak).toFixed(0)}</b> detections per 1,000 ha burned in ${peak}, <b>${r(last).toFixed(0)}</b> in ${last}.` : ""}
     The burning shrank, and it also moved out of the satellites' sight.`;
+}
+
+// ---------------------------------------------------------------- 4b1. Meteosat afternoon fires (LSA SAF MSG-IODC FRP-PIXEL)
+let GEOS = null, G3S = null, geoReg = "in";
+const GEO_REGS = { in: ["Punjab", "Haryana"], pk: ["Punjab (PK)"] };
+const GEO_C = { ref: "#3d93cc", last: "#e8691c" };
+const LATE_H = [15, 16, 17, 18, 19, 20, 21, 22, 23, 0];
+const geoWin = (y, regs) => { const s = GEOS.seasons[y]; if (!s) return null;
+  const w = regs.map((r) => s.regions[r].window);
+  return { cells: sum(w.map((x) => x.fire_cells)), fre: sum(w.map((x) => x.fre_tj)), first: [...Array(24).keys()].map((h) => sum(w.map((x) => x.first_seen_hour[h]))) }; };
+const geoLate = (g) => (g && sum(g.first) ? (sum(LATE_H.map((h) => g.first[h])) / sum(g.first)) * 100 : null);
+const viirsWin = (y, regs) => sum(regs.map((r) => sum(((D.daily.snpp[r] || {})[y] || []).slice(30, 62))));   // day 0 = 15 Sep
+function renderGeo() {
+  if (!GEOS || !D) return;
+  const years = Object.keys(GEOS.seasons).filter((y) => GEOS.seasons[y].window_complete).map(Number).sort();
+  if (years.length < 2) return;
+  $("#sect-geo").hidden = false;
+  const t = th(), regs = GEO_REGS[geoReg];
+  const ref = years.reduce((a, y) => (viirsWin(y, regs) > viirsWin(a, regs) ? y : a), years[0]), last = years.at(-1);
+  const gi = Object.fromEntries(years.map((y) => [y, geoWin(y, regs)]));
+  // hour first seen, share of the season's cells
+  const shown = [[ref, GEO_C.ref, 2], [last, GEO_C.last, 2.4]];
+  // INSAT-3DS (30-min gallery maps): hour each 0.1 deg cell was first seen, same window and regions
+  const g3 = (y) => { const z = G3S && G3S.seasons[y]; if (!z || !z.window_complete) return null;
+    const f = [...Array(24).keys()].map((h) => sum(regs.map((r) => z.regions[r].window.first_seen_hour[h]))); return sum(f) ? f : null; };
+  const g3y = [last, ref].find((y) => g3(y));
+  const hrs = [...Array(24).keys()].map((h) => `${String(h).padStart(2, "0")}:00`);
+  chart("c-geohour").setOption(base({
+    tooltip: { ...base().tooltip, formatter: (ps) => `<div class="tt-title">${ps[0].axisValue} IST</div>` + ps.map((p) => tipRow(p.color, p.seriesName, `${fmt1(p.value)}%`)).join("") },
+    xAxis: cAxis(hrs, { axisLabel: { color: t.dim, interval: document.getElementById("c-geohour").clientWidth < 480 ? 5 : 2 } }),
+    yAxis: vAxis({ min: 0, axisLabel: { color: t.dim, formatter: (v) => `${v}%` } }),
+    series: shown.map(([y, color, w], i) => ({ name: String(y), type: "line", smooth: 0.2, symbol: "circle", symbolSize: 5, showSymbol: false,
+      lineStyle: { width: w, color }, itemStyle: { color },
+      data: gi[y].first.map((v) => (v / Math.max(1, sum(gi[y].first))) * 100),
+      ...(i === 0 ? { markArea: { silent: true, itemStyle: { color: t.grid, opacity: 0.6 }, label: { color: t.dim, fontSize: 10.5, position: "insideTop" },
+        data: [[{ name: "polar passes", xAxis: "13:00" }, { xAxis: "15:00" }]] } } : {}) })).concat(g3y ? [{
+      name: `${g3y} INSAT-3DS`, type: "line", smooth: 0.2, symbol: "rect", symbolSize: 5, showSymbol: false,
+      lineStyle: { width: 2, type: [5, 3], color: g3y === last ? GEO_C.last : GEO_C.ref }, itemStyle: { color: g3y === last ? GEO_C.last : GEO_C.ref },
+      data: g3(g3y).map((v) => (v / sum(g3(g3y))) * 100) }] : []),
+  }), true);
+  // VIIRS vs Meteosat, each indexed to the reference season
+  const vi = years.map((y) => (viirsWin(y, regs) / Math.max(1, viirsWin(ref, regs))) * 100);
+  const ge = years.map((y) => (gi[y].cells / Math.max(1, gi[ref].cells)) * 100);
+  $("#t-geoyears").textContent = `Fires seen, ${ref} = 100`;
+  chart("c-geoyears").setOption(base({
+    tooltip: { ...base().tooltip, formatter: (ps) => { const y = +ps[0].axisValue;
+      return `<div class="tt-title">${y} · ${GEOS.seasons[y].satellite || "Meteosat"}</div>` +
+        tipRow(GEO_C.ref, "VIIRS detections", `${fmt(viirsWin(y, regs))} (${fmt(vi[years.indexOf(y)])})`) +
+        tipRow(GEO_C.last, "Meteosat fire cells", `${fmt(gi[y].cells)} (${fmt(ge[years.indexOf(y)])})`) +
+        tipRow("transparent", "first seen after 15:00", `${fmt1(geoLate(gi[y]))}%`); } },
+    xAxis: cAxis(years.map(String)),
+    yAxis: vAxis({ min: 0 }),
+    series: [
+      { name: "VIIRS detections", type: "line", smooth: 0.2, symbolSize: 6, lineStyle: { width: 2, color: GEO_C.ref }, itemStyle: { color: GEO_C.ref }, data: vi },
+      { name: "Meteosat fire cells", type: "line", smooth: 0.2, symbolSize: 6, lineStyle: { width: 2, color: GEO_C.last }, itemStyle: { color: GEO_C.last }, data: ge,
+        markLine: { silent: true, symbol: "none", lineStyle: { color: t.axis, type: "dashed" }, label: { show: false }, data: [{ yAxis: 100 }] } },
+    ],
+  }), true);
+  const where = geoReg === "in" ? "Punjab and Haryana" : "Pakistani Punjab";
+  const dv = pct(viirsWin(last, regs), viirsWin(ref, regs)), dg = pct(gi[last].cells, gi[ref].cells);
+  $("#geo-lede").innerHTML = `The polar satellites see Punjab for a few minutes a day. Meteosat, parked over the Indian Ocean, images it every
+    15 minutes. Its 4 km pixels only catch the larger fires (above about 40-60 MW, roughly the top few percent of VIIRS detections), but they catch them
+    whenever they burn. In ${where}, the share of Meteosat fire cells first seen after 15:00 IST went from <b>${fmt(geoLate(gi[ref]))}%</b>
+    in ${ref} to <b>${fmt(geoLate(gi[last]))}%</b> in ${last}. Between those seasons (15 Oct - 15 Nov) VIIRS detections changed by
+    <b>${dv > 0 ? "+" : ""}${fmt(dv)}%</b>, Meteosat fire cells by <b>${dg > 0 ? "+" : ""}${fmt(dg)}%</b>.${g3y ? ` India's
+    INSAT-3DS, from a different orbit slot and a better angle, puts <b>${fmt(sum(LATE_H.map((h) => g3(g3y)[h])) / sum(g3(g3y)) * 100)}%</b> of its ${g3y} fire cells after 15:00 too.` : ""}${dg - dv > 25 && geoLate(gi[last]) > 50 ? ` Far fewer fires reach the
+    polar satellites, but the burning fell much less: most of it now happens after the afternoon passes.` : ""}`;
 }
 
 // ---------------------------------------------------------------- 4b2. Sentinel-2 at night (ESA campaign, Dec 2025)
@@ -722,12 +790,18 @@ function renderDSS(y) {
 function renderNotes() {
   const r = "Kharif rice area and production: DA&FW / DES via UPAg (district APY, final estimates; state-wise official APY), as compiled for agri.reclaimchennai.city. Milled rice, agricultural year starting in the fire season's year.";
   const notes = [
+    ...(D.fire_index ? [["All-satellite index", (() => { const F = D.fire_index, x = F.crosscheck_ph || {}, ph = F.ph || {}, ly = Object.keys(x).sort().at(-1);
+      return `The best VIIRS count (each district and day, the highest among S-NPP, NOAA-20 and NOAA-21) plus the fires the polar passes missed, each counted once, in VIIRS-equivalent detections, 15 September to 30 November from 2017. Geostationary fire cells (${F.cell_deg} degree, per day; Meteosat every 15 min from 2017 over the two Punjabs, Haryana, Delhi and north Rajasthan, INSAT-3DS every 30 min over every state from 2025) are each worth ${F.r.msg.toFixed(1)} VIIRS detections (Meteosat; the S-NPP detections per jointly seen cell in 2017-2021) or ${(F.r.insat || 0).toFixed(1)} (INSAT-3DS, scaled through the late Aqua pass, which sees both); per state and season the index adds that worth minus the VIIRS detections in or next to those cells within ${F.window_h} hours. Aqua MODIS detections no VIIRS pass or geostationary cell saw (Aqua now passes near 16:00 IST) add ${(F.k_aqua_only || 0).toFixed(1)} each. Seasons 2017-2021 gain 3-7%, mostly cloud and Aqua-only fires.` +
+        (ly ? ` Cross-check for ${ly}, Punjab + Haryana: from the 16:00 Aqua pass and the geostationary cells it missed, scaled by the 2018-2021 VIIRS:Aqua ratio (${x[ly].viirs_per_aqua}), about ${fmt(x[ly].estimate)}, against the index's ${fmt((ph[ly] || {}).base + (ph[ly] || {}).added)}; the cross-check also counts the small afternoon fires no satellite saw, so it is the upper end.` : "") +
+        ` An estimate, not a census: geostationary pixels see only the larger fires. For Uttar Pradesh, Madhya Pradesh and south Rajasthan the 2025 rise is partly new data (INSAT-3DS only from 2025).`; })()]] : []),
     ["Fire detections", "NASA FIRMS active fires: MODIS Terra and Aqua (1 km, 2003 onward) and VIIRS S-NPP (375 m, 2012 onward), from the public yearly country files and the FIRMS area API. Industrial heat sources are removed. Counts are per sensor; nothing is merged across satellites."],
     ["What a detection is", "A pixel that was burning when a satellite passed. Polar orbiters pass at about 10:30, 13:30 and 01:30 IST; cloud, smoke and short fires lit between passes go unseen. Treat counts as an index of burning, not a census of fields."],
     ["Official counts", "ICAR-IARI CREAMS daily bulletins, parsed from the PDFs on creams.iari.res.in. CREAMS counts from 15 September (1 October before 2020) with its own VIIRS protocol, so its numbers are lower than raw FIRMS."],
     ["Paddy area", `${r} The latest APY year can lag the fire season by a year; per-hectare figures use the latest year available.`],
     ["Burned area", "NASA MODIS MCD64A1 collection 6.1 (500 m, monthly burn date), read from Microsoft Planetary Computer, 15 Sep - 5 Dec, clipped to each district. It is NASA's validated global product, but at 500 m it misses many of Punjab's 1-2 ha fields and short burns, so its hectares understate the true area. Some months are missing from the archive (Sep 2023, Sep-Oct 2025); those seasons are shown faded and left out of ratios. A field-scale Sentinel-2 classifier was tested and rejected: it could not tell burned from merely harvested paddy."],
     ["Enforcement", "Punjab Pollution Control Board action-taken reports to CAQM, Haryana's enforcement dashboard, CAQM directions and press releases, NGT affidavits, and Lok Sabha / Rajya Sabha answers (some via data.gov.in), parsed from the documents; every value carries its source, and figures quoted from prose are checked against the cached text. Season figures are cumulative to the date shown; where several reports cover a season, the latest is plotted. A 2022 compensation table with an implausible unit is left out. There are no official end-of-season Punjab totals for 2023 or 2024, and no Haryana compensation or FIR totals for 2021-2025."],
+    ["Afternoon fires (INSAT-3DS)", "ISRO's INSAT-3DS imager (82 E) fire product, every 30 minutes, read from the maps MOSDAC publishes for each slot (the point files need a login). Red markers are shrunk to their centres and binned to 0.1 degree cells, each counted once a day at its first half-hour; positions are good to roughly 0.1-0.2 degrees. The product shows almost no Punjab fires before 2025, so it starts with the 2025 season. Pilot: docs/geostationary_pilot.md."],
+    ["Afternoon fires (Meteosat)", "EUMETSAT LSA SAF MSG-IODC FRP-PIXEL (CC BY 4.0): SEVIRI on Meteosat-8 at 41.5 E (to mid-2022) and Meteosat-9 at 45.5 E, every 15 minutes, 3 km at nadir and about 4 x 4 km over Punjab. A fire cell is a 0.04 degree cell with at least one detection that day, counted once. SEVIRI detects fires above roughly 40-60 MW here, so it sees the larger fires only, and its counts are not comparable with FIRMS counts, only its trend and timing are. In a December placebo (5-25 Dec, 2024 and 2025) it found under 2% of a season's detections, with no afternoon peak. Industrial sources are not removed. Pilot: docs/geostationary_pilot.md."],
     ["Night hot spots", "ESA's Sentinel-2A night-time campaign (3-22 Dec 2025; scenes of 9 and 12 Dec over Punjab), orthorectified radiance, 20 m. Clusters bright in both B12 and B11 (0.5 W m-2 sr-1 um-1 over a 1 km background); none pass on the negated images. Matched to FIRMS within 1 km; setting from ESA WorldCover 2021. Hot spots on open land may still be lone factories or brick kilns. A one-off test: ESA's second campaign (Jul-Sep 2026) is restricted to expert users and no campaign has covered the October-November burning season."],
     ["Districts", "geoBoundaries district polygons (India: LGD 2021). Districts created after 2021 are counted inside their parent polygon. Pakistan's districts are shown for comparison; no paddy area is available for them here."],
     ["Air quality", "Ground PM2.5: CPCB continuous ambient air-quality stations via the OpenAQ v3 API, daily means kept only with 18+ hours of data, city value = mean of stations reporting (Delhi grew from 6 stations in 2016 to about 40). OpenAQ holds no CPCB data from late 2022 to February 2025. Model PM2.5: CAMS via Open-Meteo, from August 2022, good at day-to-day swings but biased low in absolute level. Weather moves PM2.5 as much as fires do; the scatter is an association, not an attribution."],
@@ -739,7 +813,7 @@ function renderNotes() {
 
 // ---------------------------------------------------------------- orchestration
 function renderAll() {
-  renderHeader(); renderTotals(); renderTiming(); renderMap(); renderScatter(); renderTable(); renderPerHa(); renderBurn(); renderS2n(); renderEnf(); renderAir(); renderNotes();
+  renderHeader(); renderTotals(); renderTiming(); renderMap(); renderScatter(); renderTable(); renderPerHa(); renderBurn(); renderGeo(); renderS2n(); renderEnf(); renderAir(); renderNotes();
 }
 function press(sel, v) { document.querySelectorAll(`${sel} button`).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v))); }
 function bind() {
@@ -756,6 +830,7 @@ function bind() {
   };
   document.querySelectorAll("#seg-basis button").forEach((b) => b.onclick = () => { basis = b.dataset.v; press("#seg-basis", basis); renderAll(); });
   document.querySelectorAll("#seg-totals button").forEach((b) => b.onclick = () => { totalsMode = b.dataset.v; press("#seg-totals", totalsMode); renderTotals(); });
+  document.querySelectorAll("#seg-georeg button").forEach((b) => b.onclick = () => { geoReg = b.dataset.v; press("#seg-georeg", geoReg); renderGeo(); });
   document.querySelectorAll("#seg-mapmetric button").forEach((b) => b.onclick = () => { mapMetric = b.dataset.v; press("#seg-mapmetric", mapMetric); renderMap(); });
   $("#map-year").oninput = (e) => { mapYear = +e.target.value; renderMap(); };
   $("#map-play").onclick = () => {
@@ -782,6 +857,8 @@ async function boot() {
   setupAir();
   setupEnf();
   renderAll();
+  fetch("../data/geostationary/geostationary.json").then((r) => (r.ok ? r.json() : null)).then((v) => { GEOS = v; renderGeo(); }).catch((e) => console.error(e));
+  fetch("../data/geostationary/insat3ds.json").then((r) => (r.ok ? r.json() : null)).then((v) => { G3S = v; renderGeo(); }).catch((e) => console.error(e));
   fetch("../data/s2night/s2night_validation.json").then((r) => (r.ok ? r.json() : null)).then((v) => { S2N = v; renderS2n(); }).catch((e) => console.error(e));
 }
 boot().catch((e) => { console.error(e); $("#lede").textContent = `Could not load the data: ${e.message}`; });

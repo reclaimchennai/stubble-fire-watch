@@ -10,7 +10,7 @@ rsync -a --delete --exclude 'icons/' vendor/ "$W/vendor/"
 rsync -a --delete db/ "$W/db/"
 rsync -a --delete south/ "$W/south/"
 rsync -a --delete timeline/ "$W/timeline/"
-for d in fires smoke geo burnscar s2night timeline; do [ -d "data/$d" ] && rsync -a --delete --exclude '.*.tmp' "data/$d/" "$W/data/$d/"; done
+for d in fires smoke geo burnscar s2night geostationary timeline; do [ -d "data/$d" ] && rsync -a --delete --exclude '.*.tmp' "data/$d/" "$W/data/$d/"; done
 cp data/creams/creams_dashboard.json "$W/data/creams/"
 cp data/db/db.json "$W/data/db/"
 [ -f data/db/south.json ] && cp data/db/south.json "$W/data/db/"

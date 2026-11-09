@@ -60,6 +60,19 @@ body { -webkit-text-size-adjust: 100%; }
 .aer-ticks span:first-child { transform: none; }
 .aer-ticks span:last-child { transform: translateX(-100%); }
 
+.tl-states { padding: 10px 16px 0; }
+.st-tab { width: 100%; border-collapse: separate; border-spacing: 0 3px; font-size: 12px; table-layout: fixed; }
+.st-tab th { font-size: 10.5px; font-weight: 600; color: var(--dim); text-align: right; padding: 0 6px 2px; line-height: 1.2; vertical-align: bottom; }
+.st-tab th:first-child { text-align: left; width: 30%; }
+.st-tab th i { display: block; width: 100%; height: 3px; border-radius: 2px; margin-top: 3px; }
+.st-tab td { background: var(--panel); padding: 5px 6px 4px; text-align: right; line-height: 1.15; }
+.st-tab td:first-child { text-align: left; font-weight: 600; border-radius: 3px 0 0 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-tab td:last-child { border-radius: 0 3px 3px 0; }
+.st-tab td b { display: block; font-size: 14px; font-weight: 700; color: var(--text); }
+.st-tab td small { display: block; font-size: 10px; color: var(--dim); }
+.st-tab td.idx { background: var(--accent-soft); }
+.st-tab td.zero b { color: var(--dim); font-weight: 500; }
+
 .aqi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
 .aqi-cell { border-radius: 3px; padding: 8px 9px 7px; min-height: 64px; display: flex; flex-direction: column; justify-content: space-between;
   background: var(--panel-2); color: var(--text); transition: background-color 0.35s, color 0.35s; }

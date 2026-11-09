@@ -455,6 +455,35 @@ function buildLegend() {
   $("#aqi-scale").innerHTML = AQI_CATS.map((c) => `<div style="background:${c.bg};color:${c.fg}">${c.k}<br>${c.r}</div>`).join("");
 }
 
+// ---------------------------------------------------------------- fires by state
+let ST = null, stShown = "";
+const ST_COLS = [
+  { k: "viirs", label: "VIIRS", color: "#ff6b35", title: "VIIRS S-NPP + NOAA-20 + NOAA-21 detections" },
+  { k: "modis", label: "MODIS", color: "#ffd166", title: "MODIS Terra + Aqua detections" },
+  { k: "msg", label: "Meteosat", color: "#60a5fa", title: "Meteosat fire cells (4 km, unique per day); Punjab-Haryana window only" },
+  { k: "insat", label: "INSAT-3DS", color: "#22d3ee", title: "INSAT-3DS fire cells (4 km, unique per day)" },
+  { k: "index", label: "All-sat index", color: "#5794f2", title: "All-satellite index: the best VIIRS count plus the fires the polar passes missed (Meteosat, INSAT-3DS, the late Aqua pass), in VIIRS-equivalent detections, each fire counted once" },
+];
+const ST_NAMES = { "Punjab (PK)": "Punjab (Pakistan)" };
+function renderStates() {
+  if (!ST) return;
+  const i = Math.round((Date.parse(istDay(t)) - Date.parse(ST.first_ist_date)) / DAY);
+  const key = String(i); if (key === stShown) return;
+  stShown = key;
+  const ok = i >= 0 && i < ST.days;
+  const dd = new Date(istDay(t) + "T00:00:00Z");
+  $("#st-date").textContent = `${dd.getUTCDate()} ${MONTHS[dd.getUTCMonth()]}`;
+  const nf = new Intl.NumberFormat("en-IN");
+  const cell = (arr, idx) => {
+    if (!arr) return `<td class="zero${idx ? " idx" : ""}"><b>–</b><small>&nbsp;</small></td>`;
+    const v = ok ? arr[i] : null;
+    let s = 0; for (let j = 0; j <= Math.min(i, arr.length - 1); j++) s += arr[j] || 0;
+    return `<td class="${!v ? "zero" : ""}${idx ? " idx" : ""}"><b>${v == null ? "–" : nf.format(v)}</b><small>${nf.format(s)}</small></td>`;
+  };
+  $("#st-tab").innerHTML = `<thead><tr><th>State</th>${ST_COLS.map((c) => `<th title="${c.title}">${c.label}<i style="background:${c.color}"></i></th>`).join("")}</tr></thead><tbody>` +
+    ST.states.map((r) => `<tr><td title="${r.name}">${ST_NAMES[r.name] || r.name}</td>${ST_COLS.map((c) => cell(r[c.k], c.k === "index")).join("")}</tr>`).join("") + "</tbody>";
+}
+
 let AQ = null, aqiShown = "";
 function renderAQI() {
   if (!AQ || !AQ.dates.length) return;
@@ -509,6 +538,7 @@ function drawUI(force) {
     const d = new Date(t + IST); $("#ctl-d").textContent = `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
     if (!dragging) $("#slider").value = String(Math.round((t - T0) / HOUR));
     renderAQI();
+    renderStates();
   }
 }
 
@@ -543,6 +573,7 @@ async function boot() {
   startAt = saved && saved >= T0 && saved < T1 ? saved : T0;
   t = startAt;
   buildLegend(); bindUI(); setPlaying(true); drawUI(true);
+  if (M.states) fetch(`../data/timeline/${M.states.file}?v=${encodeURIComponent(M.generated)}`).then((r) => r.json()).then((x) => { ST = x; stShown = ""; $(".tl-states").hidden = false; renderStates(); }).catch(() => {});
   fetch(`../data/timeline/aqi.json?v=${encodeURIComponent(M.generated)}`).then((r) => r.json()).then((a) => { AQ = a; aqiShown = ""; renderAQI(); }).catch(() => {});
   $("#foot").innerHTML = `Every 3 hours from ${fmtDate(T0)} to ${fmtDate(T1)}; built ${M.generated.replace("T", " ")}. Fires: NASA FIRMS (MODIS Terra and Aqua, VIIRS S-NPP, NOAA-20, NOAA-21), ICAR-IARI CREAMS bulletin events, Meteosat SEVIRI FRP-PIXEL (EUMETSAT LSA SAF, Punjab-Haryana window, CC BY 4.0) and INSAT-3DS L2P fire pixels (ISRO/SAC via MOSDAC). Polar-orbiter fires stay on the map 12 hours, geostationary cells 1-1.5 hours. Smoke and 10 m wind: NASA GMAO GEOS-FP. AQI: CPCB National Air Quality Index bulletin (Delhi-NCR shows Delhi). The basemap darkens with the sun over central India. <a href="https://github.com/reclaimchennai/stubble-fire-watch">Open data and code</a>.`;
   await initMap();

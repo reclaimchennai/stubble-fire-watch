@@ -43,6 +43,7 @@
     <div class="seg" id="seg-basis" role="group" aria-label="Sensor family">
       <button type="button" data-v="modis" aria-pressed="false" title="MODIS Terra + Aqua, 1 km, consistent since 2003">MODIS since 2003</button>
       <button type="button" data-v="snpp" aria-pressed="true" title="VIIRS S-NPP, 375 m, since 2012: sees about five times more small fires">VIIRS since 2012</button>
+      <button type="button" data-v="combo" aria-pressed="false" title="All-satellite index: the best VIIRS count plus the fires the polar passes missed, from Meteosat (2017 on), INSAT-3DS (2025 on) and the late Aqua pass, each fire counted once">All satellites</button>
     </div>
   </div>
   <nav class="topnav">
@@ -159,6 +160,23 @@
         <div class="chart h-md" id="c-burn"></div></div>
       <div class="panel"><div class="panel-h"><h2>Fires seen per 1,000 ha burned</h2><span class="hint" tabindex="0" data-tip="Active-fire detections divided by MODIS burned area. If the burning simply shrank, this would hold steady; a fall means a growing share of the burning happens when no satellite is looking."><span data-icon="info"></span></span></div>
         <div class="chart h-md" id="c-burnratio"></div></div>
+    </div>
+  </section>
+
+  <!-- 4b1. geostationary afternoon fires -->
+  <section class="sect" id="sect-geo" hidden>
+    <div class="sect-head">
+      <h2><span data-icon="clock"></span>Watching all afternoon: Meteosat and INSAT-3DS</h2>
+      <p class="sect-lede" id="geo-lede"></p>
+      <div class="sect-ctls">
+        <div class="seg sm" id="seg-georeg" role="group" aria-label="Region"><button type="button" data-v="in" aria-pressed="true">Punjab + Haryana</button><button type="button" data-v="pk" aria-pressed="false">Pakistani Punjab</button></div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="panel"><div class="panel-h"><h2>Hour each fire cell was first seen</h2><span class="hint" tabindex="0" data-tip="Share of Meteosat fire cells (about 4 x 4 km, counted once per day) by the IST hour of their first detection, 15 Oct - 15 Nov. The shaded band is when VIIRS and Aqua pass over Punjab. A fire first seen at 16:00 was either lit after the afternoon passes or too small for Meteosat until then. Dashed: INSAT-3DS (82 E), 30-minute imagery read from MOSDAC's published fire maps, so positions are coarse (0.1 degree cells). It starts in 2025: MOSDAC's 2024 maps show almost no Punjab fires."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-geohour"></div></div>
+      <div class="panel"><div class="panel-h"><h2 id="t-geoyears">Fires seen, indexed</h2><span class="hint" tabindex="0" data-tip="15 Oct - 15 Nov each season. VIIRS S-NPP detections (FIRMS, industrial sources removed) and Meteosat fire cells, each as a percentage of its own value in the reference season. Meteosat-8 (41.5 E) observed until mid-2022, Meteosat-9 (45.5 E) since; both see Punjab at about 50 degrees from vertical."><span data-icon="info"></span></span></div>
+        <div class="chart h-md" id="c-geoyears"></div></div>
     </div>
   </section>
 

@@ -11,7 +11,8 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 const STAR = "path://M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z";
 const C = { fit: "#8a8f98", shift: "#f2683c", cur: "#f2b33d", line: "#d63b48" };
 
-let D = null;
+let D = null, D0 = null;   // D: the view shown (Aqua alone, or Aqua + geostationary-only when /db's toggle says so)
+const useCombo = () => { const b = document.querySelector('#seg-basis button[data-v="combo"]'); return !!(b && b.getAttribute("aria-pressed") === "true"); };
 const charts = {};
 
 function th() {
@@ -131,26 +132,38 @@ function info() {
     c && !c.complete ? kv("Predicted by now", `${fmt(c.pred_to_date)} <small>(${fmt(c.pred_to_date_lo)}–${fmt(c.pred_to_date_hi)})</small>`) : "",
     kv(`Fit, ${D.fit_years[0]}–${D.fit_years[1]}`, `y = ${fmt(f.slope)}·NDVI ${sign} ${fmt(Math.abs(f.intercept))}`, true),
     kv("R²", f.r2.toFixed(2)), kv("Standard error", fmt(f.se)),
+    D.isCombo && D.r_aqua ? kv("Geostationary-only fire cell", `${D.r_aqua.msg.toFixed(1)} (Meteosat) · ${(D.r_aqua.insat || 0).toFixed(1)} (INSAT-3DS) Aqua detections`, true) : "",
   ].join("");
   const done = D.years.filter((r) => shifted(r) && r.complete);
   const pct = (v) => `${Math.round(v * 100)}%`;
-  let lede = `In ${D.fit_years[0]}–${D.fit_years[1]} a greener paddy crop in early September meant more fires seen by Aqua in October and November (R² ${f.r2.toFixed(2)}).`;
-  if (done.length) lede += ` Since ${done[0].year} the satellite has seen ${pct(Math.min(...done.map((r) => r.ratio)))}–${pct(Math.max(...done.map((r) => r.ratio)))} of what the crop predicts: much of the burning now happens after its 13:30 pass.`;
+  const ttl = $("#c-ndvisc").closest(".panel").querySelector("h2");
+  if (ttl) ttl.textContent = D.isCombo ? "September NDVI against Oct–Nov Aqua + geostationary-only fires, Punjab + Haryana" : "September NDVI against Oct–Nov Aqua fire detections, Punjab + Haryana";
+  const rng = done.length ? `${pct(Math.min(...done.map((r) => r.ratio)))}–${pct(Math.max(...done.map((r) => r.ratio)))}` : "";
+  let lede = D.isCombo
+    ? `Counting the fires the polar passes missed (Meteosat from 2017, INSAT-3DS from 2025), as Aqua-equivalent detections, each fire once: in ${D.fit_years[0]}–${D.fit_years[1]} the fit is R² ${f.r2.toFixed(2)}.`
+    : `In ${D.fit_years[0]}–${D.fit_years[1]} a greener paddy crop in early September meant more fires seen by Aqua in October and November (R² ${f.r2.toFixed(2)}).`;
+  if (done.length) lede += D.isCombo
+    ? ` With them, ${done[0].year} onward reach ${rng} of what the crop predicts, against ${(() => { const a = D0.years.filter((r) => shifted(r) && r.complete); return `${pct(Math.min(...a.map((r) => r.ratio)))}–${pct(Math.max(...a.map((r) => r.ratio)))}`; })()} for Aqua alone.`
+    : ` Since ${done[0].year} the satellite has seen ${rng} of what the crop predicts: much of the burning now happens after its 13:30 pass.`;
   if (c && !c.complete && c.ratio_to_date != null) lede += ` ${c.year} so far: ${fmt(c.to_date)} detections against ${fmt(c.pred_to_date)} expected by ${seasonDay(c.year, D.days_observed - 1)} (${pct(c.ratio_to_date)}).`;
   $("#ndvi-lede").textContent = lede;
   $("#ndvi-src").innerHTML = `Updated ${D.generated.replace("T", " ")} · ` + D.sources.map((s) => `<a href="${s.url}" rel="noopener">${s.name}</a>`).join(" · ");
 }
 
 function render() {
-  if (!D) return;
+  if (!D0) return;
+  D = useCombo() && D0.combo ? { ...D0, ...D0.combo, isCombo: true } : D0;
   scatter(); cumulative(); ratio(); info();
 }
 
 async function boot() {
   const sect = $("#sect-ndvi");
   if (!sect) return;
-  D = await fetch("../data/db/ndvi_fire.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  if (!D || !D.years || !D.years.length) return;
+  D0 = await fetch("../data/db/ndvi_fire.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!D0 || !D0.years || !D0.years.length) return;
+  D = D0;
+  const seg = $("#seg-basis");   // follow /db's sensor toggle
+  let q = 0; if (seg) new MutationObserver(() => { clearTimeout(q); q = setTimeout(render, 0); }).observe(seg, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
   sect.hidden = false;
   render();
   let w = window.innerWidth;
